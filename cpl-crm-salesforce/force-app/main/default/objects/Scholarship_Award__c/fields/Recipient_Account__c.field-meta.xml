@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recipient_Account__c</fullName>
+    <description>The CPL Member (Account) who received this scholarship.</description>
+    <inlineHelpText>The member who received the scholarship.</inlineHelpText>
+    <label>Recipient</label>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Scholarship Awards</relationshipLabel>
+    <relationshipName>Scholarship_Awards</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

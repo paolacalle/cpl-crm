@@ -64,11 +64,91 @@
             <label>Yes - promote to Scholar Alumni</label>
         </rules>
     </decisions>
-    <description>When a Prospect Scholar Application is created or updated with Application_Status__c = Accepted, auto-promote the Applicant Account's CPL Student Lifecycle. Athlete/Prospect/Applicant -> Scholar. Alumni -> Scholar Alumni. Already-Scholar/Scholar Alumni/Inactive -> no change.</description>
+    <decisions>
+        <description>Only create a Scholarship Award if the application has an Applicant Account.</description>
+        <name>Decision_Has_Applicant_Account</name>
+        <label>Has Applicant Account?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Skip_If_Already_Final</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - skip award</defaultConnectorLabel>
+        <rules>
+            <name>Has_Account</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Applicant_Account__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Scholarship_Award</targetReference>
+            </connector>
+            <label>Yes - create award</label>
+        </rules>
+    </decisions>
+    <description>When a Prospect Scholar Application is created or updated with Application_Status__c = Accepted, auto-promote the Applicant Account's CPL Student Lifecycle (Athlete/Prospect/Applicant -> Scholar; Alumni -> Scholar Alumni; already-Scholar/Scholar Alumni/Inactive -> no change) and create a Scholarship Award record to track the awarded scholarship.</description>
     <environments>Default</environments>
     <interviewLabel>Application Accepted Set Scholar {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Application Accepted Set Scholar</label>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Create a Scholarship Award to track the scholarship granted by this accepted application. Award amount is left blank for the team to fill in.</description>
+        <name>Create_Scholarship_Award</name>
+        <label>Create Scholarship Award</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Skip_If_Already_Final</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Award_Source__c</field>
+            <value>
+                <stringValue>Application</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Cycle_Term__c</field>
+            <value>
+                <elementReference>$Record.Cycle_Term__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Cycle_Year__c</field>
+            <value>
+                <elementReference>$Record.Cycle_Year__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Date_Awarded__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Prospect_Scholar_Application__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Recipient_Account__c</field>
+            <value>
+                <elementReference>$Record.Applicant_Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Awarded</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Scholarship_Award__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <description>Get the applicant Person Account to read its current lifecycle and prepare for update.</description>
         <name>Get_Applicant_Account</name>
@@ -77,7 +157,7 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Decision_Skip_If_Already_Final</targetReference>
+            <targetReference>Decision_Has_Applicant_Account</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>

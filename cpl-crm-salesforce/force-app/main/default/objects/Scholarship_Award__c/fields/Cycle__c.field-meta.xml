@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cycle__c</fullName>
+    <description>Display label for the scholarship cycle, derived from the cycle year.</description>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Cycle_Year__c), &quot;&quot;, &quot;Cycle &quot; &amp; TEXT(Cycle_Year__c))</formula>
+    <label>Cycle</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>The lifecycle status of the scholarship award.</description>
+    <inlineHelpText>Awarded once granted; Received once funds are received; Declined or Forfeited if not taken up.</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Awarded</fullName>
+                <default>true</default>
+                <label>Awarded</label>
+            </value>
+            <value>
+                <fullName>Received</fullName>
+                <default>false</default>
+                <label>Received</label>
+            </value>
+            <value>
+                <fullName>Declined</fullName>
+                <default>false</default>
+                <label>Declined</label>
+            </value>
+            <value>
+                <fullName>Forfeited</fullName>
+                <default>false</default>
+                <label>Forfeited</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

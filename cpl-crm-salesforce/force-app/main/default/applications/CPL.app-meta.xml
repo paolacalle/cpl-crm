@@ -56,6 +56,7 @@
     <tabs>standard-Account</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>Prospect_Scholar_Application__c</tabs>
+    <tabs>Scholarship_Award__c</tabs>
     <tabs>standard-Dashboard</tabs>
     <tabs>Form_Submission__c</tabs>
     <tabs>standard-Event</tabs>
@@ -68,6 +69,10 @@
         <mappings>
             <fieldName>Applicant_Account__c</fieldName>
             <tab>Prospect_Scholar_Application__c</tab>
+        </mappings>
+        <mappings>
+            <fieldName>Recipient_Account__c</fieldName>
+            <tab>Scholarship_Award__c</tab>
         </mappings>
         <mappings>
             <fieldName>ParentId</fieldName>
