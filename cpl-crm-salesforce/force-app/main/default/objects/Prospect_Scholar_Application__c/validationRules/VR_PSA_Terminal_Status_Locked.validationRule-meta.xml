@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Terminal_Status_Locked</fullName>
+    <active>true</active>
+    <description>Prevents changes to applications that are already in a terminal status.</description>
+    <errorConditionFormula>AND(
+  NOT(ISNEW()),
+  OR(
+    TEXT(PRIORVALUE(Application_Status__c)) = &quot;Rejected&quot;,
+    TEXT(PRIORVALUE(Application_Status__c)) = &quot;Withdrawn&quot;
+  ),
+  TEXT(Application_Status__c) &lt;&gt; TEXT(PRIORVALUE(Application_Status__c))
+)</errorConditionFormula>
+    <errorMessage>Applications that are Rejected or Withdrawn cannot be changed.</errorMessage>
+</ValidationRule>

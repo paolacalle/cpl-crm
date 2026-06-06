@@ -1,0 +1,58 @@
+<template>
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="sport-search">
+            <template if:true={required}>
+                <abbr class="slds-required" title="required">*</abbr>
+            </template>
+            {label}
+        </label>
+        <div class="slds-form-element__control">
+            <div class={comboboxClass} aria-expanded={isOpen} aria-haspopup="listbox" role="combobox">
+                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                    <lightning-input
+                        id="sport-search"
+                        type="search"
+                        variant="label-hidden"
+                        value={searchTerm}
+                        placeholder={placeholder}
+                        onchange={handleSearchChange}
+                        onfocus={openList}
+                        onblur={handleBlur}>
+                    </lightning-input>
+                </div>
+                <template if:true={isOpen}>
+                    <div class="slds-dropdown slds-dropdown_length-7 slds-dropdown_fluid" role="listbox">
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                            <template for:each={filteredOptions} for:item="option">
+                                <li key={option.value} role="presentation" class="slds-listbox__item">
+                                    <div
+                                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                        data-value={option.value}
+                                        data-label={option.label}
+                                        role="option"
+                                        onclick={handleSelect}>
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title={option.label}>{option.label}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                            <template if:false={hasOptions}>
+                                <li role="presentation" class="slds-listbox__item">
+                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate">No sports found</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <template if:true={errorMessage}>
+            <div class="slds-form-element__help">{errorMessage}</div>
+        </template>
+    </div>
+</template>

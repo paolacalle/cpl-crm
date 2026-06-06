@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Start_Date_Required</fullName>
+    <active>true</active>
+    <description>Ensures all employment records include start date.</description>
+    <errorConditionFormula>ISBLANK(Start_Date__c)</errorConditionFormula>
+    <errorDisplayField>Start_Date__c</errorDisplayField>
+    <errorMessage>Start Date is required for all employment records.</errorMessage>
+</ValidationRule>

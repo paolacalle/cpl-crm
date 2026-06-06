@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RemoteSiteSetting xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Allows Apex lead intake processing to download resume files submitted through the CPL Wix form.</description>
+    <disableProtocolSecurity>false</disableProtocolSecurity>
+    <isActive>true</isActive>
+    <url>https://df79c96f-8208-40e3-b6c9-ab14ea349c4e.usrfiles.com</url>
+</RemoteSiteSetting>

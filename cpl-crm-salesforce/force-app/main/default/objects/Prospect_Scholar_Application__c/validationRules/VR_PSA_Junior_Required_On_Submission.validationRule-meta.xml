@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Junior_Required_On_Submission</fullName>
+    <active>true</active>
+    <description>Ensures that only Junior-year students can have a Prospect Scholar Application.</description>
+    <errorConditionFormula>AND(
+  NOT(ISPICKVAL(College_Year__c, &quot;Junior&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>College_Year__c</errorDisplayField>
+    <errorMessage>Only Junior-year students are eligible to submit a CPL Scholar application.</errorMessage>
+</ValidationRule>

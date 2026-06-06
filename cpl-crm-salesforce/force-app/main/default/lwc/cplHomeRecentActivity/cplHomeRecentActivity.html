@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Recent CPL Activity" icon-name="standard:recent">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+            <template if:false={errorMessage}>
+                <template if:true={hasRows}>
+                    <ul class="rows">
+                        <template for:each={rows} for:item="row">
+                            <li key={row.id} class="row">
+                                <lightning-icon icon-name={row.iconName} size="small" class="row-icon"></lightning-icon>
+                                <div class="row-body">
+                                    <div class="row-headline">
+                                        <a href={row.url} class="row-title" target="_top">{row.title}</a>
+                                        <span class="row-time">{row.timeLabel}</span>
+                                    </div>
+                                    <div class="row-meta">
+                                        <span class="row-type">{row.activityType}</span>
+                                        <template if:true={row.subtitle}>
+                                            <span class="row-dot">•</span>
+                                            <span class="row-subtitle">{row.subtitle}</span>
+                                        </template>
+                                        <template if:true={row.status}>
+                                            <span class="row-dot">•</span>
+                                            <span class="row-status">{row.status}</span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={hasRows}>
+                    <div class="slds-text-color_weak">No recent CPL activity yet.</div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Internship_Supervisor_Name__c</fullName>
+    <description>Name of the internship supervisor who will write a recommendation letter for the applicant. Captured on the applicant materials JotForm.</description>
+    <inlineHelpText>Provided by the applicant. Used by Step 4's optional "email recommender" action.</inlineHelpText>
+    <label>Internship Supervisor Name</label>
+    <length>80</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submitted_Resume_URL__c</fullName>
+    <description>URL of the resume file uploaded to JotForm. The routing flow uses presence of this URL to mark Resume_Received__c on the Application.</description>
+    <label>Submitted Resume URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

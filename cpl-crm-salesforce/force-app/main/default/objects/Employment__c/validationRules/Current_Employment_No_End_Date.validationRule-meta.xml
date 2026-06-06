@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Employment_No_End_Date</fullName>
+    <active>true</active>
+    <description>Prevents employment records marked as current from having End Date.</description>
+    <errorConditionFormula>AND (
+  Is_Current__c, 
+  NOT(ISBLANK(End_Date__c))
+)</errorConditionFormula>
+    <errorDisplayField>End_Date__c</errorDisplayField>
+    <errorMessage>Current employment must not have an End Date.</errorMessage>
+</ValidationRule>

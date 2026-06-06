@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_NoRejectionFields_Unless_Terminal</fullName>
+    <active>true</active>
+    <description>Prevent adding rejection details unless the status is terminal.</description>
+    <errorConditionFormula>AND(
+  NOT(
+    OR(
+      ISPICKVAL(Application_Status__c, &quot;Rejected&quot;),
+      ISPICKVAL(Application_Status__c, &quot;Withdrawn&quot;)
+    )
+  ),
+  OR(
+    NOT(ISBLANK(TEXT(Rejection_Filter__c))),
+    NOT(ISBLANK(Rejection_Reason__c))
+  )
+)</errorConditionFormula>
+    <errorMessage>Only use Rejection fields when the application is Rejected or Withdrawn.</errorMessage>
+</ValidationRule>

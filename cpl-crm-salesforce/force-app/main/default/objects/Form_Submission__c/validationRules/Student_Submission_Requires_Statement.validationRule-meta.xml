@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_Submission_Requires_Statement</fullName>
+    <active>true</active>
+    <description>Requires a meaningful scholar statement on Student Interest submissions.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Student Interest Submission&quot;,
+  LEN(TRIM(Student_Submitted_Statement__c)) &lt; 25
+)</errorConditionFormula>
+    <errorDisplayField>Student_Submitted_Statement__c</errorDisplayField>
+    <errorMessage>A scholar statement of at least 25 characters is required for Student Interest submissions.</errorMessage>
+</ValidationRule>

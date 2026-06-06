@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_Submission_Requires_School</fullName>
+    <active>true</active>
+    <description>Requires students to provide a school on Student Interest submissions.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Student Interest Submission&quot;,
+  ISBLANK(Submitted_School__c)
+)</errorConditionFormula>
+    <errorDisplayField>Submitted_School__c</errorDisplayField>
+    <errorMessage>School is required for Student Interest submissions.</errorMessage>
+</ValidationRule>

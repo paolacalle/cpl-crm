@@ -1,0 +1,25 @@
+<template>
+    <template if:true={hasFile}>
+        <div class="slds-m-bottom_x-small">
+            <a
+                href={previewHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="slds-button slds-button_brand"
+            >
+                Preview resume
+            </a>
+        </div>
+        <p class="slds-text-body_small slds-text-color_weak">{fileLabel}</p>
+    </template>
+    <template if:true={hasUrl}>
+        <p>
+            <a href={resume.resumeUrl} target="_blank" rel="noopener noreferrer"
+                >View submitted resume link</a
+            >
+        </p>
+    </template>
+    <template if:false={hasResume}>
+        <p class="slds-text-color_weak">No resume uploaded.</p>
+    </template>
+</template>

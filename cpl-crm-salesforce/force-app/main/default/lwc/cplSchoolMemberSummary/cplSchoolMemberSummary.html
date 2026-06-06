@@ -1,0 +1,52 @@
+<template>
+    <lightning-card title="CPL Members from this School" icon-name="standard:groups">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+            <template if:false={errorMessage}>
+                <div class="total">{totalLabel}</div>
+                <template if:true={hasMembers}>
+                    <div class="breakdowns">
+                        <div class="breakdown">
+                            <div class="breakdown-title">By Lifecycle</div>
+                            <ul class="rows">
+                                <template for:each={byLifecycle} for:item="row">
+                                    <li key={row.label} class="row">
+                                        <span class="row-label">{row.label}</span>
+                                        <span class="row-count">{row.count}</span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <div class="breakdown">
+                            <div class="breakdown-title">By Sport</div>
+                            <ul class="rows">
+                                <template for:each={bySport} for:item="row">
+                                    <li key={row.label} class="row">
+                                        <span class="row-label">{row.label}</span>
+                                        <span class="row-count">{row.count}</span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <div class="breakdown">
+                            <div class="breakdown-title">By College Year</div>
+                            <ul class="rows">
+                                <template for:each={byCollegeYear} for:item="row">
+                                    <li key={row.label} class="row">
+                                        <span class="row-label">{row.label}</span>
+                                        <span class="row-count">{row.count}</span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={hasMembers}>
+                    <div class="slds-text-color_weak slds-m-top_small">No CPL members linked to this school yet.</div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

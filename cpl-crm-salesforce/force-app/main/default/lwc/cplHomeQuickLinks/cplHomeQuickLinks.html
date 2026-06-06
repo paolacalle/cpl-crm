@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Quick Actions" icon-name="standard:bolt">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <div class="links">
+                <template for:each={links} for:item="link">
+                    <button
+                        key={link.key}
+                        class="link"
+                        data-key={link.key}
+                        onclick={handleClick}
+                        type="button"
+                    >
+                        <lightning-icon icon-name={link.icon} size="small" class="link-icon"></lightning-icon>
+                        <span class="link-label">{link.label}</span>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

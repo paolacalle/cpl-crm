@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submitted_Coach_Letter_URL__c</fullName>
+    <description>URL of the coach / professor recommendation letter uploaded via JotForm. Presence triggers Coach_Professor_Recommendation_Received__c on the Application.</description>
+    <label>Submitted Coach Letter URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

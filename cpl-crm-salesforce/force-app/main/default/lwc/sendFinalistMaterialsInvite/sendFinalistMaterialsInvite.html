@@ -1,0 +1,29 @@
+<template>
+    <lightning-quick-action-panel header="Send Finalist Materials Invite">
+        <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+            <p>This sends the finalist materials invite and generates the personalized submission link for the applicant.</p>
+            <ul class="slds-list_dotted slds-m-top_small slds-m-left_large">
+                <li>Resume with GPA, leadership activities, and athletic achievements</li>
+                <li>Two recommendation letters</li>
+                <li>Financial aid, scholarship, or grant details, if applicable</li>
+                <li>Short essay about the CPL mantra and wealth management goals</li>
+            </ul>
+        </div>
+
+        <div slot="footer">
+            <lightning-button
+                label="Cancel"
+                variant="neutral"
+                onclick={handleCancel}
+                disabled={isSaving}
+            ></lightning-button>
+            <lightning-button
+                class="slds-m-left_small"
+                label="Send Invite"
+                variant="brand"
+                onclick={handleSend}
+                disabled={isSaving}
+            ></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

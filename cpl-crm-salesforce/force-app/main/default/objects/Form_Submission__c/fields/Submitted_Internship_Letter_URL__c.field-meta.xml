@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submitted_Internship_Letter_URL__c</fullName>
+    <description>URL of the internship supervisor recommendation letter uploaded via JotForm.</description>
+    <label>Submitted Internship Letter URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluator_Required_Exactly_One</fullName>
+    <active>true</active>
+    <description>An evaluation can only belong to a contact or a user not both.</description>
+    <errorConditionFormula>OR(
+  AND(
+    ISBLANK(Evaluator_Contact__c),
+    ISBLANK(Evaluator_User__c)
+  ),
+  AND(
+    NOT(ISBLANK(Evaluator_Contact__c)),
+    NOT(ISBLANK(Evaluator_User__c))
+  )
+)</errorConditionFormula>
+    <errorMessage>Select either an Evaluator Contact or an Evaluator User (choose exactly one).</errorMessage>
+</ValidationRule>

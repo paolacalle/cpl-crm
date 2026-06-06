@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_External_Submission_ID</fullName>
+    <active>true</active>
+    <description>Ensures each Form Submission includes a unique external identifier from the source system.</description>
+    <errorConditionFormula>ISBLANK(External_Submission_ID__c)</errorConditionFormula>
+    <errorDisplayField>External_Submission_ID__c</errorDisplayField>
+    <errorMessage>External Submission ID is required to prevent duplicate form submissions.</errorMessage>
+</ValidationRule>

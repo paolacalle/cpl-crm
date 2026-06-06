@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Lead</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Prospect Scholar Intake Path</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Email</fieldNames>
+        <fieldNames>Phone</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <fieldNames>Lead_Source_Detail__c</fieldNames>
+        <info>&lt;p&gt;Confirm that contact has been made with the student.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Log any relevant notes or activities related to outreach.&lt;/p&gt;&lt;p&gt;Determine whether the student is eligible and prepared to enter the application pipeline.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If approved, move the lead to Qualified - Ready to Convert.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>Contacted</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;strong&gt;This lead has been successfully converted into a CPL Member.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;No further action is required on the Lead record.&lt;/p&gt;&lt;p&gt;Continue all work on the CPL Member Account Page.&lt;/p&gt;</info>
+        <picklistValueName>Converted</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>College_Year__c</fieldNames>
+        <fieldNames>Sport_From_Form__c</fieldNames>
+        <fieldNames>Why_CPL_Scholar__c</fieldNames>
+        <fieldNames>School_Name_From_Form__c</fieldNames>
+        <fieldNames>Rating</fieldNames>
+        <info>&lt;p&gt;Assess the student's eligibility based on current college year and college standing.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Review academic and athletic information for accuracy.&lt;/p&gt;&lt;p&gt;If clarification is needed, contact the student and document the interaction.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Once eligibility is confirmed and the student is ready to move forward, update the status to Qualified - Ready to Convert.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>In Intake Review</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Email</fieldNames>
+        <fieldNames>School__c</fieldNames>
+        <fieldNames>College_Year__c</fieldNames>
+        <fieldNames>Resume_Uploaded__c</fieldNames>
+        <fieldNames>Why_CPL_Scholar__c</fieldNames>
+        <info>&lt;p&gt;Review the newly submitted student lead for completeness.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Confirm that the &lt;strong&gt;email, school, college year, resume is uploaded, and scholar statement&lt;/strong&gt; are present and valid.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Assign yourself as the Intake Owner if you are taking ownership of this lead. The Intake Owner receives notifications for this lead going forward.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If key information is missing, move the lead to In Intake Review and initiate outreach.&lt;/p&gt;</info>
+        <picklistValueName>New</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Email</fieldNames>
+        <fieldNames>School__c</fieldNames>
+        <fieldNames>Primary_Sport__c</fieldNames>
+        <fieldNames>College_Year__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <info>&lt;p&gt;&lt;strong&gt;This lead has been approved to move forward.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Before converting, confirm that the fields are accurate.&lt;/p&gt;&lt;p&gt;Convert the lead to create a CPL Member.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Do not convert unless all required academic fields are complete.&lt;/p&gt;</info>
+        <picklistValueName>Qualified</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Status</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <info>&lt;p&gt;Use this status if the student is not eligible, out of scope, or a duplicate.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Document the reason for disqualification in notes or activities for future reference.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>Unqualified</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>CPL_Scholar_Lead</recordTypeName>
+</PathAssistant>

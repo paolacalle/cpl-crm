@@ -1,0 +1,66 @@
+.section + .section {
+    margin-top: 1.25rem;
+}
+
+.section-title {
+    color: #706e6b;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.row {
+    align-items: flex-start;
+    border-bottom: 1px solid #f3f3f3;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.row:last-child {
+    border-bottom: 0;
+}
+
+.row-name {
+    color: #0b5cab;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.row-name:hover {
+    text-decoration: underline;
+}
+
+.row-app-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+}
+
+.row-applicant {
+    color: #706e6b;
+    font-size: 0.75rem;
+}
+
+.row-meta {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 0.5rem;
+}
+
+.row-date {
+    color: #706e6b;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}

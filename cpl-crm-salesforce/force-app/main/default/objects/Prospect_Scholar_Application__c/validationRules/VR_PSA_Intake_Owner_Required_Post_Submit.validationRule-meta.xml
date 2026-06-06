@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Intake_Owner_Required_Post_Submit</fullName>
+    <active>false</active>
+    <description>Requires an Intake Owner to be assigned once an application moves beyond Draft.</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Application_Status__c, &quot;Submitted&quot;),
+  ISBLANK(Intake_Owner__c)
+)</errorConditionFormula>
+    <errorDisplayField>Intake_Owner__c</errorDisplayField>
+    <errorMessage>An Intake Owner must be assigned when an application is submitted.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_Interest_Submission</fullName>
+    <active>true</active>
+    <description>Represents a form submission from a student or athlete expressing interest in the CPL program. Captures intake data exactly as submitted for review, matching, and routing.</description>
+    <label>Student Interest Submission</label>
+    <picklistValues>
+        <picklist>Partner_Interest_Type__c</picklist>
+        <values>
+            <fullName>Company partnership</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee matching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offering an internship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supporting CPL athletes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Processing_Status__c</picklist>
+        <values>
+            <fullName>Created Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored %2F Spam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matched to Contact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matched to Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Needs Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Processed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Submission_Source__c</picklist>
+        <values>
+            <fullName>Import</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wix</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Submitted_College_Year__c</picklist>
+        <values>
+            <fullName>Freshman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Graduate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Junior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Senior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sophomore</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

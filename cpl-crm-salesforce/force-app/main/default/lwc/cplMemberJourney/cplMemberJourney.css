@@ -1,0 +1,81 @@
+.journey {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.journey-stage {
+    align-items: flex-start;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.25rem;
+    display: flex;
+    flex: 1 1 12rem;
+    gap: 0.75rem;
+    min-width: 12rem;
+    padding: 0.75rem;
+}
+
+.step {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    flex: 0 0 1.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 1.75rem;
+    justify-content: center;
+}
+
+.step-current {
+    background: #eaf5fe;
+    color: #0b5cab;
+}
+
+.step-completed {
+    background: #dff6dd;
+    color: #2e844a;
+}
+
+.step-upcoming {
+    background: #f3f3f3;
+    color: #747474;
+}
+
+.journey-stage-body {
+    min-width: 0;
+}
+
+.journey-stage-title {
+    color: #181818;
+    font-weight: 600;
+}
+
+.journey-stage-sublabel {
+    color: #0b5cab;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.125rem;
+}
+
+.journey-stage-desc {
+    color: #706e6b;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.inactive {
+    align-items: center;
+    background: #fdf2e9;
+    border-radius: 0.25rem;
+    color: #8a4b08;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem;
+}
+
+.inactive-icon {
+    --sds-c-icon-color-foreground-default: #8a4b08;
+}

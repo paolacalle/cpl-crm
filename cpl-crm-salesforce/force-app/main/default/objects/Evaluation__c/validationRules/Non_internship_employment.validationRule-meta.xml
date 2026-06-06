@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_internship_employment</fullName>
+    <active>true</active>
+    <description>Non-internship must NOT have Employment</description>
+    <errorConditionFormula>AND(
+  NOT(ISPICKVAL(Evaluation_Type__c, &quot;Internship&quot;)),
+  NOT(ISBLANK(Employment__c))
+)</errorConditionFormula>
+    <errorDisplayField>Evaluation_Type__c</errorDisplayField>
+    <errorMessage>Only an evaluation of type internship can be linked to an employment record.</errorMessage>
+</ValidationRule>

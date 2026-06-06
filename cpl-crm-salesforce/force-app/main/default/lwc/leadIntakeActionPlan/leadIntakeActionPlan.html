@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Intake Action Plan" icon-name="standard:task">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={hasTasks}>
+                <ol class="plan">
+                    <template for:each={tasks} for:item="task">
+                        <li key={task.subject} class="plan-item">
+                            <div class={task.badgeClass}>{task.stepNumber}</div>
+                            <div class="plan-body">
+                                <div class="plan-title-row">
+                                    <a if:true={task.taskUrl} href={task.taskUrl} class="plan-title">{task.subject}</a>
+                                    <span if:false={task.taskUrl} class="plan-title">{task.subject}</span>
+                                    <lightning-badge label={task.status} class={task.statusClass}></lightning-badge>
+                                </div>
+                                <div class="plan-meta">
+                                    <template if:true={task.isUpcoming}>
+                                        <lightning-icon icon-name="utility:lock" size="x-small" class="lock-icon"></lightning-icon>
+                                    </template>
+                                    <span>{task.ownerLabel}</span>
+                                    <template if:true={task.dueDate}>
+                                        <span class="dot">•</span>
+                                        <span>Due {task.dueDate}</span>
+                                    </template>
+                                </div>
+                                <template if:true={task.showLaunch}>
+                                    <lightning-button
+                                        label="Launch"
+                                        variant="brand"
+                                        class="slds-m-top_x-small"
+                                        data-flow={task.flowApiName}
+                                        data-subject={task.subject}
+                                        onclick={handleLaunch}
+                                    ></lightning-button>
+                                </template>
+                            </div>
+                        </li>
+                    </template>
+                </ol>
+            </template>
+            <template if:false={hasTasks}>
+                <div class="slds-text-color_weak">No intake action plan tasks found.</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Eligibility_Confirmed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether CPL has verified that the applicant meets the program’s eligibility requirements.</description>
+    <inlineHelpText>Check this box once CPL has confirmed that the applicant meets eligibility requirements.</inlineHelpText>
+    <label>Eligibility Confirmed</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Requires_Core_Fields</fullName>
+    <active>true</active>
+    <description>Ensures all prospect scholar applications include an applicant and application status before saving.</description>
+    <errorConditionFormula>OR(
+  ISBLANK(Applicant_Account__c),
+  ISPICKVAL(Application_Status__c, &quot;&quot;)
+)</errorConditionFormula>
+    <errorMessage>Applicant and Application Status are required.</errorMessage>
+</ValidationRule>

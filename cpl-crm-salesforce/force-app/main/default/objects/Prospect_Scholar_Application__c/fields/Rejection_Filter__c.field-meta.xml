@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rejection_Filter__c</fullName>
+    <description>High-level category explaining why the applicant was not moved forward or exited the process.</description>
+    <inlineHelpText>Select the main reason for rejection or withdrawal. Use Rejection Reason for specific context/details.</inlineHelpText>
+    <label>Rejection Filter</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No response / ghosted</fullName>
+                <default>false</default>
+                <label>No response / ghosted</label>
+            </value>
+            <value>
+                <fullName>Scheduling unavailable / repeatedly rescheduled</fullName>
+                <default>false</default>
+                <label>Scheduling unavailable / repeatedly rescheduled</label>
+            </value>
+            <value>
+                <fullName>Not junior year / wrong college year</fullName>
+                <default>false</default>
+                <label>Not junior year / wrong college year</label>
+            </value>
+            <value>
+                <fullName>Not a student-athlete / not eligible</fullName>
+                <default>false</default>
+                <label>Not a student-athlete / not eligible</label>
+            </value>
+            <value>
+                <fullName>Outside program requirements (other)</fullName>
+                <default>false</default>
+                <label>Outside program requirements (other)</label>
+            </value>
+            <value>
+                <fullName>Incomplete application</fullName>
+                <default>false</default>
+                <label>Incomplete application</label>
+            </value>
+            <value>
+                <fullName>Inconsistent info / unclear background</fullName>
+                <default>false</default>
+                <label>Inconsistent info / unclear background</label>
+            </value>
+            <value>
+                <fullName>Goals misaligned with wealth management path</fullName>
+                <default>false</default>
+                <label>Goals misaligned with wealth management path</label>
+            </value>
+            <value>
+                <fullName>Not ready for internship expectations</fullName>
+                <default>false</default>
+                <label>Not ready for internship expectations</label>
+            </value>
+            <value>
+                <fullName>Professionalism concerns</fullName>
+                <default>false</default>
+                <label>Professionalism concerns</label>
+            </value>
+            <value>
+                <fullName>Citizenship status</fullName>
+                <default>false</default>
+                <label>Citizenship status</label>
+            </value>
+            <value>
+                <fullName>Limited slots / cohort full</fullName>
+                <default>false</default>
+                <label>Limited slots / cohort full</label>
+            </value>
+            <value>
+                <fullName>Timing mismatch (cycle closed)</fullName>
+                <default>false</default>
+                <label>Timing mismatch (cycle closed)</label>
+            </value>
+            <value>
+                <fullName>Duplicate application</fullName>
+                <default>false</default>
+                <label>Duplicate application</label>
+            </value>
+            <value>
+                <fullName>Invalid submission / spam</fullName>
+                <default>false</default>
+                <label>Invalid submission / spam</label>
+            </value>
+            <value>
+                <fullName>Other (use Rejection Reason)</fullName>
+                <default>false</default>
+                <label>Other (use Rejection Reason)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

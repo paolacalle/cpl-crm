@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partnership_Interest__c</fullName>
+    <description>How the partner is interested in working with Climb-Pause-Lift. Multi-select to match the partner intake form's checkbox UX. Values match Form_Submission__c.Partner_Interest_Type__c exactly.</description>
+    <inlineHelpText>Captures the partner's selected interests from the intake form. Used to route the inquiry to the appropriate team.</inlineHelpText>
+    <label>Partnership Interest</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Offering an internship to an athlete</fullName>
+                <default>false</default>
+                <label>Offering an internship to an athlete</label>
+            </value>
+            <value>
+                <fullName>Supporting CPL athletes</fullName>
+                <default>false</default>
+                <label>Supporting CPL athletes</label>
+            </value>
+            <value>
+                <fullName>How my company can work with CPL</fullName>
+                <default>false</default>
+                <label>How my company can work with CPL</label>
+            </value>
+            <value>
+                <fullName>Employee matching opportunities</fullName>
+                <default>false</default>
+                <label>Employee matching opportunities</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

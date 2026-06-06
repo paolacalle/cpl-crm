@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Scholar_New_Requires_Intake_Fields</fullName>
+    <active>true</active>
+    <description>Requires CPL Scholar leads to have complete and validated intake details before moving out of New.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;CPL Scholar Lead&quot;,
+  ISCHANGED(Status),
+  TEXT(PRIORVALUE(Status)) = &quot;New&quot;,
+  OR(
+    ISBLANK(Email),
+    ISBLANK(School__c),
+    ISPICKVAL(College_Year__c, &quot;&quot;)
+  )
+)</errorConditionFormula>
+    <errorMessage>Before moving this lead out of New, confirm the email, matched school, and college year are present and valid.</errorMessage>
+</ValidationRule>

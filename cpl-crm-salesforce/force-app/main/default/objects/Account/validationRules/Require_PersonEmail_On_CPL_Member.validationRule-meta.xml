@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_PersonEmail_On_CPL_Member</fullName>
+    <active>true</active>
+    <description>Email is required to create or save a CPL Member (Person Account). Email is the identity key used to dedupe leads, link former members to Partner Accounts, and target email engagement. Fires on create AND update so it can't be cleared.</description>
+    <errorConditionFormula>AND(
+  IsPersonAccount,
+  RecordType.DeveloperName = &quot;cpl_applicant_account&quot;,
+  ISBLANK(PersonEmail)
+)</errorConditionFormula>
+    <errorDisplayField>PersonEmail</errorDisplayField>
+    <errorMessage>Email is required to create a CPL Member account.</errorMessage>
+</ValidationRule>

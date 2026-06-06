@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Materials_Form_URL__c</fullName>
+    <description>Personalized Scholar Finalist Materials form URL sent to the applicant.</description>
+    <inlineHelpText>Generated from the Scholar Finalist Materials Form Base URL custom label.</inlineHelpText>
+    <label>Materials Form URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

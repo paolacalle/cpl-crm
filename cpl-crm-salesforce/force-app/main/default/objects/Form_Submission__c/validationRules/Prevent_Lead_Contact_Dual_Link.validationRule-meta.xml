@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Lead_Contact_Dual_Link</fullName>
+    <active>true</active>
+    <description>Ensures a Form Submission is linked to either a Lead or a Contact, but never both, to maintain a single canonical person reference. This rule enforces a single source of truth for each submission. Leads are temporary; Contacts are canonical.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(Matched_Lead__c)),
+  NOT(ISBLANK(Matched_Contact__c))
+)</errorConditionFormula>
+    <errorMessage>A Form Submission can be linked to either a Lead or a Contact, not both.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submitted_Email__c</fullName>
+    <description>Stored exactly as submitted at intake time. Does not automatically overwrite Lead or Contact data.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Required. Used to match this submission to existing Leads or Contacts and prevent duplicate intake records.</inlineHelpText>
+    <label>Submitted Email</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Email</type>
+    <unique>false</unique>
+</CustomField>

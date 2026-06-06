@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submitted_Sport__c</fullName>
+    <description>Sport provided by the student on the interest form.</description>
+    <inlineHelpText>Stored as submitted. May require later standardization for reporting.</inlineHelpText>
+    <label>Submitted Sport</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

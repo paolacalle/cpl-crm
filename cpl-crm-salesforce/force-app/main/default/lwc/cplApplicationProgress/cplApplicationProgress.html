@@ -1,0 +1,49 @@
+<template>
+    <lightning-card title="Application Progress" icon-name="standard:scholar">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+            <template if:false={errorMessage}>
+                <div class="status-row">
+                    <span class={statusBadgeClass}>{status}</span>
+                    <template if:true={materialsComplete}>
+                        <span class="materials-complete-badge">All materials in</span>
+                    </template>
+                </div>
+
+                <template if:true={hasAnyDate}>
+                    <div class="dates">
+                        <template if:true={hasSentDate}>
+                            <div class="date-item">
+                                <span class="date-label">Invite Sent</span>
+                                <span class="date-value">{inviteSentLabel}</span>
+                            </div>
+                        </template>
+                        <template if:true={hasConfirmedDate}>
+                            <div class="date-item">
+                                <span class="date-label">Invite Confirmed</span>
+                                <span class="date-value">{inviteConfirmedLabel}</span>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <div class="materials-section">
+                    <div class="materials-header">
+                        <span class="materials-title">Materials</span>
+                        <span class="materials-count">{materialsLabel}</span>
+                    </div>
+                    <ul class="materials-list">
+                        <template for:each={materials} for:item="mat">
+                            <li key={mat.key} class={mat.cssClass}>
+                                <lightning-icon icon-name={mat.iconName} size="x-small" class="material-icon"></lightning-icon>
+                                <span class="material-label">{mat.label}</span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

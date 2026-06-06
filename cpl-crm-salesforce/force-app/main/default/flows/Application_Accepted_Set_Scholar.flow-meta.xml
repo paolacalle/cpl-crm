@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <decisions>
+        <description>Skip the auto-promotion if the applicant is already Scholar, Scholar Alumni, or Inactive.</description>
+        <name>Decision_Skip_If_Already_Final</name>
+        <label>Already Scholar/SAlumni/Inactive?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Was_Alumni</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Promote</defaultConnectorLabel>
+        <rules>
+            <name>Skip</name>
+            <conditionLogic>1 OR 2 OR 3</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Applicant_Account.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Scholar</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Applicant_Account.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Scholar Alumni</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Applicant_Account.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Inactive</stringValue>
+                </rightValue>
+            </conditions>
+            <label>Skip - already final</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>If the applicant is already Alumni (graduated before getting a scholarship), promote them to Scholar Alumni. Otherwise promote to Scholar.</description>
+        <name>Decision_Was_Alumni</name>
+        <label>Was Alumni?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Update_To_Scholar</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - promote to Scholar</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Alumni</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Applicant_Account.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Alumni</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_To_Scholar_Alumni</targetReference>
+            </connector>
+            <label>Yes - promote to Scholar Alumni</label>
+        </rules>
+    </decisions>
+    <description>When a Prospect Scholar Application is created or updated with Application_Status__c = Accepted, auto-promote the Applicant Account's CPL Student Lifecycle. Athlete/Prospect/Applicant -> Scholar. Alumni -> Scholar Alumni. Already-Scholar/Scholar Alumni/Inactive -> no change.</description>
+    <environments>Default</environments>
+    <interviewLabel>Application Accepted Set Scholar {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Application Accepted Set Scholar</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get the applicant Person Account to read its current lifecycle and prepare for update.</description>
+        <name>Get_Applicant_Account</name>
+        <label>Get Applicant Account</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_Skip_If_Already_Final</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Applicant_Account__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Promote the applicant to Scholar.</description>
+        <name>Update_To_Scholar</name>
+        <label>Promote to Scholar</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Applicant_Account.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>CPL_Student_Lifecycle__c</field>
+            <value>
+                <stringValue>Scholar</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Promote the applicant to Scholar Alumni (already graduated, retroactive scholarship recognition).</description>
+        <name>Update_To_Scholar_Alumni</name>
+        <label>Promote to Scholar Alumni</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Applicant_Account.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>CPL_Student_Lifecycle__c</field>
+            <value>
+                <stringValue>Scholar Alumni</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Applicant_Account</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Application_Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Accepted</stringValue>
+            </value>
+        </filters>
+        <object>Prospect_Scholar_Application__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

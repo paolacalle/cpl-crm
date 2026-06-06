@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Sets the resource variable for record type if to Partner lead.</description>
+        <name>Set_Lead_RT_Partner</name>
+        <label>Set Lead RT - Partner</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varLeadRecordTypeIdToCreate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>012Kd00000163eqIAA</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Lead_By_Email_Unconverted</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets the resource variable for record type if to CPL Scholar lead.</description>
+        <name>Set_Lead_RT_Student</name>
+        <label>Set Lead RT - Student</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varLeadRecordTypeIdToCreate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>012Kd00000163evIAA</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Ensure_Valid_Student_Statement</targetReference>
+        </connector>
+    </assignments>
+    <customErrors>
+        <description>Provide a window warning of the submission error within the specific submission form.</description>
+        <name>Unsupported_Submission_Type_Error</name>
+        <label>Unsupported Submission Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <customErrorMessages>
+            <errorMessage>This Form Submission uses an unsupported Record Type and cannot be processed. This usually means the integration did not set the correct RecordTypeId. Please update the record or fix the Zapier/Wix configuration.</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <description>Determines next step based on if a matching CPL Member account was found for the submission email.</description>
+        <name>Decision_CPL_Member_Found</name>
+        <label>CPL Member Found?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Lead_By_Email_Unconverted</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - CPL Member Found</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Contact_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_CPL_Member_By_Email.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Submission_To_CPL_Member</targetReference>
+            </connector>
+            <label>Yes - CPL Member Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>In order to determine where to assign the resolve school task, we determine if their is an existing contact or lead.</description>
+        <name>Decision_Has_Matched_Contact</name>
+        <label>Has Matched Contact?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Create_Task_Resolve_School_Lead</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - Matched Lead</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Matched_Contact</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Matched_Contact__r.AccountId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Resolve_School_Contact</targetReference>
+            </connector>
+            <label>Yes - Matched Contact</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decides if the automated school field can be ran based on if there was a submitted field for school from the form.</description>
+        <name>Decision_Has_Submitted_School</name>
+        <label>Has Submitted School?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>No - Has School Text</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Has_School_Text</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Submitted_School__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_School_Account_by_Name</targetReference>
+            </connector>
+            <label>Yes - Has School Text</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decision based on if an unconverted lead was found related to the new submission form.</description>
+        <name>Decision_Lead_Found</name>
+        <label>Unconverted Lead Found?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Create_New_Lead_from_Submission</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - Lead Found</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Lead_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Lead_By_Email_Unconverted.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Link_Submission_to_Existing_Lead</targetReference>
+            </connector>
+            <label>Yes - Lead Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Determine if the system was able to find a school based on the submitted school name.</description>
+        <name>Decision_School_Found</name>
+        <label>School Found?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Flag_Needs_Review_School_Unresolved</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - School Not Found</defaultConnectorLabel>
+        <rules>
+            <name>Yes_School_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_School_Account_by_Name</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Matched_School</targetReference>
+            </connector>
+            <label>Yes - School Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Based on the type of the submission form, we decide if we follow a student or partner journey.</description>
+        <name>Decision_Submission_Form_Type</name>
+        <label>Submission Form Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Unsupported_Submission_Type_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Other/Unknown</defaultConnectorLabel>
+        <rules>
+            <name>Student_Interest_Submission</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>012Vx000003PMA5IAO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Lead_RT_Student</targetReference>
+            </connector>
+            <label>Student Interest Submission</label>
+        </rules>
+        <rules>
+            <name>Partner_Interest_Submission</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>012Vx000003PMGXIA4</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Lead_RT_Partner</targetReference>
+            </connector>
+            <label>Partner Interest Submission</label>
+        </rules>
+    </decisions>
+    <description>Routes incoming Form Submission records by matching them to an existing Contact or unconverted Lead using submitted email, or creating a new Lead when no match is found. Applies record-type–specific logic to resolve student school lookups, detect data conflicts, flag submissions for review, and create follow-up tasks. This Flow centralizes intake, deduplication, and routing logic for all CPL web form submissions.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Returns the submitted scholar statement if it satisfies the 25-character minimum validation rule, otherwise a placeholder so downstream updates don&apos;t hit the validation error.</description>
+        <name>effectiveStudentStatement</name>
+        <dataType>String</dataType>
+        <expression>IF(LEN({!$Record.Student_Submitted_Statement__c}) &gt;= 25, {!$Record.Student_Submitted_Statement__c}, &quot;user did not include a scholar statement&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Default Lead.Company value when creating from a Partner Interest Submission (form has no Company field). Empty for Student submissions so the field stays blank.</description>
+        <name>defaultLeadCompany</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.RecordTypeId} = &quot;012Vx000003PMGXIA4&quot;, &quot;Pending - Partner Outreach&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <interviewLabel>Form Submission Intake Router {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Form Submission Intake Router</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Creates a new lead based on the submission.</description>
+        <name>Create_New_Lead_from_Submission</name>
+        <label>Create New Lead from Submission</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignRecordIdToReference>new_lead_id</assignRecordIdToReference>
+        <connector>
+            <targetReference>Link_Submission_to_New_Lead</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>College_Year__c</field>
+            <value>
+                <elementReference>$Record.Submitted_College_Year__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Commits_to_CPL_mantra__c</field>
+            <value>
+                <elementReference>$Record.Commits_to_CPL_Mantra__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Email</field>
+            <value>
+                <elementReference>$Record.Submitted_Email__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FirstName</field>
+            <value>
+                <elementReference>$Record.Submitted_First_Name__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastName</field>
+            <value>
+                <elementReference>$Record.Submitted_Last_Name__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LeadSource</field>
+            <value>
+                <stringValue>Web - Wix / Zapier</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Lead_Source_Detail__c</field>
+            <value>
+                <elementReference>$Record.External_Form_Name__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Intake_Review_Queue_ID_by_Name.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>varLeadRecordTypeIdToCreate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Primary_Resume_URL__c</field>
+            <value>
+                <elementReference>$Record.Resume_URL__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Resume_Uploaded__c</field>
+            <value>
+                <elementReference>$Record.Resume_Uploaded__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>School_Name_From_Form__c</field>
+            <value>
+                <elementReference>$Record.Submitted_School__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sport_From_Form__c</field>
+            <value>
+                <elementReference>$Record.Submitted_Sport__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Why_CPL_Scholar__c</field>
+            <value>
+                <elementReference>$Record.Student_Submitted_Statement__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Company</field>
+            <value>
+                <elementReference>defaultLeadCompany</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Partner_Message__c</field>
+            <value>
+                <elementReference>$Record.Partner_Message__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Partnership_Interest__c</field>
+            <value>
+                <elementReference>$Record.Partner_Interest_Type__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Partner_Interest_Other__c</field>
+            <value>
+                <elementReference>$Record.Partner_Interest_Other__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordCreates>
+    <recordCreates>
+        <description>Create a task on the matched contact related to this submission form for matching of the school.</description>
+        <name>Create_Task_Resolve_School_Contact</name>
+        <label>Create Task - Resolve School (Contact)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Student submission school text could not be matched to a School Account. Submitted School: {!$Record.Submitted_School__c} Submitted Email: {!$Record.Submitted_Email__c} Form Submission Id: {!$Record.Id}. To resolve, please manually set Matched_School_Account.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Intake_Review_Queue_ID_by_Name.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Resolve submitted school (no match found)</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.Matched_Contact__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <description>Create a task on this submission form record related to the Lead for matching of the school.</description>
+        <name>Create_Task_Resolve_School_Lead</name>
+        <label>Create Task - Resolve School (Lead)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Student submission school text could not be matched to a School Account. Submitted School: {!$Record.Submitted_School__c} Submitted Email: {!$Record.Submitted_Email__c} Form Submission Id: {!$Record.Id}. To resolve, please manually set Matched_School_Account.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Intake_Review_Queue_ID_by_Name.OwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Resolve submitted school (no match found)</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordLookups>
+        <description>Get all possible email matches.</description>
+        <name>Get_CPL_Member_By_Email</name>
+        <label>Get CPL Member by Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_CPL_Member_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsPersonAccount</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>PersonEmail</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Submitted_Email__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <sortField>LastModifiedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Gets the intake review queue by name. Runs at the start of the flow so the queue Id is available for both the new-lead owner and follow-up task assignments.</description>
+        <name>Get_Intake_Review_Queue_ID_by_Name</name>
+        <label>Get Intake Review Queue ID by Name</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_Submission_Form_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Intake_Review_Queue</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <sortField>LastModifiedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>We find leads that have not yet been converted linked to the provided email.</description>
+        <name>Get_Lead_By_Email_Unconverted</name>
+        <label>Get unconverted Lead by Email</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_Lead_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Submitted_Email__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsConverted</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <sortField>LastModifiedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>A simple lookup based on the student&apos;s submitted school.</description>
+        <name>Get_School_Account_by_Name</name>
+        <label>Get School Account by Name</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_School_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>012Kd00000163gIIAQ</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Submitted_School__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <sortField>LastModifiedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>If the submitted scholar statement is missing or under 25 characters, replace it with a placeholder so downstream Form Submission updates don&apos;t trip the &quot;at least 25 characters&quot; validation rule.</description>
+        <name>Ensure_Valid_Student_Statement</name>
+        <label>Ensure Valid Student Statement</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_CPL_Member_By_Email</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Student_Submitted_Statement__c</field>
+            <value>
+                <elementReference>effectiveStudentStatement</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Trigger the need review for this submission form due to being unable to auto-map a school account.</description>
+        <name>Flag_Needs_Review_School_Unresolved</name>
+        <label>Flag Needs Review - School Unresolved</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Has_Matched_Contact</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Needs_Review__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Processing_Status__c</field>
+            <value>
+                <stringValue>Needs Review</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Link new submission to the matched lead found.</description>
+        <name>Link_Submission_to_Existing_Lead</name>
+        <label>Link Submission to Existing Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Has_Submitted_School</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Matched_Contact__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Matched_Lead__c</field>
+            <value>
+                <elementReference>Get_Lead_By_Email_Unconverted.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Processing_Status__c</field>
+            <value>
+                <stringValue>Matched to Lead</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Link new submission to the new lead.</description>
+        <name>Link_Submission_to_New_Lead</name>
+        <label>Link Submission to New Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Has_Submitted_School</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Matched_Contact__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Matched_Lead__c</field>
+            <value>
+                <elementReference>new_lead_id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Processing_Status__c</field>
+            <value>
+                <stringValue>Matched to Lead</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Update the matched school field if there was a match found.</description>
+        <name>Set_Matched_School</name>
+        <label>Set Matched School</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Matched_School_Account__c</field>
+            <value>
+                <elementReference>Get_School_Account_by_Name.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Links the new submission to the CPL Member Contact.</description>
+        <name>Update_Submission_To_CPL_Member</name>
+        <label>Link Submission to CPL Member Contact</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Decision_Has_Submitted_School</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Matched_Contact__c</field>
+            <value>
+                <elementReference>Get_CPL_Member_By_Email.PersonContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Matched_Lead__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Processing_Status__c</field>
+            <value>
+                <stringValue>Matched to Contact</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Intake_Review_Queue_ID_by_Name</targetReference>
+        </connector>
+        <filterFormula>AND(
+  NOT(ISBLANK({!$Record.Submitted_Email__c})),
+  {!$Record.RecordType.DeveloperName} != &quot;Scholar_Finalist_Materials&quot;
+)</filterFormula>
+        <object>Form_Submission__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <description>The id of the new lead created.</description>
+        <name>new_lead_id</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Stores the lead record type id</description>
+        <name>varLeadRecordTypeIdToCreate</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

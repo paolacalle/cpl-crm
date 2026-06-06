@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Reuse the generic LeadConvertAction Apex (Database.convertLead, doNotCreateOpportunity) used by Scholar Lead conversion.</description>
+        <name>Convert_Lead_Action</name>
+        <label>Convert Lead (Apex)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>LeadConvertAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Get_Converted_Lead</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LeadConvertAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <description>Reuse LeadFileTransferAction to copy any files attached to the Lead onto the new Partner Organization Account.</description>
+        <name>Transfer_Files_Action</name>
+        <label>Transfer Lead Files</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>LeadFileTransferAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Get_Outcome_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>Get_Converted_Lead.ConvertedAccountId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LeadFileTransferAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <choices>
+        <name>Outcome_Convert</name>
+        <choiceText>Convert to Partner Organization</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Convert</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Outcome_Disqualify</name>
+        <choiceText>Disqualify</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Disqualify</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <description>Route to either the Convert or Disqualify branch based on the user's choice.</description>
+        <name>Route_Outcome</name>
+        <label>Route Outcome</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Unqualified_Status</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Disqualify</defaultConnectorLabel>
+        <rules>
+            <name>Is_Convert</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Outcome_Choice</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Convert</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Confirm_Convert</targetReference>
+            </connector>
+            <label>Convert</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Skip the Task update if the seeded "Convert or Disqualify" Task is missing.</description>
+        <name>Has_Outcome_Task</name>
+        <label>Has Outcome Task?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Outcome_Done</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - Task Missing</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Has_Task</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Outcome_Task.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Complete_Outcome_Task</targetReference>
+            </connector>
+            <label>Yes - Has Task</label>
+        </rules>
+    </decisions>
+    <description>Step 3 of the Partner Lead action plan. Lets the intake host either Convert the Lead into a Partner Organization Account + Contact (using the generic LeadConvertAction Apex, then reclassifying the new Account to the Partner Organization record type and transferring any files) or Disqualify it (Status = Unqualified, append a disqualify reason). In both cases the "Convert or Disqualify" Task is marked complete at the end.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Append a labeled "Disqualification reason:" section to any existing Lead.Description content instead of overwriting.</description>
+        <name>appendedDescription</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_Lead.Description}), &quot;&quot;, {!Get_Lead.Description} &amp; BR() &amp; BR()) &amp; &quot;Disqualification reason:&quot; &amp; BR() &amp; {!Disqualify_Reason}</expression>
+    </formulas>
+    <interviewLabel>Partner Convert Or Disqualify {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Partner Convert Or Disqualify</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>Load the Partner Lead so the screens can show Name / Company / Description.</description>
+        <name>Get_Lead</name>
+        <label>Get Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Choose_Outcome</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Re-query the Lead after conversion to grab the ConvertedAccountId / ConvertedContactId for follow-up steps.</description>
+        <name>Get_Converted_Lead</name>
+        <label>Get Converted Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Account_Partner_RT</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Find the Partner Organization Account record type so the converted Account can be reclassified.</description>
+        <name>Get_Partner_Org_RT</name>
+        <label>Get Partner Org Record Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Convert_Lead_Action</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Account</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Partner_Organization</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Find the seeded "Convert or Disqualify" Task to mark Completed.</description>
+        <name>Get_Outcome_Task</name>
+        <label>Get Outcome Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Has_Outcome_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WhoId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Convert or Disqualify</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Set Lead.Status = Unqualified and append the disqualification reason to Description.</description>
+        <name>Set_Unqualified_Status</name>
+        <label>Set Unqualified Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Outcome_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Unqualified</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>appendedDescription</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Reclassify the newly-converted Account to the Partner Organization record type.</description>
+        <name>Set_Account_Partner_RT</name>
+        <label>Set Account RT to Partner Org</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Transfer_Files_Action</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Converted_Lead.ConvertedAccountId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>Get_Partner_Org_RT.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Mark the "Convert or Disqualify" Task as Completed.</description>
+        <name>Complete_Outcome_Task</name>
+        <label>Complete Outcome Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Outcome_Done</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Outcome_Task.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordUpdates>
+    <screens>
+        <description>Ask the intake host whether to Convert or Disqualify this Partner Lead.</description>
+        <name>Choose_Outcome</name>
+        <label>Choose Outcome</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Route_Outcome</targetReference>
+        </connector>
+        <fields>
+            <name>Intro_Header</name>
+            <fieldText>&lt;p&gt;What&apos;s the outcome for &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt; at &lt;strong&gt;{!Get_Lead.Company}&lt;/strong&gt;?&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Outcome_Choice</name>
+            <choiceReferences>Outcome_Convert</choiceReferences>
+            <choiceReferences>Outcome_Disqualify</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Outcome</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Disqualify_Reason</name>
+            <fieldText>If disqualifying, why? (skipped if converting)</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Show the conversion preview before calling the Apex action so the user can sanity-check.</description>
+        <name>Confirm_Convert</name>
+        <label>Confirm Conversion</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Get_Partner_Org_RT</targetReference>
+        </connector>
+        <fields>
+            <name>Convert_Preview</name>
+            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new Account &lt;strong&gt;{!Get_Lead.Company}&lt;/strong&gt; with the &lt;em&gt;Partner Organization&lt;/em&gt; record type.&lt;/li&gt;&lt;li&gt;Creates a Contact for {!Get_Lead.Name} on that Account.&lt;/li&gt;&lt;li&gt;Transfers any files attached to this Lead onto the new Account.&lt;/li&gt;&lt;li&gt;Marks the &quot;Convert or Disqualify&quot; Task complete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Confirmation that the outcome was processed.</description>
+        <name>Outcome_Done</name>
+        <label>Outcome Done</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Done_Text</name>
+            <fieldText>&lt;p&gt;&#9989; Outcome recorded for {!Get_Lead.Name}. The &quot;Convert or Disqualify&quot; step is complete.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Generic fault screen if any lookup, update, or action fails.</description>
+        <name>Flow_Error</name>
+        <label>Flow Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Error_Text</name>
+            <fieldText>&lt;p&gt;&#10060; Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Lead</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <description>The Partner Lead Id passed in from the Action Plan stepper LWC.</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

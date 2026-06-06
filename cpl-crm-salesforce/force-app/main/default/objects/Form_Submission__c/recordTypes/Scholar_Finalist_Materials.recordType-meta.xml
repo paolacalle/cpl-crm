@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scholar_Finalist_Materials</fullName>
+    <active>true</active>
+    <description>Represents applicant and recommender material submissions for a Prospect Scholar Application finalist.</description>
+    <label>Scholar Finalist Materials</label>
+    <picklistValues>
+        <picklist>Material_Submission_Type__c</picklist>
+        <values>
+            <fullName>Applicant Materials</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Coach/Professor Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internship Supervisor Recommendation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Processing_Status__c</picklist>
+        <values>
+            <fullName>Created Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored %2F Spam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matched to Application</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matched to Contact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matched to Lead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Needs Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Processed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Submission_Source__c</picklist>
+        <values>
+            <fullName>Import</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JotForm</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Manual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wix</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

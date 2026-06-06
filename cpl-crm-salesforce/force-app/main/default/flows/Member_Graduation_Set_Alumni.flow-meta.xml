@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <assignments>
+        <description>Set CPL Student Lifecycle to Scholar Alumni (they were a Scholar at time of graduation).</description>
+        <name>Set_Scholar_Alumni</name>
+        <label>Set Lifecycle to Scholar Alumni</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CPL_Student_Lifecycle__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Scholar Alumni</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Set CPL Student Lifecycle to Alumni (they graduated without ever being Scholar).</description>
+        <name>Set_Alumni</name>
+        <label>Set Lifecycle to Alumni</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CPL_Student_Lifecycle__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Alumni</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Skip the auto-transition if the member is already in a terminal state (Alumni, Scholar Alumni, or Inactive).</description>
+        <name>Decision_Skip_If_Already_Final</name>
+        <label>Already Final State?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Was_Scholar</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Promote to Alumni/Scholar Alumni</defaultConnectorLabel>
+        <rules>
+            <name>Already_Final</name>
+            <conditionLogic>1 OR 2 OR 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Scholar Alumni</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Alumni</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Inactive</stringValue>
+                </rightValue>
+            </conditions>
+            <label>Skip - already final</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>If the member was a Scholar at time of graduation, promote to Scholar Alumni; otherwise promote to plain Alumni.</description>
+        <name>Decision_Was_Scholar</name>
+        <label>Was Scholar?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Alumni</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - promote to Alumni</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Scholar</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CPL_Student_Lifecycle__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Scholar</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Scholar_Alumni</targetReference>
+            </connector>
+            <label>Yes - promote to Scholar Alumni</label>
+        </rules>
+    </decisions>
+    <description>When Graduation_Date__c becomes populated on a CPL Member Person Account, auto-set CPL_Student_Lifecycle__c to Scholar Alumni (if currently Scholar) or Alumni (otherwise). Skips members already in a terminal lifecycle state.</description>
+    <environments>Default</environments>
+    <interviewLabel>Member Graduation Set Alumni {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Member Graduation Set Alumni</label>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Skip_If_Already_Final</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Graduation_Date__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsPersonAccount</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

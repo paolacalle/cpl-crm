@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_Submission_Requires_College_Year</fullName>
+    <active>true</active>
+    <description>Ensures college year is provided for Student Interest submissions.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Student Interest Submission&quot;,
+  ISPICKVAL(Submitted_College_Year__c, &quot;&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Submitted_College_Year__c</errorDisplayField>
+    <errorMessage>Student_Submission_Requires_College_Year</errorMessage>
+</ValidationRule>

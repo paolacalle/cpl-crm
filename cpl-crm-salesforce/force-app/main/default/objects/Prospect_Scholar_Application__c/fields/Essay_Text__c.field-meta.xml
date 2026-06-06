@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Essay_Text__c</fullName>
+    <description>Essay text submitted by the applicant via the JotForm materials form. Stored on the Application by the Scholar Finalist Materials Router.</description>
+    <label>Essay Text</label>
+    <length>32768</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Applicant_Must_Be_Person_Account</fullName>
+    <active>true</active>
+    <description>Prospect Scholar Applications must be tied to an individual Person Account, not an organization account.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(Applicant_Account__c)),
+  NOT(Applicant_Account__r.IsPersonAccount)
+)</errorConditionFormula>
+    <errorDisplayField>Applicant_Account__c</errorDisplayField>
+    <errorMessage>The applicant must be connected to a Person Account.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intended_CPL_Lifecycle__c</fullName>
+    <label>Intended CPL Lifecycle</label>
+    <description>Member lifecycle the lead should become on conversion. Captured during the Disqualify / Convert action-plan step and applied to the CPL Member (Person Account) by the Lead Conversion Set CPL Lifecycle flow.</description>
+    <inlineHelpText>Set during the Convert step. Determines the CPL Member lifecycle created when the lead is converted.</inlineHelpText>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Athlete</fullName>
+                <default>true</default>
+                <label>Athlete</label>
+            </value>
+            <value>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+                <label>Prospect</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="Recent Activity from this School" icon-name="standard:recent">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+            <template if:false={errorMessage}>
+                <div class="section">
+                    <div class="section-title">Recent Leads</div>
+                    <template if:true={hasLeads}>
+                        <ul class="rows">
+                            <template for:each={recentLeads} for:item="lead">
+                                <li key={lead.id} class="row">
+                                    <a href={lead.url} class="row-name" target="_top">{lead.name}</a>
+                                    <span class="row-meta">
+                                        <lightning-badge label={lead.status}></lightning-badge>
+                                        <span class="row-date">{lead.createdLabel}</span>
+                                    </span>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <template if:false={hasLeads}>
+                        <div class="slds-text-color_weak">No recent leads from this school.</div>
+                    </template>
+                </div>
+                <div class="section">
+                    <div class="section-title">Recent Scholar Applications</div>
+                    <template if:true={hasApps}>
+                        <ul class="rows">
+                            <template for:each={recentApps} for:item="app">
+                                <li key={app.id} class="row">
+                                    <div class="row-app-main">
+                                        <a href={app.url} class="row-name" target="_top">{app.name}</a>
+                                        <template if:true={app.applicantName}>
+                                            <span class="row-applicant">{app.applicantName}</span>
+                                        </template>
+                                    </div>
+                                    <span class="row-meta">
+                                        <template if:true={app.status}>
+                                            <lightning-badge label={app.status}></lightning-badge>
+                                        </template>
+                                        <span class="row-date">{app.createdLabel}</span>
+                                    </span>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <template if:false={hasApps}>
+                        <div class="slds-text-color_weak">No recent scholar applications from this school.</div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

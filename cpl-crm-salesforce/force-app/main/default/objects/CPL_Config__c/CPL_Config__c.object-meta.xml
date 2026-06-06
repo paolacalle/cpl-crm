@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Hierarchy Custom Setting for organization-wide CPL configuration values (form base URLs, integration endpoints, etc.). Single org-default record is set in Setup; flows and formulas reference it via $Setup.CPL_Config__c.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>CPL Config</label>
+    <visibility>Public</visibility>
+</CustomObject>
