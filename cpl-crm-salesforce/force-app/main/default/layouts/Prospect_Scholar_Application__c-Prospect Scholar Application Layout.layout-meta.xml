@@ -2,11 +2,6 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Send_Scholarship_Invite_Confirm_Eligibility</customButtons>
     <excludeButtons>Submit</excludeButtons>
-    <quickActionList>
-        <quickActionListItems>
-            <quickActionName>Prospect_Scholar_Application__c.Send_Finalist_Materials_Invite</quickActionName>
-        </quickActionListItems>
-    </quickActionList>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -151,6 +146,15 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Evaluation__c.Prospect_Scholar_Application__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Award_Amount__c</fields>
+        <fields>Status__c</fields>
+        <fields>Date_Awarded__c</fields>
+        <fields>Date_Received__c</fields>
+        <fields>Award_Source__c</fields>
+        <relatedList>Scholarship_Award__c.Prospect_Scholar_Application__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

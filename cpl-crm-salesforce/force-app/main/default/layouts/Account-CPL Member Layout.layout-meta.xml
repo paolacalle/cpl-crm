@@ -141,6 +141,16 @@
         <relatedList>Prospect_Scholar_Application__c.Applicant_Account__c</relatedList>
     </relatedLists>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Award_Amount__c</fields>
+        <fields>Status__c</fields>
+        <fields>Date_Awarded__c</fields>
+        <fields>Date_Received__c</fields>
+        <fields>Cycle__c</fields>
+        <fields>Award_Source__c</fields>
+        <relatedList>Scholarship_Award__c.Recipient_Account__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHO_NAME</fields>
         <fields>TASK.WHAT_NAME</fields>
