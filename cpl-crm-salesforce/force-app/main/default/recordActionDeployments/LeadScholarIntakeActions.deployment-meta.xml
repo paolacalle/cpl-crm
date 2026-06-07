@@ -7,7 +7,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>0</position>
+            <position>1</position>
             <type>Flow</type>
         </channelItems>
         <channelItems>
@@ -15,7 +15,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>1</position>
+            <position>2</position>
             <type>QuickAction</type>
         </channelItems>
         <channelItems>
@@ -23,7 +23,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>2</position>
+            <position>0</position>
             <type>Flow</type>
         </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
@@ -35,7 +35,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>0</position>
+            <position>1</position>
             <type>Flow</type>
         </channelItems>
         <channelItems>
@@ -43,7 +43,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>1</position>
+            <position>2</position>
             <type>QuickAction</type>
         </channelItems>
         <channelItems>
@@ -51,7 +51,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>2</position>
+            <position>0</position>
             <type>Flow</type>
         </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
@@ -63,7 +63,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>0</position>
+            <position>1</position>
             <type>Flow</type>
         </channelItems>
         <channelItems>
@@ -71,7 +71,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>1</position>
+            <position>2</position>
             <type>QuickAction</type>
         </channelItems>
         <channelItems>
@@ -79,7 +79,7 @@
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
-            <position>2</position>
+            <position>0</position>
             <type>Flow</type>
         </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>

@@ -172,6 +172,9 @@
         <label>Update All Submission Forms</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_All_Evaluations</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Matched_Lead__c</field>
@@ -193,6 +196,40 @@
             </value>
         </inputAssignments>
         <object>Form_Submission__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Transfer all evaluations from the converted lead onto the new CPL Member account.</description>
+        <name>Update_All_Evaluations</name>
+        <label>Update All Evaluations</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Lead__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Converted_Lead.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>CPL_Member__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Evaluation_Target_Type__c</field>
+            <value>
+                <stringValue>General CPL Member</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Lead__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <object>Evaluation__c</object>
     </recordUpdates>
     <start>
         <locationX>0</locationX>
