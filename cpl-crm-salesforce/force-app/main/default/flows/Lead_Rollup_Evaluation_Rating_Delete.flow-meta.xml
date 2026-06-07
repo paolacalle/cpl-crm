@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <assignments>
+        <description>Reset the running totals before looping.</description>
+        <name>Init_Totals</name>
+        <label>Initialize Totals</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Rating_Sum</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Eval_Count</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Get_Lead_Evaluations</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Add this evaluation's rating to the running totals.</description>
+        <name>Add_To_Totals</name>
+        <label>Add To Totals</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Rating_Sum</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Rating_Value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Eval_Count</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Evals</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Only count evaluations that have a rating.</description>
+        <name>Has_Rating</name>
+        <label>Has Rating?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Evals</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No rating</defaultConnectorLabel>
+        <rules>
+            <name>Rating_Present</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Evals.Rating__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_To_Totals</targetReference>
+            </connector>
+            <label>Has rating</label>
+        </rules>
+    </decisions>
+    <description>When an Evaluation linked to a Lead is deleted, recalculate the lead's average evaluation rating and count from the remaining rated evaluations.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Numeric value of the current evaluation's rating picklist.</description>
+        <name>Loop_Rating_Value</name>
+        <dataType>Number</dataType>
+        <expression>VALUE(TEXT({!Loop_Evals.Rating__c}))</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <description>Average rating, or null when there are no rated evaluations.</description>
+        <name>Average_Rating</name>
+        <dataType>Number</dataType>
+        <expression>IF({!Eval_Count} &gt; 0, {!Rating_Sum} / {!Eval_Count}, null)</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Lead Rollup Evaluation Rating Delete {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead Rollup Evaluation Rating Delete</label>
+    <loops>
+        <description>Loop over the remaining evaluations for the lead.</description>
+        <name>Loop_Evals</name>
+        <label>Loop Evaluations</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Lead_Evaluations</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Has_Rating</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Lead</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Get the remaining evaluations linked to this lead, excluding the one being deleted.</description>
+        <name>Get_Lead_Evaluations</name>
+        <label>Get Lead Evaluations</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Evals</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Lead__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Lead__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Evaluation__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Write the aggregated rating and count back to the lead.</description>
+        <name>Update_Lead</name>
+        <label>Update Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Lead__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Average_Evaluation_Rating__c</field>
+            <value>
+                <elementReference>Average_Rating</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Evaluation_Count__c</field>
+            <value>
+                <elementReference>Eval_Count</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Init_Totals</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Lead__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Evaluation__c</object>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Eval_Count</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+    <variables>
+        <name>Rating_Sum</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+</Flow>

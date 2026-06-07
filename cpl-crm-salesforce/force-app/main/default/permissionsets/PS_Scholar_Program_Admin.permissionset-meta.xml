@@ -3,6 +3,21 @@
     <description>Grants authority to manage late-stage applicant records, including scholar candidacy decisions, award outcomes, and post-interview lifecycle updates. Intended for program decision-makers. Does not grant system configuration privileges.</description>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Evaluation__c.Lead__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Average_Evaluation_Rating__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Evaluation_Count__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Scholarship_Award__c.Award_Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>

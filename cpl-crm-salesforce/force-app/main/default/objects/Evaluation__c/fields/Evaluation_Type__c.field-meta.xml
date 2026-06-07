@@ -28,6 +28,11 @@
                 <label>Interview</label>
             </value>
             <value>
+                <fullName>Call</fullName>
+                <default>false</default>
+                <label>Call</label>
+            </value>
+            <value>
                 <fullName>Mentorship</fullName>
                 <default>false</default>
                 <label>Mentorship</label>

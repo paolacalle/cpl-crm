@@ -139,6 +139,26 @@
                 <identifier>RecordCollege_Year_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Average_Evaluation_Rating__c</fieldItem>
+                <identifier>RecordAverage_Evaluation_Rating_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Evaluation_Count__c</fieldItem>
+                <identifier>RecordEvaluation_Count_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-match-details-column</name>
         <type>Facet</type>
     </flexiPageRegions>

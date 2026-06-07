@@ -18,6 +18,14 @@
             <position>1</position>
             <type>QuickAction</type>
         </channelItems>
+        <channelItems>
+            <action>Lead_Scholar_Evaluation</action>
+            <isMandatory>false</isMandatory>
+            <isUiRemoveHidden>false</isUiRemoveHidden>
+            <pinned>Top</pinned>
+            <position>2</position>
+            <type>Flow</type>
+        </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
     </channelConfigurations>
     <channelConfigurations>
@@ -38,6 +46,14 @@
             <position>1</position>
             <type>QuickAction</type>
         </channelItems>
+        <channelItems>
+            <action>Lead_Scholar_Evaluation</action>
+            <isMandatory>false</isMandatory>
+            <isUiRemoveHidden>false</isUiRemoveHidden>
+            <pinned>Top</pinned>
+            <position>2</position>
+            <type>Flow</type>
+        </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
     </channelConfigurations>
     <channelConfigurations>
@@ -57,6 +73,14 @@
             <pinned>Top</pinned>
             <position>1</position>
             <type>QuickAction</type>
+        </channelItems>
+        <channelItems>
+            <action>Lead_Scholar_Evaluation</action>
+            <isMandatory>false</isMandatory>
+            <isUiRemoveHidden>false</isUiRemoveHidden>
+            <pinned>Top</pinned>
+            <position>2</position>
+            <type>Flow</type>
         </channelItems>
         <isAutopopEnabled>false</isAutopopEnabled>
     </channelConfigurations>
@@ -89,5 +113,11 @@
         <frequentActionSequenceNbr>1</frequentActionSequenceNbr>
         <isFrequentAction>true</isFrequentAction>
         <type>QuickAction</type>
+    </selectableItems>
+    <selectableItems>
+        <action>Lead_Scholar_Evaluation</action>
+        <frequentActionSequenceNbr>2</frequentActionSequenceNbr>
+        <isFrequentAction>true</isFrequentAction>
+        <type>Flow</type>
     </selectableItems>
 </RecordActionDeployment>
