@@ -7,6 +7,30 @@ public with sharing class ScholarFinalistMaterialsService {
     private static Boolean isHandlingSubmissions = false;
     private static Boolean isHandlingFiles = false;
 
+    // CRM intake org-wide email address used as the sender for all automated emails.
+    @TestVisible
+    private static final String INTAKE_EMAIL_ADDRESS = 'crm-intake@climbpauselift.org';
+    private static Boolean intakeOweaQueried = false;
+    private static Id intakeOweaId;
+
+    // Returns the Org-Wide Email Address Id for the CRM intake address so automated
+    // emails are sent from crm-intake@ instead of the running user. Cached per
+    // transaction; returns null when not found (e.g. in tests without the address)
+    // so callers fall back to the default sender.
+    public static Id getIntakeOrgWideEmailId() {
+        if (!intakeOweaQueried) {
+            intakeOweaQueried = true;
+            List<OrgWideEmailAddress> addresses = [
+                SELECT Id
+                FROM OrgWideEmailAddress
+                WHERE Address = :INTAKE_EMAIL_ADDRESS
+                LIMIT 1
+            ];
+            intakeOweaId = addresses.isEmpty() ? null : addresses[0].Id;
+        }
+        return intakeOweaId;
+    }
+
     @TestVisible
     private class SubmissionProcessingResult {
         public List<Form_Submission__c> submissionUpdates = new List<Form_Submission__c>();

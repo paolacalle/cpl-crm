@@ -18,12 +18,17 @@ public with sharing class LeadConvertAction {
             convertedStatus = status.MasterLabel;
         }
 
+        // Intake leads are owned by a queue, but converted records can only be owned
+        // by a user. Assign the converted records to whoever is running the conversion.
+        Id runningUserId = UserInfo.getUserId();
+
         List<Database.LeadConvert> converts = new List<Database.LeadConvert>();
         for (Request req : requests) {
             Database.LeadConvert lc = new Database.LeadConvert();
             lc.setLeadId(req.leadId);
             lc.setConvertedStatus(convertedStatus);
             lc.setDoNotCreateOpportunity(true);
+            lc.setOwnerId(runningUserId);
             converts.add(lc);
         }
 
