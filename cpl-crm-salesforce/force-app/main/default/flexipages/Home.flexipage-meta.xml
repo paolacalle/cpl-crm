@@ -16,6 +16,12 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentName>c:cplHomeMemberPipeline</componentName>
+                <identifier>cplHomeMemberPipeline</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentName>c:cplHomeRecentActivity</componentName>
                 <identifier>cplHomeRecentActivity</identifier>
             </componentInstance>

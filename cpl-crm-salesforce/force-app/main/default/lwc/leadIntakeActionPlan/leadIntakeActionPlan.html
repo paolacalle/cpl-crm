@@ -1,6 +1,43 @@
 <template>
     <lightning-card title="Intake Action Plan" icon-name="standard:task">
         <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={isConverted}>
+                <div class="terminal-banner terminal-converted" role="status">
+                    <lightning-icon icon-name="utility:success" size="small" variant="inverse" class="terminal-icon"></lightning-icon>
+                    <div class="terminal-body">
+                        <p class="terminal-title">Lead converted &mdash; no action required.</p>
+                        <p class="terminal-text">This lead is now a CPL member.</p>
+                        <template if:true={canViewConverted}>
+                            <lightning-button
+                                label="View converted record"
+                                variant="brand"
+                                icon-name="utility:new_window"
+                                class="slds-m-top_x-small"
+                                onclick={handleViewConverted}
+                            ></lightning-button>
+                        </template>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={isUnqualified}>
+                <div class="terminal-banner terminal-unqualified" role="status">
+                    <lightning-icon icon-name="utility:ban" size="small" variant="inverse" class="terminal-icon"></lightning-icon>
+                    <div class="terminal-body">
+                        <p class="terminal-title">Lead was disqualified.</p>
+                        <p class="terminal-text">This lead is marked Unqualified. Re-open it to return it to the intake pipeline.</p>
+                        <lightning-button
+                            label="Re-open lead"
+                            variant="neutral"
+                            icon-name="utility:undo"
+                            class="slds-m-top_x-small"
+                            disabled={reopening}
+                            onclick={handleReopen}
+                        ></lightning-button>
+                    </div>
+                </div>
+            </template>
+
             <template if:true={hasTasks}>
                 <ol class="plan">
                     <template for:each={tasks} for:item="task">

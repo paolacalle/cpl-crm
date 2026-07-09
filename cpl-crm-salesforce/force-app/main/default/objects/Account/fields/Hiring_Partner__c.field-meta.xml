@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hiring_Partner__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the organization participates as a hiring partner within the CLP Wealth Management career pipeline.</description>
+    <inlineHelpText>Check this box if the organization provides internship and/or full-time opportunities for CPL Scholars.</inlineHelpText>
+    <label>Hiring Partner</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

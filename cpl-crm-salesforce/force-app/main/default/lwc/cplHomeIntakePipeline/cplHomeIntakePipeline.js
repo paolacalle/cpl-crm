@@ -1,21 +1,21 @@
 import { LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import getPipeline from '@salesforce/apex/CplHomeIntakePipelineController.getPipeline';
+import getScholarLead from '@salesforce/apex/CplHomeIntakePipelineController.getScholarLead';
 
+// each of the status leads to a specifc filter
 const STATUS_META = {
     'New': { cssClass: 'stat stat-new', objectApiName: 'Lead', filterName: 'CPL_Lead_New' },
-    'In Intake Review': { cssClass: 'stat stat-review', objectApiName: 'Lead', filterName: 'CPL_Lead_In_Intake_Review' },
+    'In Review': { cssClass: 'stat stat-review', objectApiName: 'Lead', filterName: 'CPL_Lead_In_Intake_Review' },
     'Contacted': { cssClass: 'stat stat-contacted', objectApiName: 'Lead', filterName: 'CPL_Lead_Contacted' },
     'Qualified': { cssClass: 'stat stat-qualified', objectApiName: 'Lead', filterName: 'CPL_Lead_Qualified' },
     'Unqualified': { cssClass: 'stat stat-unqualified', objectApiName: 'Lead', filterName: 'CPL_Lead_Unqualified' },
-    'Converted': { cssClass: 'stat stat-converted', objectApiName: 'Account', filterName: 'CPL_Members' }
 };
 
 export default class CplHomeIntakePipeline extends NavigationMixin(LightningElement) {
     counts;
     error;
 
-    @wire(getPipeline)
+    @wire(getScholarLead)
     wiredPipeline({ data, error }) {
         if (data) {
             this.counts = data;

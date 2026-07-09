@@ -32,6 +32,11 @@
                 <default>false</default>
                 <label>Scholar Lead</label>
             </value>
+            <value>
+                <fullName>Partner Lead</fullName>
+                <default>false</default>
+                <label>Partner Lead</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

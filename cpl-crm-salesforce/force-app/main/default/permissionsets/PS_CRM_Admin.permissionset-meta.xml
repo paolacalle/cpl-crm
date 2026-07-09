@@ -493,6 +493,18 @@
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
+        <recordType>Evaluation__c.CPL_Member_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.Partner_Lead_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.Scholar_Lead_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
         <recordType>Account.Donor_Household</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>

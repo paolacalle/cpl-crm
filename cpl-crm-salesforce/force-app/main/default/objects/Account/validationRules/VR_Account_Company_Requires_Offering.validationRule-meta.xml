@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Account_Company_Requires_Offering</fullName>
+    <active>true</active>
+    <description>Prevents saving a Company / Employer account unless it offers an internship or a full-time role.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Company / Employer&quot;,
+  NOT(Internship_Eligible__c),
+  NOT(Full_Time_Eligible__c)
+)</errorConditionFormula>
+    <errorMessage>Company / Employer accounts must offer at least an internship or a full-time opportunity.</errorMessage>
+</ValidationRule>

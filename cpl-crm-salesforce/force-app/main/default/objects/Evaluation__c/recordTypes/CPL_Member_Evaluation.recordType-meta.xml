@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Member_Evaluation</fullName>
+    <active>true</active>
+    <description>General feedback or evaluation of a CPL Member.</description>
+    <label>CPL Member Evaluation</label>
+    <picklistValues>
+        <picklist>Evaluation_Target_Type__c</picklist>
+        <values>
+            <fullName>General CPL Member</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+</RecordType>

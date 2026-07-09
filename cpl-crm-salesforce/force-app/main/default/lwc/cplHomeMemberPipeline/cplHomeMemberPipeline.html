@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="CPL Memberships" icon-name="standard:lead_insights">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+            <template if:false={errorMessage}>
+                <div class="stats">
+                    <template for:each={stats} for:item="stat">
+                        <button
+                            key={stat.status}
+                            type="button"
+                            class={stat.cssClass}
+                            data-filter={stat.filterName}
+                            data-object={stat.objectApiName}
+                            onclick={handleStatClick}
+                        >
+                            <div class="stat-count">{stat.count}</div>
+                            <div class="stat-label">{stat.status}</div>
+                        </button>
+                    </template>
+                </div>
+                <div class="footnote">Click a status to open that filtered list.</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

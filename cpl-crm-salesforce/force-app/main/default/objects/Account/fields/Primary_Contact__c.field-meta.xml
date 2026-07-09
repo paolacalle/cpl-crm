@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Identifies the primary point of contact for this account.</description>
+    <inlineHelpText>Select the main individual responsible for communication and coordination related to this account.</inlineHelpText>
+    <label>Primary Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Primary Contact For</relationshipLabel>
+    <relationshipName>Accounts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>

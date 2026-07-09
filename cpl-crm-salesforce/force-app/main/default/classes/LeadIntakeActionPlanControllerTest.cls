@@ -111,6 +111,84 @@ private class LeadIntakeActionPlanControllerTest {
     }
 
     @IsTest
+    static void disqualifiedLeadHasNoCurrentStep() {
+        Lead leadRecord = new Lead(
+            FirstName = 'Dis',
+            LastName = 'Qualified',
+            Company = 'CPL',
+            Status = 'Unqualified',
+            RecordTypeId = scholarLeadRtId()
+        );
+        insert leadRecord;
+        clearSeededTasks(leadRecord.Id);
+
+        insert new List<Task>{
+            new Task(WhoId = leadRecord.Id, Subject = 'Confirm submission', Status = 'Completed'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Contact lead', Status = 'Completed'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Disqualify / Convert', Status = 'Completed')
+        };
+
+        List<LeadIntakeActionPlanController.ActionPlanTask> tasks =
+            LeadIntakeActionPlanController.getTasks(leadRecord.Id);
+        for (LeadIntakeActionPlanController.ActionPlanTask task : tasks) {
+            System.assertEquals(false, task.isCurrent, 'Terminal lead should have no active step');
+        }
+
+        LeadIntakeActionPlanController.LeadPlanState state =
+            LeadIntakeActionPlanController.getLeadState(leadRecord.Id);
+        System.assertEquals(true, state.isUnqualified);
+        System.assertEquals(false, state.isConverted);
+    }
+
+    @IsTest
+    static void reopenLeadResetsStatusAndOutcomeTask() {
+        Lead leadRecord = new Lead(
+            FirstName = 'Re',
+            LastName = 'Open',
+            Company = 'CPL',
+            Status = 'Unqualified',
+            RecordTypeId = scholarLeadRtId()
+        );
+        insert leadRecord;
+        clearSeededTasks(leadRecord.Id);
+
+        insert new List<Task>{
+            new Task(WhoId = leadRecord.Id, Subject = 'Confirm submission', Status = 'Completed'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Contact lead', Status = 'Completed')
+        };
+        Task outcome = new Task(
+            WhoId = leadRecord.Id,
+            Subject = 'Disqualify / Convert',
+            Status = 'Completed'
+        );
+        insert outcome;
+
+        Test.startTest();
+        LeadIntakeActionPlanController.reopenLead(leadRecord.Id);
+        Test.stopTest();
+
+        Lead reloaded = [SELECT Status FROM Lead WHERE Id = :leadRecord.Id];
+        System.assertEquals('Contacted', reloaded.Status);
+
+        Task reloadedTask = [SELECT Status FROM Task WHERE Id = :outcome.Id];
+        System.assertEquals('Not Started', reloadedTask.Status);
+
+        // The reopened outcome step is active again.
+        List<LeadIntakeActionPlanController.ActionPlanTask> tasks =
+            LeadIntakeActionPlanController.getTasks(leadRecord.Id);
+        System.assertEquals('Disqualify / Convert', tasks[2].subject);
+        System.assertEquals(true, tasks[2].isCurrent);
+    }
+
+    @IsTest
+    static void nullLeadStateIsEmpty() {
+        LeadIntakeActionPlanController.LeadPlanState state =
+            LeadIntakeActionPlanController.getLeadState(null);
+        System.assertEquals(false, state.isConverted);
+        System.assertEquals(false, state.isUnqualified);
+    }
+
+    @IsTest
     static void partnerLeadReturnsPartnerSubjects() {
         RecordType partnerRt = [
             SELECT Id FROM RecordType

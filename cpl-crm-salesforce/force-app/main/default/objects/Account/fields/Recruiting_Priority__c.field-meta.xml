@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recruiting_Priority__c</fullName>
+    <description>Internal prioritization of this college for recruiting and outreach efforts.</description>
+    <inlineHelpText>Use this field to prioritize recruiting outreach based on historical success and strategic importance.</inlineHelpText>
+    <label>Recruiting Priority</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_Importance_Rank</valueSetName>
+    </valueSet>
+</CustomField>

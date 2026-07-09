@@ -72,6 +72,18 @@
         <object>Scholarship_Award__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.CPL_Member_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.Partner_Lead_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.Scholar_Lead_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <tabSettings>
         <tab>Scholarship_Award__c</tab>
         <visibility>Visible</visibility>
