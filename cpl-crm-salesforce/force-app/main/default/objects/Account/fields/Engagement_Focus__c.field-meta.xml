@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Engagement_Focus__c</fullName>
+    <description>Identifies the primary ways in which the partner organization engages with CLP scholars.</description>
+    <inlineHelpText>Select one or more engagement areas that describe how this partner supports CLP.</inlineHelpText>
+    <label>Engagement Focus</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Mentorship</fullName>
+                <default>false</default>
+                <label>Mentorship</label>
+            </value>
+            <value>
+                <fullName>Career Coaching</fullName>
+                <default>false</default>
+                <label>Career Coaching</label>
+            </value>
+            <value>
+                <fullName>Networking</fullName>
+                <default>false</default>
+                <label>Networking</label>
+            </value>
+            <value>
+                <fullName>Programming / Events</fullName>
+                <default>false</default>
+                <label>Programming / Events</label>
+            </value>
+            <value>
+                <fullName>Referrals</fullName>
+                <default>false</default>
+                <label>Referrals</label>
+            </value>
+            <value>
+                <fullName>Thought Leadership</fullName>
+                <default>false</default>
+                <label>Thought Leadership</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

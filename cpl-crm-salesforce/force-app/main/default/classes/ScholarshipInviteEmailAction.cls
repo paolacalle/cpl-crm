@@ -26,44 +26,15 @@ public with sharing class ScholarshipInviteEmailAction {
         Map<Id, Prospect_Scholar_Application__c> applicationsById = new Map<Id, Prospect_Scholar_Application__c>([
             SELECT Id,
                    Applicant_Account__r.FirstName,
-                   Applicant_Account__r.PersonEmail,
-                   Materials_Form_Token__c,
-                   Materials_Form_URL__c
+                   Applicant_Account__r.PersonEmail
             FROM Prospect_Scholar_Application__c
             WHERE Id IN :applicationIds
         ]);
 
-        ensureMaterialsFormLinks(applicationsById.values());
         List<Messaging.SingleEmailMessage> messages = buildMessages(requests, applicationsById);
 
         if (!messages.isEmpty()) {
             Messaging.sendEmail(messages);
-        }
-    }
-
-    private static void ensureMaterialsFormLinks(List<Prospect_Scholar_Application__c> applications) {
-        List<Prospect_Scholar_Application__c> updates = new List<Prospect_Scholar_Application__c>();
-        for (Prospect_Scholar_Application__c application : applications) {
-            String token = application.Materials_Form_Token__c;
-            if (String.isBlank(token)) {
-                token = ScholarFinalistMaterialsService.generateToken();
-            }
-
-            String formUrl = ScholarFinalistMaterialsService.buildMaterialsFormUrl(application.Id, token);
-            if (application.Materials_Form_Token__c != token ||
-                application.Materials_Form_URL__c != formUrl) {
-                application.Materials_Form_Token__c = token;
-                application.Materials_Form_URL__c = formUrl;
-                updates.add(new Prospect_Scholar_Application__c(
-                    Id = application.Id,
-                    Materials_Form_Token__c = token,
-                    Materials_Form_URL__c = formUrl
-                ));
-            }
-        }
-
-        if (!updates.isEmpty()) {
-            update updates;
         }
     }
 
@@ -93,10 +64,7 @@ public with sharing class ScholarshipInviteEmailAction {
             Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
             message.setToAddresses(new List<String>{ recipientEmail });
             message.setSubject('CPL Scholar Finalist Invitation');
-            message.setHtmlBody(buildInviteBody(
-                application.Applicant_Account__r.FirstName,
-                application.Materials_Form_URL__c
-            ));
+            message.setHtmlBody(buildInviteBody(application.Applicant_Account__r.FirstName));
             message.setSaveAsActivity(false);
             messages.add(message);
         }
@@ -106,22 +74,13 @@ public with sharing class ScholarshipInviteEmailAction {
 
     @TestVisible
     private static String buildInviteBody(String firstName) {
-        return buildInviteBody(firstName, null);
-    }
-
-    @TestVisible
-    private static String buildInviteBody(String firstName, String materialsFormUrl) {
         String greetingName = String.isBlank(firstName) ? 'there' : firstName.escapeHtml4();
-        String safeFormUrl = String.isBlank(materialsFormUrl)
-            ? 'https://www.climbpauselift.org/scholar-finalist-materials'
-            : materialsFormUrl;
         return ''
             + '<p>' + greetingName + ',</p>'
             + '<p>I am so excited that you have decided that a career in Wealth Management as a Financial Advisor is your goal. '
             + 'I am also delighted to share that you have been selected as a <strong>CPL Scholar Finalist</strong>.</p>'
             + '<p>This recognition reflects both your accomplishments to date and your potential to contribute to a community of exceptional women who are committed to guiding, lifting, and inspiring one another throughout their careers.</p>'
-            + '<p>To complete the review process, please submit your finalist materials through your personalized form:</p>'
-            + '<p><a href="' + safeFormUrl.escapeHtml4() + '">Submit finalist materials</a></p>'
+            + '<p>To complete the review process, please provide the following in one consolidated email:</p>'
             + '<ul>'
             + '<li>Your most recent resume, including GPA, leadership activities, and athletic achievements</li>'
             + '<li>Two letters of recommendation: one from your coach or a college professor, and one from your summer internship supervisor</li>'

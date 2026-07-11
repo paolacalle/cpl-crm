@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Materials_Form_Token__c</fullName>
     <description>Random token used to validate personalized Scholar Finalist Materials form submissions.</description>
+    <externalId>false</externalId>
     <inlineHelpText>Generated when the finalist invite email is sent. Do not share outside the personalized form link.</inlineHelpText>
     <label>Materials Form Token</label>
     <length>64</length>

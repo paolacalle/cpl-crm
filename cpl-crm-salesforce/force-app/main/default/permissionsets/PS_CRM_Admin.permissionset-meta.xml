@@ -8,12 +8,15 @@
         <application>standard__Marketing</application>
         <visible>true</visible>
     </applicationVisibilities>
+    <classAccesses>
+        <apexClass>ScholarshipInviteActionCtrl</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScholarshipInviteEmailAction</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Grants administrative access for configuring, maintaining, and troubleshooting the CPL Salesforce CRM, including object configuration, automation, reporting, and system-level capabilities. Intended for CRM builders and maintainers only.</description>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.Intended_CPL_Lifecycle__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.AccountId</field>
@@ -191,6 +194,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Evaluation__c.Lead__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Form_Submission__c.Coach_Professor_Recommender_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -250,6 +258,21 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Average_Evaluation_Rating__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Evaluation_Count__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Intended_CPL_Lifecycle__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Prospect_Scholar_Application__c.Application_Status__c</field>
         <readable>true</readable>
@@ -261,12 +284,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Prospect_Scholar_Application__c.College_Year__c</field>
+        <field>Prospect_Scholar_Application__c.Coach_Professor_Recommendation_Received__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Prospect_Scholar_Application__c.Coach_Professor_Recommendation_Received__c</field>
+        <field>Prospect_Scholar_Application__c.College_Year__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -296,17 +319,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Prospect_Scholar_Application__c.Internship_Supervisor_Rec_Received__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Prospect_Scholar_Application__c.Intake_Owner__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Prospect_Scholar_Application__c.Internal_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Prospect_Scholar_Application__c.Internship_Supervisor_Rec_Received__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -384,40 +407,8 @@
         <field>Scholarship_Award__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Lead__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Lead.Average_Evaluation_Rating__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Lead.Evaluation_Count__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <classAccesses>
-        <apexClass>ScholarshipInviteActionCtrl</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ScholarshipInviteEmailAction</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>PS_CRM_Admin</label>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Scholarship_Award__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -488,6 +479,16 @@
         <viewAllFields>true</viewAllFields>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Scholarship_Award__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <recordTypeVisibilities>
         <recordType>Account.Company_Employer</recordType>
         <visible>true</visible>
@@ -522,6 +523,18 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>Contact.Partner</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.CPL_Member_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.Partner_Lead_Evaluation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>Evaluation__c.Scholar_Lead_Evaluation</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>

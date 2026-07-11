@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Stored exactly as submitted at intake time. Does not automatically overwrite Lead or Contact data. --></help>
+    <label><!-- Submitted First Name --></label>
+    <name>Submitted_First_Name__c</name>
+</CustomFieldTranslation>

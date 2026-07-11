@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Submitted_Coach_Email__c</fullName>
-    <description>Email of the coach / professor recommender submitted via JotForm. The routing flow copies this onto the Application's Coach_Professor_Email__c so Step 4 can email the recommender.</description>
+    <description>Email of the coach / professor recommender submitted via JotForm. The routing flow copies this onto the Application&apos;s Coach_Professor_Email__c so Step 4 can email the recommender.</description>
+    <externalId>false</externalId>
     <label>Submitted Coach Email</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Email</type>
     <unique>false</unique>
 </CustomField>

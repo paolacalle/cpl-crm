@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
-    <assignments>
-        <description>Set CPL Student Lifecycle to Scholar Alumni (they were a Scholar at time of graduation).</description>
-        <name>Set_Scholar_Alumni</name>
-        <label>Set Lifecycle to Scholar Alumni</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignmentItems>
-            <assignToReference>$Record.CPL_Student_Lifecycle__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Scholar Alumni</stringValue>
-            </value>
-        </assignmentItems>
-    </assignments>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <description>Set CPL Student Lifecycle to Alumni (they graduated without ever being Scholar).</description>
         <name>Set_Alumni</name>
@@ -26,6 +13,20 @@
             <operator>Assign</operator>
             <value>
                 <stringValue>Alumni</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Set CPL Student Lifecycle to Scholar Alumni (they were a Scholar at time of graduation).</description>
+        <name>Set_Scholar_Alumni</name>
+        <label>Set Lifecycle to Scholar Alumni</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.CPL_Student_Lifecycle__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Scholar Alumni</stringValue>
             </value>
         </assignmentItems>
     </assignments>

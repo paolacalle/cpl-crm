@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Internship_Supervisor_Recommender_Name__c</fullName>
     <description>Summer internship supervisor recommender name provided by the applicant.</description>
+    <externalId>false</externalId>
     <label>Internship Supervisor Recommender Name</label>
     <length>255</length>
     <required>false</required>

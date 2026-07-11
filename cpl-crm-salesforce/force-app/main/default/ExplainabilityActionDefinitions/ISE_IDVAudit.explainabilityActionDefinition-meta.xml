@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExplainabilityActionDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionLogSchemaType>Other</actionLogSchemaType>
+    <applicationSubtype>ISE_IDV</applicationSubtype>
+    <applicationType>IndustryServiceExcellence</applicationType>
+    <description>ISE IDV Audit Trail Log Def</description>
+    <internal>false</internal>
+    <masterLabel>ISE_IDVAudit</masterLabel>
+    <processType>IDV_Audit</processType>
+</ExplainabilityActionDefinition>

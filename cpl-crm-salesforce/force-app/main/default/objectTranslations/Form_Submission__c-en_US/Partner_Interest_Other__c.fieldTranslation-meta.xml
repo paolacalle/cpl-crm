@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Populated only when the partner checked &quot;Other&quot; on the form and typed a custom description. Empty otherwise. --></help>
+    <label><!-- Partner Interest - Other Detail --></label>
+    <name>Partner_Interest_Other__c</name>
+</CustomFieldTranslation>

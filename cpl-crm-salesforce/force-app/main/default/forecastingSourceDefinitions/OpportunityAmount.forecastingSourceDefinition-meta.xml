@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForecastingSourceDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <categoryField>Opportunity.ForecastCategoryName</categoryField>
+    <dateField>Opportunity.CloseDate</dateField>
+    <isProtected>false</isProtected>
+    <masterLabel>Opportunity Amount</masterLabel>
+    <measureField>Opportunity.Amount</measureField>
+    <sourceObject>Opportunity</sourceObject>
+    <userField>Opportunity.OwnerId</userField>
+</ForecastingSourceDefinition>

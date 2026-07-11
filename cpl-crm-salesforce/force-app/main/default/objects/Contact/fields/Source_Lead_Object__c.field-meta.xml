@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Lead_Object__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The original Lead record from which this Contact was created during conversion. This field preserves a permanent link to the initial submission and source data.</description>
+    <inlineHelpText>Automatically populated during Lead conversion. Used to reference original application or inquiry details from the Lead. This field should not be edited manually.</inlineHelpText>
+    <label>Source Lead Object</label>
+    <referenceTo>Lead</referenceTo>
+    <relationshipLabel>Contacts</relationshipLabel>
+    <relationshipName>Contacts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>

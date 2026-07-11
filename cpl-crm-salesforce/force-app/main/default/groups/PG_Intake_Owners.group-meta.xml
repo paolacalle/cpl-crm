@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Members of this group are responsible for managing initial form submissions, 
+triaging incoming student and partner leads, resolving intake data issues 
+(e.g., school matching, duplicates), and overseeing lead qualification 
+and conversion into CPL Members or Partner records.</description>
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <name>PG_Intake_Owners</name>
+</Group>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Paste the public URL of the JotForm materials form here (e.g., https://form.jotform.com/250123456789). Step 3 of the Application action plan will use this to generate per-application links. --></help>
+    <label><!-- JotForm Materials Base URL --></label>
+    <name>JotForm_Materials_Base_URL__c</name>
+</CustomFieldTranslation>

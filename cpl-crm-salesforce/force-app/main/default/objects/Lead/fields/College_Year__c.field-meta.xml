@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>College_Year__c</fullName>
+    <description>Applicant’s self-reported current year of enrollment in college at the time of form submission.</description>
+    <inlineHelpText>Select the option that best reflects your current academic standing. This information is used to understand eligibility and to route applications appropriately during review.</inlineHelpText>
+    <label>College Year</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_College_Year</valueSetName>
+    </valueSet>
+</CustomField>

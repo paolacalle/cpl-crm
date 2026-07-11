@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Order Activation</fullName>
+        <default>true</default>
+        <label>Order Activation</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order Approval</fullName>
+        <default>false</default>
+        <label>Order Approval</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Fulfillment</fullName>
+        <default>false</default>
+        <label>Fulfillment</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Payment</fullName>
+        <default>false</default>
+        <label>Payment</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Invoicing</fullName>
+        <default>false</default>
+        <label>Invoicing</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Place Order</fullName>
+        <default>false</default>
+        <label>Place Order</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order To Asset</fullName>
+        <default>false</default>
+        <label>Order To Asset</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order Item Summary To Asset</fullName>
+        <default>false</default>
+        <label>Order Item Summary To Asset</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order To Billing Schedule</fullName>
+        <default>false</default>
+        <label>Order To Billing Schedule</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Catalog Syndication</fullName>
+        <default>false</default>
+        <label>Catalog Syndication</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Subscription Payment</fullName>
+        <default>false</default>
+        <label>Subscription Payment</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Cancel</fullName>
+        <default>false</default>
+        <label>Cancel</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Payment Credit</fullName>
+        <default>false</default>
+        <label>Payment Credit</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Commerce Delivery Service</fullName>
+        <default>false</default>
+        <label>Commerce Delivery Service</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Order Summary Orchestration</fullName>
+        <default>false</default>
+        <label>Order Summary Orchestration</label>
+    </standardValue>
+</StandardValueSet>

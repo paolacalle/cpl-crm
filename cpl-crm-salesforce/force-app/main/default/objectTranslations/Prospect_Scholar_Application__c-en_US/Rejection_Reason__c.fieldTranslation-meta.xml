@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Add details that explain the decision (context, dates, key messages, interview notes). Do not include sensitive personal data. --></help>
+    <label><!-- Rejection Reason --></label>
+    <name>Rejection_Reason__c</name>
+</CustomFieldTranslation>

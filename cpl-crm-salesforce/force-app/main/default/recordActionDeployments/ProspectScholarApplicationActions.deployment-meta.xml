@@ -58,10 +58,4 @@
         <isFrequentAction>true</isFrequentAction>
         <type>Flow</type>
     </selectableItems>
-    <selectableItems>
-        <action>Prospect_Scholar_Application__c.Send_Finalist_Materials_Invite</action>
-        <frequentActionSequenceNbr>2</frequentActionSequenceNbr>
-        <isFrequentAction>true</isFrequentAction>
-        <type>QuickAction</type>
-    </selectableItems>
 </RecordActionDeployment>

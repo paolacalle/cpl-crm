@@ -29,6 +29,7 @@ public with sharing class LeadIntakeActionPlanController {
         }
 
         List<String> planSubjects = subjectsForLead(leadId);
+        Boolean isTerminal = isTerminalLead(leadId);
 
         Map<String, Task> tasksBySubject = new Map<String, Task>();
         for (Task intakeTask : [
@@ -50,16 +51,95 @@ public with sharing class LeadIntakeActionPlanController {
             step++;
         }
 
-        // The first step that is not completed is the current/active step.
-        for (ActionPlanTask planTask : planTasks) {
-            if (planTask.stateClass != 'completed') {
-                planTask.isCurrent = true;
-                planTask.stateClass = 'current';
-                break;
+        // The first step that is not completed is the current/active step. A
+        // converted or disqualified (Unqualified) lead is terminal: no step is
+        // active and nothing should offer a Launch button ("no action required").
+        if (!isTerminal) {
+            for (ActionPlanTask planTask : planTasks) {
+                if (planTask.stateClass != 'completed') {
+                    planTask.isCurrent = true;
+                    planTask.stateClass = 'current';
+                    break;
+                }
             }
         }
 
         return planTasks;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static LeadPlanState getLeadState(Id leadId) {
+        LeadPlanState state = new LeadPlanState();
+        if (leadId == null) {
+            return state;
+        }
+
+        for (Lead lead : [
+            SELECT Status, IsConverted, ConvertedAccountId, ConvertedContactId
+            FROM Lead
+            WHERE Id = :leadId
+            LIMIT 1
+        ]) {
+            state.statusLabel = lead.Status;
+            state.isConverted = lead.IsConverted;
+            state.isUnqualified = !lead.IsConverted && lead.Status == 'Unqualified';
+            // Person leads convert into a Person Account (the CPL member); fall
+            // back to the Contact if no account was created.
+            state.convertedRecordId = lead.ConvertedAccountId != null
+                ? lead.ConvertedAccountId
+                : lead.ConvertedContactId;
+        }
+        return state;
+    }
+
+    @AuraEnabled
+    public static void reopenLead(Id leadId) {
+        if (leadId == null) {
+            throw new AuraHandledException('No lead specified.');
+        }
+
+        List<Lead> leads = [
+            SELECT Status, IsConverted, RecordType.DeveloperName
+            FROM Lead
+            WHERE Id = :leadId
+            LIMIT 1
+        ];
+        if (leads.isEmpty()) {
+            throw new AuraHandledException('Lead not found.');
+        }
+
+        Lead lead = leads[0];
+        if (lead.IsConverted) {
+            throw new AuraHandledException('Converted leads cannot be re-opened.');
+        }
+
+        // Return the lead to the decision point so the intake host can work it again.
+        lead.Status = 'Contacted';
+        update lead;
+
+        // Re-open the final outcome step so its Launch button reappears.
+        List<String> planSubjects = subjectsForLead(leadId);
+        String outcomeSubject = planSubjects[planSubjects.size() - 1];
+        List<Task> outcomeTasks = [
+            SELECT Id, Status
+            FROM Task
+            WHERE WhoId = :leadId AND Subject = :outcomeSubject
+        ];
+        for (Task outcomeTask : outcomeTasks) {
+            outcomeTask.Status = 'Not Started';
+        }
+        if (!outcomeTasks.isEmpty()) {
+            update outcomeTasks;
+        }
+    }
+
+    private static Boolean isTerminalLead(Id leadId) {
+        for (Lead lead : [
+            SELECT Status, IsConverted FROM Lead WHERE Id = :leadId LIMIT 1
+        ]) {
+            return lead.IsConverted || lead.Status == 'Unqualified';
+        }
+        return false;
     }
 
     private static List<String> subjectsForLead(Id leadId) {
@@ -71,6 +151,13 @@ public with sharing class LeadIntakeActionPlanController {
             }
         }
         return SCHOLAR_SUBJECTS;
+    }
+
+    public class LeadPlanState {
+        @AuraEnabled public Boolean isConverted = false;
+        @AuraEnabled public Boolean isUnqualified = false;
+        @AuraEnabled public Id convertedRecordId;
+        @AuraEnabled public String statusLabel;
     }
 
     public class ActionPlanTask {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Link to the scholarship application that produced this award. Leave blank for historical awards entered manually. --></help>
+    <label><!-- Source Application --></label>
+    <name>Prospect_Scholar_Application__c</name>
+    <relationshipLabel><!-- Scholarship Awards --></relationshipLabel>
+</CustomFieldTranslation>

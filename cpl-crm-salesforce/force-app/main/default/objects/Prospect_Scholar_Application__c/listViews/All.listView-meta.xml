@@ -2,6 +2,9 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
+    <columns>Applicant_Account__c</columns>
+    <columns>Application_Status__c</columns>
+    <columns>Eligibility_Confirmed__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

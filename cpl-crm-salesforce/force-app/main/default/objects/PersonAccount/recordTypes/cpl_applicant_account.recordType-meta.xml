@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cpl_applicant_account</fullName>
+    <active>true</active>
+    <description>This covers all individual humans in the program pipeline (athletes, applicants, lifters, scholars, alumni).</description>
+    <label>CPL Member Account</label>
+    <picklistValues>
+        <picklist>AccountSource</picklist>
+        <values>
+            <fullName>Advertisement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Relations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminar - Internal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminar - Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web - Wix %2F Zapier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Word of mouth</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Athletic_Division__c</picklist>
+        <values>
+            <fullName>NAIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NCAA Division I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NCAA Division II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NCAA Division III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NJCAA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CPL_Student_Lifecycle__c</picklist>
+        <values>
+            <fullName>Alumni</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Applicant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Athlete</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prospect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scholar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scholar Alumni</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Engagement_Focus__c</picklist>
+        <values>
+            <fullName>Career Coaching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mentorship</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Networking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Programming %2F Events</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referrals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Thought Leadership</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Giving_Focus__c</picklist>
+        <values>
+            <fullName>General Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grants</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internships</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scholarships</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Highest_Degree_Offered__c</picklist>
+        <values>
+            <fullName>Associate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bachelor%E2%80%99s</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certificate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Doctoral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Master%E2%80%99s</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Industry</picklist>
+        <values>
+            <fullName>Agriculture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apparel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Banking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Biotechnology</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chemicals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Communications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Construction</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Education</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electronics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engineering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entertainment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Environmental</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Food %26 Beverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Healthcare</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hospitality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Machinery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manufacturing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Media</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not For Profit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recreation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shipping</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telecommunications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transportation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Utilities</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Institution_Type__c</picklist>
+        <values>
+            <fullName>Private For-Profit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private Nonprofit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ownership</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subsidiary</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Partner_Type__c</picklist>
+        <values>
+            <fullName>CPL Ambassador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Connector %2F Resource Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Advisor %28Hiring%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>School Sourcing Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wealth Management Firm %28Hiring%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Preferred_Communication_Method__c</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Preference</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Text</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Primary_Wealth_Focus__c</picklist>
+        <values>
+            <fullName>Client Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Advisory</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Planning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investment Management</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private Banking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wealth Management</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rating</picklist>
+        <values>
+            <fullName>Cold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warm</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Scholarship_Eligibility_Status__pc</picklist>
+        <values>
+            <fullName>Eligible</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nearly Eligible</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Eligible</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sports_Focus__c</picklist>
+        <values>
+            <fullName>Acrobatics %26 Tumbling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aerial Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aerobic Gymnastics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aikido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alpine Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aquathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Archery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arena Soccer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arm Wrestling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artistic Gymnastics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artistic Swimming</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BMX Cycling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Badminton</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ballet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ballroom Dance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Barebow Archery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baseball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baseball5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Basketball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Basketball 3x3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baton Twirling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Beach Handball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Beach Soccer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Beach Tennis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Beach Volleyball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Biathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Billiards</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boardercross</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bobsled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bocce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bodybuilding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bowling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boxing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brazilian Jiu-Jitsu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Breakdancing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Broomball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canoe Polo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canoe Slalom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canoe Sprint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Capoeira</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cheerleading</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clay Target Shooting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Climbing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Competitive Dance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cricket</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cross Country</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CrossFit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cue Sports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Curling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cycling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cyclocross</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Darts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disc Golf</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diving</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dragon Boat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Duathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Endurance Riding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equestrian</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Esports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fencing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Field Archery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Field Hockey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Figure Skating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fistball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flag Football</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Footgolf</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freediving</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freestyle BMX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freestyle Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freestyle Wrestling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Futsal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gaelic Football</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goalball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Golf</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grappling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grass Volleyball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greco-Roman Wrestling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gymnastics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Halfpipe Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Halfpipe Snowboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Diving</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hurling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ice Climbing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ice Hockey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indoor Track</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inline Hockey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Judo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Karate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kayaking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kendo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kickboxing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kin-Ball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kitesurfing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kung Fu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lacrosse</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laser Run</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lifesaving Sport</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Longboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Luge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marathon Swimming</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mixed Martial Arts</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Modern Pentathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motocross</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mountain Biking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Muay Thai</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Netball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nordic Combined</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nordic Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open Water Swimming</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orienteering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Padel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paratriathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parkour</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pickleball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Platform Tennis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Polo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Powerlifting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Race Walking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Racquetball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rifle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ringette</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Road Cycling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roller Derby</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roller Figure Skating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roller Hockey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roller Skating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rowing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rugby</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rugby Sevens</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STUNT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sailing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sand Volleyball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Savate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sculling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sepak Takraw</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Short Track Speed Skating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shotgun Sports</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Show Jumping</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sitting Volleyball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skateboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skeet Shooting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skeleton</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ski Jumping</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Slalom Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sled Hockey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snowboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snowshoeing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Soccer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Soft Tennis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Softball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Speed Climbing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Speed Skating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sport Climbing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sport Pistol</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sprint Canoe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sprint Kayak</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Squash</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stand Up Paddleboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Steeplechase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submission Wrestling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surf Lifesaving</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surfing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Swimming</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Swimming %26 Diving</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Synchronized Skating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Table Tennis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Taekwondo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Target Archery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Team Handball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telemark Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tennis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tetrathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Touch Rugby</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Track %26 Field</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Track%2C Indoor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Track%2C Outdoor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trampoline Gymnastics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trap Shooting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Triathlon</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tug of War</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ultimate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ultimate Frisbee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Underwater Hockey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vaulting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volleyball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wakeboarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Water Polo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Water Skiing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weightlifting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wheelchair Basketball</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wheelchair Fencing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wheelchair Rugby</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wheelchair Tennis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Whitewater Kayaking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windsurfing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wrestling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wushu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yoga</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Analyst</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Integrator</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Press</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prospect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reseller</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

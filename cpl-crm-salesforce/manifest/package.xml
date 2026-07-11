@@ -1,0 +1,1730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>CPL_Lead_Intake_Action_Plan</members>
+        <name>ActionPlanTemplate</name>
+    </types>    <types>
+        <members>PSA_Application_Lifecycle</members>
+        <members>Prospect_Scholar_Intake_Path</members>
+        <name>AnimationRule</name>
+    </types>    <types>
+        <members>CplHomeIntakePipelineController</members>
+        <members>CplHomeIntakePipelineControllerTest</members>
+        <members>CplHomeRecentActivityController</members>
+        <members>CplHomeRecentActivityControllerTest</members>
+        <members>CplSchoolMemberSummaryController</members>
+        <members>CplSchoolMemberSummaryControllerTest</members>
+        <members>CplSchoolRecentActivityController</members>
+        <members>CplSchoolRecentActivityControllerTest</members>
+        <members>LeadConvertAction</members>
+        <members>LeadConvertActionTest</members>
+        <members>LeadFileTransferAction</members>
+        <members>LeadFileTransferActionTest</members>
+        <members>LeadIntakeActionPlanController</members>
+        <members>LeadIntakeActionPlanControllerTest</members>
+        <members>LeadResumeFileService</members>
+        <members>LeadResumeFileServiceTest</members>
+        <members>LeadResumePreviewController</members>
+        <members>LeadResumePreviewControllerTest</members>
+        <members>ProspectAppActionPlanController</members>
+        <members>ProspectAppActionPlanControllerTest</members>
+        <members>ProspectScholarOwnerTriggerTest</members>
+        <members>ScholarshipInviteActionCtrl</members>
+        <members>ScholarshipInviteActionCtrlTest</members>
+        <members>ScholarshipInviteEmailAction</members>
+        <members>ScholarshipInviteEmailActionTest</members>
+        <members>SportPicklistOptionsController</members>
+        <members>SportPicklistOptionsControllerTest</members>
+        <name>ApexClass</name>
+    </types>    <types>
+        <members>apexEmailNotifications</members>
+        <name>ApexEmailNotifications</name>
+    </types>    <types>
+        <members>LeadResumeFileTrigger</members>
+        <members>ProspectScholarApplicationOwnerTrigger</members>
+        <name>ApexTrigger</name>
+    </types>    <types>
+        <members>AppSwitcher</members>
+        <members>Salesforce1</members>
+        <name>AppMenu</name>
+    </types>    <types>
+        <members>ISE_IDV</members>
+        <members>PtyRelaGrp</members>
+        <name>ApplicationSubtypeDefinition</name>
+    </types>    <types>
+        <members>Case</members>
+        <members>Lead</members>
+        <name>AssignmentRules</name>
+    </types>    <types>
+        <members>Case</members>
+        <members>Lead</members>
+        <name>AutoResponseRules</name>
+    </types>    <types>
+        <members>LEXTHEMINGCPL</members>
+        <name>BrandingSet</name>
+    </types>    <types>
+        <members>Lead.CPL Scholar Lead Process</members>
+        <members>Lead.Partner Lead Process</members>
+        <name>BusinessProcess</name>
+    </types>    <types>
+        <members>GroupAudit</members>
+        <members>IDV_Audit</members>
+        <name>BusinessProcessTypeDefinition</name>
+    </types>    <types>
+        <members>primaryModel</members>
+        <name>CampaignInfluenceModel</name>
+    </types>    <types>
+        <members>DataCloudCompanyMatch</members>
+        <members>DataCloudGeoLocation</members>
+        <members>DataCloudLeadAppend</members>
+        <name>CleanDataService</name>
+    </types>    <types>
+        <members>Internal Zone</members>
+        <name>Community</name>
+    </types>    <types>
+        <members>abbreviated_fullcolor</members>
+        <members>horizontal_fullcolor</members>
+        <name>ContentAsset</name>
+    </types>    <types>
+        <members>CPL</members>
+        <members>standard__AllTabSet</members>
+        <members>standard__AppLauncher</members>
+        <members>standard__Approvals</members>
+        <members>standard__Chatter</members>
+        <members>standard__Community</members>
+        <members>standard__Content</members>
+        <members>standard__DataGovernanceConsole</members>
+        <members>standard__DigitalWallet</members>
+        <members>standard__ExpressionSetConsole</members>
+        <members>standard__LightningBolt</members>
+        <members>standard__LightningInstrumentation</members>
+        <members>standard__LightningSales</members>
+        <members>standard__LightningSalesConsole</members>
+        <members>standard__LightningService</members>
+        <members>standard__MSJApp</members>
+        <members>standard__Marketing</members>
+        <members>standard__OnlineSales</members>
+        <members>standard__Platform</members>
+        <members>standard__ProgramManagementConsole</members>
+        <members>standard__Sales</members>
+        <members>standard__SalesCloudMobile</members>
+        <members>standard__SalesforceCMS</members>
+        <members>standard__Service</members>
+        <members>standard__ServiceConsole</members>
+        <name>CustomApplication</name>
+    </types>    <types>
+        <members>Account.Active_Internships__c</members>
+        <members>Account.Athletic_Division__c</members>
+        <members>Account.CPL_Student_Lifecycle__c</members>
+        <members>Account.College_Scorecard_ID__c</members>
+        <members>Account.Engagement_Focus__c</members>
+        <members>Account.Full_Time_Eligible__c</members>
+        <members>Account.Giving_Focus__c</members>
+        <members>Account.Graduation_Date__c</members>
+        <members>Account.Highest_Degree_Offered__c</members>
+        <members>Account.Hiring_Partner__c</members>
+        <members>Account.Institution_Type__c</members>
+        <members>Account.Internship_Count__c</members>
+        <members>Account.Internship_Eligible__c</members>
+        <members>Account.Latest_Internship_End_Date__c</members>
+        <members>Account.Partner_Type__c</members>
+        <members>Account.Preferred_Communication_Method__c</members>
+        <members>Account.Primary_Contact__c</members>
+        <members>Account.Primary_Resume_URL__c</members>
+        <members>Account.Primary_Wealth_Focus__c</members>
+        <members>Account.Qualifying_Internship_Count__c</members>
+        <members>Account.Recruiting_Priority__c</members>
+        <members>Account.Scholarship_Eligibility_Computed__c</members>
+        <members>Account.Sports_Focus__c</members>
+        <members>Account.Strategic_Importance__c</members>
+        <members>BenefitManagementRecertification__c.Language__c</members>
+        <members>BenefitManagementRecertification__c.Subtype__c</members>
+        <members>BenefitManagementRecertification__c.Type__c</members>
+        <members>CPL_Config__c.JotForm_Materials_Base_URL__c</members>
+        <members>CPL_Config__c.Recommender_JotForm_Base_URL__c</members>
+        <members>Contact.College_Year__c</members>
+        <members>Contact.Commits_to_CPL_mantra__c</members>
+        <members>Contact.Contact_Status__c</members>
+        <members>Contact.Current_Employer__c</members>
+        <members>Contact.Current_Employment__c</members>
+        <members>Contact.Current_Job_Title__c</members>
+        <members>Contact.Current_Term_Season__c</members>
+        <members>Contact.Current_Term_Year__c</members>
+        <members>Contact.Current_Term__c</members>
+        <members>Contact.Graduation_Year__c</members>
+        <members>Contact.Lead_Source_Detail__c</members>
+        <members>Contact.Notes__c</members>
+        <members>Contact.Primary_Sport__c</members>
+        <members>Contact.Scholarship_Eligibility_Status__c</members>
+        <members>Contact.School__c</members>
+        <members>Contact.Source_Lead_Object__c</members>
+        <members>Contact.Why_CPL__c</members>
+        <members>Employment__c.CPL_Member__c</members>
+        <members>Employment__c.City__c</members>
+        <members>Employment__c.Contact__c</members>
+        <members>Employment__c.Country__c</members>
+        <members>Employment__c.Department__c</members>
+        <members>Employment__c.Employer__c</members>
+        <members>Employment__c.Employment_Type__c</members>
+        <members>Employment__c.End_Date__c</members>
+        <members>Employment__c.Internship_Season__c</members>
+        <members>Employment__c.Is_Current__c</members>
+        <members>Employment__c.Is_qualifying__c</members>
+        <members>Employment__c.Job_Title__c</members>
+        <members>Employment__c.Notes__c</members>
+        <members>Employment__c.Start_Date__c</members>
+        <members>Employment__c.State__c</members>
+        <members>Employment__c.Status__c</members>
+        <members>Evaluation__c.Additional_Comments__c</members>
+        <members>Evaluation__c.Areas_for_Improvement__c</members>
+        <members>Evaluation__c.CPL_Member__c</members>
+        <members>Evaluation__c.Employment__c</members>
+        <members>Evaluation__c.Evaluation_Date__c</members>
+        <members>Evaluation__c.Evaluation_Target_Type__c</members>
+        <members>Evaluation__c.Evaluation_Type__c</members>
+        <members>Evaluation__c.Evaluator_Contact__c</members>
+        <members>Evaluation__c.Evaluator_Name__c</members>
+        <members>Evaluation__c.Evaluator_Relationship__c</members>
+        <members>Evaluation__c.Evaluator_Type__c</members>
+        <members>Evaluation__c.Evaluator_User__c</members>
+        <members>Evaluation__c.Feedback_Source__c</members>
+        <members>Evaluation__c.Lead__c</members>
+        <members>Evaluation__c.Overall_Rating__c</members>
+        <members>Evaluation__c.Prospect_Scholar_Application__c</members>
+        <members>Evaluation__c.Rating__c</members>
+        <members>Evaluation__c.Strengths__c</members>
+        <members>Evaluation__c.Would_Rehire__c</members>
+        <members>Form_Submission__c.Coach_Professor_Recommender_Email__c</members>
+        <members>Form_Submission__c.Coach_Professor_Recommender_Name__c</members>
+        <members>Form_Submission__c.Commits_to_CPL_Mantra__c</members>
+        <members>Form_Submission__c.External_Form_ID__c</members>
+        <members>Form_Submission__c.External_Form_Name__c</members>
+        <members>Form_Submission__c.External_Submission_ID__c</members>
+        <members>Form_Submission__c.Field_Difference__c</members>
+        <members>Form_Submission__c.Finalist_Essay__c</members>
+        <members>Form_Submission__c.Financial_Aid_Scholarship_Grant_Details__c</members>
+        <members>Form_Submission__c.Internship_Supervisor_Recommender_Email__c</members>
+        <members>Form_Submission__c.Internship_Supervisor_Recommender_Name__c</members>
+        <members>Form_Submission__c.Matched_Contact__c</members>
+        <members>Form_Submission__c.Matched_Lead__c</members>
+        <members>Form_Submission__c.Matched_School_Account__c</members>
+        <members>Form_Submission__c.Material_Submission_Type__c</members>
+        <members>Form_Submission__c.Materials_Processed__c</members>
+        <members>Form_Submission__c.Materials_Submission_Current__c</members>
+        <members>Form_Submission__c.Needs_Review__c</members>
+        <members>Form_Submission__c.Partner_Interest_Other__c</members>
+        <members>Form_Submission__c.Partner_Interest_Type__c</members>
+        <members>Form_Submission__c.Partner_Message__c</members>
+        <members>Form_Submission__c.Partnership_Interest__c</members>
+        <members>Form_Submission__c.Processing_Status__c</members>
+        <members>Form_Submission__c.Prospect_Scholar_Application__c</members>
+        <members>Form_Submission__c.Raw_Payload__c</members>
+        <members>Form_Submission__c.Recommender_Email__c</members>
+        <members>Form_Submission__c.Recommender_Name__c</members>
+        <members>Form_Submission__c.Resume_URL__c</members>
+        <members>Form_Submission__c.Resume_Uploaded__c</members>
+        <members>Form_Submission__c.Student_Submitted_Statement__c</members>
+        <members>Form_Submission__c.Submission_Source__c</members>
+        <members>Form_Submission__c.Submission_Token__c</members>
+        <members>Form_Submission__c.Submitted_App_Id__c</members>
+        <members>Form_Submission__c.Submitted_At__c</members>
+        <members>Form_Submission__c.Submitted_Athletic_Detail__c</members>
+        <members>Form_Submission__c.Submitted_Coach_Email__c</members>
+        <members>Form_Submission__c.Submitted_Coach_Letter_URL__c</members>
+        <members>Form_Submission__c.Submitted_Coach_Name__c</members>
+        <members>Form_Submission__c.Submitted_College_Year__c</members>
+        <members>Form_Submission__c.Submitted_Email__c</members>
+        <members>Form_Submission__c.Submitted_Essay__c</members>
+        <members>Form_Submission__c.Submitted_First_Name__c</members>
+        <members>Form_Submission__c.Submitted_GPA__c</members>
+        <members>Form_Submission__c.Submitted_Internship_Email__c</members>
+        <members>Form_Submission__c.Submitted_Internship_Letter_URL__c</members>
+        <members>Form_Submission__c.Submitted_Internship_Name__c</members>
+        <members>Form_Submission__c.Submitted_Last_Name__c</members>
+        <members>Form_Submission__c.Submitted_Leadership_Detail__c</members>
+        <members>Form_Submission__c.Submitted_Phone__c</members>
+        <members>Form_Submission__c.Submitted_Resume_URL__c</members>
+        <members>Form_Submission__c.Submitted_School__c</members>
+        <members>Form_Submission__c.Submitted_Sport__c</members>
+        <members>Lead.Average_Evaluation_Rating__c</members>
+        <members>Lead.College_Year__c</members>
+        <members>Lead.Commits_to_CPL_mantra__c</members>
+        <members>Lead.Evaluation_Count__c</members>
+        <members>Lead.Intended_CPL_Lifecycle__c</members>
+        <members>Lead.Lead_Source_Detail__c</members>
+        <members>Lead.Partner_Interest_Other__c</members>
+        <members>Lead.Partner_Message__c</members>
+        <members>Lead.Partner_Type__c</members>
+        <members>Lead.Partnership_Interest__c</members>
+        <members>Lead.Primary_Resume_URL__c</members>
+        <members>Lead.Primary_Sport__c</members>
+        <members>Lead.Resume_Uploaded__c</members>
+        <members>Lead.School_Name_From_Form__c</members>
+        <members>Lead.School__c</members>
+        <members>Lead.Sport_From_Form__c</members>
+        <members>Lead.Sport__c</members>
+        <members>Lead.Why_CPL_Scholar__c</members>
+        <members>Prospect_Scholar_Application__c.Applicant_Account__c</members>
+        <members>Prospect_Scholar_Application__c.Application_Status__c</members>
+        <members>Prospect_Scholar_Application__c.Athletic_Detail__c</members>
+        <members>Prospect_Scholar_Application__c.Athletic_Received__c</members>
+        <members>Prospect_Scholar_Application__c.Case_Owner__c</members>
+        <members>Prospect_Scholar_Application__c.Coach_Professor_Email__c</members>
+        <members>Prospect_Scholar_Application__c.Coach_Professor_Name__c</members>
+        <members>Prospect_Scholar_Application__c.Coach_Professor_Recommendation_Received__c</members>
+        <members>Prospect_Scholar_Application__c.College_Year__c</members>
+        <members>Prospect_Scholar_Application__c.Cycle_Term__c</members>
+        <members>Prospect_Scholar_Application__c.Cycle_Year__c</members>
+        <members>Prospect_Scholar_Application__c.Cycle__c</members>
+        <members>Prospect_Scholar_Application__c.Eligibility_Confirmed__c</members>
+        <members>Prospect_Scholar_Application__c.Essay_Received__c</members>
+        <members>Prospect_Scholar_Application__c.Essay_Text__c</members>
+        <members>Prospect_Scholar_Application__c.Financial_Aid_Detail__c</members>
+        <members>Prospect_Scholar_Application__c.Financial_Aid_Info_Received__c</members>
+        <members>Prospect_Scholar_Application__c.GPA__c</members>
+        <members>Prospect_Scholar_Application__c.Intake_Owner__c</members>
+        <members>Prospect_Scholar_Application__c.Internal_Notes__c</members>
+        <members>Prospect_Scholar_Application__c.Internship_Supervisor_Email__c</members>
+        <members>Prospect_Scholar_Application__c.Internship_Supervisor_Name__c</members>
+        <members>Prospect_Scholar_Application__c.Internship_Supervisor_Rec_Received__c</members>
+        <members>Prospect_Scholar_Application__c.Leadership_Detail__c</members>
+        <members>Prospect_Scholar_Application__c.Leadership_Received__c</members>
+        <members>Prospect_Scholar_Application__c.Materials_Complete__c</members>
+        <members>Prospect_Scholar_Application__c.Materials_Form_Token__c</members>
+        <members>Prospect_Scholar_Application__c.Materials_Form_URL__c</members>
+        <members>Prospect_Scholar_Application__c.Rejection_Filter__c</members>
+        <members>Prospect_Scholar_Application__c.Rejection_Reason__c</members>
+        <members>Prospect_Scholar_Application__c.Resume_Received__c</members>
+        <members>Prospect_Scholar_Application__c.Scholarship_Invite_Confirmed__c</members>
+        <members>Prospect_Scholar_Application__c.Scholarship_Invite_Confrimed_Date__c</members>
+        <members>Prospect_Scholar_Application__c.Scholarship_Invite_Sent_Date__c</members>
+        <members>Prospect_Scholar_Application__c.Scholarship_Invite_Sent__c</members>
+        <members>Prospect_Scholar_Application__c.Scholarship_Invite_Status__c</members>
+        <members>Scholarship_Award__c.Award_Amount__c</members>
+        <members>Scholarship_Award__c.Award_Source__c</members>
+        <members>Scholarship_Award__c.Cycle_Term__c</members>
+        <members>Scholarship_Award__c.Cycle_Year__c</members>
+        <members>Scholarship_Award__c.Cycle__c</members>
+        <members>Scholarship_Award__c.Date_Awarded__c</members>
+        <members>Scholarship_Award__c.Date_Received__c</members>
+        <members>Scholarship_Award__c.Prospect_Scholar_Application__c</members>
+        <members>Scholarship_Award__c.Recipient_Account__c</members>
+        <members>Scholarship_Award__c.Status__c</members>
+        <name>CustomField</name>
+    </types>    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
+    </types>    <types>
+        <members>New_Lead_Created</members>
+        <name>CustomNotificationType</name>
+    </types>    <types>
+        <members>Account</members>
+        <members>AccountContactRelation</members>
+        <members>AccountContactRole</members>
+        <members>ActionPlan</members>
+        <members>ActionPlanItemDependency</members>
+        <members>ActionPlanTmplItmAssessmentInd</members>
+        <members>ActionPlnTmplItmDependency</members>
+        <members>Activity</members>
+        <members>Address</members>
+        <members>AiJobRun</members>
+        <members>AnalyticsUserAttrFuncTkn</members>
+        <members>Applicant</members>
+        <members>ApplicationForm</members>
+        <members>ApplicationFormProduct</members>
+        <members>ApprovalSubmission</members>
+        <members>ApprovalSubmissionDetail</members>
+        <members>ApprovalWorkItem</members>
+        <members>AssessmentIndicatorDefinition</members>
+        <members>AssessmentTask</members>
+        <members>AssessmentTaskContentDocument</members>
+        <members>AssessmentTaskDefinition</members>
+        <members>AssessmentTaskIndDefinition</members>
+        <members>AssessmentTaskOrder</members>
+        <members>Asset</members>
+        <members>AssetRelationship</members>
+        <members>AssistantProgress</members>
+        <members>AssociatedLocation</members>
+        <members>AsyncOperationTracker</members>
+        <members>AuditTrailFileExport</members>
+        <members>AuthorizationForm</members>
+        <members>AuthorizationFormConsent</members>
+        <members>AuthorizationFormDataUse</members>
+        <members>AuthorizationFormText</members>
+        <members>BatchJob</members>
+        <members>BatchJobPart</members>
+        <members>BatchJobPartFailedRecord</members>
+        <members>BenefitManagementRecertification__c</members>
+        <members>BroadcastTopic</members>
+        <members>BroadcastTopicCollabRoom</members>
+        <members>BroadcastTopicUserRole</members>
+        <members>BusinessBrand</members>
+        <members>BusinessMilestone</members>
+        <members>CPL_Config__c</members>
+        <members>CalcMatrixColumnRange</members>
+        <members>CalcProcStepRelationship</members>
+        <members>CalculationMatrix</members>
+        <members>CalculationMatrixActionLog</members>
+        <members>CalculationMatrixColumn</members>
+        <members>CalculationMatrixRow</members>
+        <members>CalculationMatrixVersion</members>
+        <members>CalculationProcedure</members>
+        <members>CalculationProcedureStep</members>
+        <members>CalculationProcedureVariable</members>
+        <members>CalculationProcedureVersion</members>
+        <members>Campaign</members>
+        <members>CampaignMember</members>
+        <members>Case</members>
+        <members>CaseContactRole</members>
+        <members>CaseMilestone</members>
+        <members>CaseParticipant</members>
+        <members>CaseRelatedIssue</members>
+        <members>ChangeRequest</members>
+        <members>ChangeRequestRelatedIssue</members>
+        <members>ChangeRequestRelatedItem</members>
+        <members>ChatterActivity</members>
+        <members>CollaborationGroup</members>
+        <members>CollaborationGroupMember</members>
+        <members>CommSubscription</members>
+        <members>CommSubscriptionChannelType</members>
+        <members>CommSubscriptionConsent</members>
+        <members>CommSubscriptionTiming</members>
+        <members>Contact</members>
+        <members>ContactPointAddress</members>
+        <members>ContactPointConsent</members>
+        <members>ContactPointEmail</members>
+        <members>ContactPointPhone</members>
+        <members>ContactPointTypeConsent</members>
+        <members>ContactRequest</members>
+        <members>ContentDocument</members>
+        <members>ContentVersion</members>
+        <members>Contract</members>
+        <members>ContractContactRole</members>
+        <members>ContractLineItem</members>
+        <members>Customer</members>
+        <members>DataUseLegalBasis</members>
+        <members>DataUsePurpose</members>
+        <members>DevopsActivityLog</members>
+        <members>DevopsEnvironment</members>
+        <members>DevopsRequestInfo</members>
+        <members>DocumentChecklistItem</members>
+        <members>DocumentDecisionRequirement</members>
+        <members>DuplicateRecordItem</members>
+        <members>DuplicateRecordSet</members>
+        <members>EmailMessage</members>
+        <members>EmailMessageMigration</members>
+        <members>EmpUserProvisionProcessErr</members>
+        <members>Employment__c</members>
+        <members>EngagementAttendee</members>
+        <members>EngagementChannelType</members>
+        <members>EngagementInteraction</members>
+        <members>EngagementInterface</members>
+        <members>EngagementTopic</members>
+        <members>EnrollmentEligibilityCriteria</members>
+        <members>Entitlement</members>
+        <members>EntitlementContact</members>
+        <members>EntityMilestone</members>
+        <members>Evaluation__c</members>
+        <members>Event</members>
+        <members>ExchangeUserMapping</members>
+        <members>ExpressionFilter</members>
+        <members>ExpressionFilterCriteria</members>
+        <members>ExpressionSet</members>
+        <members>ExpressionSetVersion</members>
+        <members>ExternalEventMapping</members>
+        <members>FeedItem</members>
+        <members>FlowOrchestrationInstance</members>
+        <members>FlowOrchestrationLog</members>
+        <members>FlowOrchestrationStageInstance</members>
+        <members>FlowOrchestrationStepInstance</members>
+        <members>FlowOrchestrationVersion</members>
+        <members>FlowOrchestrationWorkItem</members>
+        <members>ForecastingAdjustment</members>
+        <members>ForecastingCategoryMapping</members>
+        <members>ForecastingCustomData</members>
+        <members>ForecastingOwnerAdjustment</members>
+        <members>ForecastingQuota</members>
+        <members>ForecastingTypeToCategory</members>
+        <members>Form_Submission__c</members>
+        <members>GenericVisitTask</members>
+        <members>GenericVisitTaskContext</members>
+        <members>GnrcVstKeyPerformanceInd</members>
+        <members>GnrcVstTaskContextRelation</members>
+        <members>Idea</members>
+        <members>Image</members>
+        <members>Incident</members>
+        <members>IncidentRelatedItem</members>
+        <members>Individual</members>
+        <members>IntegrationProviderAttr</members>
+        <members>IntegrationProviderDcsnRqmt</members>
+        <members>IntegrationProviderDef</members>
+        <members>IntegrationProviderExecution</members>
+        <members>JournalType</members>
+        <members>Lead</members>
+        <members>Location</members>
+        <members>LocationTrustMeasure</members>
+        <members>MLModel</members>
+        <members>MLModelFactor</members>
+        <members>MLModelFactorComponent</members>
+        <members>Macro</members>
+        <members>MacroAction</members>
+        <members>MacroInstruction</members>
+        <members>MacroUsage</members>
+        <members>MigratedEmail</members>
+        <members>OmniComponentErrorLog</members>
+        <members>OmniDataPack</members>
+        <members>OmniDataTransform</members>
+        <members>OmniDataTransformItem</members>
+        <members>OmniESignatureTemplate</members>
+        <members>OmniGlobalAutoNumber</members>
+        <members>OmniProcess</members>
+        <members>OmniProcessCompilation</members>
+        <members>OmniProcessElement</members>
+        <members>OmniProcessTransientData</members>
+        <members>OmniScriptSavedSession</members>
+        <members>OmniUiCard</members>
+        <members>Opportunity</members>
+        <members>OpportunityCompetitor</members>
+        <members>OpportunityContactRole</members>
+        <members>OpportunityLineItem</members>
+        <members>OpportunityRelatedDeleteLog</members>
+        <members>Order</members>
+        <members>OrderItem</members>
+        <members>OrgMetricScanResult</members>
+        <members>OrgMetricScanSummary</members>
+        <members>PartnerRole</members>
+        <members>PartyConsent</members>
+        <members>PersonAccount</members>
+        <members>PersonLifeEvent</members>
+        <members>Pricebook2</members>
+        <members>PricebookEntry</members>
+        <members>Problem</members>
+        <members>ProblemIncident</members>
+        <members>ProblemRelatedItem</members>
+        <members>ProcessException</members>
+        <members>Product2</members>
+        <members>ProductAvailabilityProjection</members>
+        <members>ProductFulfillmentLocation</members>
+        <members>ProfileSkill</members>
+        <members>ProfileSkillEndorsement</members>
+        <members>ProfileSkillUser</members>
+        <members>PromptAction</members>
+        <members>PromptError</members>
+        <members>Prospect_Scholar_Application__c</members>
+        <members>QuickText</members>
+        <members>QuickTextUsage</members>
+        <members>Recommendation</members>
+        <members>RecordAction</members>
+        <members>RecordActnSelItemExtrc</members>
+        <members>RecordAlert</members>
+        <members>RecordAlertActionableTarget</members>
+        <members>RecordMergeHistory</members>
+        <members>RecurrenceSchedule</members>
+        <members>RelationshipGraphView</members>
+        <members>ReportHierarchyObjectField</members>
+        <members>RequestsForAccessSIQ</members>
+        <members>RevenueAsyncOperation</members>
+        <members>RevenueTransactionErrorLog</members>
+        <members>Scholarship_Award__c</members>
+        <members>Scorecard</members>
+        <members>ScorecardAssociation</members>
+        <members>ScorecardMetric</members>
+        <members>SearchRecentQuery</members>
+        <members>SecurityHealthCheckAlertRecipient</members>
+        <members>SecurityHealthCheckResult</members>
+        <members>Seller</members>
+        <members>ServiceContract</members>
+        <members>SetupDataSynchronization</members>
+        <members>SfdcPartnerSbscrOffer</members>
+        <members>SfdcPartnerSbscrOfferItem</members>
+        <members>SharingRecordCollection</members>
+        <members>SharingRecordCollectionItem</members>
+        <members>SharingRecordCollectionMember</members>
+        <members>Site</members>
+        <members>SlackChannelRelatedRecord</members>
+        <members>SocialPersona</members>
+        <members>SocialPost</members>
+        <members>Solution</members>
+        <members>StagedEmail</members>
+        <members>StagedUnmtchdEmailAddr</members>
+        <members>StagedUnmtchdEmailAddrRela</members>
+        <members>StreamActivityAccess</members>
+        <members>StreamingChannel</members>
+        <members>Swarm</members>
+        <members>TableauHostMapping</members>
+        <members>Task</members>
+        <members>TenantConsumptionAlert</members>
+        <members>TenantPvsnLicConsumption</members>
+        <members>TenantPvsnProdtLicMap</members>
+        <members>Topic</members>
+        <members>TopicAssignment</members>
+        <members>TransactionJournal</members>
+        <members>UnitOfMeasure</members>
+        <members>UnstructuredStorageSpace</members>
+        <members>UnstructuredStorageSpaceLayer</members>
+        <members>User</members>
+        <members>UserCapabilityPreference</members>
+        <members>UserDevopsPreference</members>
+        <members>UserExternalCredential</members>
+        <members>UserLocalWebServerIdentity</members>
+        <members>UserPrioritizedRecord</members>
+        <members>UserProvisioningRequest</members>
+        <members>VideoCall</members>
+        <members>VideoCallParticipant</members>
+        <members>VideoCallRecording</members>
+        <members>Visit</members>
+        <members>VisitedParty</members>
+        <members>Visitor</members>
+        <members>VoiceCall</members>
+        <members>WorkBadge</members>
+        <members>WorkBadgeDefinition</members>
+        <members>WorkOrder</members>
+        <members>WorkOrderLineItem</members>
+        <members>WorkPlan</members>
+        <members>WorkPlanTemplate</members>
+        <members>WorkPlanTemplateEntry</members>
+        <members>WorkStep</members>
+        <members>WorkStepTemplate</members>
+        <members>WorkThanks</members>
+        <members>WorkflowSLAAction</members>
+        <name>CustomObject</name>
+    </types>    <types>
+        <members>BenefitManagementRecertification__c-en_US</members>
+        <members>CPL_Config__c-en_US</members>
+        <members>Employment__c-en_US</members>
+        <members>Evaluation__c-en_US</members>
+        <members>Form_Submission__c-en_US</members>
+        <members>Prospect_Scholar_Application__c-en_US</members>
+        <members>Scholarship_Award__c-en_US</members>
+        <name>CustomObjectTranslation</name>
+    </types>    <types>
+        <members>Account_Record_Page</members>
+        <members>Form_Submission__c</members>
+        <members>Prospect_Scholar_Application__c</members>
+        <members>Scholarship_Award__c</members>
+        <name>CustomTab</name>
+    </types>    <types>
+        <members>Activities/</members>
+        <members>Activities/NonA360EacDashboard</members>
+        <members>AdminDashboards/</members>
+        <members>CompanyDashboards/</members>
+        <members>HostDashboards/</members>
+        <members>HostDashboards/AdoptionDashboard</members>
+        <members>HostDashboards/CompanyPerformanceDashboard</members>
+        <members>HostDashboards/Host_Command_Center</members>
+        <members>InterviewDashboards/</members>
+        <members>LeadershipDashboards/</members>
+        <name>Dashboard</name>
+    </types>    <types>
+        <members>CPL_CRM_Documents</members>
+        <members>CPL_CRM_Documents/CPL_Logo.png</members>
+        <members>PSSOutboundReferralTemplates</members>
+        <members>PSSOutboundReferralTemplates/ShareChildWelfareInformation_pdf.pdf</members>
+        <members>PSSOutboundReferralTemplates/ShareJobCounsellingInformation_pdf.pdf</members>
+        <members>PSSOutboundReferralTemplates/ShareWorkshopInformation_pdf.pdf</members>
+        <members>SharedDocuments</members>
+        <name>Document</name>
+    </types>    <types>
+        <members>Account.Standard_Account_Duplicate_Rule</members>
+        <members>Account.Standard_Person_Account_Duplicate_Rule</members>
+        <members>Contact.Standard_Contact_Duplicate_Rule</members>
+        <members>Lead.Standard_Lead_Duplicate_Rule</members>
+        <name>DuplicateRule</name>
+    </types>    <types>
+        <members>EmailToSalesforce</members>
+        <name>EmailServicesFunction</name>
+    </types>    <types>
+        <members>CPL_CRM_Email_Notifications</members>
+        <members>CPL_CRM_Email_Notifications/New_Lead_Created_Email</members>
+        <members>unfiled$public</members>
+        <members>unfiled$public/ContactFollowUpSAMPLE</members>
+        <members>unfiled$public/LeadsNewassignmentnotificationSAMPLE</members>
+        <members>unfiled$public/LeadsWebtoLeademailresponseSAMPLE</members>
+        <members>unfiled$public/SUPPORTCaseResponsewithSolutionSAMPLE</members>
+        <members>unfiled$public/SUPPORTCaseescalationnotificationSAMPLE</members>
+        <members>unfiled$public/SUPPORTNewassignmentnotificationSAMPLE</members>
+        <members>unfiled$public/SUPPORTSelfServiceNewCommentNotificationSAMPLE</members>
+        <members>unfiled$public/SUPPORTSelfServiceNewUserLoginInformationSAMPLE</members>
+        <members>unfiled$public/SUPPORTSelfServiceResetPasswordSAMPLE</members>
+        <members>unfiled$public/SUPPORTWebtoCaseemailresponseSAMPLE</members>
+        <name>EmailTemplate</name>
+    </types>    <types>
+        <members>standard case</members>
+        <name>EntitlementProcess</name>
+    </types>    <types>
+        <members>Case</members>
+        <name>EscalationRules</name>
+    </types>    <types>
+        <members>ISE_IDVAudit</members>
+        <members>PartyRelationshipGroupAuditLog</members>
+        <name>ExplainabilityActionDefinition</name>
+    </types>    <types>
+        <members>ISE_IDVAudit</members>
+        <members>PartyRelationshipGroupAuditLog</members>
+        <name>ExplainabilityActionVersion</name>
+    </types>    <types>
+        <members>Account_Record_Page</members>
+        <members>AdvertisingInventoryCalendar_UtilityBar</members>
+        <members>CPL_Member</members>
+        <members>CPL_UtilityBar</members>
+        <members>CommandCenterApp_UtilityBar</members>
+        <members>DataGovernanceConsole_UtilityBar</members>
+        <members>Evaluation_CPL_Member_Record</members>
+        <members>Evaluation_Partner_Lead_Record</members>
+        <members>Evaluation_Record_Page</members>
+        <members>Evaluation_Scholar_Lead_Record</members>
+        <members>ExpressionSetConsole_UtilityBar</members>
+        <members>Home</members>
+        <members>Integration_UtilityBar</members>
+        <members>LightningSalesConsole_UtilityBar</members>
+        <members>LightningSales_UtilityBar</members>
+        <members>LightningService_UtilityBar</members>
+        <members>MediaAdSalesManagement_UtilityBar</members>
+        <members>Partner_Lead_Record</members>
+        <members>Prospect_Scholar_Lead_Record</members>
+        <members>SalesCloudMobile_UtilityBar</members>
+        <members>Scholar_Interest_Form</members>
+        <members>Scholarship_Application_Record</members>
+        <members>School_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>    <types>
+        <members>App_Confirm_Invite_Acceptance</members>
+        <members>App_Confirm_Materials</members>
+        <members>App_Send_Invite</members>
+        <members>App_Send_Materials_Link</members>
+        <members>Application_Accepted_Set_Scholar</members>
+        <members>Employment_Set_Current_Employment_on_Contact</members>
+        <members>Evaluation_Screen_Flow</members>
+        <members>Form_Submission_Intake_Router</members>
+        <members>Lead_Conversion_Set_CPL_Lifecycle</members>
+        <members>Lead_Convert_Or_Disqualify</members>
+        <members>Lead_Guided_Intake_Review</members>
+        <members>Lead_Log_Contact</members>
+        <members>Lead_Rollup_Evaluation_Rating</members>
+        <members>Lead_Rollup_Evaluation_Rating_Delete</members>
+        <members>Lead_Scholar_Evaluation</members>
+        <members>Member_Graduation_Set_Alumni</members>
+        <members>New_Lead_Creation</members>
+        <members>New_Partner_Lead_Creation</members>
+        <members>New_Prospect_App_Creation</members>
+        <members>Partner_Convert_Or_Disqualify</members>
+        <members>Partner_Discovery_Meeting</members>
+        <members>Partner_Initial_Outreach</members>
+        <members>Prospect_Scholar_Application_Autofill_From_Applicant</members>
+        <members>Scholar_Finalist_Materials_Router</members>
+        <members>Send_Scholarship_Invite_Confirm_Eligibility</members>
+        <members>Send_Scholarship_Invite_Reminder</members>
+        <name>Flow</name>
+    </types>    <types>
+        <members>App_Confirm_Invite_Acceptance</members>
+        <members>App_Confirm_Materials</members>
+        <members>App_Send_Invite</members>
+        <members>App_Send_Materials_Link</members>
+        <members>Application_Accepted_Set_Scholar</members>
+        <members>Employment_Set_Current_Employment_on_Contact</members>
+        <members>Evaluation_Screen_Flow</members>
+        <members>Form_Submission_Intake_Router</members>
+        <members>Lead_Conversion_Set_CPL_Lifecycle</members>
+        <members>Lead_Convert_Or_Disqualify</members>
+        <members>Lead_Guided_Intake_Review</members>
+        <members>Lead_Log_Contact</members>
+        <members>Lead_Rollup_Evaluation_Rating</members>
+        <members>Lead_Rollup_Evaluation_Rating_Delete</members>
+        <members>Lead_Scholar_Evaluation</members>
+        <members>Member_Graduation_Set_Alumni</members>
+        <members>New_Lead_Creation</members>
+        <members>New_Partner_Lead_Creation</members>
+        <members>New_Prospect_App_Creation</members>
+        <members>Partner_Convert_Or_Disqualify</members>
+        <members>Partner_Discovery_Meeting</members>
+        <members>Partner_Initial_Outreach</members>
+        <members>Prospect_Scholar_Application_Autofill_From_Applicant</members>
+        <members>Scholar_Finalist_Materials_Router</members>
+        <members>Send_Scholarship_Invite_Confirm_Eligibility</members>
+        <members>Send_Scholarship_Invite_Reminder</members>
+        <name>FlowDefinition</name>
+    </types>    <types>
+        <members>Form_Submission_Intake_Router_Test_On_Non_existing_Lead</members>
+        <members>Form_Submission_Intake_Router_Without_Contact_or_Lead</members>
+        <name>FlowTest</name>
+    </types>    <types>
+        <members>OpportunityAmount</members>
+        <name>ForecastingSourceDefinition</name>
+    </types>    <types>
+        <members>LineItemQuantityProductDate</members>
+        <members>LineItemRevenueProductDate</members>
+        <members>OpportunityAmount</members>
+        <members>OpportunityLineItemQuantity</members>
+        <members>OpportunityLineItemRevenue</members>
+        <members>OpportunityQuantity</members>
+        <members>OpportunityQuantityProductDate</members>
+        <members>OpportunityRevenue</members>
+        <members>OpportunityRevenueProductDate</members>
+        <name>ForecastingType</name>
+    </types>    <types>
+        <members>OpportunityAmount</members>
+        <name>ForecastingTypeSource</name>
+    </types>    <types>
+        <members>CPL_College_Year</members>
+        <members>CPL_Engagement_Status</members>
+        <members>CPL_Importance_Rank</members>
+        <members>CPL_Sports</members>
+        <members>CPL_Term_Season</members>
+        <members>Lead_Type</members>
+        <members>Partner_Type</members>
+        <name>GlobalValueSet</name>
+    </types>    <types>
+        <members>PG_Application_Hosts</members>
+        <members>PG_CRM_Admins</members>
+        <members>PG_Intake_Owners</members>
+        <members>PG_Interview_Coordinators</members>
+        <members>PG_Scholar_Program_Admins</members>
+        <name>Group</name>
+    </types>    <types>
+        <members>Dashboard Home Page Default</members>
+        <name>HomePageLayout</name>
+    </types>    <types>
+        <members>BusinessMilestone</members>
+        <members>BusinessMilestone1</members>
+        <members>BusinessMilestone2</members>
+        <members>BusinessMilestone3</members>
+        <members>BusinessMilestone4</members>
+        <members>BusinessMilestone5</members>
+        <members>BusinessMilestone6</members>
+        <members>BusinessMilestone7</members>
+        <members>BusinessMilestone8</members>
+        <members>BusinessMilestone9</members>
+        <members>PersonLifeEvent</members>
+        <members>PersonLifeEvent1</members>
+        <members>PersonLifeEvent2</members>
+        <members>PersonLifeEvent3</members>
+        <members>PersonLifeEvent4</members>
+        <members>PersonLifeEvent5</members>
+        <members>PersonLifeEvent6</members>
+        <members>PersonLifeEvent7</members>
+        <members>PersonLifeEvent8</members>
+        <members>PersonLifeEvent9</members>
+        <name>Icon</name>
+    </types>    <types>
+        <members>IframeWhiteListUrlSettings</members>
+        <name>IframeWhiteListUrlSettings</name>
+    </types>    <types>
+        <members>OIQ</members>
+        <members>omnistudio</members>
+        <name>InstalledPackage</name>
+    </types>    <types>
+        <members>Account-Account Layout</members>
+        <members>Account-CPL Member Layout</members>
+        <members>Account-Layout_Company_Employer</members>
+        <members>Account-Layout_Donor_Household</members>
+        <members>Account-Layout_Partner_Organization</members>
+        <members>Account-Layout_School</members>
+        <members>AccountContactRelation-Account Contact Relationship Layout</members>
+        <members>ActionPlan-Action Plan Layout</members>
+        <members>ActionPlanItemDependency-Action Plan Item Dependency Layout</members>
+        <members>ActionPlanTemplate-Action Plan Template Layout</members>
+        <members>ActionPlanTemplateItem-Action Plan Template Item Layout</members>
+        <members>ActionPlanTemplateItemValue-Action Plan Template Item Value Layout</members>
+        <members>ActionPlanTemplateVersion-Action Plan Template Version Layout</members>
+        <members>ActionPlnTmplItmDependency-Action Plan Template Item Dependency Layout</members>
+        <members>Address-Address Layout</members>
+        <members>Applicant-Applicant Layout</members>
+        <members>ApplicationForm-Application Form Layout</members>
+        <members>ApplicationFormProduct-Application Form Product Layout</members>
+        <members>AssessmentIndicatorDefinition-Assessment Indicator Definition Layout</members>
+        <members>AssessmentTask-Assessment Task Layout</members>
+        <members>AssessmentTaskContentDocument-Assessment Task Content Document Layout</members>
+        <members>AssessmentTaskDefinition-Assessment Task Definition Layout</members>
+        <members>Asset-Asset Layout</members>
+        <members>AssetRelationship-Asset Relationship Layout</members>
+        <members>AssociatedLocation-Associated Location Layout</members>
+        <members>AuthorizationForm-Authorization Form Layout</members>
+        <members>AuthorizationFormConsent-Authorization Form Consent Layout</members>
+        <members>AuthorizationFormDataUse-Authorization Form Data Use Layout</members>
+        <members>AuthorizationFormText-Authorization Form Text Layout</members>
+        <members>BusinessBrand-Business Brand Layout</members>
+        <members>BusinessMilestone-Business Milestone Layout</members>
+        <members>CalcMatrixColumnRange-Decision Matrix Column Range Layout</members>
+        <members>CalcProcStepRelationship-Expression Set Step Relationship Layout</members>
+        <members>CalculationMatrix-Decision Matrix Layout</members>
+        <members>CalculationMatrixColumn-Decision Matrix Column Layout</members>
+        <members>CalculationMatrixRow-Decision Matrix Row Layout</members>
+        <members>CalculationMatrixVersion-Decision Matrix Version Layout</members>
+        <members>CalculationProcedure-Calculation Procedure Layout</members>
+        <members>CalculationProcedureStep-Calculation Procedure Step Layout</members>
+        <members>CalculationProcedureVariable-Calculation Procedure Variable Layout</members>
+        <members>CalculationProcedureVersion-Calculation Procedure Version Layout</members>
+        <members>Campaign-Campaign Layout</members>
+        <members>CampaignMember-Campaign Member Page Layout</members>
+        <members>Case-Case Layout</members>
+        <members>CaseClose-Close Case Layout</members>
+        <members>CaseMilestone-Case Milestone Layout</members>
+        <members>CaseParticipant-Case Participant Layout</members>
+        <members>CollaborationGroup-Group Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>Contact-Layout CPL Scholar Alumni</members>
+        <members>Contact-Layout_CPL_Scholar</members>
+        <members>Contact-Layout_Prospect_Scholar</members>
+        <members>ContactPointAddress-Contact Point Address Layout</members>
+        <members>ContactPointEmail-Contact Point Email Layout</members>
+        <members>ContactPointPhone-Contact Point Phone Layout</members>
+        <members>ContactPointTypeConsent-Contact Point Type Consent Layout</members>
+        <members>ContentVersion-Content Version Layout</members>
+        <members>Contract-Contract Layout</members>
+        <members>ContractLineItem-Contract Line Item Layout</members>
+        <members>Customer-Customer Layout</members>
+        <members>DataUseLegalBasis-Data Use Legal Basis Layout</members>
+        <members>DataUsePurpose-Data Use Purpose Layout</members>
+        <members>DevopsActivityLog-Activity History Layout</members>
+        <members>DocumentChecklistItem-Document Checklist Item Layout</members>
+        <members>DocumentType-Document Type Layout</members>
+        <members>DuplicateRecordSet-Duplicate Record Set Layout</members>
+        <members>EmailMessage-Email Message Layout</members>
+        <members>EmpUserProvisionProcessErr-Employee User Provisioning Process Error Layout</members>
+        <members>EmpUserProvisioningProcess-Employee User Provisioning Process Layout</members>
+        <members>Employment__c-Employment</members>
+        <members>EngagementInteraction-Engagement Interaction Layout</members>
+        <members>EngagementTopic-Engagement Topic Layout</members>
+        <members>Entitlement-Entitlement Layout</members>
+        <members>EntityMilestone-Object Milestone Layout</members>
+        <members>Evaluation__c-CPL Member Evaluation</members>
+        <members>Evaluation__c-Evaluation Layout</members>
+        <members>Evaluation__c-Partner Lead Evaluation</members>
+        <members>Evaluation__c-Scholar Lead Evaluation</members>
+        <members>Event-Event Layout</members>
+        <members>ExpressionSet-Expression Set Layout</members>
+        <members>ExpressionSetVersion-Expression Set Version Layout</members>
+        <members>FeedItem-Feed Item Layout</members>
+        <members>FlowRecord-Flow Layout</members>
+        <members>Form_Submission__c-Form Submission Layout</members>
+        <members>Form_Submission__c-Partner Interest Submission</members>
+        <members>Form_Submission__c-Scholar Finalist Materials</members>
+        <members>Form_Submission__c-Student Interest Submission</members>
+        <members>GenericVisitTask-Generic Visit Task Layout</members>
+        <members>GenericVisitTaskContext-Generic Visit Task Context Layout</members>
+        <members>Global-Global Layout</members>
+        <members>GnrcVstKeyPerformanceInd-Generic Visit Key Performance Indicator Layout</members>
+        <members>GnrcVstTaskContextRelation-Generic Visit Task Context Relation Layout</members>
+        <members>Idea-Idea Layout</members>
+        <members>Individual-Individual Layout</members>
+        <members>Lead-CPL Scholar Lead Layout</members>
+        <members>Lead-Lead Layout</members>
+        <members>Lead-Partner Lead Layout</members>
+        <members>Location-Location Layout</members>
+        <members>Macro-Macro Layout</members>
+        <members>Opportunity-Opportunity Layout</members>
+        <members>OpportunityLineItem-Opportunity Product Layout</members>
+        <members>Order-Order Layout</members>
+        <members>OrderItem-Order Product Layout</members>
+        <members>PersonAccount-CPL Member</members>
+        <members>PersonAccount-Person Account Layout</members>
+        <members>PersonLifeEvent-Person Life Event Layout</members>
+        <members>Pricebook2-Price Book Layout</members>
+        <members>PricebookEntry-Price Book Entry</members>
+        <members>ProcessException-Process Exception Layout</members>
+        <members>Product2-Product Layout</members>
+        <members>ProfileSkill-Skill Layout</members>
+        <members>ProfileSkillEndorsement-Endorsement Layout</members>
+        <members>ProfileSkillUser-Skill User Layout</members>
+        <members>Prospect_Scholar_Application__c-Prospect Scholar Application Layout</members>
+        <members>QuickText-Quick Text Layout</members>
+        <members>RecurrenceSchedule-Recurrence Schedule Layout</members>
+        <members>Scholarship_Award__c-Scholarship Award Layout</members>
+        <members>Scorecard-Scorecard Layout</members>
+        <members>ScorecardAssociation-Scorecard Association Layout</members>
+        <members>ScorecardMetric-Scorecard Metric Layout</members>
+        <members>Seller-Seller Layout</members>
+        <members>ServiceContract-Service Contract Layout</members>
+        <members>SocialPersona-Social Persona Layout</members>
+        <members>SocialPost-Social Post Layout</members>
+        <members>Solution-Solution Layout</members>
+        <members>Task-Task Layout</members>
+        <members>User-User Layout</members>
+        <members>UserAlt-User Profile Layout</members>
+        <members>UserProvAccount-User Provisioning Account Layout</members>
+        <members>UserProvisioningLog-User Provisioning Log Layout</members>
+        <members>UserProvisioningRequest-User Provisioning Request Layout</members>
+        <members>Visit-Visit Layout</members>
+        <members>VisitedParty-Visited Party Layout</members>
+        <members>Visitor-Visitor Layout</members>
+        <members>VoiceCall-Voice Call Layout</members>
+        <members>WorkBadge-Badge Received Layout</members>
+        <members>WorkBadgeDefinition-Badge Layout</members>
+        <members>WorkOrder-Work Order Layout</members>
+        <members>WorkOrderLineItem-Work Order Line Item Layout</members>
+        <members>WorkPlan-Work Plan Layout</members>
+        <members>WorkPlanTemplate-Work Plan Template Layout</members>
+        <members>WorkPlanTemplateEntry-Work Plan Template Entry Layout</members>
+        <members>WorkStep-Work Step Layout</members>
+        <members>WorkStepTemplate-Work Step Template Layout</members>
+        <name>Layout</name>
+    </types>    <types>
+        <members>LeadConvertSettings</members>
+        <name>LeadConvertSettings</name>
+    </types>    <types>
+        <members>CPL_CRM_Letterhead</members>
+        <name>Letterhead</name>
+    </types>    <types>
+        <members>cplApplicationProgress</members>
+        <members>cplHomeIntakePipeline</members>
+        <members>cplHomeQuickLinks</members>
+        <members>cplHomeRecentActivity</members>
+        <members>cplMemberJourney</members>
+        <members>cplSchoolMemberSummary</members>
+        <members>cplSchoolRecentActivity</members>
+        <members>leadActionPlanFlowModal</members>
+        <members>leadIntakeActionPlan</members>
+        <members>leadResumePreview</members>
+        <members>prospectAppActionPlan</members>
+        <members>searchableSportPicklist</members>
+        <members>sendFinalistMaterialsInvite</members>
+        <name>LightningComponentBundle</name>
+    </types>    <types>
+        <members>CPL</members>
+        <name>LightningExperienceTheme</name>
+    </types>    <types>
+        <members>Account.CPL_Members</members>
+        <members>Account.Company_Employers</members>
+        <members>Account.Donor_Household</members>
+        <members>Account.Partner_Organization</members>
+        <members>Account.Schools</members>
+        <members>Activity.MyActivities</members>
+        <members>Activity.MyDelegatedActivities</members>
+        <members>Activity.MyTeamsActivities</members>
+        <members>Activity.TodaysTasks</members>
+        <members>Activity.UpcomingEvents</members>
+        <members>Asset.AllAssets</members>
+        <members>Campaign.AllActiveCampaigns</members>
+        <members>Campaign.MyActiveCampaigns</members>
+        <members>Case.AllOpenCases</members>
+        <members>Case.MyCases</members>
+        <members>Case.MyOpenCases</members>
+        <members>Contact.AllContacts</members>
+        <members>Contact.BirthdaysThisMonth</members>
+        <members>Contact.CPL_Members</members>
+        <members>Contact.Copy_of_CPL_Members</members>
+        <members>Contact.Copy_of_Partners</members>
+        <members>Contact.NewThisWeek</members>
+        <members>Contract.AllActivatedContracts</members>
+        <members>Contract.AllContracts</members>
+        <members>Contract.AllDraftContracts</members>
+        <members>Contract.AllInApprovalContracts</members>
+        <members>Contract.MyActivatedContracts</members>
+        <members>Contract.MyDraftContracts</members>
+        <members>Contract.MyInApprovalContracts</members>
+        <members>Form_Submission__c.All</members>
+        <members>Form_Submission__c.Form_Submission_View</members>
+        <members>Form_Submission__c.Intake_Review_Queue_Form_Submission</members>
+        <members>Lead.AllOpenLeads</members>
+        <members>Lead.All_Leads</members>
+        <members>Lead.CPL_Lead_Contacted</members>
+        <members>Lead.CPL_Lead_Converted</members>
+        <members>Lead.CPL_Lead_In_Intake_Review</members>
+        <members>Lead.CPL_Lead_New</members>
+        <members>Lead.CPL_Lead_Qualified</members>
+        <members>Lead.CPL_Lead_Unqualified</members>
+        <members>Lead.Intake_Review_Queue_Lead</members>
+        <members>Lead.MyUnreadLeads</members>
+        <members>Lead.TodaysLeads</members>
+        <members>Opportunity.AllOpportunities</members>
+        <members>Opportunity.ClosingNextMonth</members>
+        <members>Opportunity.ClosingThisMonth</members>
+        <members>Opportunity.Default_Opportunity_Pipeline</members>
+        <members>Opportunity.MyOpportunities</members>
+        <members>Opportunity.NewThisWeek</members>
+        <members>Opportunity.Won</members>
+        <members>Order.AllActivatedOrders</members>
+        <members>Order.AllDraftOrders</members>
+        <members>Order.AllOrders</members>
+        <members>Product2.AllProducts</members>
+        <members>Prospect_Scholar_Application__c.All</members>
+        <members>Solution.AllReviewedSolutions</members>
+        <members>Solution.AllUnreviewedSolutions</members>
+        <members>Task.Intake_Review_Queue_Task</members>
+        <members>User.ActiveUsers</members>
+        <members>User.AdminUsers</members>
+        <members>User.AllUsers</members>
+        <name>ListView</name>
+    </types>    <types>
+        <members>Account.Standard_Account_Match_Rule_v1_0</members>
+        <members>Contact.Standard_Contact_Match_Rule_v1_1</members>
+        <members>Lead.Standard_Lead_Match_Rule_v1_0</members>
+        <name>MatchingRule</name>
+    </types>    <types>
+        <members>Account</members>
+        <members>Address</members>
+        <members>Applicant</members>
+        <members>Contact</members>
+        <members>Individual</members>
+        <members>Lead</members>
+        <members>PersonAccount</members>
+        <name>MatchingRules</name>
+    </types>    <types>
+        <members>Close Case</members>
+        <members>Escalate Case</members>
+        <members>First Response to Customer</members>
+        <name>MilestoneType</name>
+    </types>    <types>
+        <members>NotificationTypeConfig</members>
+        <name>NotificationTypeConfig</name>
+    </types>    <types>
+        <members>TheFirstInstalledOmniPackage</members>
+        <name>OmniInteractionConfig</name>
+    </types>    <types>
+        <members>PSA_Application_Lifecycle</members>
+        <members>Prospect_Scholar_Intake_Path</members>
+        <name>PathAssistant</name>
+    </types>    <types>
+        <members>Decision_Explainer_CC</members>
+        <members>PS_Application_Reviewer</members>
+        <members>PS_CRM_Admin</members>
+        <members>PS_Intake_Host</members>
+        <members>PS_Interview_Coordinator</members>
+        <members>PS_Scholar_Program_Admin</members>
+        <members>sfdcInternalInt__sfdc_activityplatform</members>
+        <members>sfdcInternalInt__sfdc_nc_constraints_engine_deploy</members>
+        <members>sfdcInternalInt__sfdc_slack</members>
+        <name>PermissionSet</name>
+    </types>    <types>
+        <members>force__Benefit_Management_Caseworker</members>
+        <members>force__Fundraising_Admin</members>
+        <members>force__Fundraising_User</members>
+        <members>force__SalesCloudCallCoachingSeller</members>
+        <members>force__SalesCloudSeller</members>
+        <members>force__SalesWorkspacePSG</members>
+        <members>force__ScaleCenterUsers</members>
+        <members>force__Social_Program_Management_Caseworker</members>
+        <members>force__Volunteer_Management_User</members>
+        <name>PermissionSetGroup</name>
+    </types>    <types>
+        <members>Admin</members>
+        <members>Analytics Cloud Integration User</members>
+        <members>Analytics Cloud Security User</members>
+        <members>Anypoint Integration</members>
+        <members>Chatter External User</members>
+        <members>Chatter Free User</members>
+        <members>Chatter Moderator User</members>
+        <members>ContractManager</members>
+        <members>Customer Community Login User</members>
+        <members>Customer Community Plus Login User</members>
+        <members>Customer Community Plus User</members>
+        <members>Customer Community User</members>
+        <members>Guest License User</members>
+        <members>Identity User</members>
+        <members>MarketingProfile</members>
+        <members>Minimum Access - API Only Integrations</members>
+        <members>Minimum Access - Salesforce</members>
+        <members>Partner Community Login User</members>
+        <members>Partner Community User</members>
+        <members>Sales Insights Integration User</members>
+        <members>Salesforce API Only System Integrations</members>
+        <members>SolutionManager</members>
+        <members>Standard</members>
+        <members>Standard User - CPL</members>
+        <name>Profile</name>
+    </types>    <types>
+        <members>PT1_profilePasswordPolicy1768857456355</members>
+        <members>Standard_User_CPL_profilePasswordPolicy1767631237713</members>
+        <name>ProfilePasswordPolicy</name>
+    </types>    <types>
+        <members>PT1_profileSessionSetting1768857456626</members>
+        <members>Standard_User_CPL_profileSessionSetting1767631237904</members>
+        <name>ProfileSessionSetting</name>
+    </types>    <types>
+        <members>Intake_Review_Queue</members>
+        <name>Queue</name>
+    </types>    <types>
+        <members>Account.ScheduleFollowUp</members>
+        <members>Case.CloseCaseLightning</members>
+        <members>Case.LogACall</members>
+        <members>Case.NewChildCase</members>
+        <members>CollaborationGroup.NewGroupMember</members>
+        <members>CollaborationGroup.NewGroupRecord</members>
+        <members>FeedItem.NewTaskFromFeedItem</members>
+        <members>Lead.Guided_Intake_Review</members>
+        <members>LogACall</members>
+        <members>NewAccount</members>
+        <members>NewCase</members>
+        <members>NewContact</members>
+        <members>NewEvent</members>
+        <members>NewGroup</members>
+        <members>NewLead</members>
+        <members>NewNote</members>
+        <members>NewOpportunity</members>
+        <members>NewTask</members>
+        <members>Prospect_Scholar_Application__c.Accept_Application</members>
+        <members>Prospect_Scholar_Application__c.Assign_Intake_Owner</members>
+        <members>Prospect_Scholar_Application__c.Confirm_Eligibility</members>
+        <members>Prospect_Scholar_Application__c.Reject_Application</members>
+        <members>Prospect_Scholar_Application__c.Send_Finalist_Materials_Invite</members>
+        <members>Prospect_Scholar_Application__c.Update_Status</members>
+        <members>Prospect_Scholar_Application__c.Withdraw_Application</members>
+        <members>SendEmail</members>
+        <members>Task.Defer</members>
+        <members>Task.EditDescription</members>
+        <members>Task.UpdatePriority</members>
+        <members>Task.UpdateStatus</members>
+        <name>QuickAction</name>
+    </types>    <types>
+        <members>CPLMemberActions</members>
+        <members>LeadScholarIntakeActions</members>
+        <members>ProspectScholarApplicationActions</members>
+        <name>RecordActionDeployment</name>
+    </types>    <types>
+        <members>Account.Company_Employer</members>
+        <members>Account.Donor_Household</members>
+        <members>Account.Partner_Organization</members>
+        <members>Account.School</members>
+        <members>PersonAccount.cpl_applicant_account</members>
+        <members>Contact.CPL_Athlete</members>
+        <members>Contact.CPL_Lifters</members>
+        <members>Contact.CPL_Scholar</members>
+        <members>Contact.CPL_Scholar_Alumni</members>
+        <members>Contact.Connector</members>
+        <members>Contact.Donor</members>
+        <members>Contact.Insider</members>
+        <members>Contact.Other</members>
+        <members>Contact.Partner</members>
+        <members>Contact.Prospect_Scholar</members>
+        <members>Evaluation__c.CPL_Member_Evaluation</members>
+        <members>Evaluation__c.Partner_Lead_Evaluation</members>
+        <members>Evaluation__c.Scholar_Lead_Evaluation</members>
+        <members>Form_Submission__c.Partner_Interest_Submission</members>
+        <members>Form_Submission__c.Scholar_Finalist_Materials</members>
+        <members>Form_Submission__c.Student_Interest_Submission</members>
+        <members>Lead.CPL_Scholar_Lead</members>
+        <members>Lead.Partner_Lead</members>
+        <name>RecordType</name>
+    </types>    <types>
+        <members>Wix_Usrfiles_Resume_Host</members>
+        <name>RemoteSiteSetting</name>
+    </types>    <types>
+        <members>ActivityReports/</members>
+        <members>ActivityReports/Accounts_with_Activities</members>
+        <members>ActivityReports/Opportunities_with_Activities_this_Month</members>
+        <members>ActivityReports/Opptys_Report</members>
+        <members>ActivityReports/Sales_Rep_Activities</members>
+        <members>unfiled$public/</members>
+        <members>unfiled$public/SampleReportActiveUsers</members>
+        <members>unfiled$public/SampleReportCasesStatusbyRep</members>
+        <members>unfiled$public/SampleReportClosedSales</members>
+        <members>unfiled$public/SampleReportCompletedActivities</members>
+        <members>unfiled$public/SampleReportCustomReportsbyUser</members>
+        <members>unfiled$public/SampleReportDocumentLibrary</members>
+        <members>unfiled$public/SampleReportLastModifiedBy</members>
+        <members>unfiled$public/SampleReportLeadsbyLeadSource</members>
+        <members>unfiled$public/SampleReportLoginLeaderboard</members>
+        <members>unfiled$public/SampleReportLoginWallofShame</members>
+        <members>unfiled$public/SampleReportMonthtoDateTrending</members>
+        <members>unfiled$public/SampleReportOpenCasesByPriority</members>
+        <members>unfiled$public/SampleReportOpenDeals</members>
+        <members>unfiled$public/SampleReportPipelineByCloseMonth</members>
+        <members>unfiled$public/SampleReportPipelineHistory</members>
+        <members>unfiled$public/SampleReportSalesLeaderboard</members>
+        <members>unfiled$public/SampleReportSalesPipelinebyStage</members>
+        <members>unfiled$public/SampleReportSolutionsAdded</members>
+        <members>unfiled$public/SampleReportTopAccounts</members>
+        <members>unfiled$public/SampleReportUsersLoggedIn</members>
+        <members>unfiled$public/SampleReportofAccounts</members>
+        <members>unfiled$public/SampleReportofCases</members>
+        <members>unfiled$public/SampleReportofContacts</members>
+        <members>unfiled$public/SampleReportofDocuments</members>
+        <members>unfiled$public/SampleReportofLeads</members>
+        <members>unfiled$public/SampleReportofOpenTasks</members>
+        <members>unfiled$public/SampleReportofOpportunities</members>
+        <members>unfiled$public/SampleReportofReports</members>
+        <members>unfiled$public/SampleReportofSolutions</members>
+        <members>unfiled$public/SampleReportofTasksandActivities</members>
+        <members>unfiled$public/SampleReportsLeadsbyStatus</members>
+        <members>unfiled$public/flow_orchestration_log_ootb_report_two_four_eight</members>
+        <members>unfiled$public/flow_orchestration_run_ootb_report_two_four_eight</members>
+        <members>unfiled$public/flow_orchestration_stage_run_ootb_report_two_four_eight</members>
+        <members>unfiled$public/flow_orchestration_step_run_ootb_report_two_four_eight</members>
+        <members>unfiled$public/flow_orchestration_work_item_ootb_report_two_four_eight</members>
+        <members>unfiled$public/flow_screen_prebuilt_report</members>
+        <name>Report</name>
+    </types>    <types>
+        <members>AP_Accounts_with_Activities_2024_07_02</members>
+        <members>AP_Opportunities_with_Activities_2024_07_02</members>
+        <members>AP_Opptys_2024_07_02</members>
+        <members>AP_User_Activities_2024_07_02</members>
+        <members>Accounts_with_Employment_History_with_Evaluations</members>
+        <members>Email_Messages</members>
+        <members>Opportunities_with_Historical_Trending</members>
+        <members>flow_orchestration_log_ootb_crt_two_four_eight</members>
+        <members>flow_orchestration_run_crt</members>
+        <members>flow_orchestration_run_ootb_crt_two_four_eight</members>
+        <members>flow_orchestration_stage_run_ootb_crt_two_four_eight</members>
+        <members>flow_orchestration_step_run_ootb_crt_two_four_eight</members>
+        <members>flow_orchestration_work_item_ootb_crt_two_four_eight</members>
+        <members>screen_flows_prebuilt_crt</members>
+        <name>ReportType</name>
+    </types>    <types>
+        <members>Account</members>
+        <members>AccountIntelligence</members>
+        <members>AccountPlan</members>
+        <members>Accounting</members>
+        <members>Actions</members>
+        <members>Activities</members>
+        <members>Address</members>
+        <members>AgentforceForDevelopers</members>
+        <members>Ai4m</members>
+        <members>Analytics</members>
+        <members>Apex</members>
+        <members>AppAnalytics</members>
+        <members>AppExperience</members>
+        <members>Blockchain</members>
+        <members>BusinessHours</members>
+        <members>Campaign</members>
+        <members>Case</members>
+        <members>Chatter</members>
+        <members>ChatterEmailsMD</members>
+        <members>CodeBuilder</members>
+        <members>Commerce</members>
+        <members>Communities</members>
+        <members>Company</members>
+        <members>ConnectedApp</members>
+        <members>Content</members>
+        <members>Contract</members>
+        <members>ConversationServiceIntegration</members>
+        <members>ConversationalIntelligence</members>
+        <members>Currency</members>
+        <members>CustomAddressField</members>
+        <members>CustomerDataPlatform</members>
+        <members>CustomizablePropensityScoring</members>
+        <members>DataImportManagement</members>
+        <members>Deployment</members>
+        <members>DevHub</members>
+        <members>Discovery</members>
+        <members>DocumentChecklist</members>
+        <members>DxGlobalTerms</members>
+        <members>DynamicForms</members>
+        <members>EAC</members>
+        <members>EinsteinAgent</members>
+        <members>EinsteinDealInsights</members>
+        <members>EinsteinDocumentCapture</members>
+        <members>EmailAdministration</members>
+        <members>EmailAuthorization</members>
+        <members>EmailIntegration</members>
+        <members>EmailTemplate</members>
+        <members>EmployeeFieldAccess</members>
+        <members>EmployeeUser</members>
+        <members>EncryptionKey</members>
+        <members>EnhancedNotes</members>
+        <members>Entitlement</members>
+        <members>Essentials</members>
+        <members>Event</members>
+        <members>ExperienceBundle</members>
+        <members>ExternalClientApp</members>
+        <members>FileUploadAndDownloadSecurity</members>
+        <members>FilesConnect</members>
+        <members>Flow</members>
+        <members>Forecasting</members>
+        <members>ForecastingObjectList</members>
+        <members>Formula</members>
+        <members>GRCIntelligenceUdd</members>
+        <members>GoogleApps</members>
+        <members>HerokuAppLink</members>
+        <members>HighVelocitySales</members>
+        <members>Ideas</members>
+        <members>IdentityProvider</members>
+        <members>IncidentMgmt</members>
+        <members>Industries</members>
+        <members>IndustriesContext</members>
+        <members>IndustriesEinsteinFeature</members>
+        <members>IndustriesEnergyUtilitiesMultiSite</members>
+        <members>IndustriesUnifiedInventory</members>
+        <members>InsuranceBrokerage</members>
+        <members>InterestTagging</members>
+        <members>InvocableAction</members>
+        <members>KnowledgeGeneration</members>
+        <members>Language</members>
+        <members>LeadConfig</members>
+        <members>LightningExperience</members>
+        <members>Macro</members>
+        <members>MailMerge</members>
+        <members>MapsAndLocation</members>
+        <members>Meetings</members>
+        <members>Mobile</members>
+        <members>MyDomain</members>
+        <members>Name</members>
+        <members>Notifications</members>
+        <members>OauthOidc</members>
+        <members>ObjectLinking</members>
+        <members>OmniChannel</members>
+        <members>OmniChannelPricing</members>
+        <members>OmniStudio</members>
+        <members>OnlineSales</members>
+        <members>Opportunity</members>
+        <members>Order</members>
+        <members>Org</members>
+        <members>Pardot</members>
+        <members>PardotEinstein</members>
+        <members>PartyDataModel</members>
+        <members>PathAssistant</members>
+        <members>PaymentsManagementEnabled</members>
+        <members>Picklist</members>
+        <members>PlatformEncryption</members>
+        <members>PlatformEvent</members>
+        <members>PlatformWebIde</members>
+        <members>Portals</members>
+        <members>PredictionBuilder</members>
+        <members>Privacy</members>
+        <members>PrmCore</members>
+        <members>Product</members>
+        <members>ProductDiscovery</members>
+        <members>PurchaseOrderMgmt</members>
+        <members>QuickText</members>
+        <members>Quote</members>
+        <members>RealTimeEvent</members>
+        <members>RecommendationBuilder</members>
+        <members>RecordPage</members>
+        <members>ReleaseMgmt</members>
+        <members>RetailExecution</members>
+        <members>RiskMgmt</members>
+        <members>Sandbox</members>
+        <members>SceGlobalModelOptOut</members>
+        <members>Schema</members>
+        <members>Search</members>
+        <members>Security</members>
+        <members>ServiceAIRecommendations</members>
+        <members>ServiceCloudVoice</members>
+        <members>ServiceItsmIntelligenceUdd</members>
+        <members>ServiceProcess</members>
+        <members>ServiceSetupAssistant</members>
+        <members>Sharing</members>
+        <members>Site</members>
+        <members>SocialCustomerService</members>
+        <members>SourceTracking</members>
+        <members>SubscriptionManagement</members>
+        <members>Survey</members>
+        <members>SystemNotification</members>
+        <members>Territory2</members>
+        <members>Trailhead</members>
+        <members>TrialOrg</members>
+        <members>UIBundle</members>
+        <members>UserEngagement</members>
+        <members>UserInterface</members>
+        <members>UserManagement</members>
+        <members>Voice</members>
+        <members>WebToX</members>
+        <members>WorkDotCom</members>
+        <name>Settings</name>
+    </types>    <types>
+        <members>Account</members>
+        <members>ActionPlan</members>
+        <members>ActionPlanTemplate</members>
+        <members>ActivityRecurrence2</members>
+        <members>ActivityRecurrence2Exception</members>
+        <members>AiJobRun</members>
+        <members>AnalyticsUserAttrFuncTkn</members>
+        <members>ApplicationForm</members>
+        <members>ApplicationFormProduct</members>
+        <members>ApprovalSubmission</members>
+        <members>AssessmentIndicatorDefinition</members>
+        <members>AssessmentTask</members>
+        <members>AssessmentTaskDefinition</members>
+        <members>Asset</members>
+        <members>AssistantInteraction</members>
+        <members>AssistantProgress</members>
+        <members>AssistantRecommendation</members>
+        <members>AsyncOperationTracker</members>
+        <members>AuditTrailFileExport</members>
+        <members>AuthorizationForm</members>
+        <members>AuthorizationFormConsent</members>
+        <members>AuthorizationFormDataUse</members>
+        <members>BatchJob</members>
+        <members>BenefitManagementRecertification__c</members>
+        <members>BroadcastTopic</members>
+        <members>BusinessBrand</members>
+        <members>BusinessMilestone</members>
+        <members>CalculationMatrix</members>
+        <members>CalculationProcedure</members>
+        <members>CalendarModel</members>
+        <members>CalendarView</members>
+        <members>Campaign</members>
+        <members>Case</members>
+        <members>ChangeRequest</members>
+        <members>CommSubscription</members>
+        <members>CommSubscriptionChannelType</members>
+        <members>CommSubscriptionConsent</members>
+        <members>ComponentResponseCache</members>
+        <members>Contact</members>
+        <members>ContactPointConsent</members>
+        <members>ContactPointTypeConsent</members>
+        <members>ContactRequest</members>
+        <members>ConvCoachingRecommendation</members>
+        <members>Customer</members>
+        <members>DataUseLegalBasis</members>
+        <members>DataUsePurpose</members>
+        <members>DevopsActivityLog</members>
+        <members>DevopsEnvironment</members>
+        <members>DevopsRequestInfo</members>
+        <members>DocumentChecklistItem</members>
+        <members>DocumentDecisionRequirement</members>
+        <members>EngagementChannelType</members>
+        <members>EnrollmentEligibilityCriteria</members>
+        <members>ExchangeUserMapping</members>
+        <members>ExpressionSet</members>
+        <members>ExternalEventMapping</members>
+        <members>FlowInterview</members>
+        <members>FlowInterviewLog</members>
+        <members>FlowOrchestrationInstance</members>
+        <members>FlowOrchestrationStageInstance</members>
+        <members>FlowOrchestrationStepInstance</members>
+        <members>FlowOrchestrationWorkItem</members>
+        <members>FlowRecord</members>
+        <members>FlowTestResult</members>
+        <members>FlowVersionMilestone</members>
+        <members>Form_Submission__c</members>
+        <members>GenericVisitTask</members>
+        <members>GenericVisitTaskContext</members>
+        <members>Image</members>
+        <members>Incident</members>
+        <members>Individual</members>
+        <members>IntegrationProviderDcsnRqmt</members>
+        <members>IntegrationProviderExecution</members>
+        <members>JournalType</members>
+        <members>Lead</members>
+        <members>ListEmail</members>
+        <members>Location</members>
+        <members>LocationTrustMeasure</members>
+        <members>Macro</members>
+        <members>MacroUsage</members>
+        <members>NotifDeliveryUserPref</members>
+        <members>ObjectDataImport</members>
+        <members>OmniComponentErrorLog</members>
+        <members>OmniDataPack</members>
+        <members>OmniDataTransform</members>
+        <members>OmniESignatureTemplate</members>
+        <members>OmniGlobalAutoNumber</members>
+        <members>OmniProcess</members>
+        <members>OmniProcessTransientData</members>
+        <members>OmniScriptSavedSession</members>
+        <members>OmniUiCard</members>
+        <members>Opportunity</members>
+        <members>Order</members>
+        <members>PartyConsent</members>
+        <members>Problem</members>
+        <members>ProcessException</members>
+        <members>Product2</members>
+        <members>ProductAvailabilityProjection</members>
+        <members>ProductFulfillmentLocation</members>
+        <members>ProfileSkill</members>
+        <members>PromptAction</members>
+        <members>PromptError</members>
+        <members>Prospect_Scholar_Application__c</members>
+        <members>QuickText</members>
+        <members>QuickTextUsage</members>
+        <members>RecordActnSelItemExtrc</members>
+        <members>RecordAlert</members>
+        <members>RecordMergeHistory</members>
+        <members>RecurrenceSchedule</members>
+        <members>RelationshipGraphView</members>
+        <members>ReportResultBlob</members>
+        <members>RequestsForAccessSIQ</members>
+        <members>RevenueTransactionErrorLog</members>
+        <members>Scholarship_Award__c</members>
+        <members>Scorecard</members>
+        <members>SearchRecentQuery</members>
+        <members>Seller</members>
+        <members>ServiceContract</members>
+        <members>SetupDataSynchronization</members>
+        <members>SfdcPartnerSbscrOffer</members>
+        <members>SharingRecordCollection</members>
+        <members>SiqUserBlacklist</members>
+        <members>SocialPersonaFieldBackup</members>
+        <members>SocialPost</members>
+        <members>StagedInviteeEmail</members>
+        <members>StreamActivityAccess</members>
+        <members>StreamingChannel</members>
+        <members>Swarm</members>
+        <members>TableauHostMapping</members>
+        <members>TenantConsumptionAlert</members>
+        <members>TodayGoal</members>
+        <members>UnitOfMeasure</members>
+        <members>UnstructuredStorageSpace</members>
+        <members>User</members>
+        <members>UserAppMenuCustomization</members>
+        <members>UserCapabilityPreference</members>
+        <members>UserDefinedLabel</members>
+        <members>UserDefinedLabelAssignment</members>
+        <members>UserDevopsPreference</members>
+        <members>UserEmailPreferredPerson</members>
+        <members>UserExternalCredential</members>
+        <members>UserLocalWebServerIdentity</members>
+        <members>UserPrioritizedRecord</members>
+        <members>UserProvisioningRequest</members>
+        <members>VideoCall</members>
+        <members>Visit</members>
+        <members>VoiceCall</members>
+        <members>WorkAccess</members>
+        <members>WorkBadgeDefinition</members>
+        <members>WorkOrder</members>
+        <members>WorkPlan</members>
+        <members>WorkPlanTemplate</members>
+        <members>WorkStepTemplate</members>
+        <members>WorkThanks</members>
+        <members>WorkflowSLAAction</members>
+        <name>SharingRules</name>
+    </types>    <types>
+        <members>AccountContactMultiRoles</members>
+        <members>AccountContactRole</members>
+        <members>AccountOwnership</members>
+        <members>AccountRating</members>
+        <members>AccountType</members>
+        <members>AssetStatus</members>
+        <members>CampaignMemberStatus</members>
+        <members>CampaignStatus</members>
+        <members>CampaignType</members>
+        <members>CaseContactRole</members>
+        <members>CaseOrigin</members>
+        <members>CasePriority</members>
+        <members>CaseReason</members>
+        <members>CaseStatus</members>
+        <members>CaseType</members>
+        <members>ContactRole</members>
+        <members>ContractContactRole</members>
+        <members>ContractStatus</members>
+        <members>EntitlementType</members>
+        <members>EventSubject</members>
+        <members>EventType</members>
+        <members>FiscalYearPeriodPrefix</members>
+        <members>FiscalYearQuarterName</members>
+        <members>FiscalYearQuarterPrefix</members>
+        <members>Industry</members>
+        <members>LeadSource</members>
+        <members>LeadStatus</members>
+        <members>OpportunityStage</members>
+        <members>OpportunityType</members>
+        <members>OrderStatus</members>
+        <members>PartnerRole</members>
+        <members>ProcessExceptionCategory</members>
+        <members>ProcessExceptionPriority</members>
+        <members>ProcessExceptionSeverity</members>
+        <members>ProcessExceptionStatus</members>
+        <members>Product2Family</members>
+        <members>QuantityUnitOfMeasure</members>
+        <members>QuickTextCategory</members>
+        <members>QuickTextChannel</members>
+        <members>Salutation</members>
+        <members>ServiceContractApprovalStatus</members>
+        <members>SocialPostClassification</members>
+        <members>SocialPostEngagementLevel</members>
+        <members>SolutionStatus</members>
+        <members>TaskPriority</members>
+        <members>TaskStatus</members>
+        <members>TaskSubject</members>
+        <members>TaskType</members>
+        <members>WorkOrderLineItemStatus</members>
+        <members>WorkOrderPriority</members>
+        <members>WorkOrderStatus</members>
+        <name>StandardValueSet</name>
+    </types>    <types>
+        <members>Benefit_Disbursements_Timeline</members>
+        <name>TimelineObjectDefinition</name>
+    </types>    <types>
+        <members>Account</members>
+        <members>Asset</members>
+        <members>Campaign</members>
+        <members>Case</members>
+        <members>CaseParticipant</members>
+        <members>ChangeRequest</members>
+        <members>Contact</members>
+        <members>ContentDocument</members>
+        <members>Contract</members>
+        <members>Employment__c</members>
+        <members>Evaluation__c</members>
+        <members>Event</members>
+        <members>Form_Submission__c</members>
+        <members>Incident</members>
+        <members>Lead</members>
+        <members>Opportunity</members>
+        <members>Order</members>
+        <members>Problem</members>
+        <members>Prospect_Scholar_Application__c</members>
+        <members>Scholarship_Award__c</members>
+        <members>Solution</members>
+        <members>Task</members>
+        <members>WorkOrder</members>
+        <members>WorkOrderLineItem</members>
+        <members>WorkPlan</members>
+        <members>WorkPlanTemplate</members>
+        <members>WorkPlanTemplateEntry</members>
+        <members>WorkStep</members>
+        <members>WorkStepTemplate</members>
+        <name>TopicsForObjects</name>
+    </types>    <types>
+        <members>Account.Require_PersonEmail_On_CPL_Member</members>
+        <members>Account.VR_Account_Company_Requires_Offering</members>
+        <members>Account.VR_Account_Company_Requires_Wealth_Focus</members>
+        <members>Account.VR_Account_Partner_Requires_Type</members>
+        <members>Account.VR_Account_School_Requires_Division</members>
+        <members>Account.VR_Account_School_Requires_Sport</members>
+        <members>Employment__c.Current_Employment_No_End_Date</members>
+        <members>Employment__c.End_Date_After_Start_Date</members>
+        <members>Employment__c.Past_Employment_Not_Current</members>
+        <members>Employment__c.Start_Date_Required</members>
+        <members>Evaluation__c.Enforce_Single_Evaluation_Target</members>
+        <members>Evaluation__c.Evaluator_Required_Exactly_One</members>
+        <members>Evaluation__c.Non_internship_employment</members>
+        <members>Evaluation__c.overall_rating_range</members>
+        <members>Form_Submission__c.Partner_Submission_Requires_Interest</members>
+        <members>Form_Submission__c.Prevent_Lead_Contact_Dual_Link</members>
+        <members>Form_Submission__c.Require_External_Submission_ID</members>
+        <members>Form_Submission__c.Require_Submitted_Email</members>
+        <members>Form_Submission__c.Scholar_Materials_Requires_Application</members>
+        <members>Form_Submission__c.Scholar_Materials_Requires_Token</members>
+        <members>Form_Submission__c.Scholar_Materials_Requires_Type</members>
+        <members>Form_Submission__c.Student_Submission_Requires_College_Year</members>
+        <members>Form_Submission__c.Student_Submission_Requires_Resume</members>
+        <members>Form_Submission__c.Student_Submission_Requires_School</members>
+        <members>Form_Submission__c.Student_Submission_Requires_Statement</members>
+        <members>Lead.CPL_Scholar_New_Requires_Intake_Fields</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Applicant_Must_Be_Person_Account</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Eligibility_Required_For_Accepted</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Eligible_Internship_Required</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Intake_Owner_Required_Post_Submit</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Invite_Confirmed_Before_Forward</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Junior_Required_On_Submission</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_NoRejectionFields_Unless_Terminal</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_RejectionDetails_Required</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_RejectionReason_Required_Other</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Requires_Core_Fields</members>
+        <members>Prospect_Scholar_Application__c.VR_PSA_Terminal_Status_Locked</members>
+        <name>ValidationRule</name>
+    </types>    <types>
+        <members>Account.AltavistaNews</members>
+        <members>Account.GoogleMaps</members>
+        <members>Account.GoogleNews</members>
+        <members>Account.GoogleSearch</members>
+        <members>Account.HooversProfile</members>
+        <members>Account.YahooMaps</members>
+        <members>Campaign.ViewAllCampaignMembers</members>
+        <members>Campaign.ViewCampaignInfluenceReport</members>
+        <members>Contact.GoogleMaps</members>
+        <members>Contact.GoogleSearch</members>
+        <members>Contact.SendGmail</members>
+        <members>Contact.YahooMaps</members>
+        <members>Contact.YahooWeather</members>
+        <members>Lead.AltavistaNews</members>
+        <members>Lead.GoogleMaps</members>
+        <members>Lead.GoogleNews</members>
+        <members>Lead.GoogleSearch</members>
+        <members>Lead.HooversProfile</members>
+        <members>Lead.SendGmail</members>
+        <members>Lead.YahooMaps</members>
+        <members>Prospect_Scholar_Application__c.Send_Scholarship_Invite_Confirm_Eligibility</members>
+        <name>WebLink</name>
+    </types>    <types>
+        <members>Case</members>
+        <members>Lead</members>
+        <name>Workflow</name>
+    </types>    <types>
+        <members>Lead.New_Lead_Created_Email_Alert</members>
+        <name>WorkflowAlert</name>
+    </types>    <types>
+        <members>Case.ChangePriorityToHigh</members>
+        <name>WorkflowFieldUpdate</name>
+    </types>    <version>66.0</version>
+</Package>

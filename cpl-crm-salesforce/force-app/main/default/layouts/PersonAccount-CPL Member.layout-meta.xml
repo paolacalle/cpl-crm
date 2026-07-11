@@ -15,6 +15,10 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>PersonEmail</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>CPL_Student_Lifecycle__c</field>
             </layoutItems>
@@ -35,6 +39,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Commits_to_CPL_mantra__pc</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PersonGenderIdentity</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -131,12 +139,6 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
-        <fields>FULL_NAME</fields>
-        <fields>ACCOUNT.NAME</fields>
-        <fields>CONTACT.PHONE1</fields>
-        <relatedList>Contact.School__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <fields>NAME</fields>
         <fields>Case_Owner__c</fields>
         <fields>CREATED_DATE</fields>
@@ -148,14 +150,9 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>External_Form_Name__c</fields>
-        <fields>Submitted_At__c</fields>
-        <fields>Submitted_School__c</fields>
-        <fields>Submitted_Sport__c</fields>
-        <fields>Submitted_College_Year__c</fields>
-        <fields>Resume_Uploaded__c</fields>
-        <fields>Needs_Review__c</fields>
-        <relatedList>Form_Submission__c.Matched_Contact__c</relatedList>
+        <fields>Cycle__c</fields>
+        <fields>Award_Amount__c</fields>
+        <relatedList>Scholarship_Award__c.Recipient_Account__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -178,6 +175,17 @@
         <relatedList>Evaluation__c.CPL_Member__c</relatedList>
         <sortField>CREATED_DATE</sortField>
         <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>External_Form_Name__c</fields>
+        <fields>Submitted_At__c</fields>
+        <fields>Submitted_School__c</fields>
+        <fields>Submitted_Sport__c</fields>
+        <fields>Submitted_College_Year__c</fields>
+        <fields>Resume_Uploaded__c</fields>
+        <fields>Needs_Review__c</fields>
+        <relatedList>Form_Submission__c.Matched_Contact__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

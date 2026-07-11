@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Financial Advisor (Hiring)</fullName>
+        <default>false</default>
+        <label>Financial Advisor (Hiring)</label>
+    </customValue>
+    <customValue>
+        <fullName>Wealth Management Firm (Hiring)</fullName>
+        <default>false</default>
+        <label>Wealth Management Firm (Hiring)</label>
+    </customValue>
+    <customValue>
+        <fullName>CPL Ambassador</fullName>
+        <default>false</default>
+        <label>CPL Ambassador</label>
+    </customValue>
+    <customValue>
+        <fullName>Connector / Resource Partner</fullName>
+        <default>false</default>
+        <label>Connector / Resource Partner</label>
+    </customValue>
+    <customValue>
+        <fullName>School Sourcing Partner</fullName>
+        <default>false</default>
+        <label>School Sourcing Partner</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>true</default>
+        <label>Other</label>
+    </customValue>
+    <description>Picklist of the different partner roles that exist.</description>
+    <masterLabel>Partner Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

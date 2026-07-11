@@ -46,6 +46,18 @@
                 <default>false</default>
                 <label>Inactive</label>
             </value>
+            <value>
+                <fullName>Community</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Community</label>
+            </value>
+            <value>
+                <fullName>Lifter</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lifter</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

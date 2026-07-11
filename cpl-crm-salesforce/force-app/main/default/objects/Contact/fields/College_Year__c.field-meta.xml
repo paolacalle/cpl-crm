@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>College_Year__c</fullName>
+    <description>The current college year the student is in.</description>
+    <inlineHelpText>Select the current college year the student is in.</inlineHelpText>
+    <label>College Year</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_College_Year</valueSetName>
+    </valueSet>
+</CustomField>

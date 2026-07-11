@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Materials_Complete__c</fullName>
     <description>True when all required finalist materials have been received. Financial aid details are optional.</description>
-    <externalId>false</externalId>
     <formula>AND(
   Resume_Received__c,
   Essay_Received__c,
@@ -11,7 +10,6 @@
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Materials Complete</label>
-    <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>

@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
-    <formulas>
-        <description>Append the new Discovery Meeting note to any existing Lead.Description content (with a labeled section header) instead of overwriting it.</description>
-        <name>appendedDescription</name>
-        <dataType>String</dataType>
-        <expression>IF(ISBLANK({!Get_Lead.Description}), &quot;&quot;, {!Get_Lead.Description} &amp; BR() &amp; BR()) &amp; &quot;Discovery Meeting Note:&quot; &amp; BR() &amp; {!Meeting_Notes}</expression>
-    </formulas>
-    <choices>
-        <name>Outcome_Promising</name>
-        <choiceText>Promising - move forward</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Qualified</stringValue>
-        </value>
-    </choices>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <choices>
         <name>Outcome_Not_A_Fit</name>
         <choiceText>Not a fit - disqualify</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Unqualified</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Outcome_Promising</name>
+        <choiceText>Promising - move forward</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Qualified</stringValue>
         </value>
     </choices>
     <decisions>
@@ -49,8 +44,14 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Guided screen flow for the Partner Lead Discovery meeting step. Captures meeting date / attendees / outcome notes, marks the seeded "Discovery meeting" Task complete, and advances Lead.Status based on the outcome the user selects (Qualified or Unqualified).</description>
+    <description>Guided screen flow for the Partner Lead Discovery meeting step. Captures meeting date / attendees / outcome notes, marks the seeded &quot;Discovery meeting&quot; Task complete, and advances Lead.Status based on the outcome the user selects (Qualified or Unqualified).</description>
     <environments>Default</environments>
+    <formulas>
+        <description>Append the new Discovery Meeting note to any existing Lead.Description content (with a labeled section header) instead of overwriting it.</description>
+        <name>appendedDescription</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_Lead.Description}), &quot;&quot;, {!Get_Lead.Description} &amp; BR() &amp; BR()) &amp; &quot;Discovery Meeting Note:&quot; &amp; BR() &amp; {!Meeting_Notes}</expression>
+    </formulas>
     <interviewLabel>Partner Discovery Meeting {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Partner Discovery Meeting</label>
     <processMetadataValues>
@@ -73,32 +74,7 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordLookups>
-        <description>Load the Partner Lead for context and to apply status updates.</description>
-        <name>Get_Lead</name>
-        <label>Get Lead</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Log_Meeting_Details</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Lead</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <description>Find the seeded "Discovery meeting" Task for this Lead.</description>
+        <description>Find the seeded &quot;Discovery meeting&quot; Task for this Lead.</description>
         <name>Get_Discovery_Task</name>
         <label>Get Discovery Task</label>
         <locationX>0</locationX>
@@ -136,8 +112,33 @@
         <object>Task</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <description>Load the Partner Lead for context and to apply status updates.</description>
+        <name>Get_Lead</name>
+        <label>Get Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Log_Meeting_Details</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
-        <description>Mark the "Discovery meeting" Task complete.</description>
+        <description>Mark the &quot;Discovery meeting&quot; Task complete.</description>
         <name>Complete_Discovery_Task</name>
         <label>Complete Discovery Task</label>
         <locationX>0</locationX>
@@ -185,19 +186,44 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Status</field>
-            <value>
-                <elementReference>Meeting_Outcome</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>Description</field>
             <value>
                 <elementReference>appendedDescription</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <elementReference>Meeting_Outcome</elementReference>
+            </value>
+        </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
+    <screens>
+        <description>Generic fault screen if a record lookup or update fails.</description>
+        <name>Flow_Error</name>
+        <label>Flow Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Error_Text</name>
+            <fieldText>&lt;p&gt;❌ Something went wrong while saving. Details:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <description>Capture discovery meeting details and outcome.</description>
         <name>Log_Meeting_Details</name>
@@ -214,6 +240,14 @@
             <name>Intro_Header</name>
             <fieldText>&lt;p&gt;Log the discovery meeting with &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt; at &lt;strong&gt;{!Get_Lead.Company}&lt;/strong&gt;. Capture date, attendees, outcome, and notes — the Lead status will move to the outcome you pick.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Meeting_Date</name>
@@ -221,6 +255,14 @@
             <fieldText>Meeting date</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Attendees</name>
@@ -228,6 +270,14 @@
             <fieldText>Attendees (who attended from both sides)</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Meeting_Outcome</name>
@@ -237,12 +287,28 @@
             <fieldText>Outcome</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Meeting_Notes</name>
             <fieldText>Meeting notes</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -258,25 +324,16 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Confirmation_Text</name>
-            <fieldText>&lt;p&gt;&#9989; Discovery meeting logged. {!Get_Lead.Name} is now &lt;strong&gt;{!Meeting_Outcome}&lt;/strong&gt;. Next: open Step 3 to convert (or disqualify).&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;✅ Discovery meeting logged. {!Get_Lead.Name} is now &lt;strong&gt;{!Meeting_Outcome}&lt;/strong&gt;. Next: open Step 3 to convert (or disqualify).&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <description>Generic fault screen if a record lookup or update fails.</description>
-        <name>Flow_Error</name>
-        <label>Flow Error</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Error_Text</name>
-            <fieldText>&lt;p&gt;&#10060; Something went wrong while saving. Details:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -288,7 +345,7 @@
             <targetReference>Get_Lead</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>The Partner Lead Id passed in from the Action Plan stepper LWC.</description>
         <name>recordId</name>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExplainabilityActionDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionLogSchemaType>Other</actionLogSchemaType>
+    <applicationSubtype>PtyRelaGrp</applicationSubtype>
+    <applicationType>PublicSector</applicationType>
+    <description>Audit log of an action or event affecting party relationship groups and associated relationship records.</description>
+    <internal>false</internal>
+    <masterLabel>PartyRelationshipGroupAuditLog</masterLabel>
+    <processType>GroupAudit</processType>
+</ExplainabilityActionDefinition>

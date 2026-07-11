@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Populated from the personalized finalist materials link. --></help>
+    <label><!-- Prospect Scholar Application --></label>
+    <name>Prospect_Scholar_Application__c</name>
+    <relationshipLabel><!-- Form Submissions --></relationshipLabel>
+</CustomFieldTranslation>

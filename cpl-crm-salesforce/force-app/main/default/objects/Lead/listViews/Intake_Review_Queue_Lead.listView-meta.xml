@@ -4,6 +4,7 @@
     <columns>FULL_NAME</columns>
     <columns>LEAD.EMAIL</columns>
     <columns>LEAD.STATUS</columns>
+    <columns>LEAD.RECORDTYPE</columns>
     <columns>LEAD.CREATED_DATE</columns>
     <columns>CORE.USERS.ALIAS</columns>
     <columns>LEAD.UNREAD</columns>

@@ -2,12 +2,13 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Average_Evaluation_Rating__c</fullName>
     <description>Average of the Rating across all Evaluations linked to this lead. Maintained automatically by the evaluation roll-up flows.</description>
+    <externalId>false</externalId>
     <inlineHelpText>Average evaluator rating across all evaluations for this lead (1-5).</inlineHelpText>
     <label>Average Evaluation Rating</label>
     <precision>3</precision>
     <required>false</required>
     <scale>2</scale>
-    <trackHistory>false</trackHistory>
+    <trackFeedHistory>false</trackFeedHistory>
     <type>Number</type>
     <unique>false</unique>
 </CustomField>

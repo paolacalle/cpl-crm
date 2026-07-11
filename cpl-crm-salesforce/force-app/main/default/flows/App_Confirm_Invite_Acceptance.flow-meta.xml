@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <description>If the application already has Scholarship_Invite_Confirmed__c = true, skip the capture screen and just mark the task complete.</description>
         <name>Decision_Already_Confirmed</name>
@@ -28,7 +29,7 @@
         </rules>
     </decisions>
     <decisions>
-        <description>Skip the Task update if the seeded "Confirm invite acceptance" Task is missing.</description>
+        <description>Skip the Task update if the seeded &quot;Confirm invite acceptance&quot; Task is missing.</description>
         <name>Has_Confirm_Task</name>
         <label>Has Confirm Task?</label>
         <locationX>0</locationX>
@@ -53,7 +54,7 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Step 2 of the Application action plan. Captures the date the applicant confirmed they accepted the scholarship invite, flips Scholarship_Invite_Confirmed__c = true, advances Application_Status__c to Collecting Documents, and marks the "Confirm invite acceptance" Task complete.</description>
+    <description>Step 2 of the Application action plan. Captures the date the applicant confirmed they accepted the scholarship invite, flips Scholarship_Invite_Confirmed__c = true, advances Application_Status__c to Collecting Documents, and marks the &quot;Confirm invite acceptance&quot; Task complete.</description>
     <environments>Default</environments>
     <interviewLabel>App Confirm Invite Acceptance {!$Flow.CurrentDateTime}</interviewLabel>
     <label>App Confirm Invite Acceptance</label>
@@ -139,46 +140,6 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <description>Set Scholarship_Invite_Confirmed__c, the confirmed date, and advance the Application status to Collecting Documents.</description>
-        <name>Save_Confirmation</name>
-        <label>Save Confirmation</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Get_Confirm_Task</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Scholarship_Invite_Confirmed__c</field>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Scholarship_Invite_Confrimed_Date__c</field>
-            <value>
-                <elementReference>Confirmed_Date</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Application_Status__c</field>
-            <value>
-                <stringValue>Collecting Documents</stringValue>
-            </value>
-        </inputAssignments>
-        <object>Prospect_Scholar_Application__c</object>
-    </recordUpdates>
-    <recordUpdates>
         <name>Complete_Confirm_Task</name>
         <label>Complete Confirm Task</label>
         <locationX>0</locationX>
@@ -205,32 +166,46 @@
         </inputAssignments>
         <object>Task</object>
     </recordUpdates>
-    <screens>
-        <name>Capture_Confirmation</name>
-        <label>Capture Invite Confirmation</label>
+    <recordUpdates>
+        <description>Set Scholarship_Invite_Confirmed__c, the confirmed date, and advance the Application status to Collecting Documents.</description>
+        <name>Save_Confirmation</name>
+        <label>Save Confirmation</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
         <connector>
-            <targetReference>Save_Confirmation</targetReference>
+            <targetReference>Get_Confirm_Task</targetReference>
         </connector>
-        <fields>
-            <name>Intro_Header</name>
-            <fieldText>&lt;p&gt;Did &lt;strong&gt;{!Get_App.Applicant_Account__r.Name}&lt;/strong&gt; accept the scholarship invite? Capture when they confirmed. The application will move to &lt;strong&gt;Collecting Documents&lt;/strong&gt;.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Confirmed_Date</name>
-            <dataType>DateTime</dataType>
-            <fieldText>When did the applicant confirm acceptance?</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Application_Status__c</field>
+            <value>
+                <stringValue>Collecting Documents</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Scholarship_Invite_Confirmed__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Scholarship_Invite_Confrimed_Date__c</field>
+            <value>
+                <elementReference>Confirmed_Date</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Prospect_Scholar_Application__c</object>
+    </recordUpdates>
     <screens>
         <name>Already_Confirmed_Screen</name>
         <label>Already Confirmed</label>
@@ -246,6 +221,56 @@
             <name>Already_Confirmed_Notice</name>
             <fieldText>&lt;p&gt;{!Get_App.Applicant_Account__r.Name} already confirmed the scholarship invite. Click Next to mark this step complete.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Capture_Confirmation</name>
+        <label>Capture Invite Confirmation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Save_Confirmation</targetReference>
+        </connector>
+        <fields>
+            <name>Intro_Header</name>
+            <fieldText>&lt;p&gt;Did &lt;strong&gt;{!Get_App.Applicant_Account__r.Name}&lt;/strong&gt; accept the scholarship invite? Capture when they confirmed. The application will move to &lt;strong&gt;Collecting Documents&lt;/strong&gt;.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Confirmed_Date</name>
+            <dataType>DateTime</dataType>
+            <fieldText>When did the applicant confirm acceptance?</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -260,8 +285,16 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Done_Text</name>
-            <fieldText>&lt;p&gt;&#9989; Step complete. Next: send the materials review link to the applicant.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;✅ Step complete. Next: send the materials review link to the applicant.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -276,8 +309,16 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Error_Text</name>
-            <fieldText>&lt;p&gt;&#10060; Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;❌ Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -289,7 +330,7 @@
             <targetReference>Get_App</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>The Prospect Scholar Application Id passed in from the Action Plan stepper LWC.</description>
         <name>recordId</name>

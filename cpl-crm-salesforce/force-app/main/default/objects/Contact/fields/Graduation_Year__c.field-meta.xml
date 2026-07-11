@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Graduation_Year__c</fullName>
+    <description>Stores the calendar year in which the student is expected to graduate from college.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the student’s expected college graduation year (for example, 2027).</inlineHelpText>
+    <label>Graduation Year</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Form Submission</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Form Submissions</value>
+    </caseValues>
+    <layouts>
+        <layout>Partner Interest Submission</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Matching &amp; Routing --></label>
+            <section>Matching &amp; Routing</section>
+        </sections>
+        <sections>
+            <label><!-- Partner Interest Details --></label>
+            <section>Partner Interest Details</section>
+        </sections>
+        <sections>
+            <label><!-- Raw Payload --></label>
+            <section>Raw Payload</section>
+        </sections>
+        <sections>
+            <label><!-- Submission Summary --></label>
+            <section>Submission Summary</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Scholar Finalist Materials</layout>
+        <sections>
+            <label><!-- Applicant Materials --></label>
+            <section>Applicant Materials</section>
+        </sections>
+        <sections>
+            <label><!-- Integration --></label>
+            <section>Integration</section>
+        </sections>
+        <sections>
+            <label><!-- Raw Payload --></label>
+            <section>Raw Payload</section>
+        </sections>
+        <sections>
+            <label><!-- Recommender Details --></label>
+            <section>Recommender Details</section>
+        </sections>
+        <sections>
+            <label><!-- Submission Summary --></label>
+            <section>Submission Summary</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Student Interest Submission</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Matching &amp; Routing --></label>
+            <section>Matching &amp; Routing</section>
+        </sections>
+        <sections>
+            <label><!-- Student Details --></label>
+            <section>Student Details</section>
+        </sections>
+        <sections>
+            <label><!-- Student Statement &amp; Resume --></label>
+            <section>Student Statement &amp; Resume</section>
+        </sections>
+        <sections>
+            <label><!-- Submission Summary --></label>
+            <section>Submission Summary</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <description><!-- Represents a form submission from an individual or organization interested in partnering with CPL (e.g., internships, sponsorship, or company engagement). --></description>
+        <label><!-- Partner Interest Submission --></label>
+        <name>Partner_Interest_Submission</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Represents applicant and recommender material submissions for a Prospect Scholar Application finalist. --></description>
+        <label><!-- Scholar Finalist Materials --></label>
+        <name>Scholar_Finalist_Materials</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Represents a form submission from a student or athlete expressing interest in the CPL program. Captures intake data exactly as submitted for review, matching, and routing. --></description>
+        <label><!-- Student Interest Submission --></label>
+        <name>Student_Interest_Submission</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please select an area of interest for this Partner submission. --></errorMessage>
+        <name>Partner_Submission_Requires_Interest</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A Form Submission can be linked to either a Lead or a Contact, not both. --></errorMessage>
+        <name>Prevent_Lead_Contact_Dual_Link</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- External Submission ID is required to prevent duplicate form submissions. --></errorMessage>
+        <name>Require_External_Submission_ID</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Submitted Email is required to process this form submission. --></errorMessage>
+        <name>Require_Submitted_Email</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Scholar finalist materials submissions must include the Prospect Scholar Application from the personalized link. --></errorMessage>
+        <name>Scholar_Materials_Requires_Application</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Scholar finalist materials submissions must include the personalized submission token. --></errorMessage>
+        <name>Scholar_Materials_Requires_Token</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Select the material submission type. --></errorMessage>
+        <name>Scholar_Materials_Requires_Type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Student_Submission_Requires_College_Year --></errorMessage>
+        <name>Student_Submission_Requires_College_Year</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A resume upload is required for Student Interest submissions. --></errorMessage>
+        <name>Student_Submission_Requires_Resume</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- School is required for Student Interest submissions. --></errorMessage>
+        <name>Student_Submission_Requires_School</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A scholar statement of at least 25 characters is required for Student Interest submissions. --></errorMessage>
+        <name>Student_Submission_Requires_Statement</name>
+    </validationRules>
+</CustomObjectTranslation>

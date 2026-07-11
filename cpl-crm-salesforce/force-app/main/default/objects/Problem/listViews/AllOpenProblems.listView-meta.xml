@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllOpenProblems</fullName>
+    <columns>Name</columns>
+    <columns>Description</columns>
+    <columns>Urgency</columns>
+    <columns>Impact</columns>
+    <columns>Priority</columns>
+    <columns>AssignedUser</columns>
+    <columns>Category</columns>
+    <columns>SubCategory</columns>
+    <columns>Status</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status</field>
+        <operation>notEqual</operation>
+        <value>Closed,Resolved,Known Error,Risk Accepted</value>
+    </filters>
+    <label>All Open Problems</label>
+</ListView>

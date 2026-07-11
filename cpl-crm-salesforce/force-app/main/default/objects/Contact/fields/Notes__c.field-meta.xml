@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notes__c</fullName>
+    <description>Internal note for admins. Stores supplemental information, history, or specific background details relevant to the contact record that doesn&apos;t fit into standard fields.</description>
+    <inlineHelpText>Enter any additional background information or important notes regarding this contact here.</inlineHelpText>
+    <label>Notes</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

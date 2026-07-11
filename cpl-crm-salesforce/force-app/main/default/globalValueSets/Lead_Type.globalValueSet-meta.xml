@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Prospect Partner</fullName>
+        <default>false</default>
+        <label>Prospect Partner</label>
+    </customValue>
+    <customValue>
+        <fullName>Prospect CPL Scholar</fullName>
+        <default>false</default>
+        <label>Prospect CPL Scholar</label>
+    </customValue>
+    <description>Defines the primary classification of a Lead based on the originating form and intended engagement. This global value set is used to distinguish Partner leads from CPL Scholar applicants and supports consistent routing, automation, reporting, and record type behavior across the org.</description>
+    <masterLabel>Lead Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

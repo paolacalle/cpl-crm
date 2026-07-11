@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForecastingType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <amount>false</amount>
+    <dateType>0</dateType>
+    <developerName>OpportunityLineItemQuantity</developerName>
+    <hasCustomGroup>false</hasCustomGroup>
+    <hasProductFamily>true</hasProductFamily>
+    <masterLabel>Opportunity Line Item Quantity</masterLabel>
+    <quantity>true</quantity>
+    <roleType>R</roleType>
+</ForecastingType>

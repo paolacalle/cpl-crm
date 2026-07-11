@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Partner_Interest_Other__c</fullName>
-    <description>Free-text detail captured when a partner selected the "Other" option in their intake form's Partnership Interest checkboxes.</description>
-    <inlineHelpText>Populated by the Form Submission Intake Router when the partner checked "Other" and typed a custom description.</inlineHelpText>
+    <description>Free-text detail captured when a partner selected the &quot;Other&quot; option in their intake form&apos;s Partnership Interest checkboxes.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Populated by the Form Submission Intake Router when the partner checked &quot;Other&quot; and typed a custom description.</inlineHelpText>
     <label>Partner Interest - Other Detail</label>
     <length>255</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>false</unique>
 </CustomField>

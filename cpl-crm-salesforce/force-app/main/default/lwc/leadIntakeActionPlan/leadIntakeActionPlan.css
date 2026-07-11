@@ -1,3 +1,50 @@
+.terminal-banner {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.terminal-converted {
+    background-color: #ebf7ee;
+    border: 1px solid #2e844a;
+}
+
+.terminal-converted .terminal-icon {
+    --slds-c-icon-color-foreground-default: #2e844a;
+    background-color: #2e844a;
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+
+.terminal-unqualified {
+    background-color: #fef1ee;
+    border: 1px solid #ba0517;
+}
+
+.terminal-unqualified .terminal-icon {
+    --slds-c-icon-color-foreground-default: #ba0517;
+    background-color: #ba0517;
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+
+.terminal-body {
+    flex: 1;
+}
+
+.terminal-title {
+    font-weight: 700;
+}
+
+.terminal-text {
+    color: #444;
+    font-size: 0.8125rem;
+    margin-top: 0.125rem;
+}
+
 .plan {
     list-style: none;
     margin: 0;

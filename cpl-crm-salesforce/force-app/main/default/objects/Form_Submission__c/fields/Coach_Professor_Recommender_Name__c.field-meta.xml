@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Coach_Professor_Recommender_Name__c</fullName>
     <description>Coach or college professor recommender name provided by the applicant.</description>
+    <externalId>false</externalId>
     <label>Coach/Professor Recommender Name</label>
     <length>255</length>
     <required>false</required>

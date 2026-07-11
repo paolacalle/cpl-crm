@@ -5,17 +5,59 @@
     <description>Represents a form submission from an individual or organization interested in partnering with CPL (e.g., internships, sponsorship, or company engagement).</description>
     <label>Partner Interest Submission</label>
     <picklistValues>
+        <picklist>Material_Submission_Type__c</picklist>
+        <values>
+            <fullName>Applicant Materials</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coach%2FProfessor Recommendation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internship Supervisor Recommendation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Partner_Interest_Type__c</picklist>
         <values>
-            <fullName>Company partnership</fullName>
+            <fullName>Employee matching opportunities</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Employee matching</fullName>
+            <fullName>How my company can work with CPL</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Offering an internship</fullName>
+            <fullName>Offering an internship to an athlete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supporting CPL athletes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Partnership_Interest__c</picklist>
+        <values>
+            <fullName>Employee matching opportunities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>How my company can work with CPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offering an internship to an athlete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
             <default>false</default>
         </values>
         <values>

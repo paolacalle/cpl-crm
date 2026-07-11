@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Account_School_Requires_Division</fullName>
+    <active>false</active>
+    <description>Requires an Athletic Division / League to be specified for School accounts.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;School&quot;,
+  ISPICKVAL(Athletic_Division__c, &quot;&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Athletic_Division__c</errorDisplayField>
+    <errorMessage>Athletic Division / League is required for School accounts.</errorMessage>
+</ValidationRule>

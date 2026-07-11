@@ -5,5 +5,6 @@
     <description>True when the applicant submitted an Athletic Detail via the JotForm materials form. Set by the Scholar Finalist Materials Router.</description>
     <label>Athletic Received</label>
     <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

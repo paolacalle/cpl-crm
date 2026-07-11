@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <choices>
+        <name>Channel_Call</name>
+        <choiceText>Phone call</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Call</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Channel_Email</name>
+        <choiceText>Email</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Email</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Channel_Other</name>
+        <choiceText>Other</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Other</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <description>Skip the Task update if the seeded Task is missing.</description>
+        <name>Has_Outreach_Task</name>
+        <label>Has Outreach Task?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Outreach_Logged</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - Task Missing</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Has_Task</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Outreach_Task.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Complete_Outreach_Task</targetReference>
+            </connector>
+            <label>Yes - Has Task</label>
+        </rules>
+    </decisions>
+    <description>Guided screen flow for the Partner Lead Initial outreach step. Logs the first-contact attempt, completes the seeded &quot;Initial outreach&quot; Task, and advances the Lead.Status to Contacted.</description>
+    <environments>Default</environments>
     <formulas>
         <description>Append the new Initial outreach note to any existing Lead.Description content (with a labeled section header) instead of overwriting it.</description>
         <name>appendedDescription</name>
         <dataType>String</dataType>
         <expression>IF(ISBLANK({!Get_Lead.Description}), &quot;&quot;, {!Get_Lead.Description} &amp; BR() &amp; BR()) &amp; &quot;Initial outreach note:&quot; &amp; BR() &amp; {!Outreach_Notes}</expression>
     </formulas>
-    <description>Guided screen flow for the Partner Lead Initial outreach step. Logs the first-contact attempt, completes the seeded "Initial outreach" Task, and advances the Lead.Status to Contacted.</description>
-    <environments>Default</environments>
     <interviewLabel>Partner Initial Outreach {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Partner Initial Outreach</label>
     <processMetadataValues>
@@ -56,7 +107,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <description>Find the seeded "Initial outreach" Task for this Lead so we can mark it Completed.</description>
+        <description>Find the seeded &quot;Initial outreach&quot; Task for this Lead so we can mark it Completed.</description>
         <name>Get_Outreach_Task</name>
         <label>Get Outreach Task</label>
         <locationX>0</locationX>
@@ -94,34 +145,8 @@
         <object>Task</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <decisions>
-        <description>Skip the Task update if the seeded Task is missing.</description>
-        <name>Has_Outreach_Task</name>
-        <label>Has Outreach Task?</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Outreach_Logged</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No - Task Missing</defaultConnectorLabel>
-        <rules>
-            <name>Yes_Has_Task</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Outreach_Task.Id</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Complete_Outreach_Task</targetReference>
-            </connector>
-            <label>Yes - Has Task</label>
-        </rules>
-    </decisions>
     <recordUpdates>
-        <description>Mark the "Initial outreach" Task complete.</description>
+        <description>Mark the &quot;Initial outreach&quot; Task complete.</description>
         <name>Complete_Outreach_Task</name>
         <label>Complete Outreach Task</label>
         <locationX>0</locationX>
@@ -169,19 +194,44 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Contacted</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>Description</field>
             <value>
                 <elementReference>appendedDescription</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Contacted</stringValue>
+            </value>
+        </inputAssignments>
         <object>Lead</object>
     </recordUpdates>
+    <screens>
+        <description>Generic fault screen if a record lookup or update fails.</description>
+        <name>Flow_Error</name>
+        <label>Flow Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Error_Text</name>
+            <fieldText>&lt;p&gt;❌ Something went wrong while saving. Details:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <description>Capture details about the first-contact attempt (channel, notes).</description>
         <name>Log_Outreach_Details</name>
@@ -198,6 +248,14 @@
             <name>Intro_Header</name>
             <fieldText>&lt;p&gt;Log your initial outreach to &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt; at &lt;strong&gt;{!Get_Lead.Company}&lt;/strong&gt;. Use the notes field to capture the channel (call/email), what you said, and any follow-up commitments.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Outreach_Channel</name>
@@ -208,12 +266,28 @@
             <fieldText>How did you reach out?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Outreach_Notes</name>
             <fieldText>Outreach notes</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -229,53 +303,20 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Confirmation_Text</name>
-            <fieldText>&lt;p&gt;&#9989; Initial outreach logged. {!Get_Lead.Name} has been moved to &lt;strong&gt;Contacted&lt;/strong&gt;. Next: schedule a discovery meeting.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;✅ Initial outreach logged. {!Get_Lead.Name} has been moved to &lt;strong&gt;Contacted&lt;/strong&gt;. Next: schedule a discovery meeting.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <screens>
-        <description>Generic fault screen if a record lookup or update fails.</description>
-        <name>Flow_Error</name>
-        <label>Flow Error</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Error_Text</name>
-            <fieldText>&lt;p&gt;&#10060; Something went wrong while saving. Details:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <choices>
-        <name>Channel_Email</name>
-        <choiceText>Email</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Email</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>Channel_Call</name>
-        <choiceText>Phone call</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Call</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>Channel_Other</name>
-        <choiceText>Other</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>Other</stringValue>
-        </value>
-    </choices>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
@@ -283,7 +324,7 @@
             <targetReference>Get_Lead</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>The Partner Lead Id passed in from the Action Plan stepper LWC.</description>
         <name>recordId</name>

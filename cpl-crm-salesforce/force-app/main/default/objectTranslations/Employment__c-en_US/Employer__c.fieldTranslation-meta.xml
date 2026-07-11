@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the employer Account. Must be a Company / Employer record type account. --></help>
+    <label><!-- Employer --></label>
+    <name>Employer__c</name>
+    <relationshipLabel><!-- Employment History --></relationshipLabel>
+</CustomFieldTranslation>

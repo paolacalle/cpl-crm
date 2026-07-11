@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Wealth_Focus__c</fullName>
+    <description>Captures the primary wealth management focus area in which the organization engages or places CPL Scholars.</description>
+    <inlineHelpText>Select the primary wealth management area associated with internship or full-time opportunities at this organization.</inlineHelpText>
+    <label>Primary Wealth Focus</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Client Services</fullName>
+                <default>false</default>
+                <label>Client Services</label>
+            </value>
+            <value>
+                <fullName>Financial Advisory</fullName>
+                <default>false</default>
+                <label>Financial Advisory</label>
+            </value>
+            <value>
+                <fullName>Financial Planning</fullName>
+                <default>false</default>
+                <label>Financial Planning</label>
+            </value>
+            <value>
+                <fullName>Investment Management</fullName>
+                <default>false</default>
+                <label>Investment Management</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Private Banking</fullName>
+                <default>false</default>
+                <label>Private Banking</label>
+            </value>
+            <value>
+                <fullName>Wealth Management</fullName>
+                <default>false</default>
+                <label>Wealth Management</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

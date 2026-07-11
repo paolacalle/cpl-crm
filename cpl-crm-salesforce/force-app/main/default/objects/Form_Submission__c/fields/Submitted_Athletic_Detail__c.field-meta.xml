@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Submitted_Athletic_Detail__c</fullName>
-    <description>Athletic experience / story submitted via the JotForm materials form ("shortly Expand Athletic" field). The router flow copies this onto the Application's Athletic_Detail__c.</description>
+    <description>Athletic experience / story submitted via the JotForm materials form (&quot;shortly Expand Athletic&quot; field). The router flow copies this onto the Application&apos;s Athletic_Detail__c.</description>
     <label>Submitted Athletic Detail</label>
     <length>32768</length>
-    <required>false</required>
     <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>LongTextArea</type>
     <visibleLines>5</visibleLines>
 </CustomField>

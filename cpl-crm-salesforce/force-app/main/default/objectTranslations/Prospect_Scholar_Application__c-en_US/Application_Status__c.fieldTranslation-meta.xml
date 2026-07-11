@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the current stage of the application based on where the applicant is in the CPL process. --></help>
+    <label><!-- Application Status --></label>
+    <name>Application_Status__c</name>
+    <picklistValues>
+        <masterLabel>Accepted</masterLabel>
+        <translation><!-- Accepted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Collecting Documents</masterLabel>
+        <translation><!-- Collecting Documents --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>In Review</masterLabel>
+        <translation><!-- In Review --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Invite Sent</masterLabel>
+        <translation><!-- Invite Sent --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rejected</masterLabel>
+        <translation><!-- Rejected --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Waitlisted</masterLabel>
+        <translation><!-- Waitlisted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Withdrawn</masterLabel>
+        <translation><!-- Withdrawn --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

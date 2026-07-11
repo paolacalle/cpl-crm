@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Identifies the primary CPL team member responsible for managing communication, follow-ups, and relationship ownership for this contact. --></help>
+    <label><!-- Case Owner --></label>
+    <name>Case_Owner__c</name>
+    <relationshipLabel><!-- Prospect Scholar Applications (Case Owner) --></relationshipLabel>
+</CustomFieldTranslation>

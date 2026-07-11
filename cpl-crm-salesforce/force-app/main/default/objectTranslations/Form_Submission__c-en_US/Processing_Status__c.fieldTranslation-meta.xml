@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Set by automation to track how the submission was handled and routed. --></help>
+    <label><!-- Processing Status --></label>
+    <name>Processing_Status__c</name>
+    <picklistValues>
+        <masterLabel>Created Lead</masterLabel>
+        <translation><!-- Created Lead --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Ignored / Spam</masterLabel>
+        <translation><!-- Ignored / Spam --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Matched to Application</masterLabel>
+        <translation><!-- Matched to Application --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Matched to Contact</masterLabel>
+        <translation><!-- Matched to Contact --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Matched to Lead</masterLabel>
+        <translation><!-- Matched to Lead --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Needs Review</masterLabel>
+        <translation><!-- Needs Review --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>New</masterLabel>
+        <translation><!-- New --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Processed</masterLabel>
+        <translation><!-- Processed --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

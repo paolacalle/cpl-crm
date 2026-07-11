@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
-    <description>Seeds the 3-step Partner Outreach action plan tasks when a Partner Lead is created. Tasks are owned by the Lead's owner so they land in whatever queue / user owns the lead. Mirrors the existing New Lead Creation flow's pattern for CPL Scholar Leads.</description>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Seeds the 3-step Partner Outreach action plan tasks when a Partner Lead is created. Tasks are owned by the Lead&apos;s owner so they land in whatever queue / user owns the lead. Mirrors the existing New Lead Creation flow&apos;s pattern for CPL Scholar Leads.</description>
     <environments>Default</environments>
     <interviewLabel>New Partner Lead Creation {!$Flow.CurrentDateTime}</interviewLabel>
     <label>New Partner Lead Creation</label>
@@ -25,18 +26,15 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
-        <description>Step 1: first outreach to the partner.</description>
-        <name>Create_Task_Initial_Outreach</name>
-        <label>Create Task - Initial Outreach</label>
+        <description>Step 3: decide whether to convert the Lead to a Partner Organization Account+Contact or disqualify it.</description>
+        <name>Create_Task_Convert_Or_Disqualify</name>
+        <label>Create Task - Convert or Disqualify</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <connector>
-            <targetReference>Create_Task_Discovery_Meeting</targetReference>
-        </connector>
         <inputAssignments>
             <field>Description</field>
             <value>
-                <stringValue>Reach out to the partner to introduce CPL and gauge interest. Log channel + notes via the Action Plan stepper.</stringValue>
+                <stringValue>Convert the Lead to a Partner Organization Account + Contact, or disqualify if not a fit.</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -60,7 +58,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Initial outreach</stringValue>
+                <stringValue>Convert or Disqualify</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -119,15 +117,18 @@
         <object>Task</object>
     </recordCreates>
     <recordCreates>
-        <description>Step 3: decide whether to convert the Lead to a Partner Organization Account+Contact or disqualify it.</description>
-        <name>Create_Task_Convert_Or_Disqualify</name>
-        <label>Create Task - Convert or Disqualify</label>
+        <description>Step 1: first outreach to the partner.</description>
+        <name>Create_Task_Initial_Outreach</name>
+        <label>Create Task - Initial Outreach</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Task_Discovery_Meeting</targetReference>
+        </connector>
         <inputAssignments>
             <field>Description</field>
             <value>
-                <stringValue>Convert the Lead to a Partner Organization Account + Contact, or disqualify if not a fit.</stringValue>
+                <stringValue>Reach out to the partner to introduce CPL and gauge interest. Log channel + notes via the Action Plan stepper.</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -151,7 +152,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Convert or Disqualify</stringValue>
+                <stringValue>Initial outreach</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>

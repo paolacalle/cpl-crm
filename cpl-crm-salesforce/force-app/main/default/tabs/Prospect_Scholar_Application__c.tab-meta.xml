@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>Tracks student-athlete applications to the CPL Scholar Program from submission through decision and internship placement.</description>
+    <motif>Custom45: Ticket</motif>
+</CustomTab>

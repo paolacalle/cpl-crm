@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExplainabilityActionVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionSpecification>{}</actionSpecification>
+    <active>true</active>
+    <definitionVersion>1</definitionVersion>
+    <description>ISE IDV Audit Trail Log Def Initial Version</description>
+    <explainabilityActionDef>ISE_IDVAudit</explainabilityActionDef>
+    <masterLabel>ISE_IDVAudit</masterLabel>
+</ExplainabilityActionVersion>

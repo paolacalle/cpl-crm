@@ -26,4 +26,26 @@ private class LeadConvertActionTest {
 
         System.assertNotEquals(null, leadRecord.Id);
     }
+
+    @IsTest
+    static void formatErrorIncludesStatusAndFields() {
+        String withFields = LeadConvertAction.formatError(
+            'Some values are restricted',
+            'FIELD_CUSTOM_VALIDATION_EXCEPTION',
+            new List<String>{ 'College_Year__c', 'Primary_Sport__c' }
+        );
+        System.assert(withFields.contains('FIELD_CUSTOM_VALIDATION_EXCEPTION'), withFields);
+        System.assert(withFields.contains('College_Year__c'), withFields);
+        System.assert(withFields.contains('Primary_Sport__c'), withFields);
+
+        String noFields = LeadConvertAction.formatError(
+            'Generic failure',
+            'CANNOT_INSERT_UPDATE_ACTIVATE_ENTITY',
+            new List<String>()
+        );
+        System.assertEquals(
+            'Generic failure (CANNOT_INSERT_UPDATE_ACTIVATE_ENTITY)',
+            noFields
+        );
+    }
 }

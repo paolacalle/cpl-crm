@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>School_Name_From_Form__c</fullName>
+    <description>Raw school name provided by the applicant via the CPL Interest Form.</description>
+    <inlineHelpText>This value reflects exactly what the applicant entered on the form and may not match a standardized School record. Use this as a reference when linking the application to the correct School account during conversion.</inlineHelpText>
+    <label>School Name From Form</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

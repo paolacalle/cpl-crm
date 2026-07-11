@@ -12,6 +12,7 @@
             <targetReference>Decision_Send_Intern</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -72,6 +73,7 @@
             <targetReference>Get_Materials_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -121,6 +123,7 @@
         <offset>0</offset>
     </actionCalls>
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <description>If all 4 materials are confirmed received, advance Application_Status__c to In Review.</description>
         <name>Decision_All_Received</name>
@@ -169,7 +172,7 @@
         </rules>
     </decisions>
     <decisions>
-        <description>If the user toggled "send request to coach" AND a coach email is present, send the request.</description>
+        <description>If the user toggled &quot;send request to coach&quot; AND a coach email is present, send the request.</description>
         <name>Decision_Send_Coach</name>
         <label>Send Coach Request?</label>
         <locationX>0</locationX>
@@ -202,7 +205,7 @@
         </rules>
     </decisions>
     <decisions>
-        <description>If the user toggled "send request to internship supervisor" AND an email is present, send the request.</description>
+        <description>If the user toggled &quot;send request to internship supervisor&quot; AND an email is present, send the request.</description>
         <name>Decision_Send_Intern</name>
         <label>Send Intern Request?</label>
         <locationX>0</locationX>
@@ -235,7 +238,7 @@
         </rules>
     </decisions>
     <decisions>
-        <description>Skip the Task update if the seeded "Confirm materials" Task is missing.</description>
+        <description>Skip the Task update if the seeded &quot;Confirm materials&quot; Task is missing.</description>
         <name>Has_Materials_Task</name>
         <label>Has Materials Task?</label>
         <locationX>0</locationX>
@@ -260,8 +263,14 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Step 4 of the Application action plan. The intake host reviews what's attached and checks which materials are received. If the Coach or Internship Supervisor recommendation isn't received yet, they can optionally send the recommender an email with a JotForm link to upload their letter directly. If all 4 are confirmed, advances Application_Status__c to "In Review".</description>
+    <description>Step 4 of the Application action plan. The intake host reviews what&apos;s attached and checks which materials are received. If the Coach or Internship Supervisor recommendation isn&apos;t received yet, they can optionally send the recommender an email with a JotForm link to upload their letter directly. If all 4 are confirmed, advances Application_Status__c to &quot;In Review&quot;.</description>
     <environments>Default</environments>
+    <formulas>
+        <description>Email body for the coach / professor recommendation request.</description>
+        <name>coachEmailBody</name>
+        <dataType>String</dataType>
+        <expression>&quot;Hi &quot; &amp; BLANKVALUE({!Confirm_Coach_Name}, &quot;there&quot;) &amp; &quot;,&quot; &amp; BR() &amp; BR() &amp; BLANKVALUE({!Get_App.Applicant_Account__r.FirstName}, &quot;A CPL Scholar applicant&quot;) &amp; &quot; has listed you as their coach / professor recommender for the CPL Scholar program. We&apos;d be grateful if you could submit a brief recommendation letter on their behalf.&quot; &amp; BR() &amp; BR() &amp; &quot;Please use this link to upload your letter:&quot; &amp; BR() &amp; BR() &amp; {!coachRequestURL} &amp; BR() &amp; BR() &amp; &quot;If you have questions, just reply to this email.&quot; &amp; BR() &amp; BR() &amp; &quot;Thank you,&quot; &amp; BR() &amp; &quot;CPL Team&quot;</expression>
+    </formulas>
     <formulas>
         <description>URL for the recommender JotForm (coach branch). Composes base URL + appid + recType=Coach + applicant name + recommender name.</description>
         <name>coachRequestURL</name>
@@ -275,6 +284,12 @@
     &amp; &quot;&amp;recName=&quot; &amp; URLENCODE(BLANKVALUE({!Confirm_Coach_Name}, &quot;&quot;)))</expression>
     </formulas>
     <formulas>
+        <description>Email body for the internship supervisor recommendation request.</description>
+        <name>internEmailBody</name>
+        <dataType>String</dataType>
+        <expression>&quot;Hi &quot; &amp; BLANKVALUE({!Confirm_Intern_Name}, &quot;there&quot;) &amp; &quot;,&quot; &amp; BR() &amp; BR() &amp; BLANKVALUE({!Get_App.Applicant_Account__r.FirstName}, &quot;A CPL Scholar applicant&quot;) &amp; &quot; has listed you as their internship supervisor recommender for the CPL Scholar program. We&apos;d be grateful if you could submit a brief recommendation letter on their behalf.&quot; &amp; BR() &amp; BR() &amp; &quot;Please use this link to upload your letter:&quot; &amp; BR() &amp; BR() &amp; {!internRequestURL} &amp; BR() &amp; BR() &amp; &quot;If you have questions, just reply to this email.&quot; &amp; BR() &amp; BR() &amp; &quot;Thank you,&quot; &amp; BR() &amp; &quot;CPL Team&quot;</expression>
+    </formulas>
+    <formulas>
         <description>URL for the recommender JotForm (internship supervisor branch).</description>
         <name>internRequestURL</name>
         <dataType>String</dataType>
@@ -285,18 +300,6 @@
     &amp; &quot;&amp;recType=Internship&quot;
     &amp; &quot;&amp;applicantName=&quot; &amp; URLENCODE(BLANKVALUE({!Get_App.Applicant_Account__r.FirstName}, &quot;&quot;))
     &amp; &quot;&amp;recName=&quot; &amp; URLENCODE(BLANKVALUE({!Confirm_Intern_Name}, &quot;&quot;)))</expression>
-    </formulas>
-    <formulas>
-        <description>Email body for the coach / professor recommendation request.</description>
-        <name>coachEmailBody</name>
-        <dataType>String</dataType>
-        <expression>&quot;Hi &quot; &amp; BLANKVALUE({!Confirm_Coach_Name}, &quot;there&quot;) &amp; &quot;,&quot; &amp; BR() &amp; BR() &amp; BLANKVALUE({!Get_App.Applicant_Account__r.FirstName}, &quot;A CPL Scholar applicant&quot;) &amp; &quot; has listed you as their coach / professor recommender for the CPL Scholar program. We&apos;d be grateful if you could submit a brief recommendation letter on their behalf.&quot; &amp; BR() &amp; BR() &amp; &quot;Please use this link to upload your letter:&quot; &amp; BR() &amp; BR() &amp; {!coachRequestURL} &amp; BR() &amp; BR() &amp; &quot;If you have questions, just reply to this email.&quot; &amp; BR() &amp; BR() &amp; &quot;Thank you,&quot; &amp; BR() &amp; &quot;CPL Team&quot;</expression>
-    </formulas>
-    <formulas>
-        <description>Email body for the internship supervisor recommendation request.</description>
-        <name>internEmailBody</name>
-        <dataType>String</dataType>
-        <expression>&quot;Hi &quot; &amp; BLANKVALUE({!Confirm_Intern_Name}, &quot;there&quot;) &amp; &quot;,&quot; &amp; BR() &amp; BR() &amp; BLANKVALUE({!Get_App.Applicant_Account__r.FirstName}, &quot;A CPL Scholar applicant&quot;) &amp; &quot; has listed you as their internship supervisor recommender for the CPL Scholar program. We&apos;d be grateful if you could submit a brief recommendation letter on their behalf.&quot; &amp; BR() &amp; BR() &amp; &quot;Please use this link to upload your letter:&quot; &amp; BR() &amp; BR() &amp; {!internRequestURL} &amp; BR() &amp; BR() &amp; &quot;If you have questions, just reply to this email.&quot; &amp; BR() &amp; BR() &amp; &quot;Thank you,&quot; &amp; BR() &amp; &quot;CPL Team&quot;</expression>
     </formulas>
     <interviewLabel>App Confirm Materials {!$Flow.CurrentDateTime}</interviewLabel>
     <label>App Confirm Materials</label>
@@ -329,6 +332,7 @@
             <targetReference>Confirm_Materials_Screen</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -353,6 +357,7 @@
             <targetReference>Has_Materials_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -382,104 +387,6 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <description>Save the 4 boolean Received fields + the captured recommender contact info onto the Application.</description>
-        <name>Save_App_Fields</name>
-        <label>Save App Fields</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Decision_All_Received</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Resume_Received__c</field>
-            <value>
-                <elementReference>Confirm_Resume</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Essay_Received__c</field>
-            <value>
-                <elementReference>Confirm_Essay</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Coach_Professor_Recommendation_Received__c</field>
-            <value>
-                <elementReference>Confirm_Coach</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Internship_Supervisor_Rec_Received__c</field>
-            <value>
-                <elementReference>Confirm_Intern</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Coach_Professor_Name__c</field>
-            <value>
-                <elementReference>Confirm_Coach_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Coach_Professor_Email__c</field>
-            <value>
-                <elementReference>Confirm_Coach_Email</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Internship_Supervisor_Name__c</field>
-            <value>
-                <elementReference>Confirm_Intern_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Internship_Supervisor_Email__c</field>
-            <value>
-                <elementReference>Confirm_Intern_Email</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Prospect_Scholar_Application__c</object>
-    </recordUpdates>
-    <recordUpdates>
-        <description>Advance Application_Status__c to In Review (only fires when all 4 materials confirmed).</description>
-        <name>Save_Status_InReview</name>
-        <label>Save Status In Review</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Decision_Send_Coach</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Application_Status__c</field>
-            <value>
-                <stringValue>In Review</stringValue>
-            </value>
-        </inputAssignments>
-        <object>Prospect_Scholar_Application__c</object>
-    </recordUpdates>
-    <recordUpdates>
         <name>Complete_Materials_Task</name>
         <label>Complete Materials Task</label>
         <locationX>0</locationX>
@@ -506,6 +413,106 @@
         </inputAssignments>
         <object>Task</object>
     </recordUpdates>
+    <recordUpdates>
+        <description>Save the 4 boolean Received fields + the captured recommender contact info onto the Application.</description>
+        <name>Save_App_Fields</name>
+        <label>Save App Fields</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_All_Received</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Coach_Professor_Email__c</field>
+            <value>
+                <elementReference>Confirm_Coach_Email</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Coach_Professor_Name__c</field>
+            <value>
+                <elementReference>Confirm_Coach_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Coach_Professor_Recommendation_Received__c</field>
+            <value>
+                <elementReference>Confirm_Coach</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Essay_Received__c</field>
+            <value>
+                <elementReference>Confirm_Essay</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Internship_Supervisor_Email__c</field>
+            <value>
+                <elementReference>Confirm_Intern_Email</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Internship_Supervisor_Name__c</field>
+            <value>
+                <elementReference>Confirm_Intern_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Internship_Supervisor_Rec_Received__c</field>
+            <value>
+                <elementReference>Confirm_Intern</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Resume_Received__c</field>
+            <value>
+                <elementReference>Confirm_Resume</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Prospect_Scholar_Application__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Advance Application_Status__c to In Review (only fires when all 4 materials confirmed).</description>
+        <name>Save_Status_InReview</name>
+        <label>Save Status In Review</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Send_Coach</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Application_Status__c</field>
+            <value>
+                <stringValue>In Review</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Prospect_Scholar_Application__c</object>
+    </recordUpdates>
     <screens>
         <name>Confirm_Materials_Screen</name>
         <label>Confirm Materials Received</label>
@@ -521,6 +528,14 @@
             <name>Intro_Header</name>
             <fieldText>&lt;p&gt;Review the files attached to this Application (see the &lt;strong&gt;Files&lt;/strong&gt; related list on the record page) and check off which materials were received from &lt;strong&gt;{!Get_App.Applicant_Account__r.Name}&lt;/strong&gt;. For any recommendation letter that isn&apos;t received, you can email the recommender a link to upload their letter.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Confirm_Resume</name>
@@ -530,7 +545,16 @@
             </defaultValue>
             <fieldText>Resume received</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Confirm_Essay</name>
@@ -540,7 +564,16 @@
             </defaultValue>
             <fieldText>Essay received</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Confirm_Coach</name>
@@ -550,14 +583,32 @@
             </defaultValue>
             <fieldText>Coach / Professor recommendation received</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Send_Coach_Request_Toggle</name>
             <dataType>Boolean</dataType>
             <fieldText>Email the coach / professor a request to submit their letter</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -577,7 +628,16 @@
             </defaultValue>
             <fieldText>Coach / Professor name</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -597,7 +657,16 @@
             </defaultValue>
             <fieldText>Coach / Professor email</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -617,14 +686,32 @@
             </defaultValue>
             <fieldText>Internship supervisor recommendation received</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Send_Intern_Request_Toggle</name>
             <dataType>Boolean</dataType>
             <fieldText>Email the internship supervisor a request to submit their letter</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -644,7 +731,16 @@
             </defaultValue>
             <fieldText>Internship supervisor name</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -664,7 +760,16 @@
             </defaultValue>
             <fieldText>Internship supervisor email</fieldText>
             <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
@@ -680,22 +785,6 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Materials_Confirmed_Done</name>
-        <label>Materials Confirmation Done</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Done_Text</name>
-            <fieldText>&lt;p&gt;&#9989; Step complete. Any recommender requests have been emailed. If all 4 materials were confirmed, this application is now &lt;strong&gt;In Review&lt;/strong&gt;. Next: set up the final interview.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
         <name>Flow_Error</name>
         <label>Flow Error</label>
         <locationX>0</locationX>
@@ -705,8 +794,40 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Error_Text</name>
-            <fieldText>&lt;p&gt;&#10060; Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;❌ Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Materials_Confirmed_Done</name>
+        <label>Materials Confirmation Done</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Done_Text</name>
+            <fieldText>&lt;p&gt;✅ Step complete. Any recommender requests have been emailed. If all 4 materials were confirmed, this application is now &lt;strong&gt;In Review&lt;/strong&gt;. Next: set up the final interview.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -718,7 +839,7 @@
             <targetReference>Get_App</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>The Prospect Scholar Application Id passed in from the Action Plan stepper LWC.</description>
         <name>recordId</name>

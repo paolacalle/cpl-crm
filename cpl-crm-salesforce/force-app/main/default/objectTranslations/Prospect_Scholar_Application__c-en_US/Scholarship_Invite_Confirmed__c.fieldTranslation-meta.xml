@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Is the invite confirmed? --></help>
+    <label><!-- Scholarship Invite Confirmed --></label>
+    <name>Scholarship_Invite_Confirmed__c</name>
+</CustomFieldTranslation>

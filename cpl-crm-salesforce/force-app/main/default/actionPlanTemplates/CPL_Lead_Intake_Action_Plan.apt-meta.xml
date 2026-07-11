@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionPlanTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <isAdHocItemCreationEnabled>false</isAdHocItemCreationEnabled>
+    <name>CPL Lead Intake Action Plan</name>
+    <status>Final</status>
+    <targetEntityType>Lead</targetEntityType>
+    <uniqueName>CPL_Lead_Intake_Action_Plan</uniqueName>
+</ActionPlanTemplate>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <description>If we found the Application by appid, apply the submitted data. Otherwise flag for manual review.</description>
         <name>Decision_App_Found</name>
         <label>App Found?</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
         <defaultConnector>
             <targetReference>Flag_Needs_Review</targetReference>
         </defaultConnector>
@@ -30,60 +31,9 @@
     <description>Routes Scholar Finalist Materials form submissions onto the matching Prospect Scholar Application. Fires record-triggered on Form_Submission__c create where RecordType = Scholar_Finalist_Materials and Materials_Processed__c = false. Looks up the Application by Submitted_App_Id__c, copies the submitted URLs / names / emails onto it, flips the relevant Received booleans, sets Matched_Application__c, and marks the submission as Materials_Processed.</description>
     <environments>Default</environments>
     <formulas>
-        <description>True when the Resume URL was submitted.</description>
-        <name>resumeWasSubmitted</name>
+        <name>athleticReceivedFinal</name>
         <dataType>Boolean</dataType>
-        <expression>NOT(ISBLANK({!$Record.Submitted_Resume_URL__c}))</expression>
-    </formulas>
-    <formulas>
-        <description>True when the Essay text was submitted.</description>
-        <name>essayWasSubmitted</name>
-        <dataType>Boolean</dataType>
-        <expression>NOT(ISBLANK({!$Record.Submitted_Essay__c}))</expression>
-    </formulas>
-    <formulas>
-        <description>True when a Coach letter URL was submitted.</description>
-        <name>coachLetterWasSubmitted</name>
-        <dataType>Boolean</dataType>
-        <expression>NOT(ISBLANK({!$Record.Submitted_Coach_Letter_URL__c}))</expression>
-    </formulas>
-    <formulas>
-        <description>True when an Internship Supervisor letter URL was submitted.</description>
-        <name>internLetterWasSubmitted</name>
-        <dataType>Boolean</dataType>
-        <expression>NOT(ISBLANK({!$Record.Submitted_Internship_Letter_URL__c}))</expression>
-    </formulas>
-    <formulas>
-        <description>OR a new Received flag with the existing value so partial resubmissions never demote a previously-true flag back to false.</description>
-        <name>resumeReceivedFinal</name>
-        <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Resume_Received__c}, {!resumeWasSubmitted})</expression>
-    </formulas>
-    <formulas>
-        <name>essayReceivedFinal</name>
-        <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Essay_Received__c}, {!essayWasSubmitted})</expression>
-    </formulas>
-    <formulas>
-        <name>coachReceivedFinal</name>
-        <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Coach_Professor_Recommendation_Received__c}, {!coachLetterWasSubmitted})</expression>
-    </formulas>
-    <formulas>
-        <name>internReceivedFinal</name>
-        <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Internship_Supervisor_Rec_Received__c}, {!internLetterWasSubmitted})</expression>
-    </formulas>
-    <formulas>
-        <description>True when applicant submitted a Leadership detail.</description>
-        <name>leadershipWasSubmitted</name>
-        <dataType>Boolean</dataType>
-        <expression>NOT(ISBLANK({!$Record.Submitted_Leadership_Detail__c}))</expression>
-    </formulas>
-    <formulas>
-        <name>leadershipReceivedFinal</name>
-        <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Leadership_Received__c}, {!leadershipWasSubmitted})</expression>
+        <expression>OR({!Get_Application.Athletic_Received__c}, {!athleticWasSubmitted})</expression>
     </formulas>
     <formulas>
         <description>True when applicant submitted an Athletic detail.</description>
@@ -92,20 +42,34 @@
         <expression>NOT(ISBLANK({!$Record.Submitted_Athletic_Detail__c}))</expression>
     </formulas>
     <formulas>
-        <name>athleticReceivedFinal</name>
+        <description>True when a Coach letter URL was submitted.</description>
+        <name>coachLetterWasSubmitted</name>
         <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Athletic_Received__c}, {!athleticWasSubmitted})</expression>
+        <expression>NOT(ISBLANK({!$Record.Submitted_Coach_Letter_URL__c}))</expression>
     </formulas>
     <formulas>
-        <description>True when applicant submitted a Financial Aid detail (reuses the existing Financial_Aid_Scholarship_Grant_Details__c field on Form_Submission__c).</description>
-        <name>financeWasSubmitted</name>
+        <name>coachReceivedFinal</name>
         <dataType>Boolean</dataType>
-        <expression>NOT(ISBLANK({!$Record.Financial_Aid_Scholarship_Grant_Details__c}))</expression>
+        <expression>OR({!Get_Application.Coach_Professor_Recommendation_Received__c}, {!coachLetterWasSubmitted})</expression>
     </formulas>
     <formulas>
-        <name>financeReceivedFinal</name>
+        <name>essayReceivedFinal</name>
         <dataType>Boolean</dataType>
-        <expression>OR({!Get_Application.Financial_Aid_Info_Received__c}, {!financeWasSubmitted})</expression>
+        <expression>OR({!Get_Application.Essay_Received__c}, {!essayWasSubmitted})</expression>
+    </formulas>
+    <formulas>
+        <description>True when the Essay text was submitted.</description>
+        <name>essayWasSubmitted</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!$Record.Submitted_Essay__c}))</expression>
+    </formulas>
+    <formulas>
+        <description>File extension from original PathOnClient — defaults to pdf.</description>
+        <name>fileExt</name>
+        <dataType>String</dataType>
+        <expression>IF(RIGHT(LOWER({!Get_Content_Version.PathOnClient}), 5) = &quot;.docx&quot;, &quot;docx&quot;,
+  IF(RIGHT(LOWER({!Get_Content_Version.PathOnClient}), 4) = &quot;.doc&quot;, &quot;doc&quot;,
+    &quot;pdf&quot;))</expression>
     </formulas>
     <formulas>
         <description>Display label for the file type, derived from a Zapier-set marker in the original Title.</description>
@@ -122,12 +86,43 @@
 )</expression>
     </formulas>
     <formulas>
-        <description>File extension from original PathOnClient — defaults to pdf.</description>
-        <name>fileExt</name>
+        <name>financeReceivedFinal</name>
+        <dataType>Boolean</dataType>
+        <expression>OR({!Get_Application.Financial_Aid_Info_Received__c}, {!financeWasSubmitted})</expression>
+    </formulas>
+    <formulas>
+        <description>True when applicant submitted a Financial Aid detail (reuses the existing Financial_Aid_Scholarship_Grant_Details__c field on Form_Submission__c).</description>
+        <name>financeWasSubmitted</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!$Record.Financial_Aid_Scholarship_Grant_Details__c}))</expression>
+    </formulas>
+    <formulas>
+        <description>True when an Internship Supervisor letter URL was submitted.</description>
+        <name>internLetterWasSubmitted</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!$Record.Submitted_Internship_Letter_URL__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>internReceivedFinal</name>
+        <dataType>Boolean</dataType>
+        <expression>OR({!Get_Application.Internship_Supervisor_Rec_Received__c}, {!internLetterWasSubmitted})</expression>
+    </formulas>
+    <formulas>
+        <name>leadershipReceivedFinal</name>
+        <dataType>Boolean</dataType>
+        <expression>OR({!Get_Application.Leadership_Received__c}, {!leadershipWasSubmitted})</expression>
+    </formulas>
+    <formulas>
+        <description>True when applicant submitted a Leadership detail.</description>
+        <name>leadershipWasSubmitted</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!$Record.Submitted_Leadership_Detail__c}))</expression>
+    </formulas>
+    <formulas>
+        <description>New PathOnClient with proper extension.</description>
+        <name>newFilePath</name>
         <dataType>String</dataType>
-        <expression>IF(RIGHT(LOWER({!Get_Content_Version.PathOnClient}), 5) = &quot;.docx&quot;, &quot;docx&quot;,
-  IF(RIGHT(LOWER({!Get_Content_Version.PathOnClient}), 4) = &quot;.doc&quot;, &quot;doc&quot;,
-    &quot;pdf&quot;))</expression>
+        <expression>{!newFileTitle} &amp; &quot;.&quot; &amp; {!fileExt}</expression>
     </formulas>
     <formulas>
         <description>New file title: &quot;&lt;Type&gt; - &lt;Scholar Name&gt;&quot;.</description>
@@ -136,13 +131,31 @@
         <expression>{!fileTypeLabel} &amp; &quot; - &quot; &amp; BLANKVALUE({!Get_Application.Applicant_Account__r.FirstName}, &quot;&quot;) &amp; &quot; &quot; &amp; BLANKVALUE({!Get_Application.Applicant_Account__r.LastName}, &quot;&quot;)</expression>
     </formulas>
     <formulas>
-        <description>New PathOnClient with proper extension.</description>
-        <name>newFilePath</name>
-        <dataType>String</dataType>
-        <expression>{!newFileTitle} &amp; &quot;.&quot; &amp; {!fileExt}</expression>
+        <description>OR a new Received flag with the existing value so partial resubmissions never demote a previously-true flag back to false.</description>
+        <name>resumeReceivedFinal</name>
+        <dataType>Boolean</dataType>
+        <expression>OR({!Get_Application.Resume_Received__c}, {!resumeWasSubmitted})</expression>
+    </formulas>
+    <formulas>
+        <description>True when the Resume URL was submitted.</description>
+        <name>resumeWasSubmitted</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!$Record.Submitted_Resume_URL__c}))</expression>
     </formulas>
     <interviewLabel>Scholar Finalist Materials Router {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Scholar Finalist Materials Router</label>
+    <loops>
+        <description>Iterate over each ContentDocumentLink attached to this submission to rename and re-parent the file.</description>
+        <name>Loop_Submission_Files</name>
+        <label>Loop Submission Files</label>
+        <locationX>50</locationX>
+        <locationY>470</locationY>
+        <collectionReference>Get_Submission_Content_Links</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Get_Content_Version</targetReference>
+        </nextValueConnector>
+    </loops>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -152,7 +165,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -162,12 +175,64 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <description>Re-parent the file to the Application by inserting a new ContentDocumentLink.</description>
+        <name>Create_Application_Link</name>
+        <label>Create Application Link</label>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
+        <connector>
+            <targetReference>Delete_Submission_Link</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Delete_Submission_Link</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>ContentDocumentId</field>
+            <value>
+                <elementReference>Loop_Submission_Files.ContentDocumentId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LinkedEntityId</field>
+            <value>
+                <elementReference>Get_Application.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ShareType</field>
+            <value>
+                <stringValue>V</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Visibility</field>
+            <value>
+                <stringValue>AllUsers</stringValue>
+            </value>
+        </inputAssignments>
+        <object>ContentDocumentLink</object>
+    </recordCreates>
+    <recordDeletes>
+        <description>Delete the original submission&apos;s ContentDocumentLink — the file is now linked to the Application.</description>
+        <name>Delete_Submission_Link</name>
+        <label>Delete Submission Link</label>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
+        <connector>
+            <targetReference>Loop_Submission_Files</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Loop_Submission_Files</targetReference>
+        </faultConnector>
+        <inputReference>Loop_Submission_Files</inputReference>
+    </recordDeletes>
     <recordLookups>
-        <description>Find the Prospect Scholar Application referenced by the submission's appid.</description>
+        <description>Find the Prospect Scholar Application referenced by the submission&apos;s appid.</description>
         <name>Get_Application</name>
         <label>Get Application</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Decision_App_Found</targetReference>
@@ -185,33 +250,11 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <description>Query all ContentDocumentLinks attached to this submission so we can rename and re-parent them to the Application.</description>
-        <name>Get_Submission_Content_Links</name>
-        <label>Get Submission Content Links</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Loop_Submission_Files</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>LinkedEntityId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
-        <object>ContentDocumentLink</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <description>Fetch the latest ContentVersion for the current iteration's ContentDocumentId.</description>
+        <description>Fetch the latest ContentVersion for the current iteration&apos;s ContentDocumentId.</description>
         <name>Get_Content_Version</name>
         <label>Get Content Version</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Update_Content_Version</targetReference>
@@ -238,19 +281,67 @@
         <object>ContentVersion</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <description>Query all ContentDocumentLinks attached to this submission so we can rename and re-parent them to the Application.</description>
+        <name>Get_Submission_Content_Links</name>
+        <label>Get Submission Content Links</label>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Submission_Files</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>LinkedEntityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>ContentDocumentLink</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
-        <description>Link the submission to the Application and mark it Matched to Application so we don't reprocess.</description>
+        <description>Flag the submission Needs_Review so an intake host can investigate why the appid didn&apos;t match any Application.</description>
+        <name>Flag_Needs_Review</name>
+        <label>Flag Needs Review</label>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
+        <inputAssignments>
+            <field>Materials_Processed__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Needs_Review__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Processing_Status__c</field>
+            <value>
+                <stringValue>Needs Review</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>Link the submission to the Application and mark it Matched to Application so we don&apos;t reprocess.</description>
         <name>Save_Submission_Matched</name>
         <label>Save Submission Matched</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>125</locationX>
+        <locationY>306</locationY>
         <connector>
             <targetReference>Update_Application_Fields</targetReference>
         </connector>
         <inputAssignments>
-            <field>Prospect_Scholar_Application__c</field>
+            <field>Materials_Processed__c</field>
             <value>
-                <elementReference>Get_Application.Id</elementReference>
+                <booleanValue>true</booleanValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -260,9 +351,9 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Materials_Processed__c</field>
+            <field>Prospect_Scholar_Application__c</field>
             <value>
-                <booleanValue>true</booleanValue>
+                <elementReference>Get_Application.Id</elementReference>
             </value>
         </inputAssignments>
         <inputReference>$Record</inputReference>
@@ -271,8 +362,8 @@
         <description>Copy the submitted data onto the Application: URLs, names, emails, and Received booleans (OR-merged with existing so partial resubmissions never demote a true flag).</description>
         <name>Update_Application_Fields</name>
         <label>Update Application Fields</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>737</locationX>
+        <locationY>381</locationY>
         <connector>
             <targetReference>Get_Submission_Content_Links</targetReference>
         </connector>
@@ -285,33 +376,15 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Resume_Received__c</field>
+            <field>Athletic_Detail__c</field>
             <value>
-                <elementReference>resumeReceivedFinal</elementReference>
+                <elementReference>$Record.Submitted_Athletic_Detail__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Essay_Received__c</field>
+            <field>Athletic_Received__c</field>
             <value>
-                <elementReference>essayReceivedFinal</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Coach_Professor_Recommendation_Received__c</field>
-            <value>
-                <elementReference>coachReceivedFinal</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Internship_Supervisor_Rec_Received__c</field>
-            <value>
-                <elementReference>internReceivedFinal</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Coach_Professor_Name__c</field>
-            <value>
-                <elementReference>$Record.Submitted_Coach_Name__c</elementReference>
+                <elementReference>athleticReceivedFinal</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -321,15 +394,39 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Internship_Supervisor_Name__c</field>
+            <field>Coach_Professor_Name__c</field>
             <value>
-                <elementReference>$Record.Submitted_Internship_Name__c</elementReference>
+                <elementReference>$Record.Submitted_Coach_Name__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Internship_Supervisor_Email__c</field>
+            <field>Coach_Professor_Recommendation_Received__c</field>
             <value>
-                <elementReference>$Record.Submitted_Internship_Email__c</elementReference>
+                <elementReference>coachReceivedFinal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Essay_Received__c</field>
+            <value>
+                <elementReference>essayReceivedFinal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Essay_Text__c</field>
+            <value>
+                <elementReference>$Record.Submitted_Essay__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Financial_Aid_Detail__c</field>
+            <value>
+                <elementReference>$Record.Financial_Aid_Scholarship_Grant_Details__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Financial_Aid_Info_Received__c</field>
+            <value>
+                <elementReference>financeReceivedFinal</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -339,9 +436,21 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Essay_Text__c</field>
+            <field>Internship_Supervisor_Email__c</field>
             <value>
-                <elementReference>$Record.Submitted_Essay__c</elementReference>
+                <elementReference>$Record.Submitted_Internship_Email__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Internship_Supervisor_Name__c</field>
+            <value>
+                <elementReference>$Record.Submitted_Internship_Name__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Internship_Supervisor_Rec_Received__c</field>
+            <value>
+                <elementReference>internReceivedFinal</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -357,63 +466,19 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Athletic_Detail__c</field>
+            <field>Resume_Received__c</field>
             <value>
-                <elementReference>$Record.Submitted_Athletic_Detail__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Athletic_Received__c</field>
-            <value>
-                <elementReference>athleticReceivedFinal</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Financial_Aid_Detail__c</field>
-            <value>
-                <elementReference>$Record.Financial_Aid_Scholarship_Grant_Details__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Financial_Aid_Info_Received__c</field>
-            <value>
-                <elementReference>financeReceivedFinal</elementReference>
+                <elementReference>resumeReceivedFinal</elementReference>
             </value>
         </inputAssignments>
         <object>Prospect_Scholar_Application__c</object>
     </recordUpdates>
     <recordUpdates>
-        <description>Flag the submission Needs_Review so an intake host can investigate why the appid didn't match any Application.</description>
-        <name>Flag_Needs_Review</name>
-        <label>Flag Needs Review</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <inputAssignments>
-            <field>Needs_Review__c</field>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Processing_Status__c</field>
-            <value>
-                <stringValue>Needs Review</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Materials_Processed__c</field>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </inputAssignments>
-        <inputReference>$Record</inputReference>
-    </recordUpdates>
-    <recordUpdates>
         <description>Rename the ContentVersion to &quot;&lt;Type&gt; - &lt;Scholar Name&gt;.&lt;ext&gt;&quot;.</description>
         <name>Update_Content_Version</name>
         <label>Update Content Version</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>670</locationX>
+        <locationY>618</locationY>
         <connector>
             <targetReference>Create_Application_Link</targetReference>
         </connector>
@@ -429,97 +494,33 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Title</field>
-            <value>
-                <elementReference>newFileTitle</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>PathOnClient</field>
             <value>
                 <elementReference>newFilePath</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Title</field>
+            <value>
+                <elementReference>newFileTitle</elementReference>
+            </value>
+        </inputAssignments>
         <object>ContentVersion</object>
     </recordUpdates>
-    <loops>
-        <description>Iterate over each ContentDocumentLink attached to this submission to rename and re-parent the file.</description>
-        <name>Loop_Submission_Files</name>
-        <label>Loop Submission Files</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <collectionReference>Get_Submission_Content_Links</collectionReference>
-        <iterationOrder>Asc</iterationOrder>
-        <nextValueConnector>
-            <targetReference>Get_Content_Version</targetReference>
-        </nextValueConnector>
-    </loops>
-    <recordCreates>
-        <description>Re-parent the file to the Application by inserting a new ContentDocumentLink.</description>
-        <name>Create_Application_Link</name>
-        <label>Create Application Link</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Delete_Submission_Link</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Delete_Submission_Link</targetReference>
-        </faultConnector>
-        <inputAssignments>
-            <field>LinkedEntityId</field>
-            <value>
-                <elementReference>Get_Application.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>ContentDocumentId</field>
-            <value>
-                <elementReference>Loop_Submission_Files.ContentDocumentId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>ShareType</field>
-            <value>
-                <stringValue>V</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Visibility</field>
-            <value>
-                <stringValue>AllUsers</stringValue>
-            </value>
-        </inputAssignments>
-        <object>ContentDocumentLink</object>
-    </recordCreates>
-    <recordDeletes>
-        <description>Delete the original submission&apos;s ContentDocumentLink — the file is now linked to the Application.</description>
-        <name>Delete_Submission_Link</name>
-        <label>Delete Submission Link</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Loop_Submission_Files</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Loop_Submission_Files</targetReference>
-        </faultConnector>
-        <inputReference>Loop_Submission_Files</inputReference>
-    </recordDeletes>
     <start>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>286</locationX>
+        <locationY>50</locationY>
         <connector>
             <targetReference>Get_Application</targetReference>
         </connector>
         <filterFormula>AND(
-  $Record.RecordType.DeveloperName = &quot;Scholar_Finalist_Materials&quot;,
-  $Record.Materials_Processed__c = FALSE,
-  NOT(ISBLANK($Record.Submitted_App_Id__c))
+  {!$Record.RecordType.DeveloperName} = &quot;Scholar_Finalist_Materials&quot;,
+  {!$Record.Materials_Processed__c} = FALSE,
+  NOT(ISBLANK({!$Record.Submitted_App_Id__c}))
 )</filterFormula>
         <object>Form_Submission__c</object>
         <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
 </Flow>

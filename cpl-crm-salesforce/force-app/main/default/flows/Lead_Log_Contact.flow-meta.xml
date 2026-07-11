@@ -12,6 +12,7 @@
             <targetReference>Set_Contacted_Status</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -20,6 +21,16 @@
             <value>
                 <elementReference>Get_Lead.Email</elementReference>
             </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>CurrentUser</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
         </inputParameters>
         <inputParameters>
             <name>emailSubject</name>
@@ -36,14 +47,11 @@
         <inputParameters>
             <name>sendRichBody</name>
             <value>
-                <booleanValue>false</booleanValue>
+                <booleanValue>true</booleanValue>
             </value>
         </inputParameters>
         <inputParameters>
-            <name>logEmailOnSend</name>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
+            <name>useLineBreaks</name>
         </inputParameters>
         <inputParameters>
             <name>recipientId</name>
@@ -52,18 +60,13 @@
             </value>
         </inputParameters>
         <inputParameters>
-            <name>senderType</name>
+            <name>logEmailOnSend</name>
             <value>
-                <stringValue>OrgWideEmailAddress</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>senderAddress</name>
-            <value>
-                <stringValue>crm-intake@climbpauselift.org</stringValue>
+                <booleanValue>true</booleanValue>
             </value>
         </inputParameters>
         <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
     </actionCalls>
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
@@ -142,6 +145,7 @@
             <targetReference>Log_Contact</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -156,19 +160,6 @@
         <object>Lead</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordUpdates>
-        <name>Save_Lead</name>
-        <label>Save Lead</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Complete_Contact_Task</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <inputReference>Get_Lead</inputReference>
-    </recordUpdates>
     <recordUpdates>
         <description>Marks the Contact lead action-plan task complete and stores the contact notes so the action plan advances.</description>
         <name>Complete_Contact_Task</name>
@@ -204,136 +195,33 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Completed</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>Description</field>
             <value>
                 <elementReference>Contact_Notes</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </inputAssignments>
         <object>Task</object>
     </recordUpdates>
-    <screens>
-        <name>Log_Contact</name>
-        <label>Log Contact</label>
+    <recordUpdates>
+        <name>Save_Lead</name>
+        <label>Save Lead</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
         <connector>
-            <targetReference>Send_Email_Decision</targetReference>
+            <targetReference>Complete_Contact_Task</targetReference>
         </connector>
-        <fields>
-            <name>Log_Contact_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Log your contact with this lead.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Record how you reached out and any notes. Completing this step moves the lead to Contacted.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Contact_Notes</name>
-            <dataType>String</dataType>
-            <fieldText>Contact notes</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Send_Email</name>
-            <dataType>Boolean</dataType>
-            <defaultValue>
-                <booleanValue>false</booleanValue>
-            </defaultValue>
-            <fieldText>Send a follow-up email to this lead</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Email_Subject</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <stringValue>Following up on your CPL Scholar application</stringValue>
-            </defaultValue>
-            <fieldText>Email subject</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>Send_Email</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Email_Body</name>
-            <dataType>String</dataType>
-            <defaultValue>
-                <elementReference>Default_Email_Body</elementReference>
-            </defaultValue>
-            <fieldText>Email message</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>Send_Email</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <inputReference>Get_Lead</inputReference>
+    </recordUpdates>
     <screens>
         <name>Contact_Logged</name>
         <label>Contact Logged</label>
@@ -382,6 +270,136 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
+    <screens>
+        <name>Log_Contact</name>
+        <label>Log Contact</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Send_Email_Decision</targetReference>
+        </connector>
+        <fields>
+            <name>Log_Contact_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Log your contact with this lead.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Record how you reached out and any notes. Completing this step moves the lead to Contacted.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Contact_Notes</name>
+            <fieldText>Contact notes</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Send_Email</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>false</booleanValue>
+            </defaultValue>
+            <fieldText>Send a follow-up email to this lead</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Email_Subject</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>Following up on your CPL Scholar Interest Form</stringValue>
+            </defaultValue>
+            <fieldText>Email subject</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Send_Email</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Email_Body</name>
+            <defaultValue>
+                <stringValue>{!Default_Email_Body}</stringValue>
+            </defaultValue>
+            <fieldText>Email message</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isDisabled>
+                <booleanValue>false</booleanValue>
+            </isDisabled>
+            <isReadOnly>
+                <booleanValue>false</booleanValue>
+            </isReadOnly>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <styleSettings>
+                    <propertyName>--slds-c-textarea-sizing-height-min</propertyName>
+                    <propertyValue>
+                        <stringValue>150px</stringValue>
+                    </propertyValue>
+                </styleSettings>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Send_Email</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
@@ -396,12 +414,13 @@
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Hi {!Get_Lead.FirstName},
 
-Thank you for your interest in the CPL Scholar program. I am reaching out from the CPL intake team to follow up on your application and answer any questions you may have.
+Thank you for your interest in the CPL Scholar program. I am reaching out to schedule a quick Zoom call so we can chat.
+Please let me know some times you have available over the next two weeks. I prefer mornings but can be flexible if needed.
 
-Please reply to this email or let us know a good time to connect.
 
 Best regards,
-CPL Scholar Intake Team</text>
+{!$User.FirstName} {!$User.LastName}
+{!$User.Email}</text>
     </textTemplates>
     <variables>
         <description>The Lead record Id from the action plan launch.</description>

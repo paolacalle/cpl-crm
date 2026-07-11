@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Queue for intake-related tasks generated from form submissions, including
+school resolution, duplicate detection, lead qualification, and pre-conversion review.</description>
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>Intake Review Queue</name>
+    <queueMembers>
+        <users>
+            <user>crm-intake@climbpauselift.org</user>
+            <user>lisa-cgis@climbpauselift.org</user>
+            <user>pcallepen@gmail.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>ActionPlan</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Form_Submission__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Lead</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Task</sobjectType>
+    </queueSobject>
+</Queue>

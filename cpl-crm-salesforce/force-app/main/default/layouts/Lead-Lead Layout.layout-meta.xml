@@ -232,6 +232,10 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>CREATED_DATE</fields>
+        <fields>External_Form_Name__c</fields>
+        <fields>External_Form_ID__c</fields>
+        <fields>Submission_Source__c</fields>
         <relatedList>Form_Submission__c.Matched_Lead__c</relatedList>
     </relatedLists>
     <runAssignmentRulesDefault>false</runAssignmentRulesDefault>

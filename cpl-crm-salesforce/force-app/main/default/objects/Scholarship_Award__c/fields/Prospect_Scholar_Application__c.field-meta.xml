@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Prospect_Scholar_Application__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
     <description>The application that produced this award. Blank for manual or historical awards.</description>
     <inlineHelpText>Link to the scholarship application that produced this award. Leave blank for historical awards entered manually.</inlineHelpText>
     <label>Source Application</label>
@@ -9,5 +10,6 @@
     <relationshipName>Scholarship_Awards</relationshipName>
     <required>false</required>
     <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

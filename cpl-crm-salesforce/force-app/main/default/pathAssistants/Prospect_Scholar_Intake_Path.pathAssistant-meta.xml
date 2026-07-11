@@ -22,7 +22,7 @@
         <fieldNames>Why_CPL_Scholar__c</fieldNames>
         <fieldNames>School_Name_From_Form__c</fieldNames>
         <fieldNames>Rating</fieldNames>
-        <info>&lt;p&gt;Assess the student's eligibility based on current college year and college standing.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Review academic and athletic information for accuracy.&lt;/p&gt;&lt;p&gt;If clarification is needed, contact the student and document the interaction.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Once eligibility is confirmed and the student is ready to move forward, update the status to Qualified - Ready to Convert.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <info>&lt;p&gt;Assess the student&amp;#39;s eligibility based on current college year and college standing.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Review academic and athletic information for accuracy.&lt;/p&gt;&lt;p&gt;If clarification is needed, contact the student and document the interaction.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Once eligibility is confirmed and the student is ready to move forward, update the status to Qualified - Ready to Convert.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
         <picklistValueName>In Intake Review</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>

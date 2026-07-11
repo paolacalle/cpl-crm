@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Spring</fullName>
+        <default>false</default>
+        <label>Spring</label>
+    </customValue>
+    <customValue>
+        <fullName>Fall</fullName>
+        <default>false</default>
+        <label>Fall</label>
+    </customValue>
+    <customValue>
+        <fullName>Summer</fullName>
+        <default>false</default>
+        <label>Summer</label>
+    </customValue>
+    <description>Identifies what academic term the student is currently enrolled in.</description>
+    <masterLabel>CPL Term Season</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the applicant’s individual Account. Only Accounts with the CPL Applicant Account record type are allowed. --></help>
+    <label><!-- Applicant Account --></label>
+    <name>Applicant_Account__c</name>
+    <relationshipLabel><!-- Prospect Scholar Applications (Applicant Account) --></relationshipLabel>
+</CustomFieldTranslation>

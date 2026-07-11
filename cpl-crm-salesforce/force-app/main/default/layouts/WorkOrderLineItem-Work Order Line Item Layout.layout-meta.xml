@@ -64,6 +64,10 @@
                 <behavior>Edit</behavior>
                 <field>OrderId</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Product2Id</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>

@@ -55,23 +55,6 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <description>Marks a lead Unqualified when the intake host disqualifies it. Owner is left unchanged.</description>
-        <name>Set_Unqualified_Status</name>
-        <label>Set Unqualified Status</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignmentItems>
-            <assignToReference>Get_Lead.Status</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Unqualified</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Save_Lead</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
         <description>Stores the chosen member lifecycle so it carries through the standard lead conversion.</description>
         <name>Set_Intended_Lifecycle</name>
         <label>Set Intended Lifecycle</label>
@@ -82,6 +65,23 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Member_Type</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Save_Lead</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Marks a lead Unqualified when the intake host disqualifies it. Owner is left unchanged.</description>
+        <name>Set_Unqualified_Status</name>
+        <label>Set Unqualified Status</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Get_Lead.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Unqualified</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -176,7 +176,7 @@
     <formulas>
         <name>Outcome_Message</name>
         <dataType>String</dataType>
-        <expression>IF({!Outcome_Choice} = "Disqualify", "This lead has been marked Unqualified and the Disqualify / Convert step is complete.", "This lead has been converted into a CPL member with the selected lifecycle. The Disqualify / Convert step is complete.")</expression>
+        <expression>IF({!Outcome_Choice} = &quot;Disqualify&quot;, &quot;This lead has been marked Unqualified and the Disqualify / Convert step is complete.&quot;, &quot;This lead has been converted into a CPL member with the selected lifecycle. The Disqualify / Convert step is complete.&quot;)</expression>
     </formulas>
     <interviewLabel>Lead Convert or Disqualify {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lead Convert or Disqualify</label>
@@ -199,30 +199,6 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
-    <recordLookups>
-        <name>Get_Lead</name>
-        <label>Get Lead</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Choose_Outcome</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Lead</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
     <recordLookups>
         <description>Gets the account created by the conversion so the lead files can be relinked to it.</description>
         <name>Get_Converted_Account</name>
@@ -249,19 +225,30 @@
         <queriedFields>ConvertedAccountId</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <recordUpdates>
-        <name>Save_Lead</name>
-        <label>Save Lead</label>
+    <recordLookups>
+        <name>Get_Lead</name>
+        <label>Get Lead</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Complete_Outcome_Task</targetReference>
+            <targetReference>Choose_Outcome</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
-        <inputReference>Get_Lead</inputReference>
-    </recordUpdates>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <description>Marks the Disqualify / Convert action-plan task complete so the action plan finishes.</description>
         <name>Complete_Outcome_Task</name>
@@ -304,70 +291,19 @@
         </inputAssignments>
         <object>Task</object>
     </recordUpdates>
-    <screens>
-        <name>Choose_Outcome</name>
-        <label>Choose Outcome</label>
+    <recordUpdates>
+        <name>Save_Lead</name>
+        <label>Save Lead</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
         <connector>
-            <targetReference>Route_Outcome</targetReference>
+            <targetReference>Complete_Outcome_Task</targetReference>
         </connector>
-        <fields>
-            <name>Choose_Outcome_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Complete the intake outcome.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Disqualify the lead, or convert it into a CPL member.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Outcome_Choice</name>
-            <choiceReferences>Choice_Disqualify</choiceReferences>
-            <choiceReferences>Choice_Convert</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>What is the outcome for this lead?</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>true</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <description>Preview screen shown after the member type is selected, before the conversion fires. Lets the intake host sanity-check what's about to happen and click back to revise if needed.</description>
-        <name>Confirm_Convert</name>
-        <label>Confirm Conversion</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Set_Intended_Lifecycle</targetReference>
-        </connector>
-        <fields>
-            <name>Confirm_Convert_Preview</name>
-            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new CPL Member &lt;em&gt;Person Account&lt;/em&gt; with lifecycle &lt;strong&gt;{!Member_Type}&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;Transfers any files attached to this Lead onto the new Person Account.&lt;/li&gt;&lt;li&gt;Marks the &quot;Disqualify / Convert&quot; Task complete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <inputReference>Get_Lead</inputReference>
+    </recordUpdates>
     <screens>
         <name>Choose_Member_Type</name>
         <label>Choose Member Type</label>
@@ -413,16 +349,64 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Outcome_Done</name>
-        <label>Outcome Recorded</label>
+        <name>Choose_Outcome</name>
+        <label>Choose Outcome</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>false</allowBack>
+        <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Route_Outcome</targetReference>
+        </connector>
         <fields>
-            <name>Outcome_Done_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Outcome recorded.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!Outcome_Message}&lt;/p&gt;</fieldText>
+            <name>Choose_Outcome_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Complete the intake outcome.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Disqualify the lead, or convert it into a CPL member.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Outcome_Choice</name>
+            <choiceReferences>Choice_Disqualify</choiceReferences>
+            <choiceReferences>Choice_Convert</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>What is the outcome for this lead?</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Preview screen shown after the member type is selected, before the conversion fires. Lets the intake host sanity-check what&apos;s about to happen and click back to revise if needed.</description>
+        <name>Confirm_Convert</name>
+        <label>Confirm Conversion</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Set_Intended_Lifecycle</targetReference>
+        </connector>
+        <fields>
+            <name>Confirm_Convert_Preview</name>
+            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new CPL Member &lt;em&gt;Person Account&lt;/em&gt; with lifecycle &lt;strong&gt;{!Member_Type}&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;Transfers any files attached to this Lead onto the new Person Account.&lt;/li&gt;&lt;li&gt;Marks the &quot;Disqualify / Convert&quot; Task complete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -447,6 +431,30 @@
         <fields>
             <name>Flow_Error_Message</name>
             <fieldText>&lt;p&gt;&lt;strong&gt;The outcome could not be saved.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;No changes were saved. Try again.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error detail: {!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Outcome_Done</name>
+        <label>Outcome Recorded</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Outcome_Done_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Outcome recorded.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!Outcome_Message}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

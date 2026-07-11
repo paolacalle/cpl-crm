@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Partnership_Interest__c</fullName>
-    <description>How the partner is interested in working with Climb-Pause-Lift. Multi-select to match the partner intake form's checkbox UX. Values match Form_Submission__c.Partner_Interest_Type__c exactly.</description>
-    <inlineHelpText>Captures the partner's selected interests from the intake form. Used to route the inquiry to the appropriate team.</inlineHelpText>
+    <description>How the partner is interested in working with Climb-Pause-Lift. Multi-select to match the partner intake form&apos;s checkbox UX. Values match Form_Submission__c.Partner_Interest_Type__c exactly.</description>
+    <inlineHelpText>Captures the partner&apos;s selected interests from the intake form. Used to route the inquiry to the appropriate team.</inlineHelpText>
     <label>Partnership Interest</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>

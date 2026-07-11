@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApplicationSubtypeDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationUsageType>ExplainabilityService</applicationUsageType>
+    <description>Operations pertaining to party relationship groups and associated relationship records.</description>
+    <masterLabel>PtyRelaGrp</masterLabel>
+</ApplicationSubtypeDefinition>

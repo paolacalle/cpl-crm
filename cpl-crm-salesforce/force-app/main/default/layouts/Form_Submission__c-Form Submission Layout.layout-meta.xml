@@ -88,7 +88,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Partner_Interest_Type__c</field>
+                <field>Partnership_Interest__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -109,6 +109,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Resume_Uploaded__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Partner_Interest_Other__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

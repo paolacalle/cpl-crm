@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- When was the scholarship invite confirmed? --></help>
+    <label><!-- Scholarship Invite Confrimed Date --></label>
+    <name>Scholarship_Invite_Confrimed_Date__c</name>
+</CustomFieldTranslation>

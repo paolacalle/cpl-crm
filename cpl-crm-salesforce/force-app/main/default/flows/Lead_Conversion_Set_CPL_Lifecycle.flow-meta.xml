@@ -18,13 +18,35 @@
             <targetReference>Set_CPL_Lifecycle_Athlete</targetReference>
         </connector>
     </assignments>
+    <decisions>
+        <name>Determine_Source</name>
+        <label>Determine Source</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>No Lead</defaultConnectorLabel>
+        <rules>
+            <name>Has_Lead</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Source_Lead_Object__pr</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Converted_Lead</targetReference>
+            </connector>
+            <label>Has Lead</label>
+        </rules>
+    </decisions>
     <description>Automatically sets the CPL Lifecycle on the CPL Member (Person Account) when a Lead is converted. Uses Lead.Intended_CPL_Lifecycle__c (Athlete or Prospect) captured during the intake action plan; defaults to Athlete if blank.</description>
     <environments>Default</environments>
     <formulas>
         <description>Lifecycle to apply to the new CPL member: the lead&apos;s intended lifecycle if set, otherwise Athlete.</description>
         <name>LifecycleValue</name>
         <dataType>String</dataType>
-        <expression>IF(ISBLANK(TEXT({!Get_Converted_Lead.Intended_CPL_Lifecycle__c})), "Athlete", TEXT({!Get_Converted_Lead.Intended_CPL_Lifecycle__c}))</expression>
+        <expression>IF(ISBLANK(TEXT({!Get_Converted_Lead.Intended_CPL_Lifecycle__c})), &quot;Athlete&quot;, TEXT({!Get_Converted_Lead.Intended_CPL_Lifecycle__c}))</expression>
     </formulas>
     <interviewLabel>Lead Conversion Set CPL Lifecycle {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lead Conversion Set CPL Lifecycle</label>
@@ -167,37 +189,6 @@
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <recordUpdates>
-        <description>Update all the submission forms to be linked to the contact.</description>
-        <name>Update_All_Submission_Forms</name>
-        <label>Update All Submission Forms</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Update_All_Evaluations</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Matched_Lead__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_Converted_Lead.Id</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Matched_Contact__c</field>
-            <value>
-                <elementReference>$Record.PersonContact.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Matched_Lead__c</field>
-            <value>
-                <stringValue></stringValue>
-            </value>
-        </inputAssignments>
-        <object>Form_Submission__c</object>
-    </recordUpdates>
-    <recordUpdates>
         <description>Transfer all evaluations from the converted lead onto the new CPL Member account.</description>
         <name>Update_All_Evaluations</name>
         <label>Update All Evaluations</label>
@@ -231,11 +222,42 @@
         </inputAssignments>
         <object>Evaluation__c</object>
     </recordUpdates>
+    <recordUpdates>
+        <description>Update all the submission forms to be linked to the contact.</description>
+        <name>Update_All_Submission_Forms</name>
+        <label>Update All Submission Forms</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_All_Evaluations</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Matched_Lead__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Converted_Lead.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Matched_Contact__c</field>
+            <value>
+                <elementReference>$Record.PersonContact.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Matched_Lead__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <object>Form_Submission__c</object>
+    </recordUpdates>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Get_Converted_Lead</targetReference>
+            <targetReference>Determine_Source</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>

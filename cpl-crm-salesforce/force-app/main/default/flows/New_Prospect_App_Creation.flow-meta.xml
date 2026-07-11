@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>Seeds the 7-step Prospect Scholar Application action plan tasks when a new application is created. Tasks are owned by Case_Owner__c so they land on whoever is reviewing the application.</description>
     <environments>Default</environments>
     <interviewLabel>New Prospect App Creation {!$Flow.CurrentDateTime}</interviewLabel>
@@ -25,12 +26,12 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
-        <name>Create_Task_Send_Invite</name>
-        <label>Create Task - Send scholarship invite</label>
+        <name>Create_Task_Collect_Evaluations</name>
+        <label>Create Task - Collect evaluations</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Create_Task_Confirm_Acceptance</targetReference>
+            <targetReference>Create_Task_Make_Decision</targetReference>
         </connector>
         <inputAssignments>
             <field>OwnerId</field>
@@ -53,7 +54,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Send scholarship invite</stringValue>
+                <stringValue>Collect evaluations</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -94,46 +95,6 @@
             <field>Subject</field>
             <value>
                 <stringValue>Confirm invite acceptance</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>WhatId</field>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Task</object>
-    </recordCreates>
-    <recordCreates>
-        <name>Create_Task_Send_Materials_Link</name>
-        <label>Create Task - Send materials for review link</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Create_Task_Confirm_Materials</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>OwnerId</field>
-            <value>
-                <elementReference>$Record.Case_Owner__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Priority</field>
-            <value>
-                <stringValue>Normal</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Not Started</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Subject</field>
-            <value>
-                <stringValue>Send materials for review link</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -225,46 +186,6 @@
         <object>Task</object>
     </recordCreates>
     <recordCreates>
-        <name>Create_Task_Collect_Evaluations</name>
-        <label>Create Task - Collect evaluations</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Create_Task_Make_Decision</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>OwnerId</field>
-            <value>
-                <elementReference>$Record.Case_Owner__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Priority</field>
-            <value>
-                <stringValue>Normal</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Not Started</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Subject</field>
-            <value>
-                <stringValue>Collect evaluations</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>WhatId</field>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Task</object>
-    </recordCreates>
-    <recordCreates>
         <name>Create_Task_Make_Decision</name>
         <label>Create Task - Make decision</label>
         <locationX>0</locationX>
@@ -291,6 +212,86 @@
             <field>Subject</field>
             <value>
                 <stringValue>Make decision</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Send_Invite</name>
+        <label>Create Task - Send scholarship invite</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Task_Confirm_Acceptance</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.Case_Owner__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Send scholarship invite</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Send_Materials_Link</name>
+        <label>Create Task - Send materials for review link</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Task_Confirm_Materials</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$Record.Case_Owner__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Send materials for review link</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>

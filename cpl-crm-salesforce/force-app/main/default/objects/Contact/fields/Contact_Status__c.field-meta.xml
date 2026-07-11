@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Status__c</fullName>
+    <description>Tracks the current engagement status of the contact with CPL.</description>
+    <inlineHelpText>Use to indicate whether the contact is actively engaged, inactive, or closed.</inlineHelpText>
+    <label>Contact Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_Engagement_Status</valueSetName>
+    </valueSet>
+</CustomField>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Submission_Token__c</fullName>
     <description>Token submitted from the personalized finalist materials link.</description>
+    <externalId>false</externalId>
     <inlineHelpText>Must match the related Prospect Scholar Application materials token.</inlineHelpText>
     <label>Submission Token</label>
     <length>128</length>

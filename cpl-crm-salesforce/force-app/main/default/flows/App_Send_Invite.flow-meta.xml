@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <description>If the application already has Scholarship_Invite_Sent__c = true, skip straight to marking the task complete. Otherwise call the existing Send Scholarship Invite flow as a subflow.</description>
         <name>Decision_Already_Sent</name>
@@ -28,7 +29,7 @@
         </rules>
     </decisions>
     <decisions>
-        <description>Skip the Task update if the seeded "Send scholarship invite" Task is missing.</description>
+        <description>Skip the Task update if the seeded &quot;Send scholarship invite&quot; Task is missing.</description>
         <name>Has_Invite_Task</name>
         <label>Has Invite Task?</label>
         <locationX>0</locationX>
@@ -53,7 +54,7 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Step 1 of the Application action plan. If the scholarship invite hasn't been sent yet, runs the existing Send Scholarship Invite / Confirm Eligibility flow as a subflow so the user can send it from the stepper. Either way, marks the "Send scholarship invite" Task complete at the end.</description>
+    <description>Step 1 of the Application action plan. If the scholarship invite hasn&apos;t been sent yet, runs the existing Send Scholarship Invite / Confirm Eligibility flow as a subflow so the user can send it from the stepper. Either way, marks the &quot;Send scholarship invite&quot; Task complete at the end.</description>
     <environments>Default</environments>
     <interviewLabel>App Send Invite {!$Flow.CurrentDateTime}</interviewLabel>
     <label>App Send Invite</label>
@@ -180,22 +181,14 @@
             <name>Already_Sent_Notice</name>
             <fieldText>&lt;p&gt;The scholarship invite was already sent to &lt;strong&gt;{!Get_App.Applicant_Account__r.Name}&lt;/strong&gt;. Click Next to mark this step complete.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Invite_Sent_Confirm</name>
-        <label>Invite Sent Confirmation</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Confirmation</name>
-            <fieldText>&lt;p&gt;&#9989; Step complete. Next: confirm the applicant accepted the invite.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -210,8 +203,40 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Error_Text</name>
-            <fieldText>&lt;p&gt;&#10060; Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;❌ Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Invite_Sent_Confirm</name>
+        <label>Invite Sent Confirmation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Confirmation</name>
+            <fieldText>&lt;p&gt;✅ Step complete. Next: confirm the applicant accepted the invite.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -223,7 +248,7 @@
             <targetReference>Get_App</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <subflows>
         <description>Reuse the existing well-tested Send Scholarship Invite / Confirm Eligibility screen flow to handle eligibility check, applicant email lookup, and the actual invite email send.</description>
         <name>Send_Invite_Subflow</name>

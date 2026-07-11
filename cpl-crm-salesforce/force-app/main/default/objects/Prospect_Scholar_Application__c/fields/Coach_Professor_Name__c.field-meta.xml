@@ -2,10 +2,12 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Coach_Professor_Name__c</fullName>
     <description>Name of the coach or professor who will write a recommendation letter for the applicant. Captured on the applicant materials JotForm. Used in the recommender request email so it can be addressed to them personally.</description>
-    <inlineHelpText>Provided by the applicant. Used by Step 4's optional "email recommender" action.</inlineHelpText>
+    <externalId>false</externalId>
+    <inlineHelpText>Provided by the applicant. Used by Step 4&apos;s optional &quot;email recommender&quot; action.</inlineHelpText>
     <label>Coach / Professor Name</label>
     <length>80</length>
     <required>false</required>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>false</unique>

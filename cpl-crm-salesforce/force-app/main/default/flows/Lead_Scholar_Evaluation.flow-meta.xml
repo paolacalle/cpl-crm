@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
-    <assignments>
-        <description>Initialize the evaluation with the lead context so the screens have a record to bind to.</description>
-        <name>Init_Evaluation</name>
-        <label>Initialize Evaluation</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignmentItems>
-            <assignToReference>Evaluation.Lead__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>Evaluation.Evaluation_Target_Type__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Scholar Lead</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>Evaluation.Evaluation_Date__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>$Flow.CurrentDate</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Evaluation_Details</targetReference>
-        </connector>
-    </assignments>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <description>Evaluator is a User, so clear any Contact value.</description>
         <name>Clear_Evaluator_Contact</name>
@@ -66,38 +36,66 @@
             <targetReference>Create_Evaluation</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <description>Initialize the evaluation with the lead context so the screens have a record to bind to.</description>
+        <name>Init_Evaluation</name>
+        <label>Initialize Evaluation</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Evaluation.Lead__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Evaluation.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Eval_RecordType.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Evaluation.Evaluation_Target_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Scholar Lead</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Evaluation.Evaluation_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Evaluation_Details</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <name>No</name>
+        <choiceText>No</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Yes</name>
+        <choiceText>Yes</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Yes</stringValue>
+        </value>
+    </choices>
     <customProperties>
         <name>ScreenProgressIndicator</name>
         <value>
             <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
         </value>
     </customProperties>
-    <decisions>
-        <description>Require a rating before continuing, since the lead's average rating is built from these.</description>
-        <name>Rating_Provided_Decision</name>
-        <label>Rating Provided?</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Rating_Required</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No rating</defaultConnectorLabel>
-        <rules>
-            <name>Has_Rating</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Evaluation.Rating__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Evaluator</targetReference>
-            </connector>
-            <label>Rating provided</label>
-        </rules>
-    </decisions>
     <decisions>
         <description>Route based on whether the evaluator is a User or a Contact.</description>
         <name>Evaluator_Type_Decision</name>
@@ -139,10 +137,48 @@
             <label>Contact</label>
         </rules>
     </decisions>
+    <decisions>
+        <description>Require a rating before continuing, since the lead&apos;s average rating is built from these.</description>
+        <name>Rating_Provided_Decision</name>
+        <label>Rating Provided?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Rating_Required</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No rating</defaultConnectorLabel>
+        <rules>
+            <name>Has_Rating</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Evaluation.Rating__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Evaluator</targetReference>
+            </connector>
+            <label>Rating provided</label>
+        </rules>
+    </decisions>
     <description>Guided form to log an evaluation (interview, call, or other interaction) for a scholar lead. Captures the interaction details, an evaluator rating, and the evaluator (internal user or external contact), then creates an Evaluation linked to the lead.</description>
     <environments>Default</environments>
     <interviewLabel>Lead Scholar Evaluation {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lead Scholar Evaluation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
         <description>Create the evaluation record linked to the scholar lead.</description>
@@ -155,14 +191,68 @@
         </connector>
         <inputReference>Evaluation</inputReference>
     </recordCreates>
+    <recordLookups>
+        <description>Find the Scholar Lead Evaluation record type so the new evaluation lands on the right record type and page.</description>
+        <name>Get_Eval_RecordType</name>
+        <label>Get Evaluation Record Type</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Init_Evaluation</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Evaluation__c</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Scholar_Lead_Evaluation</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <description>Confirmation that the evaluation was saved.</description>
+        <name>Done</name>
+        <label>Done</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>done_text</name>
+            <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(33, 119, 51);&quot;&gt;Evaluation saved&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;The evaluation has been logged for this scholar lead and the average rating will update automatically.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <description>Capture details of the interaction being evaluated.</description>
         <name>Evaluation_Details</name>
         <label>Evaluation Details</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Rating_Provided_Decision</targetReference>
@@ -171,42 +261,98 @@
             <name>details_header</name>
             <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(91, 34, 108);&quot;&gt;Interaction &amp; Rating&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;Record an interview, call, or other interaction with this scholar lead and rate it.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Evaluation_Type__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Evaluation_Date__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Rating__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Strengths__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Areas_for_Improvement__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Additional_Comments__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -227,37 +373,81 @@
             <name>evaluator_header</name>
             <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(135, 36, 150);&quot;&gt;Evaluator&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;Choose whether the evaluator is an internal User or an external Contact, then select them.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <fieldType>ObjectProvided</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <objectFieldReference>Evaluation.Evaluator_Type__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Evaluator_Relationship__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Feedback_Source__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Is_this_for_yourself</name>
+            <choiceReferences>Yes</choiceReferences>
+            <choiceReferences>No</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Is this for yourself?</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Evaluator_Contact__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
-                <conditionLogic>and</conditionLogic>
+                <conditionLogic>1</conditionLogic>
                 <conditions>
-                    <leftValueReference>Evaluation.Evaluator_Type__c</leftValueReference>
+                    <leftValueReference>Is_this_for_yourself</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <stringValue>Contact</stringValue>
+                        <elementReference>No</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -267,36 +457,24 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Evaluation.Evaluator_User__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>Evaluation.Evaluator_Type__c</leftValueReference>
+                    <leftValueReference>Is_this_for_yourself</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <stringValue>User</stringValue>
+                        <elementReference>No</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <description>Shown when no rating was selected.</description>
-        <name>Rating_Required</name>
-        <label>Rating Required</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Evaluation_Details</targetReference>
-        </connector>
-        <fields>
-            <name>rating_required_text</name>
-            <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(195, 31, 31);&quot;&gt;Rating Required&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please go back and rate this interaction (1-5) before continuing.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -311,29 +489,50 @@
         <allowFinish>false</allowFinish>
         <allowPause>true</allowPause>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Evaluator</targetReference>
         </connector>
         <fields>
             <name>evaluator_required_text</name>
             <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(195, 31, 31);&quot;&gt;Evaluator Required&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please go back and select whether the evaluator is a User or a Contact.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <description>Confirmation that the evaluation was saved.</description>
-        <name>Done</name>
-        <label>Done</label>
+        <description>Shown when no rating was selected.</description>
+        <name>Rating_Required</name>
+        <label>Rating Required</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
+        <allowBack>true</allowBack>
+        <allowFinish>false</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Evaluation_Details</targetReference>
+        </connector>
         <fields>
-            <name>done_text</name>
-            <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(33, 119, 51);&quot;&gt;Evaluation saved&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;The evaluation has been logged for this scholar lead and the average rating will update automatically.&lt;/p&gt;</fieldText>
+            <name>rating_required_text</name>
+            <fieldText>&lt;h2&gt;&lt;span style=&quot;color: rgb(195, 31, 31);&quot;&gt;Rating Required&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please go back and rate this interaction (1-5) before continuing.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -342,10 +541,10 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Init_Evaluation</targetReference>
+            <targetReference>Get_Eval_RecordType</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <description>The Evaluation record being built across the screens.</description>
         <name>Evaluation</name>

@@ -109,19 +109,6 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <name>Save_Lead_Intake_Review</name>
-        <label>Save Lead Intake Review</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Complete_Confirm_Submission_Task</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <inputReference>Get_Lead</inputReference>
-    </recordUpdates>
-    <recordUpdates>
         <description>Marks the Confirm submission intake action-plan task complete so the action plan advances.</description>
         <name>Complete_Confirm_Submission_Task</name>
         <label>Complete Confirm Submission Task</label>
@@ -163,6 +150,19 @@
         </inputAssignments>
         <object>Task</object>
     </recordUpdates>
+    <recordUpdates>
+        <name>Save_Lead_Intake_Review</name>
+        <label>Save Lead Intake Review</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Complete_Confirm_Submission_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <inputReference>Get_Lead</inputReference>
+    </recordUpdates>
     <screens>
         <name>Confirm_Applicant_Details</name>
         <label>Confirm Applicant Details</label>
@@ -190,6 +190,7 @@
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
             <objectFieldReference>Get_Lead.Email</objectFieldReference>
             <styleProperties>
                 <verticalAlignment>
@@ -203,6 +204,7 @@
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
             <objectFieldReference>Get_Lead.College_Year__c</objectFieldReference>
             <styleProperties>
                 <verticalAlignment>
@@ -216,6 +218,7 @@
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
             <objectFieldReference>Get_Lead.Resume_Uploaded__c</objectFieldReference>
             <styleProperties>
                 <verticalAlignment>
@@ -237,6 +240,7 @@
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -249,7 +253,56 @@
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
             <objectFieldReference>Get_Lead.Why_CPL_Scholar__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Flow_Error</name>
+        <label>Lead Intake Review Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Flow_Error_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;The lead intake review could not finish.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;No changes were saved. Check the required lead fields and try again.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error detail: {!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Intake_Incomplete</name>
+        <label>Intake Details Incomplete</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Intake_Incomplete_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;This lead can&apos;t move forward yet.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Click &lt;strong&gt;Previous&lt;/strong&gt; and make sure all of these are filled in, then continue:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Email&lt;/li&gt;&lt;li&gt;Matched school&lt;/li&gt;&lt;li&gt;College year&lt;/li&gt;&lt;/ul&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -289,6 +342,7 @@
         <fields>
             <fieldType>ObjectProvided</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
             <objectFieldReference>Get_Lead.School__c</objectFieldReference>
             <styleProperties>
                 <verticalAlignment>
@@ -328,6 +382,7 @@
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>Get_Lead.Primary_Sport__c</assignToReference>
                 <name>value</name>
@@ -355,54 +410,6 @@
         <fields>
             <name>Review_Saved_Message</name>
             <fieldText>&lt;p&gt;&lt;strong&gt;Lead intake review saved.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead details, matched school, and sport have been updated, and the lead has been moved to In Intake Review. The lead owner remains the intake queue.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Intake_Incomplete</name>
-        <label>Intake Details Incomplete</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Intake_Incomplete_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;This lead can&apos;t move forward yet.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Click &lt;strong&gt;Previous&lt;/strong&gt; and make sure all of these are filled in, then continue:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Email&lt;/li&gt;&lt;li&gt;Matched school&lt;/li&gt;&lt;li&gt;College year&lt;/li&gt;&lt;/ul&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Flow_Error</name>
-        <label>Lead Intake Review Error</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Flow_Error_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;The lead intake review could not finish.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;No changes were saved. Check the required lead fields and try again.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error detail: {!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

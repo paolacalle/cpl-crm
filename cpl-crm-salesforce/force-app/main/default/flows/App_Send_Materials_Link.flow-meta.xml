@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <description>Send the materials review link to the applicant's PersonEmail from the org-wide crm-intake mailbox.</description>
+        <description>Send the materials review link to the applicant&apos;s PersonEmail from the org-wide crm-intake mailbox.</description>
         <name>Send_Materials_Email</name>
         <label>Send Materials Email</label>
         <locationX>0</locationX>
@@ -67,20 +67,21 @@
         <offset>0</offset>
     </actionCalls>
     <apiVersion>66.0</apiVersion>
-    <choices>
-        <name>Action_Send_Email</name>
-        <choiceText>Send the materials link via Salesforce email now</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>SendEmail</stringValue>
-        </value>
-    </choices>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <choices>
         <name>Action_Manual_Sent</name>
         <choiceText>I already sent the link manually - just mark this step done</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>MarkSent</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Action_Send_Email</name>
+        <choiceText>Send the materials link via Salesforce email now</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>SendEmail</stringValue>
         </value>
     </choices>
     <decisions>
@@ -135,14 +136,8 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Step 3 of the Application action plan. The intake host enters or confirms the Materials_Form_URL__c and picks whether to send it via the crm-intake mailbox or mark it as sent manually. Either way, the URL is saved on the Application and the "Send materials for review link" Task is marked complete.</description>
+    <description>Step 3 of the Application action plan. The intake host enters or confirms the Materials_Form_URL__c and picks whether to send it via the crm-intake mailbox or mark it as sent manually. Either way, the URL is saved on the Application and the &quot;Send materials for review link&quot; Task is marked complete.</description>
     <environments>Default</environments>
-    <formulas>
-        <description>Email body composed from the applicant's first name and the materials form URL captured on the screen.</description>
-        <name>emailBodyText</name>
-        <dataType>String</dataType>
-        <expression>&quot;Hi &quot; &amp; {!Get_App.Applicant_Account__r.FirstName} &amp; &quot;,&quot; &amp; BR() &amp; BR() &amp; &quot;Thank you for confirming your interest in the CPL Scholar program. Please use the link below to submit your application materials (resume, essay, and recommendations):&quot; &amp; BR() &amp; BR() &amp; {!Materials_URL} &amp; BR() &amp; BR() &amp; &quot;If you have any questions, just reply to this email.&quot; &amp; BR() &amp; BR() &amp; &quot;Best,&quot; &amp; BR() &amp; &quot;CPL Team&quot;</expression>
-    </formulas>
     <formulas>
         <description>Default value for the Materials_URL screen input. Order of precedence: (1) any URL already saved on the application, (2) the JotForm base URL from CPL_Config Custom Setting with prefill params appended (appId, firstName, lastName, email — URL-encoded), (3) empty so the user pastes one in.</description>
         <name>defaultMaterialsURL</name>
@@ -156,6 +151,12 @@
       &amp; &quot;&amp;q3_fullname1%5Blast%5D=&quot; &amp; URLENCODE(BLANKVALUE({!Get_App.Applicant_Account__r.LastName}, &quot;&quot;))
       &amp; &quot;&amp;q4_email2=&quot; &amp; URLENCODE(BLANKVALUE({!Get_App.Applicant_Account__r.PersonEmail}, &quot;&quot;)),
     &quot;&quot;))</expression>
+    </formulas>
+    <formulas>
+        <description>Email body composed from the applicant&apos;s first name and the materials form URL captured on the screen.</description>
+        <name>emailBodyText</name>
+        <dataType>String</dataType>
+        <expression>&quot;Hi &quot; &amp; {!Get_App.Applicant_Account__r.FirstName} &amp; &quot;,&quot; &amp; BR() &amp; BR() &amp; &quot;Thank you for confirming your interest in the CPL Scholar program. Please use the link below to submit your application materials (resume, essay, and recommendations):&quot; &amp; BR() &amp; BR() &amp; {!Materials_URL} &amp; BR() &amp; BR() &amp; &quot;If you have any questions, just reply to this email.&quot; &amp; BR() &amp; BR() &amp; &quot;Best,&quot; &amp; BR() &amp; &quot;CPL Team&quot;</expression>
     </formulas>
     <interviewLabel>App Send Materials Link {!$Flow.CurrentDateTime}</interviewLabel>
     <label>App Send Materials Link</label>
@@ -241,6 +242,33 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
+        <name>Complete_Materials_Task</name>
+        <label>Complete Materials Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Materials_Sent_Done</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Materials_Task.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordUpdates>
+    <recordUpdates>
         <description>Save the materials form URL on the Application so future steps can reference it.</description>
         <name>Save_App_Materials_Sent</name>
         <label>Save App Materials Sent</label>
@@ -268,33 +296,6 @@
         </inputAssignments>
         <object>Prospect_Scholar_Application__c</object>
     </recordUpdates>
-    <recordUpdates>
-        <name>Complete_Materials_Task</name>
-        <label>Complete Materials Task</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Materials_Sent_Done</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_Materials_Task.Id</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Completed</stringValue>
-            </value>
-        </inputAssignments>
-        <object>Task</object>
-    </recordUpdates>
     <screens>
         <name>Capture_Materials_Send</name>
         <label>Send Materials Link</label>
@@ -310,6 +311,14 @@
             <name>Intro_Header</name>
             <fieldText>&lt;p&gt;Send the materials submission link to &lt;strong&gt;{!Get_App.Applicant_Account__r.Name}&lt;/strong&gt; at &lt;strong&gt;{!Get_App.Applicant_Account__r.PersonEmail}&lt;/strong&gt;. If you don&apos;t have a URL yet, paste it in now and we&apos;ll save it on this application.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Materials_URL</name>
@@ -320,6 +329,14 @@
             <fieldText>Materials form URL</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <fields>
             <name>Send_Action_Choice</name>
@@ -329,22 +346,14 @@
             <fieldText>How should this be sent?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Materials_Sent_Done</name>
-        <label>Materials Link Sent</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>Done_Text</name>
-            <fieldText>&lt;p&gt;&#9989; Step complete. {!Get_App.Applicant_Account__r.Name} now has the materials submission link. Next: confirm when all 4 materials are received.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -359,8 +368,40 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Error_Text</name>
-            <fieldText>&lt;p&gt;&#10060; Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;❌ Something went wrong:&lt;/p&gt;&lt;p&gt;{!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Materials_Sent_Done</name>
+        <label>Materials Link Sent</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Done_Text</name>
+            <fieldText>&lt;p&gt;✅ Step complete. {!Get_App.Applicant_Account__r.Name} now has the materials submission link. Next: confirm when all 4 materials are received.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -372,7 +413,7 @@
             <targetReference>Get_App</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>The Prospect Scholar Application Id passed in from the Action Plan stepper LWC.</description>
         <name>recordId</name>

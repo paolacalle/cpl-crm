@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Populated by automation to help reviewers quickly understand what changed. --></help>
+    <label><!-- Field Difference --></label>
+    <name>Field_Difference__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the account this employment is related to. --></help>
+    <label><!-- CPL Member --></label>
+    <name>CPL_Member__c</name>
+    <relationshipLabel><!-- Employments --></relationshipLabel>
+</CustomFieldTranslation>

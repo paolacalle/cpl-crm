@@ -32,18 +32,6 @@ private class ScholarshipInviteEmailActionTest {
 
         System.assert(body.contains('there,'));
         System.assert(body.contains('CPL Scholar Finalist'));
-        System.assert(body.contains('Submit finalist materials'));
-    }
-
-    @IsTest
-    static void inviteBodyUsesPersonalizedMaterialsLink() {
-        String body = ScholarshipInviteEmailAction.buildInviteBody(
-            'Tobi',
-            'https://example.com/materials?token=abc123'
-        );
-
-        System.assert(body.contains('https://example.com/materials?token=abc123'));
-        System.assert(body.contains('personalized form'));
     }
 
     @IsTest
@@ -51,10 +39,7 @@ private class ScholarshipInviteEmailActionTest {
         Id applicationId = Id.valueOf(
             Schema.SObjectType.Prospect_Scholar_Application__c.getKeyPrefix() + '000000000002'
         );
-        Prospect_Scholar_Application__c application = new Prospect_Scholar_Application__c(
-            Id = applicationId,
-            Materials_Form_URL__c = 'https://example.com/materials?token=abc123'
-        );
+        Prospect_Scholar_Application__c application = new Prospect_Scholar_Application__c(Id = applicationId);
         Account applicant = new Account(FirstName = 'Tobi', PersonEmail = 'tobidoe@example.com');
         application.putSObject('Applicant_Account__r', applicant);
 

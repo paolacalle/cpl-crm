@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Employment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Employment History</value>
+    </caseValues>
+    <layouts>
+        <layout>Employment</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+        <sections>
+            <label><!-- Employer Details --></label>
+            <section>Employer Details</section>
+        </sections>
+        <sections>
+            <label><!-- Employment Details --></label>
+            <section>Employment Details</section>
+        </sections>
+        <sections>
+            <label><!-- Evaluation --></label>
+            <section>Evaluation</section>
+        </sections>
+        <sections>
+            <label><!-- Notes --></label>
+            <section>Notes</section>
+        </sections>
+        <sections>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Current employment must not have an End Date. --></errorMessage>
+        <name>Current_Employment_No_End_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- End Date can not be earlier than Start Date. --></errorMessage>
+        <name>End_Date_After_Start_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Employment with an End Date can not be marked as current. --></errorMessage>
+        <name>Past_Employment_Not_Current</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Start Date is required for all employment records. --></errorMessage>
+        <name>Start_Date_Required</name>
+    </validationRules>
+</CustomObjectTranslation>

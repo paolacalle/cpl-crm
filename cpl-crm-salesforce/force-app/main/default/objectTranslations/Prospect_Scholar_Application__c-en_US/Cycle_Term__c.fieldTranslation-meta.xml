@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Choose the intake term (Fall/Spring). Use this if you run multiple intakes per year; otherwise keep it hidden or default it. --></help>
+    <label><!-- Cycle Term --></label>
+    <name>Cycle_Term__c</name>
+</CustomFieldTranslation>

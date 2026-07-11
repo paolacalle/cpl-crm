@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Type any additional comments you have on the CPL member. --></help>
+    <label><!-- Additional Comments --></label>
+    <name>Additional_Comments__c</name>
+</CustomFieldTranslation>

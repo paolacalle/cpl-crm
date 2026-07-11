@@ -218,16 +218,16 @@
     <description>Routes incoming Form Submission records by matching them to an existing Contact or unconverted Lead using submitted email, or creating a new Lead when no match is found. Applies record-type–specific logic to resolve student school lookups, detect data conflicts, flag submissions for review, and create follow-up tasks. This Flow centralizes intake, deduplication, and routing logic for all CPL web form submissions.</description>
     <environments>Default</environments>
     <formulas>
-        <description>Returns the submitted scholar statement if it satisfies the 25-character minimum validation rule, otherwise a placeholder so downstream updates don&apos;t hit the validation error.</description>
-        <name>effectiveStudentStatement</name>
-        <dataType>String</dataType>
-        <expression>IF(LEN({!$Record.Student_Submitted_Statement__c}) &gt;= 25, {!$Record.Student_Submitted_Statement__c}, &quot;user did not include a scholar statement&quot;)</expression>
-    </formulas>
-    <formulas>
         <description>Default Lead.Company value when creating from a Partner Interest Submission (form has no Company field). Empty for Student submissions so the field stays blank.</description>
         <name>defaultLeadCompany</name>
         <dataType>String</dataType>
         <expression>IF({!$Record.RecordTypeId} = &quot;012Vx000003PMGXIA4&quot;, &quot;Pending - Partner Outreach&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Returns the submitted scholar statement if it satisfies the 25-character minimum validation rule, otherwise a placeholder so downstream updates don&apos;t hit the validation error.</description>
+        <name>effectiveStudentStatement</name>
+        <dataType>String</dataType>
+        <expression>IF(LEN({!$Record.Student_Submitted_Statement__c}) &gt;= 25, {!$Record.Student_Submitted_Statement__c}, &quot;user did not include a scholar statement&quot;)</expression>
     </formulas>
     <interviewLabel>Form Submission Intake Router {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Form Submission Intake Router</label>
@@ -273,6 +273,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>Company</field>
+            <value>
+                <elementReference>defaultLeadCompany</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Email</field>
             <value>
                 <elementReference>$Record.Submitted_Email__c</elementReference>
@@ -309,15 +315,33 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>RecordTypeId</field>
+            <field>Partner_Interest_Other__c</field>
             <value>
-                <elementReference>varLeadRecordTypeIdToCreate</elementReference>
+                <elementReference>$Record.Partner_Interest_Other__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Partner_Message__c</field>
+            <value>
+                <elementReference>$Record.Partner_Message__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Partnership_Interest__c</field>
+            <value>
+                <elementReference>$Record.Partner_Interest_Type__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Primary_Resume_URL__c</field>
             <value>
                 <elementReference>$Record.Resume_URL__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>varLeadRecordTypeIdToCreate</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -342,30 +366,6 @@
             <field>Why_CPL_Scholar__c</field>
             <value>
                 <elementReference>$Record.Student_Submitted_Statement__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Company</field>
-            <value>
-                <elementReference>defaultLeadCompany</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Partner_Message__c</field>
-            <value>
-                <elementReference>$Record.Partner_Message__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Partnership_Interest__c</field>
-            <value>
-                <elementReference>$Record.Partner_Interest_Type__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Partner_Interest_Other__c</field>
-            <value>
-                <elementReference>$Record.Partner_Interest_Other__c</elementReference>
             </value>
         </inputAssignments>
         <object>Lead</object>
@@ -737,7 +737,7 @@
         <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <description>The id of the new lead created.</description>
         <name>new_lead_id</name>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Paste the public URL of the Recommender JotForm here (without query string). The Confirm Materials flow appends application Id, recommender type, and applicant name as URL parameters. --></help>
+    <label><!-- Recommender JotForm Base URL --></label>
+    <name>Recommender_JotForm_Base_URL__c</name>
+</CustomFieldTranslation>

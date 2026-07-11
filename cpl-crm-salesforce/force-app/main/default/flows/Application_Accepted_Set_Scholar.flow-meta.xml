@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Only create an award if one does not already exist for this application (prevents duplicates if the application is re-accepted).</description>
+        <name>Decision_Award_Exists</name>
+        <label>Award Already Exists?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Create_Scholarship_Award</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - create award</defaultConnectorLabel>
+        <rules>
+            <name>Award_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Existing_Award.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Decision_Skip_If_Already_Final</targetReference>
+            </connector>
+            <label>Yes - skip create</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Only create a Scholarship Award if the application has an Applicant Account.</description>
+        <name>Decision_Has_Applicant_Account</name>
+        <label>Has Applicant Account?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Decision_Skip_If_Already_Final</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - skip award</defaultConnectorLabel>
+        <rules>
+            <name>Has_Account</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Applicant_Account__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Existing_Award</targetReference>
+            </connector>
+            <label>Yes - check for existing award</label>
+        </rules>
+    </decisions>
     <decisions>
         <description>Skip the auto-promotion if the applicant is already Scholar, Scholar Alumni, or Inactive.</description>
         <name>Decision_Skip_If_Already_Final</name>
@@ -64,62 +117,22 @@
             <label>Yes - promote to Scholar Alumni</label>
         </rules>
     </decisions>
-    <decisions>
-        <description>Only create a Scholarship Award if the application has an Applicant Account.</description>
-        <name>Decision_Has_Applicant_Account</name>
-        <label>Has Applicant Account?</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Decision_Skip_If_Already_Final</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No - skip award</defaultConnectorLabel>
-        <rules>
-            <name>Has_Account</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>$Record.Applicant_Account__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Get_Existing_Award</targetReference>
-            </connector>
-            <label>Yes - check for existing award</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <description>Only create an award if one does not already exist for this application (prevents duplicates if the application is re-accepted).</description>
-        <name>Decision_Award_Exists</name>
-        <label>Award Already Exists?</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Create_Scholarship_Award</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No - create award</defaultConnectorLabel>
-        <rules>
-            <name>Award_Exists</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_Existing_Award.Id</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Decision_Skip_If_Already_Final</targetReference>
-            </connector>
-            <label>Yes - skip create</label>
-        </rules>
-    </decisions>
-    <description>When a Prospect Scholar Application is created or updated with Application_Status__c = Accepted, auto-promote the Applicant Account's CPL Student Lifecycle (Athlete/Prospect/Applicant -> Scholar; Alumni -> Scholar Alumni; already-Scholar/Scholar Alumni/Inactive -> no change) and create a Scholarship Award record to track the awarded scholarship.</description>
+    <description>When a Prospect Scholar Application is created or updated with Application_Status__c = Accepted, auto-promote the Applicant Account&apos;s CPL Student Lifecycle (Athlete/Prospect/Applicant -&gt; Scholar; Alumni -&gt; Scholar Alumni; already-Scholar/Scholar Alumni/Inactive -&gt; no change) and create a Scholarship Award record to track the awarded scholarship.</description>
     <environments>Default</environments>
     <interviewLabel>Application Accepted Set Scholar {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Application Accepted Set Scholar</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
         <description>Create a Scholarship Award to track the scholarship granted by this accepted application. Award amount is left blank for the team to fill in.</description>
@@ -176,28 +189,6 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <description>Look for an existing Scholarship Award already linked to this application, to avoid creating a duplicate on re-acceptance.</description>
-        <name>Get_Existing_Award</name>
-        <label>Get Existing Award</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Decision_Award_Exists</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Prospect_Scholar_Application__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Scholarship_Award__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
         <description>Get the applicant Person Account to read its current lifecycle and prepare for update.</description>
         <name>Get_Applicant_Account</name>
         <label>Get Applicant Account</label>
@@ -217,6 +208,28 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Look for an existing Scholarship Award already linked to this application, to avoid creating a duplicate on re-acceptance.</description>
+        <name>Get_Existing_Award</name>
+        <label>Get Existing Award</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Decision_Award_Exists</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Prospect_Scholar_Application__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Scholarship_Award__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -282,5 +295,5 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
 </Flow>

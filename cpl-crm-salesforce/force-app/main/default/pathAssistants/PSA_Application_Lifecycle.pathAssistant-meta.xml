@@ -5,19 +5,17 @@
     <fieldName>Application_Status__c</fieldName>
     <masterLabel>PSA Application Lifecycle</masterLabel>
     <pathAssistantSteps>
-        <fieldNames>Applicant_Account__c</fieldNames>
-        <fieldNames>Scholarship_Invite_Sent__c</fieldNames>
-        <fieldNames>Scholarship_Invite_Sent_Date__c</fieldNames>
-        <fieldNames>Scholarship_Invite_Status__c</fieldNames>
-        <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Start the scholarship application from a confirmed invite.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Confirm the applicant account is the correct Person Account.&lt;/li&gt;&lt;li&gt;Send the finalist invite and record the sent date/status.&lt;/li&gt;&lt;li&gt;Keep the applicant in this stage until they confirm participation.&lt;/li&gt;&lt;/ul&gt;</info>
-        <picklistValueName>Invite Sent</picklistValueName>
+        <fieldNames>Eligibility_Confirmed__c</fieldNames>
+        <fieldNames>Case_Owner__c</fieldNames>
+        <fieldNames>Internal_Notes__c</fieldNames>
+        <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Finalize acceptance and hand off the scholar cleanly.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Confirm eligibility is checked before saving Accepted.&lt;/li&gt;&lt;li&gt;Make sure the case owner is set for scholar communication.&lt;/li&gt;&lt;li&gt;Record the acceptance rationale and any follow-up commitments.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Accepted</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
         <fieldNames>Applicant_Account__c</fieldNames>
-        <fieldNames>Materials_Form_URL__c</fieldNames>
-        <fieldNames>Resume_Received__c</fieldNames>
-        <fieldNames>Essay_Received__c</fieldNames>
-        <fieldNames>Materials_Complete__c</fieldNames>
+        <fieldNames>Scholarship_Invite_Confirmed__c</fieldNames>
+        <fieldNames>Scholarship_Invite_Confrimed_Date__c</fieldNames>
+        <fieldNames>Intake_Owner__c</fieldNames>
         <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Collect the finalist materials needed before review.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Most recent resume, including GPA, leadership activities, and athletic achievements.&lt;/li&gt;&lt;li&gt;Two letters of recommendation: one from a coach or college professor, and one from the summer internship supervisor.&lt;/li&gt;&lt;li&gt;If applicable, financial aid, scholarships, or grants the applicant is receiving or has received.&lt;/li&gt;&lt;li&gt;Short essay describing commitment to the CPL mantra, aspirations for a wealth management career, and any personal story that strengthens the application.&lt;/li&gt;&lt;/ul&gt;</info>
         <picklistValueName>Collecting Documents</picklistValueName>
     </pathAssistantSteps>
@@ -30,17 +28,12 @@
         <picklistValueName>In Review</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
-        <fieldNames>Eligibility_Confirmed__c</fieldNames>
-        <fieldNames>Case_Owner__c</fieldNames>
-        <fieldNames>Internal_Notes__c</fieldNames>
-        <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Finalize acceptance and hand off the scholar cleanly.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Confirm eligibility is checked before saving Accepted.&lt;/li&gt;&lt;li&gt;Make sure the case owner is set for scholar communication.&lt;/li&gt;&lt;li&gt;Record the acceptance rationale and any follow-up commitments.&lt;/li&gt;&lt;/ul&gt;</info>
-        <picklistValueName>Accepted</picklistValueName>
-    </pathAssistantSteps>
-    <pathAssistantSteps>
-        <fieldNames>Case_Owner__c</fieldNames>
-        <fieldNames>Internal_Notes__c</fieldNames>
-        <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Preserve a clear waitlist decision and next action.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Document why the applicant is waitlisted and what would change the decision.&lt;/li&gt;&lt;li&gt;Assign ownership for status updates and applicant communication.&lt;/li&gt;&lt;li&gt;Review capacity before moving to Accepted or Rejected.&lt;/li&gt;&lt;/ul&gt;</info>
-        <picklistValueName>Waitlisted</picklistValueName>
+        <fieldNames>Applicant_Account__c</fieldNames>
+        <fieldNames>Scholarship_Invite_Sent__c</fieldNames>
+        <fieldNames>Scholarship_Invite_Sent_Date__c</fieldNames>
+        <fieldNames>Scholarship_Invite_Status__c</fieldNames>
+        <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Start the scholarship application from a confirmed invite.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Confirm the applicant account is the correct Person Account.&lt;/li&gt;&lt;li&gt;Send the finalist invite and record the sent date/status.&lt;/li&gt;&lt;li&gt;Keep the applicant in this stage until they confirm participation.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Invite Sent</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
         <fieldNames>Rejection_Filter__c</fieldNames>
@@ -49,6 +42,12 @@
         <fieldNames>Internal_Notes__c</fieldNames>
         <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Close the application with a complete, reportable rejection reason.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Select the high-level rejection filter for reporting.&lt;/li&gt;&lt;li&gt;Add concise decision context in Rejection Reason.&lt;/li&gt;&lt;li&gt;Confirm applicant communication has an owner before closing the file.&lt;/li&gt;&lt;/ul&gt;</info>
         <picklistValueName>Rejected</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Case_Owner__c</fieldNames>
+        <fieldNames>Internal_Notes__c</fieldNames>
+        <info>&lt;p&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Preserve a clear waitlist decision and next action.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Document why the applicant is waitlisted and what would change the decision.&lt;/li&gt;&lt;li&gt;Assign ownership for status updates and applicant communication.&lt;/li&gt;&lt;li&gt;Review capacity before moving to Accepted or Rejected.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Waitlisted</picklistValueName>
     </pathAssistantSteps>
     <pathAssistantSteps>
         <fieldNames>Rejection_Filter__c</fieldNames>
