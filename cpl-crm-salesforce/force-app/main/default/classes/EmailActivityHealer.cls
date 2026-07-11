@@ -39,7 +39,8 @@ public with sharing class EmailActivityHealer {
             return 0;
         }
         return healRecords([
-            SELECT Id, Subject, TextBody, MessageDate, ActivityId, CreatedById
+            SELECT Id, Subject, TextBody, MessageDate, ActivityId, CreatedById,
+                   FromAddress, ToAddress, CcAddress
             FROM EmailMessage
             WHERE Id IN :emailMessageIds
         ]);
@@ -89,12 +90,15 @@ public with sharing class EmailActivityHealer {
             return 0;
         }
 
-        // Idempotency: any email we have already generated a Task for is skipped.
-        Set<Id> alreadyHealed = new Set<Id>();
+        // Idempotency: the Task already generated for an email (if any), keyed by
+        // that email. A re-run refreshes this Task's content rather than creating
+        // a duplicate -- so improvements to the description propagate on re-run.
+        Map<Id, Task> healedTaskByEmail = new Map<Id, Task>();
         for (Task t : [
-            SELECT Source_Email_Message__c FROM Task WHERE Source_Email_Message__c IN :emIdStrings
+            SELECT Id, Description, Source_Email_Message__c
+            FROM Task WHERE Source_Email_Message__c IN :emIdStrings
         ]) {
-            alreadyHealed.add((Id) t.Source_Email_Message__c);
+            healedTaskByEmail.put((Id) t.Source_Email_Message__c, t);
         }
 
         // Participant addresses per email.
@@ -155,10 +159,19 @@ public with sharing class EmailActivityHealer {
         List<Task> toUpdate = new List<Task>();
 
         for (Id emId : emById.keySet()) {
-            if (alreadyHealed.contains(emId)) {
-                continue; // a Task already represents this email
-            }
             EmailMessage em = emById.get(emId);
+
+            // Already healed: refresh the Task's content in place if it changed.
+            Task healed = healedTaskByEmail.get(emId);
+            if (healed != null) {
+                String refreshed = buildDescription(em);
+                if (healed.Description != refreshed) {
+                    healed.Description = refreshed;
+                    toUpdate.add(healed);
+                }
+                continue;
+            }
+
             Set<String> addrs = addrsByEm.get(emId);
             if (addrs == null) {
                 continue;
@@ -234,7 +247,7 @@ public with sharing class EmailActivityHealer {
             Status = 'Completed',
             TaskSubtype = 'Email',
             ActivityDate = (em.MessageDate != null) ? em.MessageDate.date() : null,
-            Description = String.isBlank(em.TextBody) ? null : em.TextBody.abbreviate(32000),
+            Description = buildDescription(em),
             Source_Email_Message__c = em.Id
         );
         // Attribute the activity to whoever logged the email, when available.
@@ -242,5 +255,32 @@ public with sharing class EmailActivityHealer {
             t.OwnerId = em.CreatedById;
         }
         return t;
+    }
+
+    // Renders the email as a readable block (From/To/Cc/Date/Subject + body) so the
+    // Task reads like the email even though it is not a native EmailMessage card.
+    private static String buildDescription(EmailMessage em) {
+        List<String> header = new List<String>();
+        if (String.isNotBlank(em.FromAddress)) {
+            header.add('From: ' + em.FromAddress);
+        }
+        if (String.isNotBlank(em.ToAddress)) {
+            header.add('To: ' + em.ToAddress);
+        }
+        if (String.isNotBlank(em.CcAddress)) {
+            header.add('Cc: ' + em.CcAddress);
+        }
+        if (em.MessageDate != null) {
+            header.add('Date: ' + em.MessageDate.format());
+        }
+        if (String.isNotBlank(em.Subject)) {
+            header.add('Subject: ' + em.Subject);
+        }
+        String full = String.join(header, '\n');
+        if (String.isNotBlank(em.TextBody)) {
+            full = (full == '' ? '' : full + '\n\n') + em.TextBody;
+        }
+        full = full.trim();
+        return String.isBlank(full) ? null : full.abbreviate(32000);
     }
 }

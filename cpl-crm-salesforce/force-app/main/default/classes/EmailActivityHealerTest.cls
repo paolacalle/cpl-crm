@@ -2,7 +2,9 @@
 private class EmailActivityHealerTest {
     // Scholars are PersonAccounts in this org, so the tests create person accounts
     // (record type cpl_applicant_account) and match on PersonEmail -- the same path
-    // the healer takes in production.
+    // the healer takes in production. Participant addresses are set as EmailMessage
+    // fields (From/To/Cc), which auto-create the EmailMessageRelation rows the
+    // healer matches on -- exactly as captured emails arrive.
 
     private static Id personRtId {
         get {
@@ -16,6 +18,18 @@ private class EmailActivityHealerTest {
             return personRtId;
         }
         set;
+    }
+
+    // Returns the Account with its PersonContactId (the scholar's Contact).
+    private static Account makeScholar(String email) {
+        Account acct = new Account(
+            FirstName = 'Ada',
+            LastName = 'Scholar ' + email,
+            PersonEmail = email,
+            RecordTypeId = personRtId
+        );
+        insert acct;
+        return [SELECT Id, PersonContactId FROM Account WHERE Id = :acct.Id];
     }
 
     // A regular business Contact (not a PersonAccount). Used where the test must
@@ -37,22 +51,13 @@ private class EmailActivityHealerTest {
         return [SELECT Id, AccountId FROM Contact WHERE Id = :c.Id];
     }
 
-    // Returns the Account with its PersonContactId (the scholar's Contact).
-    private static Account makeScholar(String email) {
-        Account acct = new Account(
-            FirstName = 'Ada',
-            LastName = 'Scholar ' + email,
-            PersonEmail = email,
-            RecordTypeId = personRtId
-        );
-        insert acct;
-        return [SELECT Id, PersonContactId FROM Account WHERE Id = :acct.Id];
-    }
-
-    private static EmailMessage makeEmail(String subject, Id activityId) {
+    private static EmailMessage makeEmail(String subject, Id activityId, String fromAddr, String toAddr, String ccAddr) {
         EmailMessage em = new EmailMessage(
             Subject = subject,
             TextBody = 'Body of ' + subject,
+            FromAddress = fromAddr,
+            ToAddress = toAddr,
+            CcAddress = ccAddr,
             Status = '3',
             Incoming = true,
             MessageDate = System.now(),
@@ -62,30 +67,56 @@ private class EmailActivityHealerTest {
         return em;
     }
 
-    private static void addRelation(Id emId, String relType, String addr) {
-        insert new EmailMessageRelation(EmailMessageId = emId, RelationType = relType, RelationAddress = addr);
+    private static EmailMessage makeEmail(String subject, Id activityId, String fromAddr, String toAddr) {
+        return makeEmail(subject, activityId, fromAddr, toAddr, null);
     }
 
     @IsTest
     static void createsTaskForOrphanMatchingScholar() {
         Account scholar = makeScholar('ada@example.com');
-        EmailMessage em = makeEmail('Welcome', null);
-        addRelation(em.Id, 'FromAddress', 'ada@example.com');
-        addRelation(em.Id, 'ToAddress', 'lisa@climbpauselift.org'); // internal -> ignored
+        // From the scholar, to an internal address (which the healer ignores).
+        EmailMessage em = makeEmail('Welcome', null, 'ada@example.com', 'lisa@climbpauselift.org');
 
         Test.startTest();
         Integer healed = EmailActivityHealer.healEmailMessages(new Set<Id>{ em.Id });
-        // Second run must be a no-op (RelatedToId now set) -> no duplicate Task.
+        // Second run must be a no-op create (no duplicate Task).
         EmailActivityHealer.healEmailMessages(new Set<Id>{ em.Id });
         Test.stopTest();
 
         System.assertEquals(1, healed, 'The orphan email should be healed once');
-        List<Task> tasks = [SELECT WhoId, Status, Subject FROM Task WHERE WhoId = :scholar.PersonContactId];
+        List<Task> tasks = [
+            SELECT Status, Subject, Source_Email_Message__c, Description
+            FROM Task WHERE WhoId = :scholar.PersonContactId
+        ];
         System.assertEquals(1, tasks.size(), 'Exactly one Email Task should exist for the scholar');
         System.assertEquals('Completed', tasks[0].Status, 'Task should be logged as completed');
         System.assertEquals('Email: Welcome', tasks[0].Subject, 'Task subject should carry the email subject');
-        Task healedTask = [SELECT Source_Email_Message__c FROM Task WHERE WhoId = :scholar.PersonContactId LIMIT 1];
-        System.assertEquals(em.Id, (Id) healedTask.Source_Email_Message__c, 'Task should record its source email for idempotency/provenance');
+        System.assertEquals(em.Id, (Id) tasks[0].Source_Email_Message__c, 'Task should record its source email');
+        System.assert(tasks[0].Description != null && tasks[0].Description.contains('From: ada@example.com'),
+            'Description should render the email header');
+        System.assert(tasks[0].Description.contains('Body of Welcome'), 'Description should include the email body');
+    }
+
+    @IsTest
+    static void reRunRefreshesTaskContentInPlace() {
+        Account scholar = makeScholar('refresh@example.com');
+        EmailMessage em = makeEmail('Status update', null, 'refresh@example.com', 'lisa@climbpauselift.org');
+        EmailActivityHealer.healEmailMessages(new Set<Id>{ em.Id });
+
+        // Simulate an older healed Task whose content predates the richer format.
+        Task stale = [SELECT Id FROM Task WHERE WhoId = :scholar.PersonContactId LIMIT 1];
+        stale.Description = null;
+        update stale;
+
+        Test.startTest();
+        Integer refreshed = EmailActivityHealer.healEmailMessages(new Set<Id>{ em.Id });
+        Test.stopTest();
+
+        Task after = [SELECT Description FROM Task WHERE Id = :stale.Id];
+        System.assertEquals(1, refreshed, 'Re-run should refresh the existing Task, not skip it');
+        System.assertNotEquals(null, after.Description, 'Re-run should restore the email content');
+        System.assertEquals(1, [SELECT COUNT() FROM Task WHERE WhoId = :scholar.PersonContactId],
+            'Re-run must not create a duplicate Task');
     }
 
     @IsTest
@@ -101,8 +132,7 @@ private class EmailActivityHealerTest {
         // ActivityId is read-only on EmailMessage in this org, so we cannot insert
         // the email pre-linked to the Task. In production the platform sets that
         // link; here we simulate it with an in-memory record carrying the same Id.
-        EmailMessage em = makeEmail('Prior', null);
-        addRelation(em.Id, 'FromAddress', 'bkath@example.com');
+        EmailMessage em = makeEmail('Prior', null, 'bkath@example.com', 'lisa@climbpauselift.org');
         EmailMessage linked = new EmailMessage(
             Id = em.Id, ActivityId = leadTask.Id, Subject = 'Prior', MessageDate = System.now()
         );
@@ -121,29 +151,26 @@ private class EmailActivityHealerTest {
 
     @IsTest
     static void skipsAmbiguousAndUnknownAddresses() {
-        Account a = makeScholar('one@example.com');
-        Account b = makeScholar('two@example.com');
+        makeScholar('one@example.com');
+        makeScholar('two@example.com');
 
-        EmailMessage ambiguous = makeEmail('Group note', null);
-        addRelation(ambiguous.Id, 'ToAddress', 'one@example.com');
-        addRelation(ambiguous.Id, 'CcAddress', 'two@example.com');
-
-        EmailMessage unknown = makeEmail('Cold email', null);
-        addRelation(unknown.Id, 'FromAddress', 'stranger@nowhere.com');
+        // Two distinct scholars on one email -> ambiguous.
+        EmailMessage ambiguous = makeEmail('Group note', null, 'lisa@climbpauselift.org', 'one@example.com', 'two@example.com');
+        // Address matches nobody.
+        EmailMessage unknown = makeEmail('Cold email', null, 'stranger@nowhere.com', 'lisa@climbpauselift.org');
 
         Test.startTest();
         Integer healed = EmailActivityHealer.healEmailMessages(new Set<Id>{ ambiguous.Id, unknown.Id });
         Test.stopTest();
 
         System.assertEquals(0, healed, 'Ambiguous and unknown-address emails must be left untouched');
-        System.assertEquals(0, [SELECT COUNT() FROM Task], 'No Tasks should be created');
+        System.assertEquals(0, [SELECT COUNT() FROM Task WHERE Subject LIKE 'Email:%'], 'No Tasks should be created');
     }
 
     @IsTest
     static void healForScholarsFindsMatchingEmails() {
         Account scholar = makeScholar('ln@example.com');
-        EmailMessage em = makeEmail('Internship update', null);
-        addRelation(em.Id, 'FromAddress', 'ln@example.com');
+        EmailMessage em = makeEmail('Internship update', null, 'ln@example.com', 'lisa@climbpauselift.org');
 
         Test.startTest();
         Integer healed = EmailActivityHealer.healForScholars(new Set<Id>{ scholar.PersonContactId });

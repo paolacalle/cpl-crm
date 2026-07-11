@@ -8,7 +8,8 @@ public with sharing class EmailActivityHealBatch implements Database.Batchable<S
 
     public Database.QueryLocator start(Database.BatchableContext context) {
         return Database.getQueryLocator([
-            SELECT Id, Subject, TextBody, MessageDate, ActivityId, CreatedById
+            SELECT Id, Subject, TextBody, MessageDate, ActivityId, CreatedById,
+                   FromAddress, ToAddress, CcAddress
             FROM EmailMessage
         ]);
     }
