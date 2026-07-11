@@ -18,6 +18,25 @@ private class EmailActivityHealerTest {
         set;
     }
 
+    // A regular business Contact (not a PersonAccount). Used where the test must
+    // avoid firing the PersonAccount-create heal Flow, so it can assert on the
+    // healer's behavior in isolation.
+    private static Contact makeBusinessContact(String email) {
+        // Donor Household: a non-person business account with no required-field
+        // validation rules, so it inserts cleanly and does not fire the
+        // PersonAccount-create heal Flow.
+        Id bizRt = [
+            SELECT Id FROM RecordType
+            WHERE SObjectType = 'Account' AND DeveloperName = 'Donor_Household'
+            LIMIT 1
+        ].Id;
+        Account biz = new Account(Name = 'Household ' + email, RecordTypeId = bizRt);
+        insert biz;
+        Contact c = new Contact(FirstName = 'Kath', LastName = 'B', Email = email, AccountId = biz.Id);
+        insert c;
+        return [SELECT Id, AccountId FROM Contact WHERE Id = :c.Id];
+    }
+
     // Returns the Account with its PersonContactId (the scholar's Contact).
     private static Account makeScholar(String email) {
         Account acct = new Account(
@@ -71,7 +90,9 @@ private class EmailActivityHealerTest {
 
     @IsTest
     static void repointsLeadOnlyTaskToScholar() {
-        Account scholar = makeScholar('bkath@example.com');
+        // Business Contact (not a PersonAccount) so the create-heal Flow does not
+        // fire and add an async heal pass that would confound this assertion.
+        Contact scholar = makeBusinessContact('bkath@example.com');
         Lead lead = new Lead(FirstName = 'Kath', LastName = 'B', Company = 'CPL', Status = 'New');
         insert lead;
         Task leadTask = new Task(WhoId = lead.Id, Subject = 'Email: Prior', Status = 'Completed');
@@ -92,7 +113,7 @@ private class EmailActivityHealerTest {
 
         System.assertEquals(1, healed, 'The lead-only email should be healed');
         Task after = [SELECT WhoId FROM Task WHERE Id = :leadTask.Id];
-        System.assertEquals(scholar.PersonContactId, after.WhoId, 'Existing Task should be re-pointed to the scholar contact');
+        System.assertEquals(scholar.Id, after.WhoId, 'Existing Task should be re-pointed to the scholar contact');
         // The healer must re-point the existing Task, not spawn a new one for this email.
         System.assertEquals(0, [SELECT COUNT() FROM Task WHERE Source_Email_Message__c = :em.Id],
             'No new healer Task should be created when a Task already exists for the email');
