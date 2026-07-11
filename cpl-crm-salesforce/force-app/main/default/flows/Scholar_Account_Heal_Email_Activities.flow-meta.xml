@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Attaches emails captured before this scholar existed by matching addresses and logging Email Tasks on the timeline. Runs asynchronously so it never blocks the account creation.</description>
+        <name>Heal_Scholar_Emails</name>
+        <label>Heal Scholar Emails</label>
+        <locationX>176</locationX>
+        <locationY>288</locationY>
+        <actionName>EmailActivityHealAction</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>scholarContactId</name>
+            <value>
+                <elementReference>$Record.PersonContactId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>EmailActivityHealAction</nameSegment>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>When a scholar Person Account is created, attaches any previously captured emails whose addresses match the scholar. Emails that land before a matchable record exists are otherwise orphaned; account creation is the moment they should appear on the timeline.</description>
+    <environments>Default</environments>
+    <interviewLabel>Scholar Account Heal Email Activities {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Scholar Account Heal Email Activities</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Heal_Scholar_Emails</targetReference>
+        </connector>
+        <filterFormula>AND(ISNEW(), {!$Record.IsPersonAccount}, NOT(ISBLANK({!$Record.PersonEmail})), NOT(ISBLANK({!$Record.PersonContactId})))</filterFormula>
+        <object>Account</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
