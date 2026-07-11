@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants visibility to the Source Email Message provenance field written by EmailActivityHealer, so staff can see and report on which email each healed timeline activity came from. Assign to CPL admins / intake staff.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Email Activity Healer</label>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Activity.Source_Email_Message__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+</PermissionSet>
