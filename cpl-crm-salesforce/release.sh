@@ -15,11 +15,10 @@ else
 fi
 
 git checkout "$BRANCH"
-git pull origin "$BRANCH"
+BEFORE=$(git rev-parse HEAD); git pull origin "$BRANCH"; AFTER=$(git rev-parse HEAD)
 
 echo "Files updated in this pull: " 
-MERGE_SHA=$(git rev-list --min-parents=2 --max-count=1 HEAD)
-FILES=$(git diff --name-status "${MERGE_SHA}^1" "$MERGE_SHA")
+FILES=$(git diff --name-status "$BEFORE" "$AFTER")
 echo "$FILES"
 
 echo ""
