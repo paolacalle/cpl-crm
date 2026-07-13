@@ -32,7 +32,7 @@ public with sharing class CplHomeIntakePipelineController {
         for (AggregateResult ar : [
             SELECT Status status, COUNT(Id) cnt
             FROM Lead
-            WHERE RecordTypeId = :rtId
+            WHERE RecordTypeId = :rtId AND IsConverted = false
             GROUP BY Status
         ]) {
             countsByStatus.put((String) ar.get('status'), (Integer) ar.get('cnt'));
