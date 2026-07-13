@@ -7,17 +7,19 @@
             <template if:false={errorMessage}>
                 <div class="stats">
                     <template for:each={stats} for:item="stat">
-                        <button
-                            key={stat.status}
-                            type="button"
-                            class={stat.cssClass}
-                            data-filter={stat.filterName}
-                            data-object={stat.objectApiName}
-                            onclick={handleStatClick}
-                        >
-                            <div class="stat-count">{stat.count}</div>
-                            <div class="stat-label">{stat.status}</div>
-                        </button>
+                        <div key={stat.status} class="tooltip-container">
+                            <button
+                                type="button"
+                                class={stat.cssClass}
+                                data-filter={stat.filterName}
+                                data-object={stat.objectApiName}
+                                onclick={handleStatClick}
+                            >
+                                <div class="stat-count">{stat.count}</div>
+                                <div class="stat-label">{stat.status}</div>
+                            </button>
+                            <span class="tooltip-text">{stat.toolTip}</span>
+                        </div>
                     </template>
                 </div>
                 <div class="footnote">Click a status to open that filtered list.</div>
