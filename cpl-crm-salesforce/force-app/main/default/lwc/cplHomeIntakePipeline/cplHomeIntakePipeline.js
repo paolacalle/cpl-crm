@@ -1,4 +1,5 @@
 import { LightningElement, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 import { NavigationMixin } from 'lightning/navigation';
 import getPipeline from '@salesforce/apex/CplHomeIntakePipelineController.getPipeline';
 
@@ -38,15 +39,28 @@ const STATUS_META = {
 export default class CplHomeIntakePipeline extends NavigationMixin(LightningElement) {
     counts;
     error;
+    isRefreshing = false;
+    wiredResult;
 
     @wire(getPipeline)
-    wiredPipeline({ data, error }) {
+    wiredPipeline(result) {
+        this.wiredResult = result;
+        const { data, error } = result;
         if (data) {
             this.counts = data;
             this.error = undefined;
         } else if (error) {
             this.error = error;
             this.counts = undefined;
+        }
+    }
+
+    async handleRefresh() {
+        this.isRefreshing = true;
+        try {
+            await refreshApex(this.wiredResult);
+        } finally {
+            this.isRefreshing = false;
         }
     }
 
