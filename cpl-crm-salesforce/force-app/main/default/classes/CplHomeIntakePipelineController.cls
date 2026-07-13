@@ -4,8 +4,7 @@ public with sharing class CplHomeIntakePipelineController {
         'In Intake Review',
         'Contacted',
         'Qualified',
-        'Unqualified',
-        'Converted'
+        'Unqualified'
     };
 
     @AuraEnabled(cacheable=true)

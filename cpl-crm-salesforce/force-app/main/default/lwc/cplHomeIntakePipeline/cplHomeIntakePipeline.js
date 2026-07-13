@@ -3,12 +3,36 @@ import { NavigationMixin } from 'lightning/navigation';
 import getPipeline from '@salesforce/apex/CplHomeIntakePipelineController.getPipeline';
 
 const STATUS_META = {
-    'New': { cssClass: 'stat stat-new', objectApiName: 'Lead', filterName: 'CPL_Lead_New' },
-    'In Intake Review': { cssClass: 'stat stat-review', objectApiName: 'Lead', filterName: 'CPL_Lead_In_Intake_Review' },
-    'Contacted': { cssClass: 'stat stat-contacted', objectApiName: 'Lead', filterName: 'CPL_Lead_Contacted' },
-    'Qualified': { cssClass: 'stat stat-qualified', objectApiName: 'Lead', filterName: 'CPL_Lead_Qualified' },
-    'Unqualified': { cssClass: 'stat stat-unqualified', objectApiName: 'Lead', filterName: 'CPL_Lead_Unqualified' },
-    'Converted': { cssClass: 'stat stat-converted', objectApiName: 'Account', filterName: 'CPL_Members' }
+    'New': { 
+        cssClass: 'stat stat-new', 
+        objectApiName: 'Lead', 
+        filterName: 'CPL_Lead_New', 
+        toolTip: 'Freshly created leads awaiting initial review.' 
+    },
+    'In Intake Review': { 
+        cssClass: 'stat stat-review', 
+        objectApiName: 'Lead', 
+        filterName: 'CPL_Lead_In_Intake_Review', 
+        toolTip: 'Leads currently undergoing initial review.' 
+    },
+    'Contacted': { 
+        cssClass: 'stat stat-contacted', 
+        objectApiName: 'Lead', 
+        filterName: 'CPL_Lead_Contacted', 
+        toolTip: 'Outreach has been made to the student.' 
+    },
+    'Qualified': { 
+        cssClass: 'stat stat-qualified', 
+        objectApiName: 'Lead', 
+        filterName: 'CPL_Lead_Qualified', 
+        toolTip: 'Leads we intend to advance into mentorship.' 
+    },
+    'Unqualified': { 
+        cssClass: 'stat stat-unqualified', 
+        objectApiName: 'Lead', 
+        filterName: 'CPL_Lead_Unqualified', 
+        toolTip: 'Leads that do not meet standard criteria.' 
+    }
 };
 
 export default class CplHomeIntakePipeline extends NavigationMixin(LightningElement) {
@@ -33,7 +57,8 @@ export default class CplHomeIntakePipeline extends NavigationMixin(LightningElem
                 ...c,
                 cssClass: meta.cssClass,
                 objectApiName: meta.objectApiName,
-                filterName: meta.filterName
+                filterName: meta.filterName,
+                toolTip : meta.toolTip
             };
         }) : [];
     }
