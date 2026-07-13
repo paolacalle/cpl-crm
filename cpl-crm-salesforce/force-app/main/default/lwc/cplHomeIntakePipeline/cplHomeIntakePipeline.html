@@ -1,5 +1,14 @@
 <template>
-    <lightning-card title="CPL Scholar Lead Pipeline" icon-name="standard:lead_insights">
+    <lightning-card title="Lead Pipeline" icon-name="standard:lead_insights">
+        <lightning-button-icon
+            slot="actions"
+            icon-name="utility:refresh"
+            variant="border-filled"
+            alternative-text="Refresh"
+            title="Refresh pipeline"
+            disabled={isRefreshing}
+            onclick={handleRefresh}
+        ></lightning-button-icon>
         <div class="slds-p-horizontal_medium slds-p-bottom_medium">
             <template if:true={errorMessage}>
                 <div class="slds-text-color_error">{errorMessage}</div>
