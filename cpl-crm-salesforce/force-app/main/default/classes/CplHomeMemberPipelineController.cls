@@ -1,12 +1,12 @@
 public with sharing class CplHomeMemberPipelineController {
     private static final List<String> STATUS_ORDER = new List<String>{
         'Athlete',
-        'Prospect',
+        // 'Prospect',
         'Applicant',
         'Scholar',
         'Scholar Alumni',
-        'Alumni',
-        'Inactive'
+        'Alumni'
+        // 'Inactive'
     };
 
     // cache the method's results on the client-side
