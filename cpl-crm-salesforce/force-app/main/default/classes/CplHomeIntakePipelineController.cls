@@ -18,6 +18,7 @@ public with sharing class CplHomeIntakePipelineController {
         ]) {
             rtId = rt.Id;
         }
+        
         if (rtId == null) {
             for (String s : STATUS_ORDER) {
                 StatusCount c = new StatusCount();
