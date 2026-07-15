@@ -12,21 +12,26 @@ public with sharing class CplHomeMemberPipelineController {
     // cache the method's results on the client-side
     @AuraEnabled(cacheable=true)
     public static List<StatusCount> getPipeline() {
-        List<StatusCount> ordered = new List<StatusCount>();
-
-        // record type for a CPL member person account
-        Id rtId='012Vx000003FTsnIAG';
-
-        // fill count for each of the status
+        // count members in each lifecycle stage. The lifecycle field is CPL-member
+        // specific, so a non-null value on a person account identifies a member --
+        // no record-type filter needed (matches the IsPersonAccount pattern used
+        // elsewhere in this project).
+        Map<String, Integer> countByStatus = new Map<String, Integer>();
         for (AggregateResult ar : [
             SELECT CPL_Student_Lifecycle__c status, COUNT(Id) cnt
-            FROM PersonAccount
-            WHERE RecordTypeId = :rtId AND CPL_Student_Lifecycle__c != Null
+            FROM Account
+            WHERE IsPersonAccount = TRUE AND CPL_Student_Lifecycle__c != Null
             GROUP BY CPL_Student_Lifecycle__c
         ]) {
+            countByStatus.put((String) ar.get('status'), (Integer) ar.get('cnt'));
+        }
+
+        // emit every stage in lifecycle order, including empty ones
+        List<StatusCount> ordered = new List<StatusCount>();
+        for (String status : STATUS_ORDER) {
             StatusCount c = new StatusCount();
-            c.status = (String) ar.get('status');
-            c.count = (Integer) ar.get('cnt');
+            c.status = status;
+            c.count = countByStatus.containsKey(status) ? countByStatus.get(status) : 0;
             ordered.add(c);
         }
 
