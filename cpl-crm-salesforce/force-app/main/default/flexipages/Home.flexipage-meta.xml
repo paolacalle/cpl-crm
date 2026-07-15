@@ -14,7 +14,7 @@
                 <identifier>cplHomeIntakePipeline</identifier>
             </componentInstance>
         </itemInstances>
-                <itemInstances>
+        <itemInstances>
             <componentInstance>
                 <componentName>cplHomeMemberPipeline</componentName>
                 <identifier>cplHomeMemberPipeline</identifier>
