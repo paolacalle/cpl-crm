@@ -1,0 +1,105 @@
+.stats {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+
+/* 1. Combined .stat and tooltip container rules */
+.stat {
+  position: relative; /* Required for the absolute tooltip placement */
+  background: #ffffff;
+  border: 0;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+  padding: 1rem; /* Added padding so your card text isn't stuck to edges */
+  box-sizing: border-box; /* Ensures padding doesn't break the grid item size */
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.stat:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.stat-count {
+  color: #181818;
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stat-label {
+  color: #181818;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* Status-specific branding */
+.stat-athlete { 
+    background: #EBF3FF; 
+    border-left: 4px solid #3B82F6; 
+} 
+
+.stat-applicant { 
+    background: #FFF0F6; 
+    border-left: 4px solid #D946EF; 
+} 
+
+.stat-scholar { 
+    background: #F3E8FF; 
+    border-left: 4px solid #A855F7; 
+} 
+
+.stat-scholar-alumni { 
+    background: #DCFCE7; 
+    border-left: 4px solid #22C55E; 
+} 
+
+.stat-alumni { 
+    background: #E0F2FE; 
+    border-left: 4px solid #0EA5E9; 
+}
+
+.footnote {
+  color: #F43F5E;
+  font-size: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* 2. Tooltip styles attached directly to the card */
+.stat .tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  max-width: 200px;
+  white-space: normal; /* Allows text wrapping if max-width is hit */
+  background-color: #0b5cab;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: normal; /* Resets any inherited card text weight */
+  
+  position: absolute;
+  z-index: 10;
+  bottom: 110%; /* Adjusted height to hover just above the card */
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gives tooltip visual depth */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover trigger on the card reveals the internal tooltip */
+.stat:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  color: #eaf5fe;
+  transform: translateX(-50%) translateY(-4px); /* Minor lift animation */
+}
