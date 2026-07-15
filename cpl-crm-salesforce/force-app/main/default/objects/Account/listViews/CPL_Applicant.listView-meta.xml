@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Applicant</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CPL_Student_Lifecycle__c</columns>
+    <columns>Graduation_Date__c</columns>
+    <columns>PC_EMAIL</columns>
+    <columns>Primary_Sport__pc</columns>
+    <columns>Recruiting_Priority__c</columns>
+    <columns>ACCOUNT.LAST_ACTIVITY</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CPL_Student_Lifecycle__c</field>
+        <operation>equals</operation>
+        <value>Applicant</value>
+    </filters>
+    <label>CPL Applicants</label>
+</ListView>
