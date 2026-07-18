@@ -17,7 +17,7 @@ public with sharing class LeadIntakeEmailQueueable implements Queueable {
         }
 
         Id orgWideEmailId = OrgWideEmailUtil.getIntakeOrgWideEmailId();
-        Set<String> recipientEmails = LeadIntakeNotificationService.getTeamEmails();
+        Set<String> recipientEmails = LeadIntakeNotificationService.getIntakeTeamEmails();
 
         if (recipientEmails.isEmpty()) {
             // Log exception/warning to your internal framework or debug log here
