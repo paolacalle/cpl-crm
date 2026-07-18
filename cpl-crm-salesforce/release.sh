@@ -44,12 +44,13 @@ echo "$FILES"
 
 SF_FILES=$(echo "$FILES" \
     | awk '$1 != "D" {print $NF}' \
+    | { grep '^cpl-crm-salesforce/force-app/' || true; } \
     | sed 's#^cpl-crm-salesforce/##' \
     | tr '\n' ' ' | xargs)
 
 if [[ -n "$SF_FILES" ]]; then
     echo "Starting Salesforce Deployment to target org: $ALIAS_ORG..."
-    echo "sf project deploy start --target-org {$ALIAS_ORG} --source-dir {$SF_FILESsf}"
+    echo "sf project deploy start --target-org $ALIAS_ORG --source-dir $SF_FILES"
     sf project deploy start --target-org "$ALIAS_ORG" --source-dir $SF_FILES
 else
     echo "No remaining files to deploy. Exiting."

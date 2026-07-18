@@ -17,7 +17,7 @@ public with sharing class LeadIntakeNotificationService {
      * @return Set<String> Set of distinct, active email addresses for the intake team.
      */
     public static Set<String> getIntakeTeamEmails() {
-        // Updated to use the correct signature from your GetGroupTeamEmailsUtils class
-        return GetGroupTeamEmailsUtils.getIntakeTeamEmails(INTAKE_GROUP_NAMES, GROUP_TYPE_REGULAR);
+        // Updated to use the correct signature from your GetGroupTeamEmailsUtil class
+        return GetGroupTeamEmailsUtil.getTeamEmails(INTAKE_GROUP_NAMES, GROUP_TYPE_REGULAR);
     }
 }

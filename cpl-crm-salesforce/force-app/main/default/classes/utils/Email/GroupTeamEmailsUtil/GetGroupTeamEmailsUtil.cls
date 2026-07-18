@@ -6,7 +6,7 @@
  * @group Utilities
  */
 
-public inherited sharing class GetGroupTeamEmailsUtils {
+public inherited sharing class GetGroupTeamEmailsUtil {
 
     /**
      * @description Retrieves active user email addresses belonging to specified groups or queues.
@@ -19,7 +19,7 @@ public inherited sharing class GetGroupTeamEmailsUtils {
             return new Set<String>();
         }
 
-        Set<Id> groupIds = new Set<Id>();
+        Set<Id> userIds = new Set<Id>();
         Set<Id> nestedGroupIds = new Set<Id>();
 
         List<GroupMember> primaryMembers = [
