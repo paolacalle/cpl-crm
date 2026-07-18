@@ -147,27 +147,25 @@ public with sharing class LeadIntakeEmailQueueable implements Queueable, Databas
         return att;
     }
 
-    @TestVisible
-    private static String buildScholarBody(Lead ld) {
-        String name = ld.Name == null ? '' : ld.Name.escapeHtml4();
-        String leadLink = URL.getOrgDomainUrl().toExternalForm() + '/' + ld.Id;
+    @TestVisible 
+    private static String buildScholarBody(Lead ld) { 
+        String name = ld.Name == null ? '' : ld.Name.escapeHtml4(); 
+        String leadLink = URL.getOrgDomainUrl().toExternalForm() + '/' + ld.Id; 
+        
+        return '<p>A new <strong>CPL Scholar Interest Lead</strong> has been created: <strong>' + name + '</strong>.</p>' + 
+            '<p><strong>View Record in Salesforce:</strong> <a href="' + leadLink + '">' + leadLink + '</a></p>' + 
+            '<p>The full lead summary (PDF) and the applicant\'s resume are attached. Please review and begin intake.</p>'; 
+    } 
 
-        return '<p>A new <strong>CPL Scholar Interest Lead</strong> has been created: <strong>'
-            + name + '</strong>.</p>'
-            + '<p><strong>View Record in Salesforce:</strong> <a href="' + leadLink + '">' + leadLink + '</a></p>' +
-            + '<p>The full lead summary (PDF) and the applicant\'s resume are attached. '
-            + 'Please review and begin intake.</p>';
+    @TestVisible 
+    private static String buildPartnerBody(Lead ld) { 
+        String name = ld.Name == null ? '' : ld.Name.escapeHtml4(); 
+        String leadLink = URL.getOrgDomainUrl().toExternalForm() + '/' + ld.Id; 
+        
+        return '<p>A new <strong>Partner Lead</strong> has been created: <strong>' + name + '</strong>.</p>' + 
+            '<p><strong>View Record in Salesforce:</strong> <a href="' + leadLink + '">' + leadLink + '</a></p>' + 
+            '<p>The full lead summary (PDF) is attached. Please review and begin outreach.</p>'; 
     }
 
-    @TestVisible
-    private static String buildPartnerBody(Lead ld) {
-        String name = ld.Name == null ? '' : ld.Name.escapeHtml4();
-        String leadLink = URL.getOrgDomainUrl().toExternalForm() + '/' + ld.Id;
-
-        return '<p>A new <strong>Partner Lead</strong> has been created: <strong>'
-            + name + '</strong>.</p>'
-            + '<p><strong>View Record in Salesforce:</strong> <a href="' + leadLink + '">' + leadLink + '</a></p>' +
-            + '<p>The full lead summary (PDF) is attached. Please review and begin outreach.</p>';
-    }
 
 }

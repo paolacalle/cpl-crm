@@ -30,16 +30,27 @@ private class LeadIntakeSummaryPdfControllerTest {
 
     @isTest
     static void partnerBranchAndMultiselect() {
+        // Derive two real, active values from the picklist so the test is org-agnostic.
+        List<String> vals = new List<String>();
+        for (Schema.PicklistEntry e : Lead.Partnership_Interest__c.getDescribe().getPicklistValues()) {
+            if (e.isActive()) {
+                vals.add(e.getValue());
+            }
+            if (vals.size() == 2) {
+                break;
+            }
+        }
+
         Lead ld = new Lead(
             FirstName = 'Nia', LastName = 'Partner', Company = 'Acme',
             Email = 'n@e.com', Status = 'New', RecordTypeId = rt('Partner_Lead'),
-            Partnership_Interest__c = 'Supporting CPL athletes;Other'
+            Partnership_Interest__c = String.join(vals, ';')
         );
         insert ld;
 
         LeadIntakeSummaryPdfController c = controllerFor(ld.Id);
         System.assert(c.getIsPartner(), 'Should detect partner record type');
-        System.assertEquals('Supporting CPL athletes, Other',
+        System.assertEquals(String.join(vals, ', '),
             c.getPartnershipInterestDisplay(),
             'Multiselect values should render as a comma list');
     }
