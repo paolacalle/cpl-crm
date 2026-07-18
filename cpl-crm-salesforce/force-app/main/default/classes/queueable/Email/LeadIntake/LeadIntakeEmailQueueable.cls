@@ -4,7 +4,7 @@
  *
  * @group Queueables
  */
-public with sharing class LeadIntakeEmailQueueable implements Queueable {
+public with sharing class LeadIntakeEmailQueueable implements Queueable, Database.AllowsCallouts {
     private final List<Id> leadIds;
 
     public LeadIntakeEmailQueueable(List<Id> leadIds) {
@@ -150,8 +150,11 @@ public with sharing class LeadIntakeEmailQueueable implements Queueable {
     @TestVisible
     private static String buildScholarBody(Lead ld) {
         String name = ld.Name == null ? '' : ld.Name.escapeHtml4();
-        return '<p>A new <strong>CPL Scholar Lead</strong> has been created: <strong>'
+        String leadLink = URL.getOrgDomainUrl().toExternalForm() + '/' + ld.Id;
+
+        return '<p>A new <strong>CPL Scholar Interest Lead</strong> has been created: <strong>'
             + name + '</strong>.</p>'
+            + '<p><strong>View Record in Salesforce:</strong> <a href="' + leadLink + '">' + leadLink + '</a></p>' +
             + '<p>The full lead summary (PDF) and the applicant\'s resume are attached. '
             + 'Please review and begin intake.</p>';
     }
@@ -159,8 +162,11 @@ public with sharing class LeadIntakeEmailQueueable implements Queueable {
     @TestVisible
     private static String buildPartnerBody(Lead ld) {
         String name = ld.Name == null ? '' : ld.Name.escapeHtml4();
+        String leadLink = URL.getOrgDomainUrl().toExternalForm() + '/' + ld.Id;
+
         return '<p>A new <strong>Partner Lead</strong> has been created: <strong>'
             + name + '</strong>.</p>'
+            + '<p><strong>View Record in Salesforce:</strong> <a href="' + leadLink + '">' + leadLink + '</a></p>' +
             + '<p>The full lead summary (PDF) is attached. Please review and begin outreach.</p>';
     }
 
