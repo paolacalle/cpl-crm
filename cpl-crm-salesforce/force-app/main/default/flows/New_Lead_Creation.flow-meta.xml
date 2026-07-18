@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Send_New_Lead_Email_Alert</name>
-        <label>Send New Lead Email Alert</label>
+        <name>Send_Lead_Intake_Summary_Email</name>
+        <label>Send Lead Intake Summary Email</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <actionName>Lead.New_Lead_Created_Email_Alert</actionName>
-        <actionType>emailAlert</actionType>
+        <actionName>LeadIntakeSummaryEmailAction</actionName>
+        <actionType>apex</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>SObjectRowId</name>
+            <name>leadId</name>
             <value>
                 <elementReference>$Record.Id</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>Lead.New_Lead_Created_Email_Alert</nameSegment>
-        <offset>0</offset>
+        <inputParameters>
+            <name>resumeUrl</name>
+            <value>
+                <elementReference>$Record.Primary_Resume_URL__c</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LeadIntakeSummaryEmailAction</nameSegment>
     </actionCalls>
     <actionCalls>
         <description>Sends a custom notification to the Lead owner when a new Lead is created.</description>
@@ -26,7 +31,7 @@
         <actionName>customNotificationAction</actionName>
         <actionType>customNotificationAction</actionType>
         <connector>
-            <targetReference>Send_New_Lead_Email_Alert</targetReference>
+            <targetReference>Send_Lead_Intake_Summary_Email</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>

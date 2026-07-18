@@ -1,0 +1,65 @@
+<apex:page controller="LeadIntakeSummaryPdfController" renderAs="pdf" applyHtmlTag="false" showHeader="false" sidebar="false">
+<html>
+<head>
+    <style type="text/css">
+        body { font-family: Arial, sans-serif; font-size: 11pt; color: #222; }
+        h1 { font-size: 16pt; margin: 0 0 2px 0; }
+        .sub { color: #666; font-size: 9pt; margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+        th { text-align: left; width: 38%; padding: 5px 8px; background: #f2f2f2; border: 1px solid #ddd; vertical-align: top; }
+        td { padding: 5px 8px; border: 1px solid #ddd; vertical-align: top; }
+        .section { font-size: 12pt; font-weight: bold; margin: 18px 0 4px 0; }
+    </style>
+</head>
+<body>
+    <apex:outputPanel rendered="{!hasLead}">
+        
+        <!-- Header Section -->
+        <h1>{!lead.Name}</h1>
+        <div class="sub">
+            <apex:outputText rendered="{!isScholar}">CPL Student Interest Lead</apex:outputText>
+            <apex:outputText rendered="{!isPartner}">Partner Interest Lead</apex:outputText>
+            &nbsp;•&nbsp; Lead summary
+        </div>
+
+        <!-- ============ SCHOLAR LAYOUT ============ -->
+        <apex:outputPanel rendered="{!isScholar}">
+            <div class="section">Contact</div>
+            <table>
+                <tr><th>Email</th><td>{!lead.Email}</td></tr>
+                <tr><th>Lead Source</th><td>{!lead.LeadSource}</td></tr>
+            </table>
+            
+            <div class="section">Athletics &amp; School</div>
+            <table>
+                <tr><th>Sport</th><td>{!lead.Sport_From_Form__c}</td></tr>
+                <tr><th>School</th><td>{!schoolDisplay}</td></tr>
+            </table>
+            
+            <div class="section">Evaluation &amp; Application</div>
+            <table>
+                <tr><th>Commits to CPL Mantra</th><td>{!lead.Commits_to_CPL_mantra__c}</td></tr>
+                <tr><th>Resume Uploaded</th><td>{!lead.Resume_Uploaded__c}</td></tr>
+                <tr><th>Why CPL Scholar</th><td>{!lead.Why_CPL_Scholar__c}</td></tr>
+            </table>
+        </apex:outputPanel>
+
+        <!-- ============ PARTNER LAYOUT ============ -->
+        <apex:outputPanel rendered="{!isPartner}">
+            <div class="section">Contact</div>
+            <table>
+                <tr><th>Email</th><td>{!lead.Email}</td></tr>
+                <tr><th>Lead Source</th><td>{!lead.LeadSource}</td></tr>
+            </table>
+            
+            <div class="section">Partnership</div>
+            <table>
+                <tr><th>Partnership Interest</th><td>{!partnershipInterestDisplay}</td></tr>
+                <tr><th>Message</th><td>{!lead.Partner_Message__c}</td></tr>
+            </table>
+        </apex:outputPanel>
+
+    </apex:outputPanel>
+</body>
+</html>
+</apex:page>

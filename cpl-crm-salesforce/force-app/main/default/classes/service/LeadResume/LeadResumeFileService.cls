@@ -23,15 +23,17 @@ public with sharing class LeadResumeFileService {
         }
 
         if (!leadIds.isEmpty()) {
-            System.enqueueJob(new ResumeFileQueueable(leadIds));
+            System.enqueueJob(new ResumeFileQueueable(leadIds, oldMap == null));
         }
     }
 
     private class ResumeFileQueueable implements Queueable, Database.AllowsCallouts {
         private final List<Id> leadIds;
+        private final Boolean isInsert;
 
-        private ResumeFileQueueable(List<Id> leadIds) {
+        private ResumeFileQueueable(List<Id> leadIds, Boolean isInsert) {
             this.leadIds = leadIds;
+            this.isInsert = isInsert;
         }
 
         public void execute(QueueableContext context) {
@@ -57,6 +59,12 @@ public with sharing class LeadResumeFileService {
 
             if (!files.isEmpty()) {
                 insert files;
+            }
+
+            // Newly created leads with a resume: the file(s) now exist, so send the intake
+            // summary email with the resume attached. Update events don't re-notify.
+            if (isInsert && !Test.isRunningTest()) {
+                System.enqueueJob(new LeadIntakeEmailQueueable(leadIds));
             }
         }
     }
