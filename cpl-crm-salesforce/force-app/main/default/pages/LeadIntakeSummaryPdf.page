@@ -34,6 +34,7 @@
             <table>
                 <tr><th>Sport</th><td>{!lead.Sport_From_Form__c}</td></tr>
                 <tr><th>School</th><td>{!schoolDisplay}</td></tr>
+                <tr><th>College Year</th><td>{!lead.Submitted_College_Year__c}</td></tr>
             </table>
             
             <div class="section">Evaluation &amp; Application</div>

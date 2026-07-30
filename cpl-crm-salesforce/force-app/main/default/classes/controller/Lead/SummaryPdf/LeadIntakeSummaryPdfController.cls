@@ -29,7 +29,7 @@ public with sharing class LeadIntakeSummaryPdfController {
         
         // safer in case no leads
         List<Lead> currentLeads = [ 
-            SELECT Id, FirstName, LastName, Name, Email, LeadSource, 
+            SELECT Id, FirstName, LastName, Name, Email, LeadSource, Submitted_College_Year__c
                    Sport_From_Form__c, School_Name_From_Form__c, Why_CPL_Scholar__c, 
                    Commits_to_CPL_mantra__c, Resume_Uploaded__c, Primary_Resume_URL__c, 
                    Partnership_Interest__c, Partner_Interest_Other__c, Partner_Message__c, 
