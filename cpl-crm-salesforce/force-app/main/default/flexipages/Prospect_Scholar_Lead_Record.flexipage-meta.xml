@@ -293,6 +293,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>c:leadGoogleCalendarEvent</componentName>
+                <identifier>c_leadGoogleCalendarEvent</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>showLegacyActivityComposer</name>
                     <value>false</value>
@@ -409,16 +415,6 @@
                 </componentInstanceProperties>
                 <componentName>runtime_sales_merge:mergeCandidatesPreviewCard</componentName>
                 <identifier>runtime_sales_merge_mergeCandidatesPreviewCard</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>recordActionDeployment</name>
-                    <value>LeadScholarIntakeActions</value>
-                </componentInstanceProperties>
-                <componentName>lbpm:actionList</componentName>
-                <identifier>lbpm_leadScholarIntakeActionList</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
