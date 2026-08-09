@@ -1,19 +1,14 @@
 <template>
-    <lightning-card
-        title="Google Calendar Event"
-        icon-name="standard:event"
-    >
-        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
-            <template lwc:if={hasLeadRecord}>
-                <lightning-button
-                    label="Create a Google Event"
-                    variant="brand"
-                    icon-name="utility:new_window"
-                    class="slds-m-top_x-small"
-                    onclick={handleSchedule}
-                >
-                </lightning-button>
-            </template>
-        </div>
-    </lightning-card>
+    <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+        <template lwc:if={hasLeadRecord}>
+            <lightning-button
+                label="Create a Google Event"
+                variant="brand"
+                icon-name="utility:new_window"
+                class="slds-m-top_x-small"
+                onclick={handleSchedule}
+            >
+            </lightning-button>
+        </template>
+    </div>
 </template>

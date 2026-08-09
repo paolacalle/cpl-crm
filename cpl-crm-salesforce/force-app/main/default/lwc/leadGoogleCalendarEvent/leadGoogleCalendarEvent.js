@@ -45,7 +45,7 @@ export default class LeadGoogleCalendarEvent extends NavigationMixin(
 
             const params = new URLSearchParams({
                 action: 'TEMPLATE',
-                text: `CPL intro call — ${this.leadName || 'Lead'}`,
+                text: `CPL — ${this.leadName || 'Lead'}`,
                 details: `Salesforce Lead: ${absoluteRecordUrl}`
             });
 
