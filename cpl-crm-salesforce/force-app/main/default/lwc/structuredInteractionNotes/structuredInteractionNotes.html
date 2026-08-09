@@ -1,0 +1,206 @@
+<template>
+  <lightning-card title="Interaction Notes" icon-name="standard:note">
+    <lightning-button
+      slot="actions"
+      label={editorToggleLabel}
+      icon-name={editorToggleIcon}
+      variant={editorToggleVariant}
+      onclick={toggleEditor}
+    ></lightning-button>
+
+    <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+      <template if:false={hasRecordContext}>
+        <div class="context-warning" role="status">
+          <lightning-icon
+            icon-name="utility:info"
+            size="x-small"
+            class="context-warning-icon"
+          ></lightning-icon>
+          <span>Add this component to a record page before saving notes.</span>
+        </div>
+      </template>
+
+      <section class="filters" aria-label="Interaction filters">
+        <div class="section-heading">
+          <div>
+            <h3>Filters</h3>
+            <p>{filterSummary}</p>
+          </div>
+          <div class="section-actions">
+            <lightning-button-icon
+              icon-name="utility:refresh"
+              alternative-text="Refresh interactions"
+              title="Refresh interactions"
+              onclick={handleRefresh}
+            ></lightning-button-icon>
+            <lightning-button
+              label="Clear"
+              variant="neutral"
+              onclick={handleClearFilters}
+            ></lightning-button>
+          </div>
+        </div>
+
+        <div class="filter-grid">
+          <lightning-input
+            name="titleFilter"
+            label="Title"
+            value={titleFilter}
+            onchange={handleInputChange}
+          ></lightning-input>
+          <lightning-combobox
+            name="topicFilter"
+            label="Topic"
+            value={selectedFilterTopicId}
+            options={filterTopicOptions}
+            onchange={handleFilterChange}
+          ></lightning-combobox>
+          <lightning-input
+            type="date"
+            name="startDateFilter"
+            label="Start Date"
+            value={startDateFilter}
+            onchange={handleInputChange}
+          ></lightning-input>
+          <lightning-input
+            type="date"
+            name="endDateFilter"
+            label="End Date"
+            value={endDateFilter}
+            onchange={handleInputChange}
+          ></lightning-input>
+        </div>
+      </section>
+
+      <template if:true={isEditorOpen}>
+        <section class="editor" aria-label={editorTitle}>
+          <div class="section-heading">
+            <div>
+              <h3>{editorTitle}</h3>
+              <p>Capture the date, title, note, and reusable topics.</p>
+            </div>
+
+            <lightning-button
+              label="Cancel"
+              variant="neutral"
+              onclick={handleCancelEdit}
+            ></lightning-button>
+          </div>
+
+          <div class="editor-grid">
+            <lightning-input
+              name="title"
+              label="Title"
+              value={title}
+              onchange={handleInputChange}
+              required
+            ></lightning-input>
+
+            <lightning-input
+              type="date"
+              name="interactionDate"
+              label="Interaction Date"
+              value={interactionDate}
+              onchange={handleInputChange}
+              required
+            ></lightning-input>
+
+            <lightning-textarea
+              class="editor-note"
+              name="note"
+              label="Note"
+              value={note}
+              onchange={handleInputChange}
+              required
+            ></lightning-textarea>
+
+            <lightning-dual-listbox
+              class="editor-topics"
+              name="topics"
+              label="Topics"
+              source-label="Available"
+              selected-label="Selected"
+              options={topicOptions}
+              value={selectedTopicIds}
+              onchange={handleTopicsChange}
+            ></lightning-dual-listbox>
+
+            <lightning-input
+              class="editor-new-topic"
+              name="newTopics"
+              label="Create Topic"
+              value={newTopics}
+              onchange={handleInputChange}
+              placeholder="Example: Financial Aid, FAFSA"
+            ></lightning-input>
+          </div>
+
+          <div class="actions">
+            <lightning-button
+              label={saveLabel}
+              variant="brand"
+              icon-name="utility:save"
+              disabled={saveDisabled}
+              onclick={handleSave}
+            ></lightning-button>
+          </div>
+        </section>
+      </template>
+
+      <template if:true={hasInteractions}>
+        <div class="timeline-scroll" style={timelineStyle}>
+          <ol class="timeline">
+            <template for:each={interactions} for:item="interaction">
+              <li key={interaction.id} class="timeline-item">
+                <div class="date-marker">
+                  <span>{interaction.dateMonth}</span>
+                  <strong>{interaction.dateDay}</strong>
+                </div>
+                <div class="timeline-main">
+                  <div class="timeline-heading">
+                    <div class="timeline-title-group">
+                      <a href={interaction.url} class="interaction-title"
+                        >{interaction.title}</a
+                      >
+                      <div class="audit">
+                        Created {interaction.createdDateLabel} by
+                        {interaction.createdByName}
+                        <span class="dot">•</span>
+                        Modified {interaction.lastModifiedDateLabel} by
+                        {interaction.lastModifiedByName}
+                      </div>
+                      <template if:true={interaction.hasTopics}>
+                        <div class="topics">
+                          <template
+                            for:each={interaction.topics}
+                            for:item="topic"
+                          >
+                            <span key={topic.id} class={topic.className}
+                              >{topic.name}</span
+                            >
+                          </template>
+                        </div>
+                      </template>
+                    </div>
+                    <lightning-button-icon
+                      icon-name="utility:edit"
+                      alternative-text="Edit interaction"
+                      title="Edit interaction"
+                      data-id={interaction.id}
+                      onclick={handleEdit}
+                    ></lightning-button-icon>
+                  </div>
+                  <p class="note">{interaction.note}</p>
+                </div>
+              </li>
+            </template>
+          </ol>
+        </div>
+      </template>
+
+      <template if:false={hasInteractions}>
+        <div class="empty-state">No interactions found.</div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

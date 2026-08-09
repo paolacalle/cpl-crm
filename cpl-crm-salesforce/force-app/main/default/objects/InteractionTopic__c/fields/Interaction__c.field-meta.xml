@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Interaction__c</fullName>
+    <description>The interaction that uses this topic.</description>
+    <label>Interaction</label>
+    <referenceTo>Interaction__c</referenceTo>
+    <relationshipLabel>Interaction Topics</relationshipLabel>
+    <relationshipName>Interaction_Topics</relationshipName>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
