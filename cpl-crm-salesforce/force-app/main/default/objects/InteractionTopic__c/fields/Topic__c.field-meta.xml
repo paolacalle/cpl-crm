@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Topic__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>The reusable topic assigned to this interaction.</description>
+    <inlineHelpText
+  >Use Active on Topic to retire values instead of deleting topics that are already in use.</inlineHelpText>
+    <label>Topic</label>
+    <referenceTo>Topic__c</referenceTo>
+    <relationshipLabel>Interaction Topics</relationshipLabel>
+    <relationshipName>Interaction_Topics</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
