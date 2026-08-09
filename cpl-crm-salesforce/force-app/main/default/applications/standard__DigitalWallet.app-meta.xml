@@ -9,5 +9,6 @@
     <navType>Standard</navType>
     <tabs>standard-LicenseUtilization</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>standard-ProductLimits</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

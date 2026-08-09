@@ -5,15 +5,13 @@
     <columns>Athletic_Division__c</columns>
     <columns>Sports_Focus__c</columns>
     <columns>Recruiting_Priority__c</columns>
-    <columns>Strategic_Importance__c</columns>
     <columns>Primary_Contact__c</columns>
     <columns>ACCOUNT.URL</columns>
-    <columns>CORE.USERS.ALIAS</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>ACCOUNT.RECORDTYPE</field>
-        <operation>equals</operation>
-        <value>Account.School</value>
+        <field>ACCOUNT.NAME</field>
+        <operation>contains</operation>
+        <value>George</value>
     </filters>
     <label>Schools</label>
 </ListView>

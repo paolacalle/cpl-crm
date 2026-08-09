@@ -52,6 +52,10 @@
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>hideSlackAction</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>numVisibleActions</name>
                     <value>3</value>
                 </componentInstanceProperties>
@@ -206,12 +210,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
-                    <name>recordActionDeployment</name>
-                    <value>CPLMemberActions</value>
-                </componentInstanceProperties>
-                <componentName>lbpm:actionList</componentName>
-                <identifier>lbpm_actionList</identifier>
+                <componentName>forceChatter:recordFeedContainer</componentName>
+                <identifier>forceChatter_recordFeedContainer2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

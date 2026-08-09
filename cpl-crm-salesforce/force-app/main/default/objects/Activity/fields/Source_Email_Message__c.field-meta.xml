@@ -6,7 +6,6 @@
     <label>Source Email Message</label>
     <length>18</length>
     <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
     <type>Text</type>
     <unique>false</unique>
 </CustomField>

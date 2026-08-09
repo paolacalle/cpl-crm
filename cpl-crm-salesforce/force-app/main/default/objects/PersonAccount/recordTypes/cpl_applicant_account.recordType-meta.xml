@@ -97,10 +97,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Prospect</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Scholar</fullName>
             <default>false</default>
         </values>
