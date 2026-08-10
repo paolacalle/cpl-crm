@@ -182,13 +182,25 @@
                         </div>
                       </template>
                     </div>
-                    <lightning-button-icon
-                      icon-name="utility:edit"
-                      alternative-text="Edit interaction"
-                      title="Edit interaction"
-                      data-id={interaction.id}
-                      onclick={handleEdit}
-                    ></lightning-button-icon>
+                    <div class="timeline-actions">
+                      <lightning-button-icon
+                        icon-name="utility:edit"
+                        alternative-text="Edit interaction"
+                        title="Edit interaction"
+                        data-id={interaction.id}
+                        disabled={interactionActionDisabled}
+                        onclick={handleEdit}
+                      ></lightning-button-icon>
+                      <lightning-button-icon
+                        icon-name="utility:delete"
+                        alternative-text="Delete interaction"
+                        title="Delete interaction"
+                        variant="border-filled"
+                        data-id={interaction.id}
+                        disabled={interactionActionDisabled}
+                        onclick={handleDelete}
+                      ></lightning-button-icon>
+                    </div>
                   </div>
                   <p class="note">{interaction.note}</p>
                 </div>

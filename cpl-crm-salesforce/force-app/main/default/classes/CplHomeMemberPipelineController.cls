@@ -3,7 +3,7 @@ public with sharing class CplHomeMemberPipelineController {
         'Athlete',
         // 'Prospect',
         'Applicant',
-        'Scholar',
+        'Member Scholar',
         'Scholar Alumni',
         'Alumni'
         // 'Inactive'

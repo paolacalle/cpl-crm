@@ -1,7 +1,9 @@
 import { LightningElement, api, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
 import { refreshApex } from "@salesforce/apex";
+import LightningConfirm from "lightning/confirm";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import deleteInteraction from "@salesforce/apex/StructuredInteractionController.deleteInteraction";
 import getActiveTopics from "@salesforce/apex/StructuredInteractionController.getActiveTopics";
 import getInteractions from "@salesforce/apex/StructuredInteractionController.getInteractions";
 import saveInteraction from "@salesforce/apex/StructuredInteractionController.saveInteraction";
@@ -26,6 +28,7 @@ export default class StructuredInteractionNotes extends LightningElement {
   wiredInteractionsResult;
   isEditorOpen = false;
   isSaving = false;
+  isDeleting = false;
   pageReferenceRecordId;
 
   @wire(CurrentPageReference)
@@ -153,6 +156,10 @@ export default class StructuredInteractionNotes extends LightningElement {
     return this.isSaving || !this.hasRecordContext;
   }
 
+  get interactionActionDisabled() {
+    return this.isSaving || this.isDeleting || !this.hasRecordContext;
+  }
+
   get editorToggleIcon() {
     return this.isEditorOpen ? "utility:close" : "utility:add";
   }
@@ -218,6 +225,72 @@ export default class StructuredInteractionNotes extends LightningElement {
 
   handleCancelEdit() {
     this.resetForm();
+  }
+
+  async handleDelete(event) {
+    if (!this.hasRecordContext) {
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Could not delete interaction",
+          message: "Add this component to a record page before deleting notes.",
+          variant: "error"
+        })
+      );
+      return;
+    }
+
+    const interactionId = event.currentTarget.dataset.id;
+    const interaction = this.interactions.find(
+      (row) => row.id === interactionId
+    );
+
+    if (!interaction) {
+      return;
+    }
+
+    const confirmed = await LightningConfirm.open({
+      label: "Delete Interaction",
+      message: `Delete "${interaction.title}"? This cannot be undone.`,
+      variant: "headerless"
+    });
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.isDeleting = true;
+
+    try {
+      await deleteInteraction({
+        interactionId,
+        parentRecordId: this.effectiveRecordId
+      });
+
+      if (this.editingInteractionId === interactionId) {
+        this.resetForm();
+      }
+
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Interaction deleted",
+          variant: "success"
+        })
+      );
+
+      await refreshApex(this.wiredInteractionsResult);
+    } catch (error) {
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Could not delete interaction",
+          message:
+            error?.body?.message ||
+            `Unexpected error deleting the interaction. Record: ${this.effectiveRecordId}`,
+          variant: "error"
+        })
+      );
+    } finally {
+      this.isDeleting = false;
+    }
   }
 
   async handleSave() {

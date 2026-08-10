@@ -187,6 +187,48 @@ public with sharing class StructuredInteractionController {
     return interactionRecord.Id;
   }
 
+  @AuraEnabled
+  public static void deleteInteraction(Id interactionId, Id parentRecordId) {
+    if (parentRecordId == null) {
+      throw new AuraHandledException(
+        'Choose a record before deleting an interaction.'
+      );
+    }
+
+    if (interactionId == null) {
+      throw new AuraHandledException('Choose an interaction to delete.');
+    }
+
+    InteractionParent parent = resolveInteractionParent(parentRecordId);
+
+    if (parent == null) {
+      throw new AuraHandledException(
+        'This record does not have a supported Lead or Contact relationship.'
+      );
+    }
+
+    Interaction__c interactionRecord = [
+      SELECT Id, Contact__c, Lead__c
+      FROM Interaction__c
+      WHERE Id = :interactionId
+      LIMIT 1
+    ];
+
+    if ((Id) interactionRecord.get(parent.fieldApiName) != parent.id) {
+      throw new AuraHandledException(
+        'This interaction does not belong to the current record.'
+      );
+    }
+
+    delete [
+      SELECT Id
+      FROM InteractionTopic__c
+      WHERE Interaction__c = :interactionRecord.Id
+    ];
+
+    delete interactionRecord;
+  }
+
   private static InteractionParent resolveInteractionParent(Id recordId) {
     Schema.SObjectType objectType = recordId.getSObjectType();
 

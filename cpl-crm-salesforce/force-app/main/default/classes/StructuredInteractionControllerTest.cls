@@ -336,6 +336,100 @@ private class StructuredInteractionControllerTest {
   }
 
   @IsTest
+  static void deletesInteractionAndTopicLinks() {
+    Contact contactRecord = makeContact();
+
+    Topic__c topicRecord = new Topic__c(
+      Name = 'Delete Topic',
+      Active__c = true
+    );
+    insert topicRecord;
+
+    Interaction__c interactionRecord = new Interaction__c(
+      Contact__c = contactRecord.Id,
+      Title__c = 'Delete me',
+      Interaction_Date__c = Date.today(),
+      Note__c = 'Temporary note'
+    );
+    insert interactionRecord;
+
+    insert new InteractionTopic__c(
+      Interaction__c = interactionRecord.Id,
+      Topic__c = topicRecord.Id
+    );
+
+    StructuredInteractionController.deleteInteraction(
+      interactionRecord.Id,
+      contactRecord.Id
+    );
+
+    System.assertEquals(
+      0,
+      [
+        SELECT COUNT()
+        FROM Interaction__c
+        WHERE Id = :interactionRecord.Id
+      ]
+    );
+
+    System.assertEquals(
+      0,
+      [
+        SELECT COUNT()
+        FROM InteractionTopic__c
+        WHERE Interaction__c = :interactionRecord.Id
+      ]
+    );
+
+    System.assertEquals(
+      1,
+      [
+        SELECT COUNT()
+        FROM Topic__c
+        WHERE Id = :topicRecord.Id
+      ]
+    );
+  }
+
+  @IsTest
+  static void rejectsDeleteFromWrongParentRecord() {
+    Contact ownerContact = makeContact();
+    Contact otherContact = new Contact(
+      FirstName = 'Other',
+      LastName = 'Student'
+    );
+    insert otherContact;
+
+    Interaction__c interactionRecord = new Interaction__c(
+      Contact__c = ownerContact.Id,
+      Title__c = 'Protected interaction',
+      Interaction_Date__c = Date.today(),
+      Note__c = 'Do not delete from another record.'
+    );
+    insert interactionRecord;
+
+    try {
+      StructuredInteractionController.deleteInteraction(
+        interactionRecord.Id,
+        otherContact.Id
+      );
+
+      System.assert(false, 'Expected wrong parent delete error.');
+    } catch (AuraHandledException expected) {
+      System.assertNotEquals(null, expected);
+    }
+
+    System.assertEquals(
+      1,
+      [
+        SELECT COUNT()
+        FROM Interaction__c
+        WHERE Id = :interactionRecord.Id
+      ]
+    );
+  }
+
+  @IsTest
   static void activeTopicsExcludesRetiredTopics() {
     insert new List<Topic__c>{
       new Topic__c(Name = 'Active Topic', Active__c = true),
