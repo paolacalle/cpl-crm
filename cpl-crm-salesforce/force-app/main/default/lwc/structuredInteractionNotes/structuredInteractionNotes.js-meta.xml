@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+
+    <!-- exposes to a record page -->
+    <masterLabel>Structured Interaction Notes</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property
+        name="maxListHeight"
+        type="Integer"
+        label="Interaction list max height (px)"
+        default="420"
+        description="Maximum height of the interaction history before it scrolls. Minimum effective height is 240px."
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
