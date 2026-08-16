@@ -131,6 +131,12 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentName>structuredInteractionNotes</componentName>
+                <identifier>structuredInteractionNotes</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>label</name>
                     <value>Tabs</value>

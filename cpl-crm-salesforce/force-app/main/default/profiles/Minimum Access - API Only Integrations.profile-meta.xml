@@ -2946,6 +2946,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Event.Source_Email_Message__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Event.Type</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -5687,6 +5692,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Task.Description</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Task.Source_Email_Message__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

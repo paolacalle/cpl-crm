@@ -7,9 +7,11 @@
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>CreateCallList</excludeButtons>
     <excludeButtons>CreateSurveyInvitation</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>PrintableView</excludeButtons>
     <excludeButtons>RecordShareHierarchy</excludeButtons>
     <excludeButtons>Share</excludeButtons>
+    <excludeButtons>SmartFillEnrich</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>XClean</excludeButtons>
     <layoutSections>
@@ -178,16 +180,6 @@
     </layoutSections>
     <relatedLists>
         <relatedList>RelatedFileList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>FULL_NAME</fields>
-        <fields>ACCOUNT.NAME</fields>
-        <fields>CONTACT.PHONE1</fields>
-        <relatedList>Contact.Source_Lead_Object__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Form_Submission__c.Matched_Lead__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

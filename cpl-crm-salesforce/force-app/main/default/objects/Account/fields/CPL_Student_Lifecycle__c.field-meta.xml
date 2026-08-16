@@ -17,11 +17,6 @@
                 <label>Athlete</label>
             </value>
             <value>
-                <fullName>Prospect</fullName>
-                <default>false</default>
-                <label>Prospect</label>
-            </value>
-            <value>
                 <fullName>Applicant</fullName>
                 <default>false</default>
                 <label>Applicant</label>
@@ -57,6 +52,12 @@
                 <default>false</default>
                 <isActive>false</isActive>
                 <label>Lifter</label>
+            </value>
+            <value>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Prospect</label>
             </value>
         </valueSetDefinition>
     </valueSet>
