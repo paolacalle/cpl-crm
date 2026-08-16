@@ -2,56 +2,53 @@
 set -euo pipefail
 
 ENV="${1:-}"
+BASE="force-app/main/default"
 
-if [[ "$ENV" == "dev" ]]; then 
-    BRANCH='sandbox'
-    ALIAS_ORG='cpl-sandbox'
+DIRS=(
+    "${BASE}/classes"
+    "${BASE}/email"
+    "${BASE}/flexipages"
+    "${BASE}/labels"
+    "${BASE}/flows"
+    "${BASE}/flowDefinitions"
+    "${BASE}/flowtests"
+    "${BASE}/objects"
+    "${BASE}/layouts"
+    "${BASE}/lwc"
+    "${BASE}/pages"
+    "${BASE}/triggers"
+    "${BASE}/tabs"
+    "${BASE}/quickActions"
+)
+
+if [[ "$ENV" == "dev" ]]; then
+    BRANCH="sandbox"
+    ALIAS_ORG="cpl-sandbox"
 elif [[ "$ENV" == "prod" ]]; then
-    BRANCH='main'
-    ALIAS_ORG='CPLProduction'
+    BRANCH="main"
+    ALIAS_ORG="CPLProduction"
 else
-    echo 'ENV must be dev / prod'
+    echo "ENV must be dev or prod"
     exit 1
 fi
 
 git checkout "$BRANCH"
-BEFORE=$(git rev-parse HEAD); git pull origin "$BRANCH"; AFTER=$(git rev-parse HEAD)
+git pull origin "$BRANCH"
 
-echo "Files updated in this pull: " 
-FILES=$(git diff --name-status "$BEFORE" "$AFTER")
-echo "$FILES"
+echo "Starting Salesforce deployment to target org: $ALIAS_ORG..."
+SOURCE_ARGS=()
+for DIR in "${DIRS[@]}"; do
+    if [[ -d "$DIR" ]]; then
+        echo "Including: $DIR"
+        SOURCE_ARGS+=(--source-dir "$DIR")
+    fi
+done
 
-echo ""
-read -r -p "Enter files to remove (separated by spaces, or leave blank to skip): " RMV_FILES
-
-if [[ -n "${RMV_FILES}" ]]; then 
-    echo "Removing requested files ..."
-
-    for FILE in $RMV_FILES; do 
-        if [[  -f "$FILE"  ]]; then 
-            FILES=$(echo "$FILES" | grep -v "$FILE" || true)
-        else 
-            echo "Warning: File '$FILE' does not exist. Skipping."
-        fi 
-    done
-else 
-    echo "No files specified for removal. Done."
-fi 
-
-echo ""
-echo "Updated file list:"
-echo "$FILES"
-
-SF_FILES=$(echo "$FILES" \
-    | awk '$1 != "D" {print $NF}' \
-    | { grep '^cpl-crm-salesforce/force-app/' || true; } \
-    | sed 's#^cpl-crm-salesforce/##' \
-    | tr '\n' ' ' | xargs)
-
-if [[ -n "$SF_FILES" ]]; then
-    echo "Starting Salesforce Deployment to target org: $ALIAS_ORG..."
-    echo "sf project deploy start --target-org $ALIAS_ORG --source-dir $SF_FILES"
-    sf project deploy start --target-org "$ALIAS_ORG" --source-dir $SF_FILES
-else
-    echo "No remaining files to deploy. Exiting."
+if [[ ${#SOURCE_ARGS[@]} -eq 0 ]]; then
+    echo "No Salesforce source directories found."
+    exit 0
 fi
+
+sf project deploy start \
+    --target-org "$ALIAS_ORG" \
+    "${SOURCE_ARGS[@]}"

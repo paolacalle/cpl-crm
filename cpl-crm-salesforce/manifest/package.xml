@@ -33,6 +33,8 @@
         <members>ScholarshipInviteActionCtrlTest</members>
         <members>ScholarshipInviteEmailAction</members>
         <members>ScholarshipInviteEmailActionTest</members>
+        <members>ScholarFinalistMaterialsService</members>
+        <members>ScholarFinalistMaterialsServiceTest</members>
         <members>SportPicklistOptionsController</members>
         <members>SportPicklistOptionsControllerTest</members>
         <name>ApexClass</name>
@@ -40,6 +42,8 @@
         <members>apexEmailNotifications</members>
         <name>ApexEmailNotifications</name>
     </types>    <types>
+        <members>ContentDocumentLinkMaterialsTrigger</members>
+        <members>FormSubmissionMaterialsTrigger</members>
         <members>LeadResumeFileTrigger</members>
         <members>ProspectScholarApplicationOwnerTrigger</members>
         <name>ApexTrigger</name>
@@ -312,8 +316,8 @@
         <members>Scholarship_Award__c.Status__c</members>
         <name>CustomField</name>
     </types>    <types>
-        <members>CustomLabels</members>
-        <name>CustomLabels</name>
+        <members>Scholar_Finalist_Materials_Form_Base_URL</members>
+        <name>CustomLabel</name>
     </types>    <types>
         <members>New_Lead_Created</members>
         <name>CustomNotificationType</name>
@@ -412,7 +416,6 @@
         <members>DuplicateRecordItem</members>
         <members>DuplicateRecordSet</members>
         <members>EmailMessage</members>
-        <members>EmailMessageMigration</members>
         <members>EmpUserProvisionProcessErr</members>
         <members>Employment__c</members>
         <members>EngagementAttendee</members>
@@ -470,7 +473,6 @@
         <members>MacroAction</members>
         <members>MacroInstruction</members>
         <members>MacroUsage</members>
-        <members>MigratedEmail</members>
         <members>OmniComponentErrorLog</members>
         <members>OmniDataPack</members>
         <members>OmniDataTransform</members>
@@ -545,9 +547,6 @@
         <members>SocialPersona</members>
         <members>SocialPost</members>
         <members>Solution</members>
-        <members>StagedEmail</members>
-        <members>StagedUnmtchdEmailAddr</members>
-        <members>StagedUnmtchdEmailAddrRela</members>
         <members>StreamActivityAccess</members>
         <members>StreamingChannel</members>
         <members>Swarm</members>
