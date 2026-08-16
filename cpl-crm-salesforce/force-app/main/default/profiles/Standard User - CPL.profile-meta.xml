@@ -6531,11 +6531,11 @@
         <layout>Employment__c-Employment</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Employment__c-Employment</layout>
+        <layout>Employment__c-Full-time</layout>
         <recordType>Employment__c.Full_time</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Employment__c-Employment</layout>
+        <layout>Employment__c-Internship</layout>
         <recordType>Employment__c.Internship</recordType>
     </layoutAssignments>
     <layoutAssignments>
