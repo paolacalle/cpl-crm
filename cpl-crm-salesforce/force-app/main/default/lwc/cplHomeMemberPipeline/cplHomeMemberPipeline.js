@@ -19,7 +19,7 @@ export const STATUS_META = Object.freeze({
         filterName: 'CPL_Applicant', 
         toolTip: 'Students who we actively mentor & have an active scholarship application.' 
     },
-    'Member Scholar': { 
+    'Scholar': { 
         cssClass: `${BASE_CLASS}-scholar`, 
         objectApiName: OBJECT_NAME, 
         filterName: 'CPL_Scholar', 
@@ -31,7 +31,7 @@ export const STATUS_META = Object.freeze({
         filterName: 'CPL_Scholar_Alumni', 
         toolTip: 'Graduated & we granted scholarship.' 
     },
-    'Alumni': { 
+    'Member Alumni': { 
         cssClass: `${BASE_CLASS}-alumni`, 
         objectApiName: OBJECT_NAME, 
         filterName: 'CPL_Alumni', 

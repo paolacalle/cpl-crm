@@ -4,9 +4,9 @@ public with sharing class CplHomeMemberPipelineController {
         'Athlete',
         // 'Prospect',
         'Applicant',
-        'Member Scholar', 
+        'Scholar', 
         'Scholar Alumni',
-        'Alumni'
+        'Member Alumni'
         // 'Inactive'
     };
 
@@ -28,9 +28,9 @@ public with sharing class CplHomeMemberPipelineController {
         }
 
         // replace scholar key with member-scholar key 
-        if (countByStatus.containsKey('Scholar')) {
-            Integer scholarCount = countByStatus.remove('Scholar');
-            countByStatus.put('Member Scholar', scholarCount);
+        if (countByStatus.containsKey('Alumni')) {
+            Integer scholarCount = countByStatus.remove('Alumni');
+            countByStatus.put('Member Alumni', scholarCount);
         }
 
         // emit every stage in lifecycle order, including empty ones
