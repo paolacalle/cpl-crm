@@ -1,9 +1,10 @@
 public with sharing class CplHomeMemberPipelineController {
+    // Lifecycle stages are defined in CPL_Student_Lifecycle__c picklist values.
     private static final List<String> STATUS_ORDER = new List<String>{
         'Athlete',
         // 'Prospect',
         'Applicant',
-        'Member Scholar',
+        'Member Scholar', 
         'Scholar Alumni',
         'Alumni'
         // 'Inactive'
@@ -24,6 +25,12 @@ public with sharing class CplHomeMemberPipelineController {
             GROUP BY CPL_Student_Lifecycle__c
         ]) {
             countByStatus.put((String) ar.get('status'), (Integer) ar.get('cnt'));
+        }
+
+        // replace scholar key with member-scholar key 
+        if (countByStatus.containsKey('Scholar')) {
+            Integer scholarCount = countByStatus.remove('Scholar');
+            countByStatus.put('Member Scholar', scholarCount);
         }
 
         // emit every stage in lifecycle order, including empty ones
