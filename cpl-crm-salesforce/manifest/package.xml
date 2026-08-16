@@ -668,6 +668,8 @@
         <members>CPL_UtilityBar</members>
         <members>CommandCenterApp_UtilityBar</members>
         <members>DataGovernanceConsole_UtilityBar</members>
+        <members>Employment_Full_Time_Record</members>
+        <members>Employment_Internship_Record</members>
         <members>Evaluation_CPL_Member_Record</members>
         <members>Evaluation_Partner_Lead_Record</members>
         <members>Evaluation_Record_Page</members>
@@ -882,6 +884,8 @@
         <members>EmpUserProvisionProcessErr-Employee User Provisioning Process Error Layout</members>
         <members>EmpUserProvisioningProcess-Employee User Provisioning Process Layout</members>
         <members>Employment__c-Employment</members>
+        <members>Employment__c-Full-time</members>
+        <members>Employment__c-Internship</members>
         <members>EngagementInteraction-Engagement Interaction Layout</members>
         <members>EngagementTopic-Engagement Topic Layout</members>
         <members>Entitlement-Entitlement Layout</members>

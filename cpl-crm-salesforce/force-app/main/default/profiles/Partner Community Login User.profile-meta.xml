@@ -6531,6 +6531,14 @@
         <layout>Employment__c-Employment</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Employment__c-Full-time</layout>
+        <recordType>Employment__c.Full_time</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Employment__c-Internship</layout>
+        <recordType>Employment__c.Internship</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>EngagementInteraction-Engagement Interaction Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -6896,6 +6904,16 @@
         <default>true</default>
         <personAccountDefault>true</personAccountDefault>
         <recordType>Contact.Partner</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Employment__c.Full_time</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Employment__c.Internship</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>

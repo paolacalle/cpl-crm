@@ -4,13 +4,13 @@
     <columns>College_Scorecard_ID__c</columns>
     <columns>ACCOUNT.NAME</columns>
     <columns>Recruiting_Priority__c</columns>
-    <columns>Primary_Contact__c</columns>
     <columns>ACCOUNT.URL</columns>
+    <columns>Athletic_Division__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>ACCOUNT.NAME</field>
-        <operation>contains</operation>
-        <value>George</value>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Account.School</value>
     </filters>
     <label>Schools</label>
 </ListView>
