@@ -4,6 +4,7 @@
     <columns>FULL_NAME</columns>
     <columns>LEAD.EMAIL</columns>
     <columns>School__c</columns>
+    <columns>Submission_Date__c</columns>
     <columns>College_Year__c</columns>
     <columns>LEAD.CREATED_DATE</columns>
     <columns>CORE.USERS.ALIAS</columns>

@@ -2005,9 +2005,19 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Secondary_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Source_Lead_Object__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Submission_Date__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -3622,6 +3632,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Sport__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Submission_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6387,11 +6402,11 @@
         <layout>Employment__c-Employment</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Employment__c-Full-time</layout>
+        <layout>Employment__c-Employment</layout>
         <recordType>Employment__c.Full_time</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Employment__c-Internship</layout>
+        <layout>Employment__c-Employment</layout>
         <recordType>Employment__c.Internship</recordType>
     </layoutAssignments>
     <layoutAssignments>

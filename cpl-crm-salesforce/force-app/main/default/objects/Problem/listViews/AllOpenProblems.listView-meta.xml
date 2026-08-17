@@ -6,6 +6,7 @@
     <columns>Urgency</columns>
     <columns>Impact</columns>
     <columns>Priority</columns>
+    <columns>AssignedUser</columns>
     <columns>Category</columns>
     <columns>SubCategory</columns>
     <columns>Status</columns>

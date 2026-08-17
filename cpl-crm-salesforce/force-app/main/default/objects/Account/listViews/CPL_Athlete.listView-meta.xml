@@ -3,10 +3,11 @@
     <fullName>CPL_Athlete</fullName>
     <columns>ACCOUNT.NAME</columns>
     <columns>CPL_Student_Lifecycle__c</columns>
-    <columns>Graduation_Date__c</columns>
+    <columns>College_Year__pc</columns>
     <columns>PC_EMAIL</columns>
     <columns>Primary_Sport__pc</columns>
     <columns>Recruiting_Priority__c</columns>
+    <columns>Graduation_Date__c</columns>
     <columns>ACCOUNT.LAST_ACTIVITY</columns>
     <filterScope>Everything</filterScope>
     <filters>

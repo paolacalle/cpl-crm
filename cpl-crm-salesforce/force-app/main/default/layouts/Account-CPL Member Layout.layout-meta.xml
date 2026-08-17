@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>DataDotComAccountInsights</excludeButtons>
-    <excludeButtons>DataDotComClean</excludeButtons>
-    <excludeButtons>DataDotComCompanyHierarchy</excludeButtons>
     <excludeButtons>OpenSlackRecordChannel</excludeButtons>
     <excludeButtons>PrintableView</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -180,7 +177,10 @@
         <fields>Status__c</fields>
         <fields>Start_Date__c</fields>
         <fields>End_Date__c</fields>
+        <fields>Department__c</fields>
+        <fields>Notes__c</fields>
         <fields>Is_qualifying__c</fields>
+        <fields>Is_Current__c</fields>
         <relatedList>Employment__c.CPL_Member__c</relatedList>
         <sortField>Start_Date__c</sortField>
         <sortOrder>Asc</sortOrder>

@@ -5,6 +5,7 @@
     <columns>Subject</columns>
     <columns>Status</columns>
     <columns>Priority</columns>
+    <columns>AssignedUser</columns>
     <columns>ChangeType</columns>
     <columns>RiskLevel</columns>
     <columns>Impact</columns>

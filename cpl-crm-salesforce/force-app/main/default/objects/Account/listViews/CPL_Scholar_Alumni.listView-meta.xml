@@ -3,6 +3,7 @@
     <fullName>CPL_Scholar_Alumni</fullName>
     <columns>ACCOUNT.NAME</columns>
     <columns>CPL_Student_Lifecycle__c</columns>
+    <columns>Submission_Date__pc</columns>
     <columns>Graduation_Date__c</columns>
     <columns>PC_EMAIL</columns>
     <columns>Primary_Sport__pc</columns>
