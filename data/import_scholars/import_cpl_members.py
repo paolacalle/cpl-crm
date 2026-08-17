@@ -1,8 +1,18 @@
 import json
-import shlex
-import subprocess
-import tempfile
 from pathlib import Path
+from sf_command import (
+    run_sf_command,
+    normalize_sf_value,
+    is_sandbox_org,
+    create_sf_record, 
+    escape_soql_string,
+    is_boolean_deserialize_error,
+    get_sobject_from_id,
+    set_target_org,
+    CPL_MEMBER_RECORD_TYPE_ID,
+    LEAD_SCHOLAR_RECORD_TYPE_ID,
+    TARGET_ORG,
+)
 import pandas as pd
 
 member_column_mapper = {
@@ -32,7 +42,6 @@ lead_column_mapper = {
     "Submission_Date": "Submission_Date__c",
 }
     
-
 boolean_fields = {
     "Commits_to_CPL_mantra__pc",
     "Commits_to_CPL_mantra__c",
@@ -43,163 +52,8 @@ sport_fields = {
     "Primary_Sport__c",
 }
 
-lifecycle_value_mapper = {
-    "Unqualified": "Inactive",
-}
-
-CPL_MEMBER_RECORD_TYPE_ID = "012Vx000003FTsnIAG"
-LEAD_SCHOLAR_RECORD_TYPE_ID = "012Kd00000163evIAA"
-TARGET_ORG = "CPLProduction" 
+set_target_org("CPLProduction")  # Change this to your target Salesforce org alias
 BASE_DIR = Path(__file__).resolve().parent
-REST_API_VERSION = "v60.0"
-
-
-def run_sf_command(args, return_errors=False, log_errors=True):
-    result = subprocess.run(
-        args,
-        capture_output=True,
-        text=True,
-    )
-
-    stdout = result.stdout.strip()
-    stderr = result.stderr.strip()
-
-    try:
-        parsed_stdout = json.loads(stdout) if stdout else None
-    except json.JSONDecodeError:
-        parsed_stdout = None
-
-    if result.returncode != 0:
-        if log_errors:
-            print(f"Salesforce command failed with exit code {result.returncode}:")
-            print(" ".join(shlex.quote(arg) for arg in args))
-            if parsed_stdout is not None:
-                print(json.dumps(compact_sf_error(parsed_stdout), indent=2))
-            elif stdout:
-                print(stdout)
-            if stderr:
-                print(stderr)
-        if return_errors:
-            return parsed_stdout
-        return None
-
-    if parsed_stdout is None:
-        print("Salesforce command did not return valid JSON:")
-        print(stdout)
-        return None
-
-    return parsed_stdout
-
-
-def compact_sf_error(error):
-    if isinstance(error, list):
-        return error
-
-    if not isinstance(error, dict):
-        return error
-
-    summary_keys = [
-        "name",
-        "message",
-        "exitCode",
-        "context",
-        "data",
-        "warnings",
-        "code",
-        "status",
-        "commandName",
-    ]
-
-    return {
-        key: error[key]
-        for key in summary_keys
-        if key in error
-    }
-
-
-def create_sf_record(sobject, values, return_errors=False, log_errors=True):
-    clean_values = {
-        field: value
-        for field, value in values.items()
-        if value is not None and not pd.isna(value)
-    }
-
-    with tempfile.NamedTemporaryFile(
-        mode="w",
-        suffix=".json",
-        encoding="utf-8",
-        delete=True,
-    ) as body_file:
-        json.dump(clean_values, body_file)
-        body_file.flush()
-
-        return run_sf_command(
-            [
-                "sf",
-                "api",
-                "request",
-                "rest",
-                f"/services/data/{REST_API_VERSION}/sobjects/{sobject}",
-                "--body",
-                f"@{body_file.name}",
-                "--method",
-                "POST",
-                "--target-org",
-                TARGET_ORG,
-            ],
-            return_errors=return_errors,
-            log_errors=log_errors,
-        )
-
-
-def parse_bool(value):
-    if isinstance(value, bool):
-        return value
-
-    normalized = str(value).strip().lower()
-
-    if normalized in {"true", "yes", "yes!", "y", "1"}:
-        return True
-
-    if normalized in {"false", "no", "no!", "n", "0"}:
-        return False
-
-    raise ValueError(f"Cannot convert {value!r} to a Salesforce boolean")
-
-
-def normalize_sf_value(field, value):
-    if field in boolean_fields:
-        return parse_bool(value)
-
-    if field == "CPL_Student_Lifecycle__c":
-        return lifecycle_value_mapper.get(value, value)
-
-    return value
-
-
-def is_boolean_deserialize_error(result):
-    if not isinstance(result, list):
-        return False
-
-    for error in result:
-        message = error.get("message", "")
-
-        if (
-            error.get("errorCode") == "JSON_PARSER_ERROR"
-            and "Cannot deserialize instance of boolean" in message
-        ):
-            return True
-
-    return False
-
-
-def escape_soql_string(value):
-    return str(value).replace("\\", "\\\\").replace("'", "\\'")
-
-
-def is_sandbox_org():
-    return TARGET_ORG.lower() in {"sandbox", "cpl-sandbox"}
-
 
 def get_account_summary(account_id):
     if not account_id:
@@ -234,7 +88,6 @@ def get_account_summary(account_id):
 
     return records[0]
 
-
 def get_lead_summary(lead_id):
     if not lead_id:
         return None
@@ -267,7 +120,6 @@ def get_lead_summary(lead_id):
         return None
 
     return records[0]
-
 
 def get_duplicate_record(result, preferred_sobject):
     if not isinstance(result, list):
@@ -310,7 +162,6 @@ def get_duplicate_record(result, preferred_sobject):
 
     return fallback_duplicate
 
-
 def validate_duplicate_record(record_id, sobject, email):
     if sobject == "Account":
         account = get_account_summary(record_id)
@@ -345,7 +196,6 @@ def validate_duplicate_record(record_id, sobject, email):
 
     return False
 
-
 def create_cpl_member_record(scholar):
     """
     Create a CPL Member Person Account and return its Account Id.
@@ -375,7 +225,7 @@ def create_cpl_member_record(scholar):
         if sf_field is None or pd.isna(value):
             continue
 
-        values[sf_field] = normalize_sf_value(sf_field, value)
+        values[sf_field] = normalize_sf_value(sf_field, value, boolean_fields)
 
     if is_lead:
         school_name = scholar.get("University_or_College_Enrolled_At")
@@ -386,7 +236,7 @@ def create_cpl_member_record(scholar):
         )
         
     # Sandbox data may not have matching school Account IDs.
-    if is_sandbox_org():
+    if is_sandbox_org(TARGET_ORG):
         values.pop("School__pc", None)
         values.pop("School__c", None)
 
@@ -445,23 +295,8 @@ def create_cpl_member_record(scholar):
         print(json.dumps(result, indent=2))
         return None
 
-
 def is_lead_scholar(scholar):
     return scholar.get("CPL Student Lifecycle") in {"Lead", "Unqualified"}
-
-
-def get_sobject_from_id(record_id):
-    if not isinstance(record_id, str):
-        return None
-
-    if record_id.startswith("001"):
-        return "Account"
-
-    if record_id.startswith("00Q"):
-        return "Lead"
-
-    return None
-
 
 def get_person_contact_id(account_id):
     """
@@ -478,7 +313,6 @@ def get_person_contact_id(account_id):
         return None
 
     return account.get("PersonContactId")
-
 
 def find_or_create_topic(name):
     escaped_name = escape_soql_string(name)
@@ -519,7 +353,6 @@ def find_or_create_topic(name):
         return None
 
     return result.get("id")
-
 
 def add_structured_note(scholar, lookup_field, lookup_id):
     note = scholar.get("Notes_On_Scholar")
@@ -629,7 +462,6 @@ def add_structured_note(scholar, lookup_field, lookup_id):
     if not result:
         print(f"Failed to link interaction topic for {scholar.get('Email')}")
 
-
 def add_structured_note_to_scholar(scholar):
     account_id = scholar["cpl_account_id"]
     contact_id = get_person_contact_id(account_id)
@@ -639,7 +471,6 @@ def add_structured_note_to_scholar(scholar):
         return
 
     add_structured_note(scholar, "Contact__c", contact_id)
-
 
 def add_structured_note_to_scholar_or_lead(scholar):
     sobject = scholar.get("cpl_sobject")
@@ -658,10 +489,9 @@ def add_structured_note_to_scholar_or_lead(scholar):
         f"for {scholar.get('Email')}"
     )
 
-
 def main():
-    input_file = BASE_DIR / "clean/cpl-members-cleaned.csv"
-    # input_file = BASE_DIR / "debug/failed_scholars.csv"
+    # input_file = BASE_DIR / "clean/cpl-members-cleaned.csv"
+    input_file = BASE_DIR / "debug/failed_scholars.csv"
 
     df = pd.read_csv(input_file)
     df["requested_cpl_sobject"] = df.apply(
