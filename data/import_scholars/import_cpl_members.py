@@ -53,6 +53,7 @@ sport_fields = {
 }
 
 set_target_org("CPLProduction")  # Change this to your target Salesforce org alias
+TARGET_ORG = "CPLProduction"
 BASE_DIR = Path(__file__).resolve().parent
 
 def get_account_summary(account_id):
