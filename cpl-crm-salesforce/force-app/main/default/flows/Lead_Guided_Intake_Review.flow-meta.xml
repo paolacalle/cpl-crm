@@ -12,6 +12,7 @@
             <targetReference>Complete_Confirm_Submission_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -28,6 +29,7 @@
             </value>
         </inputParameters>
         <nameSegment>LeadReviewApplicationNoteAction</nameSegment>
+        <offset>0</offset>
     </actionCalls>
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
@@ -123,6 +125,7 @@
             <targetReference>Confirm_Applicant_Details</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -195,6 +198,7 @@
             <targetReference>Save_Review_Note_Action</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <inputReference>Get_Lead</inputReference>
@@ -211,9 +215,24 @@
             <targetReference>Match_School_and_Sport</targetReference>
         </connector>
         <fields>
-            <name>Review_Note_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Add your initial application reaction.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;This will be saved as &lt;strong&gt;Lead Stage : Review of application&lt;/strong&gt; with topics: Automated Note, New to Contacting, Review of Initial Application, Lead Stage.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>inform_note_lead_review</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>info</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Add note of your initial application reaction. This will be saved as Lead Stage : Review of application with topics: Automated Note, New to Contacting, Review of Initial Application, Lead Stage.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -231,7 +250,7 @@
             <isRequired>true</isRequired>
             <styleProperties>
                 <styleSettings>
-                    <propertyName>--slds-c-textarea-sizing-height-min</propertyName>
+                    <propertyName>--slds-c-textarea-sizing-min-height</propertyName>
                     <propertyValue>
                         <stringValue>160px</stringValue>
                     </propertyValue>
@@ -262,6 +281,34 @@
             <name>Confirm_Details_Message</name>
             <fieldText>&lt;p&gt;&lt;strong&gt;Review the submitted intake details.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Before moving this lead to Contacting, confirm the email, college year, uploaded resume, and scholar statement are present and valid.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>notice_get_to_know_lead</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>info</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Take some time to familiarize yourself with the student applicant application. Afterwards, we you can wrote down notes on your initial impression.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -411,8 +458,36 @@
             <targetReference>Intake_Fields_Complete</targetReference>
         </connector>
         <fields>
+            <name>inform_why_match_fields</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>info</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Match the submitted school and sport to their standardized values. Our system will try to automatically match these whenever possible, but please review them for accuracy. Standardizing these fields is important because it keeps our data consistent and makes future filtering, reporting, and analysis more reliable.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
             <name>Submitted_Context</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Match the standardized school and sport.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Submitted school: {!Get_Lead.School_Name_From_Form__c}&lt;/p&gt;&lt;p&gt;Submitted sport: {!Get_Lead.Sport_From_Form__c}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;h2&gt;&lt;strong&gt;Current Raw Variables&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;Submitted school: {!Get_Lead.School_Name_From_Form__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Submitted sport: {!Get_Lead.Sport_From_Form__c}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -444,7 +519,7 @@
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Primary Sport</stringValue>
+                    <stringValue>Primary Sport Match</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
