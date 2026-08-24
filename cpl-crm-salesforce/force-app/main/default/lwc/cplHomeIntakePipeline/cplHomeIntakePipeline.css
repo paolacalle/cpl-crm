@@ -41,8 +41,9 @@
 
 /* Card variants with explicit border adjustments */
 .stat-new { background: #eaf5fe; border-left: 4px solid #0b5cab; }
-.stat-contacting { background: #c6ab7e; border-left: 4px solid #b16100; }
-.stat-decision { background: #8475b9; border-left: 4px solid #7a4ea6; }
+.stat-contacting { background: #d7cbb7; border-left: 4px solid #b16100; }
+.stat-decision { background: #aba6bf; border-left: 4px solid #7a4ea6; }
+.stat-unqualified { background: #c26e76; border-left: 4px solid #706e6b; }
 
 .footnote {
   color: #706e6b;

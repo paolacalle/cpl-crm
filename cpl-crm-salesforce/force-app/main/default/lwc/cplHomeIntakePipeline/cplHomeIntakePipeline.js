@@ -21,6 +21,13 @@ const STATUS_META = {
         objectApiName: 'Lead', 
         filterName: 'CPL_Lead_Decision',
         toolTip: 'Leads ready for conversion or disqualification.'
+    },
+    'Unqualified': {
+        cssClass: 'stat stat-unqualified',
+        objectApiName: 'Lead',
+        filterName: 'CPL_Lead_Unqualified',
+        label: 'Unqualified',
+        toolTip: 'Leads disqualified from the CPL member pipeline.'
     }
 };
 
@@ -60,6 +67,7 @@ export default class CplHomeIntakePipeline extends NavigationMixin(LightningElem
                 cssClass: meta.cssClass,
                 objectApiName: meta.objectApiName,
                 filterName: meta.filterName,
+                label: meta.label || c.status,
                 toolTip : meta.toolTip
             };
         }) : [];
