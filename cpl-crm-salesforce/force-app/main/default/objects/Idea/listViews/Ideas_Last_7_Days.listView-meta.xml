@@ -9,7 +9,6 @@
     <columns>IDEA.STATUS</columns>
     <columns>IDEA.CATEGORIES</columns>
     <columns>COMMUNITY.NAME</columns>
-    <columns>IDEA.IDEA_THEME</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>IDEA.CREATED_DATE</field>

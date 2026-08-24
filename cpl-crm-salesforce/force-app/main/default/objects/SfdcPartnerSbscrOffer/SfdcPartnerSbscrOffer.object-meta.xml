@@ -156,7 +156,7 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
-    <externalSharingModel>Read</externalSharingModel>
+    <externalSharingModel>Private</externalSharingModel>
     <searchLayouts>
         <customTabListAdditionalFields>PartnerCompanyName</customTabListAdditionalFields>
         <customTabListAdditionalFields>OfferType</customTabListAdditionalFields>

@@ -12,6 +12,7 @@
             <targetReference>Get_Converted_Account</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -22,6 +23,7 @@
             </value>
         </inputParameters>
         <nameSegment>LeadConvertAction</nameSegment>
+        <offset>0</offset>
     </actionCalls>
     <actionCalls>
         <description>Links the converted lead&apos;s files (resume, etc.) onto the new CPL member account.</description>
@@ -32,9 +34,10 @@
         <actionName>LeadFileTransferAction</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>Outcome_Done</targetReference>
+            <targetReference>Transfer_Related_Records_Action</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -51,6 +54,43 @@
             </value>
         </inputParameters>
         <nameSegment>LeadFileTransferAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+    <actionCalls>
+        <description>Moves custom interaction notes and activities from the converted lead onto the new CPL member contact.</description>
+        <name>Transfer_Related_Records_Action</name>
+        <label>Transfer Related Records</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>LeadConversionTransferAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Outcome_Done</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>convertedAccountId</name>
+            <value>
+                <elementReference>Get_Converted_Account.ConvertedAccountId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>convertedContactId</name>
+            <value>
+                <elementReference>Get_Converted_Account.ConvertedContactId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LeadConversionTransferAction</nameSegment>
+        <offset>0</offset>
     </actionCalls>
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
@@ -64,7 +104,7 @@
             <assignToReference>Get_Lead.Intended_CPL_Lifecycle__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Member_Type</elementReference>
+                <stringValue>Athlete</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -152,7 +192,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Choose_Member_Type</targetReference>
+            <targetReference>Confirm_Convert</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Convert</defaultConnectorLabel>
         <rules>
@@ -200,7 +240,7 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordLookups>
-        <description>Gets the account created by the conversion so the lead files can be relinked to it.</description>
+        <description>Gets the records created by the conversion so files, notes, and activities can be relinked.</description>
         <name>Get_Converted_Account</name>
         <label>Get Converted Account</label>
         <locationX>0</locationX>
@@ -210,6 +250,7 @@
             <targetReference>Transfer_Files_Action</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -223,6 +264,7 @@
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Lead</object>
         <queriedFields>ConvertedAccountId</queriedFields>
+        <queriedFields>ConvertedContactId</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -235,6 +277,7 @@
             <targetReference>Choose_Outcome</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -259,6 +302,7 @@
             <targetReference>Do_Convert</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <filterLogic>1 AND (2 OR 3) AND 4</filterLogic>
@@ -307,54 +351,11 @@
             <targetReference>Complete_Outcome_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
         <inputReference>Get_Lead</inputReference>
     </recordUpdates>
-    <screens>
-        <name>Choose_Member_Type</name>
-        <label>Choose Member Type</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Confirm_Convert</targetReference>
-        </connector>
-        <fields>
-            <name>Member_Type_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Choose the CPL member type.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;This sets the lifecycle the member will start with after you convert the lead.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Member_Type</name>
-            <choiceReferences>Choice_Athlete</choiceReferences>
-            <choiceReferences>Choice_Prospect</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>What type of CPL member should this become?</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>true</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <screens>
         <name>Choose_Outcome</name>
         <label>Choose Outcome</label>
@@ -386,7 +387,60 @@
             <dataType>String</dataType>
             <fieldText>What is the outcome for this lead?</fieldText>
             <fieldType>RadioButtons</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>decision_for_lead_conversion</name>
+            <extensionName>c:flowInteractionNoteInput</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>clearAfterSubmit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>title</name>
+                <value>
+                    <stringValue>Lead Stage : Decision</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>topics</name>
+                <value>
+                    <stringValue>Automated Note, Decision, Lead Stage</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>noteLabel</name>
+                <value>
+                    <stringValue>Note: Explain your decision here.</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>saveOnSubmit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>showSubmitButton</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -413,7 +467,7 @@
         </connector>
         <fields>
             <name>Confirm_Convert_Preview</name>
-            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new CPL Member &lt;em&gt;Person Account&lt;/em&gt; with lifecycle &lt;strong&gt;{!Member_Type}&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;Transfers any files attached to this Lead onto the new Person Account.&lt;/li&gt;&lt;li&gt;Marks the &quot;Decision - Disqualify / Convert&quot; Task complete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new &lt;strong style=&quot;color: rgb(162, 57, 176);&quot;&gt;CPL Member&lt;/strong&gt;!&lt;/li&gt;&lt;li&gt;Transfers any files, notes, interactions, attached to this Lead onto the new Athlete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

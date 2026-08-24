@@ -12,12 +12,12 @@
         <default>false</default>
     </values>
     <values>
-        <fullName>New</fullName>
-        <default>true</default>
-    </values>
-    <values>
         <fullName>Decision</fullName>
         <default>false</default>
+    </values>
+    <values>
+        <fullName>New</fullName>
+        <default>true</default>
     </values>
     <values>
         <fullName>Unqualified</fullName>

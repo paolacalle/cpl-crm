@@ -12,7 +12,6 @@
         <backgroundColor>#FFFFFF</backgroundColor>
         <height>0</height>
         <horizontalAlignment>Center</horizontalAlignment>
-        <logo>CPL_CRM_Documents/CPL_Logo.png</logo>
         <verticalAlignment>Middle</verticalAlignment>
     </footer>
     <header>

@@ -217,7 +217,7 @@
         <expression>&quot;Decision&quot;</expression>
     </formulas>
     <formulas>
-        <description>The Ready for Decision footer button is the user's confirmation.</description>
+        <description>The Ready for Decision footer button is the user&apos;s confirmation.</description>
         <name>ReadyForDecisionButtonClicked</name>
         <dataType>Boolean</dataType>
         <expression>true</expression>
@@ -330,6 +330,20 @@
         <object>Task</object>
     </recordUpdates>
     <recordUpdates>
+        <name>Save_Lead</name>
+        <label>Save Lead</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Save_Contacting_Checkpoint_Action</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <inputReference>Get_Lead</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <description>Stores the latest contact notes while leaving the Active Contacting action-plan task open.</description>
         <name>Update_Contacting_Task</name>
         <label>Update Active Contacting Task</label>
@@ -383,20 +397,6 @@
             </value>
         </inputAssignments>
         <object>Task</object>
-    </recordUpdates>
-    <recordUpdates>
-        <name>Save_Lead</name>
-        <label>Save Lead</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <connector>
-            <targetReference>Save_Contacting_Checkpoint_Action</targetReference>
-        </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Flow_Error</targetReference>
-        </faultConnector>
-        <inputReference>Get_Lead</inputReference>
     </recordUpdates>
     <screens>
         <name>Decision_Ready_Message</name>

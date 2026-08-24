@@ -19,13 +19,6 @@
             <desktopEnabled>true</desktopEnabled>
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
-        <notificationType>activity_team_member</notificationType>
-    </notificationTypeSettings>
-    <notificationTypeSettings>
-        <notificationChannels>
-            <desktopEnabled>true</desktopEnabled>
-            <mobileEnabled>false</mobileEnabled>
-        </notificationChannels>
         <notificationType>admin_graph_api_migration</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
@@ -47,14 +40,14 @@
             <desktopEnabled>true</desktopEnabled>
             <mobileEnabled>true</mobileEnabled>
         </notificationChannels>
-        <notificationType>approval_request</notificationType>
+        <notificationType>analyze_tableau_next</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
             <desktopEnabled>true</desktopEnabled>
-            <mobileEnabled>false</mobileEnabled>
+            <mobileEnabled>true</mobileEnabled>
         </notificationChannels>
-        <notificationType>ase_inbox_conflict_resolution</notificationType>
+        <notificationType>approval_request</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -380,13 +373,6 @@
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
-            <desktopEnabled>true</desktopEnabled>
-            <mobileEnabled>false</mobileEnabled>
-        </notificationChannels>
-        <notificationType>siq_connect_exchange</notificationType>
-    </notificationTypeSettings>
-    <notificationTypeSettings>
-        <notificationChannels>
             <desktopEnabled>false</desktopEnabled>
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
@@ -454,20 +440,6 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>user_graph_api_migration</notificationType>
-    </notificationTypeSettings>
-    <notificationTypeSettings>
-        <notificationChannels>
-            <desktopEnabled>true</desktopEnabled>
-            <mobileEnabled>false</mobileEnabled>
-        </notificationChannels>
-        <notificationType>view_all_emails</notificationType>
-    </notificationTypeSettings>
-    <notificationTypeSettings>
-        <notificationChannels>
-            <desktopEnabled>true</desktopEnabled>
-            <mobileEnabled>false</mobileEnabled>
-        </notificationChannels>
-        <notificationType>view_siq_object</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>

@@ -18,6 +18,8 @@
         <members>CplSchoolRecentActivityControllerTest</members>
         <members>LeadConvertAction</members>
         <members>LeadConvertActionTest</members>
+        <members>LeadConversionTransferAction</members>
+        <members>LeadConversionTransferActionTest</members>
         <members>LeadContactingCheckpointAction</members>
         <members>LeadContactingCheckpointActionTest</members>
         <members>LeadFileTransferAction</members>

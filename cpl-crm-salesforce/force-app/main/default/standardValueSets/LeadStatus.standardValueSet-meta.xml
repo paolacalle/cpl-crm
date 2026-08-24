@@ -23,7 +23,7 @@
         <fullName>Converted</fullName>
         <default>false</default>
         <label>Converted</label>
-        <converted>false</converted>
+        <converted>true</converted>
     </standardValue>
     <standardValue>
         <fullName>Unqualified</fullName>

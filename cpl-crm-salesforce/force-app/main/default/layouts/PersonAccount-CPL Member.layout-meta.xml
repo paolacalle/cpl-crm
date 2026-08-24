@@ -34,15 +34,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Secondary_Email__pc</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Why_CPL__pc</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Commits_to_CPL_mantra__pc</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PersonGenderIdentity</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

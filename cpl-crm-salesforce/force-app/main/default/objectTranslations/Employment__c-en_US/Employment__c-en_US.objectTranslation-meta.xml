@@ -9,30 +9,45 @@
         <value>Employment History</value>
     </caseValues>
     <layouts>
-        <layout>Employment</layout>
+        <layout>Full-time</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Details --></label>
-            <section>Details</section>
+            <label><!-- Employer and Location --></label>
+            <section>Employer and Location</section>
         </sections>
         <sections>
-            <label><!-- Employer Details --></label>
-            <section>Employer Details</section>
-        </sections>
-        <sections>
-            <label><!-- Evaluation --></label>
-            <section>Evaluation</section>
+            <label><!-- Full-time Role Details --></label>
+            <section>Full-time Role Details</section>
         </sections>
         <sections>
             <label><!-- Notes --></label>
             <section>Notes</section>
         </sections>
         <sections>
-            <label><!-- Role Details --></label>
-            <section>Role Details</section>
+            <label><!-- System Information --></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Internship</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Employer and Location --></label>
+            <section>Employer and Location</section>
+        </sections>
+        <sections>
+            <label><!-- Internship Details --></label>
+            <section>Internship Details</section>
+        </sections>
+        <sections>
+            <label><!-- Notes --></label>
+            <section>Notes</section>
         </sections>
         <sections>
             <label><!-- System Information --></label>

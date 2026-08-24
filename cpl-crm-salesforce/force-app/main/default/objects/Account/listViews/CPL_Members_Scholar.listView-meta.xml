@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Members_Scholar</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ACCOUNT.PHONE1</columns>
+    <columns>PC_EMAIL</columns>
+    <columns>College_Year__pc</columns>
+    <columns>CPL_Student_Lifecycle__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>IS_PERSON_ACCOUNT</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PersonAccount.cpl_applicant_account</value>
+    </filters>
+    <filters>
+        <field>CPL_Student_Lifecycle__c</field>
+        <operation>equals</operation>
+        <value>Scholar</value>
+    </filters>
+    <label>CPL Members - Scholar</label>
+    <sharedTo>
+        <group>PG_Application_Hosts</group>
+        <group>PG_Intake_Owners</group>
+    </sharedTo>
+</ListView>

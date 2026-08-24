@@ -1,4 +1,6 @@
 public with sharing class LeadConvertAction {
+    private static final String CPL_SCHOLAR_LEAD_RECORD_TYPE = 'CPL_Scholar_Lead';
+
     public class Request {
         @InvocableVariable(required=true)
         public Id leadId;
@@ -13,9 +15,24 @@ public with sharing class LeadConvertAction {
             return;
         }
 
+        Set<Id> leadIds = new Set<Id>();
+        for (Request req : requests) {
+            if (req != null && req.leadId != null) {
+                leadIds.add(req.leadId);
+            }
+        }
+        if (leadIds.isEmpty()) {
+            return;
+        }
+
+        prepareScholarLeadsForPersonAccountConversion(leadIds);
+
         String convertedStatus;
         for (LeadStatus status : [SELECT MasterLabel FROM LeadStatus WHERE IsConverted = true LIMIT 1]) {
             convertedStatus = status.MasterLabel;
+        }
+        if (String.isBlank(convertedStatus)) {
+            throw new ConvertException('No converted Lead Status is configured. Mark one Lead Status value as converted before running this action.');
         }
 
         // Intake leads are owned by a queue, but converted records can only be owned
@@ -30,6 +47,10 @@ public with sharing class LeadConvertAction {
         dmlOptions.DuplicateRuleHeader.RunAsCurrentUser = true;
 
         for (Request req : requests) {
+            if (req == null || req.leadId == null) {
+                continue;
+            }
+
             Database.LeadConvert lc = new Database.LeadConvert();
             lc.setLeadId(req.leadId);
             lc.setConvertedStatus(convertedStatus);
@@ -45,6 +66,35 @@ public with sharing class LeadConvertAction {
                     formatError(err.getMessage(), String.valueOf(err.getStatusCode()), err.getFields())
                 );
             }
+        }
+    }
+
+    @TestVisible
+    private static void prepareScholarLeadsForPersonAccountConversion(Set<Id> leadIds) {
+        if (leadIds == null || leadIds.isEmpty()) {
+            return;
+        }
+
+        List<Lead> leadsToClearCompany = new List<Lead>();
+        for (Lead leadRecord : [
+            SELECT Id, Company, RecordType.DeveloperName
+            FROM Lead
+            WHERE Id IN :leadIds
+        ]) {
+            if (
+                leadRecord.RecordType != null &&
+                leadRecord.RecordType.DeveloperName == CPL_SCHOLAR_LEAD_RECORD_TYPE &&
+                !String.isBlank(leadRecord.Company)
+            ) {
+                leadsToClearCompany.add(new Lead(
+                    Id = leadRecord.Id,
+                    Company = null
+                ));
+            }
+        }
+
+        if (!leadsToClearCompany.isEmpty()) {
+            update leadsToClearCompany;
         }
     }
 

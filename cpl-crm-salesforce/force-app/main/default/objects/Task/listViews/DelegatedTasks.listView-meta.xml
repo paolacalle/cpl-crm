@@ -11,5 +11,5 @@
     <columns>LAST_UPDATE</columns>
     <columns>UPDATEDBY_USER.ALIAS</columns>
     <filterScope>Delegated</filterScope>
-    <label>ENCODED:{!FilterNames.Task_DelegatedTasks}</label>
+    <label>Delegated Tasks</label>
 </ListView>

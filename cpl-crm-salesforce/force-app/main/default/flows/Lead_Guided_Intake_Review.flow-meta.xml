@@ -200,6 +200,54 @@
         <inputReference>Get_Lead</inputReference>
     </recordUpdates>
     <screens>
+        <name>Add_Reaction_of_Scholar</name>
+        <label>Add Reaction of Scholar</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Match_School_and_Sport</targetReference>
+        </connector>
+        <fields>
+            <name>Review_Note_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Add your initial application reaction.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;This will be saved as &lt;strong&gt;Lead Stage : Review of application&lt;/strong&gt; with topics: Automated Note, New to Contacting, Review of Initial Application, Lead Stage.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Review_Note</name>
+            <fieldText>What are your initial thoughts of the application? Strengths? Weaknesses? Questions to ask them?</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <styleSettings>
+                    <propertyName>--slds-c-textarea-sizing-height-min</propertyName>
+                    <propertyValue>
+                        <stringValue>160px</stringValue>
+                    </propertyValue>
+                </styleSettings>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>Confirm_Applicant_Details</name>
         <label>Confirm Applicant Details</label>
         <locationX>0</locationX>
@@ -292,54 +340,6 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Add_Reaction_of_Scholar</name>
-        <label>Add Reaction of Scholar</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Match_School_and_Sport</targetReference>
-        </connector>
-        <fields>
-            <name>Review_Note_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Add your initial application reaction.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;This will be saved as &lt;strong&gt;Lead Stage : Review of application&lt;/strong&gt; with topics: Automated Note, New to Contacting, Review of Initial Application, Lead Stage.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Review_Note</name>
-            <fieldText>What are your initial thoughts of the application? Strengths? Weaknesses? Questions to ask them?</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <styleProperties>
-                <styleSettings>
-                    <propertyName>--slds-c-textarea-sizing-height-min</propertyName>
-                    <propertyValue>
-                        <stringValue>160px</stringValue>
-                    </propertyValue>
-                </styleSettings>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
                 </verticalAlignment>

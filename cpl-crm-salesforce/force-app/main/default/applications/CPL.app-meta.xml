@@ -38,7 +38,6 @@
     </actionOverrides>
     <brand>
         <headerColor>#C5345B</headerColor>
-        <logo>abbreviated_fullcolor</logo>
         <logoVersion>1</logoVersion>
         <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
     </brand>
@@ -317,6 +316,78 @@
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Form_Submission__c</pageOrSobjectType>
         <recordType>Form_Submission__c.Student_Interest_Submission</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Full_Time_Record</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Full_time</recordType>
+        <type>Flexipage</type>
+        <profile>Standard User - CPL</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Full_Time_Record</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Full_time</recordType>
+        <type>Flexipage</type>
+        <profile>Standard User - CPL</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Full_Time_Record</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Full_time</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Full_Time_Record</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Full_time</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Internship_Record</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Internship</recordType>
+        <type>Flexipage</type>
+        <profile>Standard User - CPL</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Internship_Record</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Internship</recordType>
+        <type>Flexipage</type>
+        <profile>Standard User - CPL</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Internship_Record</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Internship</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Employment_Internship_Record</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Employment__c</pageOrSobjectType>
+        <recordType>Employment__c.Internship</recordType>
         <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>

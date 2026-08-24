@@ -16,5 +16,5 @@
         <operation>equals</operation>
         <value>1</value>
     </filters>
-    <label>ENCODED:{!FilterNames.Task_RecurringTasks}</label>
+    <label>Recurring Tasks</label>
 </ListView>

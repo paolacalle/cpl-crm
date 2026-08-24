@@ -24,7 +24,7 @@
             <value>
                 <fullName>Scholar</fullName>
                 <default>false</default>
-                <label>Member Scholar</label>
+                <label>Scholar</label>
             </value>
             <value>
                 <fullName>Scholar Alumni</fullName>

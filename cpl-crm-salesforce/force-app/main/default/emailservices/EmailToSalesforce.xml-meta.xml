@@ -4,27 +4,6 @@
     <attachmentOption>All</attachmentOption>
     <authenticationFailureAction>Discard</authenticationFailureAction>
     <authorizationFailureAction>Bounce</authorizationFailureAction>
-    <emailServicesAddresses>
-        <authorizedSenders>crm-intake@climbpauselift.org</authorizedSenders>
-        <developerName>emailtosalesforce</developerName>
-        <isActive>true</isActive>
-        <localPart>emailtosalesforce</localPart>
-        <runAsUser>crm-intake@climbpauselift.org</runAsUser>
-    </emailServicesAddresses>
-    <emailServicesAddresses>
-        <authorizedSenders>lisa@climbpauselift.org</authorizedSenders>
-        <developerName>emailtosalesforce1</developerName>
-        <isActive>true</isActive>
-        <localPart>emailtosalesforce</localPart>
-        <runAsUser>lisa-cgis@climbpauselift.org</runAsUser>
-    </emailServicesAddresses>
-    <emailServicesAddresses>
-        <authorizedSenders>pcallepen@gmail.com</authorizedSenders>
-        <developerName>emailtosalesforce2</developerName>
-        <isActive>true</isActive>
-        <localPart>emailtosalesforce</localPart>
-        <runAsUser>pcallepen@gmail.com</runAsUser>
-    </emailServicesAddresses>
     <functionInactiveAction>Bounce</functionInactiveAction>
     <functionName>EmailToSalesforce</functionName>
     <isActive>true</isActive>

@@ -7,6 +7,22 @@
             <inputField>School__c</inputField>
             <outputField>School__c</outputField>
         </mappingFields>
+        <mappingFields>
+            <inputField>Primary_Sport__c</inputField>
+            <outputField>Primary_Sport__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Why_CPL_Scholar__c</inputField>
+            <outputField>Why_CPL__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>Commits_to_CPL_mantra__c</inputField>
+            <outputField>Commits_to_CPL_mantra__c</outputField>
+        </mappingFields>
+        <mappingFields>
+            <inputField>College_Year__c</inputField>
+            <outputField>College_Year__c</outputField>
+        </mappingFields>
         <outputObject>Contact</outputObject>
     </objectMapping>
     <opportunityCreationOptions>VisibleOptional</opportunityCreationOptions>
