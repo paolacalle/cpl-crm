@@ -4,7 +4,7 @@
     <description>Lead status values for CPL Scholar applicants progressing through the admissions pipeline.</description>
     <isActive>true</isActive>
     <values>
-        <fullName>Contacted</fullName>
+        <fullName>Contacting</fullName>
         <default>false</default>
     </values>
     <values>
@@ -12,15 +12,11 @@
         <default>false</default>
     </values>
     <values>
-        <fullName>In Intake Review</fullName>
-        <default>false</default>
-    </values>
-    <values>
         <fullName>New</fullName>
         <default>true</default>
     </values>
     <values>
-        <fullName>Qualified</fullName>
+        <fullName>Decision</fullName>
         <default>false</default>
     </values>
     <values>

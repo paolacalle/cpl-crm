@@ -4,7 +4,7 @@
     <description>Lead status values for Partner leads progressing through partnership qualification.</description>
     <isActive>true</isActive>
     <values>
-        <fullName>Contacted</fullName>
+        <fullName>Contacting</fullName>
         <default>false</default>
     </values>
     <values>
@@ -16,7 +16,7 @@
         <default>true</default>
     </values>
     <values>
-        <fullName>Qualified</fullName>
+        <fullName>Decision</fullName>
         <default>false</default>
     </values>
     <values>

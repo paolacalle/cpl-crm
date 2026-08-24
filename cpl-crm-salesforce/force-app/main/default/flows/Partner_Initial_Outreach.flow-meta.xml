@@ -52,7 +52,7 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Guided screen flow for the Partner Lead Initial outreach step. Logs the first-contact attempt, completes the seeded &quot;Initial outreach&quot; Task, and advances the Lead.Status to Contacted.</description>
+    <description>Guided screen flow for the Partner Lead Initial outreach step. Logs the first-contact attempt, completes the seeded &quot;Initial outreach&quot; Task, and advances the Lead.Status to Contacting.</description>
     <environments>Default</environments>
     <formulas>
         <description>Append the new Initial outreach note to any existing Lead.Description content (with a labeled section header) instead of overwriting it.</description>
@@ -174,7 +174,7 @@
         <object>Task</object>
     </recordUpdates>
     <recordUpdates>
-        <description>Save the outreach notes and advance the Lead status to Contacted.</description>
+        <description>Save the outreach notes and advance the Lead status to Contacting.</description>
         <name>Save_Lead_Outreach</name>
         <label>Save Lead Outreach</label>
         <locationX>0</locationX>
@@ -202,7 +202,7 @@
         <inputAssignments>
             <field>Status</field>
             <value>
-                <stringValue>Contacted</stringValue>
+                <stringValue>Contacting</stringValue>
             </value>
         </inputAssignments>
         <object>Lead</object>
@@ -293,7 +293,7 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <description>Confirmation that the outreach was logged and the Lead is now Contacted.</description>
+        <description>Confirmation that the outreach was logged and the Lead is now Contacting.</description>
         <name>Outreach_Logged</name>
         <label>Outreach Logged</label>
         <locationX>0</locationX>
@@ -303,7 +303,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Confirmation_Text</name>
-            <fieldText>&lt;p&gt;✅ Initial outreach logged. {!Get_Lead.Name} has been moved to &lt;strong&gt;Contacted&lt;/strong&gt;. Next: schedule a discovery meeting.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Initial outreach logged. {!Get_Lead.Name} has been moved to &lt;strong&gt;Contacting&lt;/strong&gt;. Next: schedule a discovery meeting.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

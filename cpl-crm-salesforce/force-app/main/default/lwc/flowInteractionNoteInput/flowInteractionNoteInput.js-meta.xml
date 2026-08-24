@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Interaction Note Input</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="Record Id" role="inputOnly"/>
+            <property name="sectionLabel" type="String" label="Section Label" default="Add Contact Note" role="inputOnly"/>
+            <property name="title" type="String" label="Interaction Title" default="Lead Stage : Contacting"/>
+            <property name="topics" type="String" label="Interaction Topics" default="Automated Note, Contacting, Lead Stage"/>
+            <property name="note" type="String" label="Note"/>
+            <property name="interactionId" type="String" label="Saved Interaction Id" role="outputOnly"/>
+            <property name="noteSubmitted" type="Boolean" label="Note Submitted" role="outputOnly"/>
+            <property name="noteLabel" type="String" label="Note Label" default="Note" role="inputOnly"/>
+            <property name="notePlaceholder" type="String" label="Note Placeholder" role="inputOnly"/>
+            <property name="required" type="Boolean" label="Required" default="false" role="inputOnly"/>
+            <property name="requiredMessage" type="String" label="Required Message" default="Enter a note." role="inputOnly"/>
+            <property name="showDetails" type="Boolean" label="Show Title and Topic" default="true" role="inputOnly"/>
+            <property name="showSubmitButton" type="Boolean" label="Show Submit Button" default="false" role="inputOnly"/>
+            <property name="saveOnSubmit" type="Boolean" label="Save Interaction on Submit" default="false" role="inputOnly"/>
+            <property name="submitButtonLabel" type="String" label="Submit Button Label" default="Submit Note" role="inputOnly"/>
+            <property name="clearAfterSubmit" type="Boolean" label="Clear Note After Submit" default="false" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

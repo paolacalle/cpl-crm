@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Saves the reviewer&apos;s initial application reaction as a structured interaction note with lead-stage topics.</description>
+        <name>Save_Review_Note_Action</name>
+        <label>Save Review Note</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>LeadReviewApplicationNoteAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Complete_Confirm_Submission_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>note</name>
+            <value>
+                <elementReference>Review_Note</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LeadReviewApplicationNoteAction</nameSegment>
+    </actionCalls>
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <description>Advances the lead to In Intake Review once the submission is confirmed. Owner is left unchanged so the lead stays with the intake queue.</description>
+        <description>Advances the lead to Contacting once the application review is complete. Owner is left unchanged so the lead stays with the intake queue.</description>
         <name>Set_Intake_Review_Status</name>
-        <label>Set Intake Review Status</label>
+        <label>Set Contacting Status</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>Get_Lead.Status</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>In Intake Review</stringValue>
+                <stringValue>Contacting</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -26,7 +55,7 @@
         </value>
     </customProperties>
     <decisions>
-        <description>Blocks the In Intake Review status change until the required intake fields are present, so the reviewer gets clear guidance instead of a validation error.</description>
+        <description>Blocks the Contacting status change until the required intake fields are present, so the reviewer gets clear guidance instead of a validation error.</description>
         <name>Intake_Fields_Complete</name>
         <label>Intake Fields Complete?</label>
         <locationX>0</locationX>
@@ -51,7 +80,7 @@
             <label>All Present</label>
         </rules>
     </decisions>
-    <description>Guides CPL Scholar lead intake users through confirming applicant details, previewing the uploaded resume, and matching school and sport. On completion the lead advances to In Intake Review; the lead owner always stays with the intake queue and is never changed.</description>
+    <description>Guides CPL Scholar lead intake users through reviewing applicant details, previewing the uploaded resume, and matching school and sport. On completion the lead advances to Contacting; the lead owner always stays with the intake queue and is never changed.</description>
     <environments>Default</environments>
     <formulas>
         <description>True when the lead meets the intake requirements needed to move out of New.</description>
@@ -109,9 +138,9 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <description>Marks the Confirm submission intake action-plan task complete so the action plan advances.</description>
+        <description>Marks the Review application intake action-plan task complete so the action plan advances.</description>
         <name>Complete_Confirm_Submission_Task</name>
-        <label>Complete Confirm Submission Task</label>
+        <label>Complete Review Application Task</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
@@ -120,12 +149,19 @@
         <faultConnector>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
-        <filterLogic>and</filterLogic>
+        <filterLogic>1 AND (2 OR 3) AND 4</filterLogic>
         <filters>
             <field>WhoId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Review application</stringValue>
             </value>
         </filters>
         <filters>
@@ -156,7 +192,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Complete_Confirm_Submission_Task</targetReference>
+            <targetReference>Save_Review_Note_Action</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Flow_Error</targetReference>
@@ -172,11 +208,11 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Match_School_and_Sport</targetReference>
+            <targetReference>Add_Reaction_of_Scholar</targetReference>
         </connector>
         <fields>
             <name>Confirm_Details_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Confirm the submitted intake details.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Before moving this lead forward, confirm the email, college year, uploaded resume, and scholar statement are present and valid.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Review the submitted intake details.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Before moving this lead to Contacting, confirm the email, college year, uploaded resume, and scholar statement are present and valid.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -206,6 +242,20 @@
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>false</isRequired>
             <objectFieldReference>Get_Lead.College_Year__c</objectFieldReference>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <fieldType>ObjectProvided</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <objectFieldReference>Get_Lead.Why_CPL_Scholar__c</objectFieldReference>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -250,12 +300,46 @@
                 </width>
             </styleProperties>
         </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Add_Reaction_of_Scholar</name>
+        <label>Add Reaction of Scholar</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Match_School_and_Sport</targetReference>
+        </connector>
         <fields>
-            <fieldType>ObjectProvided</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <objectFieldReference>Get_Lead.Why_CPL_Scholar__c</objectFieldReference>
+            <name>Review_Note_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Add your initial application reaction.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;This will be saved as &lt;strong&gt;Lead Stage : Review of application&lt;/strong&gt; with topics: Automated Note, New to Contacting, Review of Initial Application, Lead Stage.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
             <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Review_Note</name>
+            <fieldText>What are your initial thoughts of the application? Strengths? Weaknesses? Questions to ask them?</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <styleSettings>
+                    <propertyName>--slds-c-textarea-sizing-height-min</propertyName>
+                    <propertyValue>
+                        <stringValue>160px</stringValue>
+                    </propertyValue>
+                </styleSettings>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
                 </verticalAlignment>
@@ -409,7 +493,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>Review_Saved_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Lead intake review saved.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead details, matched school, and sport have been updated, and the lead has been moved to In Intake Review. The lead owner remains the intake queue.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Application review saved.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead details, matched school, and sport have been updated, and the lead has been moved to Contacting. The lead owner remains the intake queue.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

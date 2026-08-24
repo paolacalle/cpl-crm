@@ -1,0 +1,39 @@
+<template>
+    <div class="note-input">
+        <div class="note-input__header">
+            <div class="note-input__section">{sectionLabel}</div>
+            <template if:true={showDetails}>
+                <dl class="note-input__details">
+                    <div>
+                        <dt>Title</dt>
+                        <dd>{title}</dd>
+                    </div>
+                    <div>
+                        <dt>Topic</dt>
+                        <dd>{topics}</dd>
+                    </div>
+                </dl>
+            </template>
+        </div>
+
+        <lightning-textarea
+            label={noteLabel}
+            value={note}
+            required={required}
+            placeholder={notePlaceholder}
+            message-when-value-missing={requiredMessage}
+            onchange={handleNoteChange}
+        ></lightning-textarea>
+
+        <template if:true={showSubmitButton}>
+            <div class="note-input__actions">
+                <lightning-button
+                    variant="brand"
+                    label={submitButtonLabel}
+                    onclick={handleSubmit}
+                    disabled={isSaving}
+                ></lightning-button>
+            </div>
+        </template>
+    </div>
+</template>

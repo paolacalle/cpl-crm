@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Initial_Contact_Email_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the initial contact email has been sent or manually marked sent during the Active Contacting checkpoint.</description>
+    <label>Initial Contact Email Sent</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

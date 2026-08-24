@@ -13,7 +13,7 @@
     <filters>
         <field>LEAD.STATUS</field>
         <operation>notEqual</operation>
-        <value>Qualified,Unqualified</value>
+        <value>Decision,Unqualified</value>
     </filters>
     <label>All Open Leads</label>
     <sharedTo>

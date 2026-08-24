@@ -8,21 +8,21 @@
         <converted>false</converted>
     </standardValue>
     <standardValue>
-        <fullName>In Intake Review</fullName>
+        <fullName>Contacting</fullName>
         <default>false</default>
-        <label>In Intake Review</label>
+        <label>Contacting</label>
         <converted>false</converted>
     </standardValue>
     <standardValue>
-        <fullName>Contacted</fullName>
+        <fullName>Decision</fullName>
         <default>false</default>
-        <label>Contacted</label>
+        <label>Decision</label>
         <converted>false</converted>
     </standardValue>
     <standardValue>
-        <fullName>Qualified</fullName>
+        <fullName>Converted</fullName>
         <default>false</default>
-        <label>Qualified</label>
+        <label>Converted</label>
         <converted>false</converted>
     </standardValue>
     <standardValue>
@@ -30,11 +30,5 @@
         <default>false</default>
         <label>Unqualified</label>
         <converted>false</converted>
-    </standardValue>
-    <standardValue>
-        <fullName>Converted</fullName>
-        <default>false</default>
-        <label>Converted</label>
-        <converted>true</converted>
     </standardValue>
 </StandardValueSet>

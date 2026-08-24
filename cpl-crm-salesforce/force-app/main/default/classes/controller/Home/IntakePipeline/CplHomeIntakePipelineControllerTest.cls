@@ -1,16 +1,14 @@
 @IsTest(SeeAllData=true)
 private class CplHomeIntakePipelineControllerTest {
     @IsTest
-    static void returnsAllSixStatusesInOrder() {
+    static void returnsPipelineStatusesInOrder() {
         List<CplHomeIntakePipelineController.StatusCount> counts =
             CplHomeIntakePipelineController.getPipeline();
 
-        System.assertEquals(5, counts.size(), 'Should always return exactly 5 status rows');
+        System.assertEquals(3, counts.size(), 'Should always return exactly 3 active pipeline rows');
         System.assertEquals('New', counts[0].status);
-        System.assertEquals('In Intake Review', counts[1].status);
-        System.assertEquals('Contacted', counts[2].status);
-        System.assertEquals('Qualified', counts[3].status);
-        System.assertEquals('Unqualified', counts[4].status);
+        System.assertEquals('Contacting', counts[1].status);
+        System.assertEquals('Decision', counts[2].status);
 
         for (CplHomeIntakePipelineController.StatusCount c : counts) {
             System.assert(c.count >= 0, 'Counts must be non-negative');

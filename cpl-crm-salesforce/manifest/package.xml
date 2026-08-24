@@ -18,10 +18,14 @@
         <members>CplSchoolRecentActivityControllerTest</members>
         <members>LeadConvertAction</members>
         <members>LeadConvertActionTest</members>
+        <members>LeadContactingCheckpointAction</members>
+        <members>LeadContactingCheckpointActionTest</members>
         <members>LeadFileTransferAction</members>
         <members>LeadFileTransferActionTest</members>
         <members>LeadIntakeActionPlanController</members>
         <members>LeadIntakeActionPlanControllerTest</members>
+        <members>LeadReviewApplicationNoteAction</members>
+        <members>LeadReviewApplicationNoteActionTest</members>
         <members>LeadResumeFileService</members>
         <members>LeadResumeFileServiceTest</members>
         <members>LeadResumePreviewController</members>
@@ -254,6 +258,7 @@
         <members>Lead.College_Year__c</members>
         <members>Lead.Commits_to_CPL_mantra__c</members>
         <members>Lead.Evaluation_Count__c</members>
+        <members>Lead.Initial_Contact_Email_Sent__c</members>
         <members>Lead.Intended_CPL_Lifecycle__c</members>
         <members>Lead.Lead_Source_Detail__c</members>
         <members>Lead.Partner_Interest_Other__c</members>
@@ -975,6 +980,7 @@
         <members>cplMemberJourney</members>
         <members>cplSchoolMemberSummary</members>
         <members>cplSchoolRecentActivity</members>
+        <members>flowInteractionNoteInput</members>
         <members>leadActionPlanFlowModal</members>
         <members>leadIntakeActionPlan</members>
         <members>leadResumePreview</members>
@@ -1020,11 +1026,10 @@
         <members>Form_Submission__c.Intake_Review_Queue_Form_Submission</members>
         <members>Lead.AllOpenLeads</members>
         <members>Lead.All_Leads</members>
-        <members>Lead.CPL_Lead_Contacted</members>
+        <members>Lead.CPL_Lead_Contacting</members>
         <members>Lead.CPL_Lead_Converted</members>
-        <members>Lead.CPL_Lead_In_Intake_Review</members>
+        <members>Lead.CPL_Lead_Decision</members>
         <members>Lead.CPL_Lead_New</members>
-        <members>Lead.CPL_Lead_Qualified</members>
         <members>Lead.CPL_Lead_Unqualified</members>
         <members>Lead.Intake_Review_Queue_Lead</members>
         <members>Lead.MyUnreadLeads</members>

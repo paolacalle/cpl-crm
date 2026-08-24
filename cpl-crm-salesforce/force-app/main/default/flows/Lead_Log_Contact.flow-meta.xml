@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
+        <description>Saves the contacting note, marks the initial contact email as sent when requested, and creates the optional follow-up task.</description>
+        <name>Save_Contacting_Checkpoint_Action</name>
+        <label>Save Contacting Checkpoint</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>LeadContactingCheckpointAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Check_Ready_For_Decision</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>createFollowUpTask</name>
+            <value>
+                <elementReference>Create_Follow_Up_Task</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>followUpTaskDueDate</name>
+            <value>
+                <elementReference>Follow_Up_Task_Due_Date</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>followUpTaskNotes</name>
+            <value>
+                <elementReference>Follow_Up_Task_Notes</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>followUpTaskSubject</name>
+            <value>
+                <elementReference>Follow_Up_Task_Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>markInitialContactEmailSent</name>
+            <value>
+                <elementReference>ShouldMarkInitialContactEmailSent</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>note</name>
+            <value>
+                <elementReference>Contact_Notes</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>submittedInteractionId</name>
+            <value>
+                <elementReference>Contact_Note_Interaction_Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>LeadContactingCheckpointAction</nameSegment>
+    </actionCalls>
+    <actionCalls>
         <description>Sends the optional follow-up email to the lead.</description>
         <name>Send_Lead_Email</name>
         <label>Send Lead Email</label>
@@ -71,22 +136,47 @@
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <description>Advances the lead to Contacted once contact is logged. Owner is left unchanged so the lead stays with the intake queue.</description>
+        <description>Keeps the lead in Contacting unless the user marks it ready for Decision. Owner is left unchanged so the lead stays with the intake queue.</description>
         <name>Set_Contacted_Status</name>
-        <label>Set Contacted Status</label>
+        <label>Set Pipeline Status</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>Get_Lead.Status</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>Contacted</stringValue>
+                <elementReference>LeadPipelineStatus</elementReference>
             </value>
         </assignmentItems>
         <connector>
             <targetReference>Save_Lead</targetReference>
         </connector>
     </assignments>
+    <decisions>
+        <name>Check_Ready_For_Decision</name>
+        <label>Ready for Decision?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Update_Contacting_Task</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Keep Contacting</defaultConnectorLabel>
+        <rules>
+            <name>Move_To_Decision</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ReadyForDecisionButtonClicked</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Complete_Contact_Task</targetReference>
+            </connector>
+            <label>Move to Decision</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>Send_Email_Decision</name>
         <label>Send Email?</label>
@@ -112,8 +202,32 @@
             <label>Send It</label>
         </rules>
     </decisions>
-    <description>Logs an intake contact attempt for a CPL Scholar lead, optionally emails the lead a follow-up from a starting template, records the contact notes on the Contact lead task, advances the lead to Contacted, and completes the Contact lead action-plan task. The lead owner stays with the intake queue.</description>
+    <description>Logs a CPL Scholar lead contact attempt, optionally emails the lead a follow-up from a starting template, stores contact notes on the Active Contacting task, and advances the lead to Decision when the user clicks Ready for Decision. The lead owner stays with the intake queue.</description>
     <environments>Default</environments>
+    <formulas>
+        <description>Shows the initial email controls only until the email has been sent or manually marked sent.</description>
+        <name>InitialContactEmailControlsVisible</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT({!Get_Lead.Initial_Contact_Email_Sent__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Lead status after the contacting checkpoint is saved.</description>
+        <name>LeadPipelineStatus</name>
+        <dataType>String</dataType>
+        <expression>&quot;Decision&quot;</expression>
+    </formulas>
+    <formulas>
+        <description>The Ready for Decision footer button is the user's confirmation.</description>
+        <name>ReadyForDecisionButtonClicked</name>
+        <dataType>Boolean</dataType>
+        <expression>true</expression>
+    </formulas>
+    <formulas>
+        <description>Marks the initial email complete when the user sends it from the flow or records that it was sent elsewhere.</description>
+        <name>ShouldMarkInitialContactEmailSent</name>
+        <dataType>Boolean</dataType>
+        <expression>OR({!Send_Email}, {!Mark_Initial_Email_Sent})</expression>
+    </formulas>
     <interviewLabel>Lead Log Contact {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lead Log Contact</label>
     <processMetadataValues>
@@ -161,23 +275,30 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <description>Marks the Contact lead action-plan task complete and stores the contact notes so the action plan advances.</description>
+        <description>Marks the Active Contacting action-plan task complete when the lead is ready for final decision.</description>
         <name>Complete_Contact_Task</name>
-        <label>Complete Contact Task</label>
+        <label>Complete Active Contacting Task</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Contact_Logged</targetReference>
+            <targetReference>Decision_Ready_Message</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
-        <filterLogic>and</filterLogic>
+        <filterLogic>1 AND (2 OR 3) AND 4</filterLogic>
         <filters>
             <field>WhoId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active Contacting</stringValue>
             </value>
         </filters>
         <filters>
@@ -209,12 +330,67 @@
         <object>Task</object>
     </recordUpdates>
     <recordUpdates>
+        <description>Stores the latest contact notes while leaving the Active Contacting action-plan task open.</description>
+        <name>Update_Contacting_Task</name>
+        <label>Update Active Contacting Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_Ready_Message</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Flow_Error</targetReference>
+        </faultConnector>
+        <filterLogic>1 AND (2 OR 3) AND 4</filterLogic>
+        <filters>
+            <field>WhoId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Active Contacting</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Contact lead</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>Contact_Notes</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Save_Lead</name>
         <label>Save Lead</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Complete_Contact_Task</targetReference>
+            <targetReference>Save_Contacting_Checkpoint_Action</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
@@ -223,16 +399,16 @@
         <inputReference>Get_Lead</inputReference>
     </recordUpdates>
     <screens>
-        <name>Contact_Logged</name>
-        <label>Contact Logged</label>
+        <name>Decision_Ready_Message</name>
+        <label>Lead Ready for Decision</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
-            <name>Contact_Logged_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Contact logged.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead has been moved to Contacted and the Contact lead step is complete.&lt;/p&gt;</fieldText>
+            <name>Decision_Ready_Text</name>
+            <fieldText>&lt;p&gt;Lead is now ready to make a decision of if disqualified or converted.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -283,7 +459,7 @@
         </connector>
         <fields>
             <name>Log_Contact_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Log your contact with this lead.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Record how you reached out and any notes. Completing this step moves the lead to Contacted.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Active Contacting&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -295,11 +471,9 @@
             </styleProperties>
         </fields>
         <fields>
-            <name>Contact_Notes</name>
-            <fieldText>Contact notes</fieldText>
-            <fieldType>LargeTextArea</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
+            <name>Initial_Contact_Email_Section</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Initial Contact Email&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -310,12 +484,35 @@
             </styleProperties>
         </fields>
         <fields>
+            <name>Initial_Contact_Email_Already_Sent</name>
+            <fieldText>&lt;p&gt;Initial contact email has already been sent or marked sent.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Get_Lead.Initial_Contact_Email_Sent__c</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
             <name>Send_Email</name>
             <dataType>Boolean</dataType>
             <defaultValue>
                 <booleanValue>false</booleanValue>
             </defaultValue>
-            <fieldText>Send a follow-up email to this lead</fieldText>
+            <fieldText>Send initial contact email</fieldText>
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
@@ -327,6 +524,45 @@
                     <stringValue>12</stringValue>
                 </width>
             </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>InitialContactEmailControlsVisible</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Mark_Initial_Email_Sent</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>false</booleanValue>
+            </defaultValue>
+            <fieldText>Mark as sent and add note on interaction</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>InitialContactEmailControlsVisible</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
             <name>Email_Subject</name>
@@ -350,6 +586,13 @@
                 <conditionLogic>and</conditionLogic>
                 <conditions>
                     <leftValueReference>Send_Email</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>InitialContactEmailControlsVisible</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
                         <booleanValue>true</booleanValue>
@@ -395,8 +638,230 @@
                         <booleanValue>true</booleanValue>
                     </rightValue>
                 </conditions>
+                <conditions>
+                    <leftValueReference>InitialContactEmailControlsVisible</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
             </visibilityRule>
         </fields>
+        <fields>
+            <name>Create_Meeting_Section</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Create a Meeting&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Google Calendar&lt;/p&gt;&lt;p&gt;Send Zoom Link&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Contact_Note_Input</name>
+            <extensionName>c:flowInteractionNoteInput</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>recordId</name>
+                <value>
+                    <elementReference>recordId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>sectionLabel</name>
+                <value>
+                    <stringValue>Add Contact Note</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>title</name>
+                <value>
+                    <stringValue>Lead Stage : Contacting</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>topics</name>
+                <value>
+                    <stringValue>Automated Note, Contacting, Lead Stage</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>note</name>
+                <value>
+                    <elementReference>Contact_Notes</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>noteLabel</name>
+                <value>
+                    <stringValue>Note</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>showSubmitButton</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>saveOnSubmit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>submitButtonLabel</name>
+                <value>
+                    <stringValue>Submit Note</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>clearAfterSubmit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>Contact_Notes</assignToReference>
+                <name>note</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>Contact_Note_Interaction_Id</assignToReference>
+                <name>interactionId</name>
+            </outputParameters>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Add_Task_Section</name>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Add Task&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Create_Follow_Up_Task</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>false</booleanValue>
+            </defaultValue>
+            <fieldText>Create follow-up task</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Follow_Up_Task_Subject</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>Follow up with lead</stringValue>
+            </defaultValue>
+            <fieldText>Task subject</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Create_Follow_Up_Task</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Follow_Up_Task_Due_Date</name>
+            <dataType>Date</dataType>
+            <fieldText>Due date</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Create_Follow_Up_Task</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Follow_Up_Task_Notes</name>
+            <fieldText>Task notes</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>false</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Create_Follow_Up_Task</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <nextOrFinishButtonLabel>Ready for Decision</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -422,6 +887,22 @@ Best regards,
 {!$User.FirstName} {!$User.LastName}
 {!$User.Email}</text>
     </textTemplates>
+    <variables>
+        <description>The interaction saved by the reusable note component.</description>
+        <name>Contact_Note_Interaction_Id</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>The reusable interaction note component output.</description>
+        <name>Contact_Notes</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <description>The Lead record Id from the action plan launch.</description>
         <name>recordId</name>

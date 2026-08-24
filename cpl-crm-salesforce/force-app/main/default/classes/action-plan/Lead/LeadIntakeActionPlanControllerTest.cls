@@ -28,14 +28,14 @@ private class LeadIntakeActionPlanControllerTest {
         insert new List<Task>{
             new Task(
                 WhoId = leadRecord.Id,
-                Subject = 'Contact lead',
+                Subject = 'Active Contacting',
                 Status = 'Not Started',
                 Priority = 'Normal',
                 OwnerId = UserInfo.getUserId()
             ),
             new Task(
                 WhoId = leadRecord.Id,
-                Subject = 'Confirm submission',
+                Subject = 'Review application',
                 Status = 'Completed',
                 Priority = 'Normal',
                 OwnerId = UserInfo.getUserId()
@@ -50,21 +50,21 @@ private class LeadIntakeActionPlanControllerTest {
         System.assertEquals(3, tasks.size());
 
         // Step 1 is complete, so it is not the current step.
-        System.assertEquals('Confirm submission', tasks[0].subject);
+        System.assertEquals('Review application', tasks[0].subject);
         System.assertEquals('Completed', tasks[0].status);
         System.assertEquals('completed', tasks[0].stateClass);
         System.assertEquals(false, tasks[0].isCurrent);
         System.assertEquals('Lead_Guided_Intake_Review', tasks[0].flowApiName);
 
         // Step 2 is the first incomplete step, so it becomes current.
-        System.assertEquals('Contact lead', tasks[1].subject);
+        System.assertEquals('Active Contacting', tasks[1].subject);
         System.assertEquals(true, tasks[1].exists);
         System.assertEquals('current', tasks[1].stateClass);
         System.assertEquals(true, tasks[1].isCurrent);
         System.assertEquals('Lead_Log_Contact', tasks[1].flowApiName);
 
         // Step 3 has no Task yet.
-        System.assertEquals('Disqualify / Convert', tasks[2].subject);
+        System.assertEquals('Decision - Disqualify / Convert', tasks[2].subject);
         System.assertEquals(false, tasks[2].exists);
         System.assertEquals('Missing', tasks[2].status);
         System.assertEquals('missing', tasks[2].stateClass);
@@ -85,9 +85,9 @@ private class LeadIntakeActionPlanControllerTest {
         clearSeededTasks(leadRecord.Id);
 
         insert new List<Task>{
-            new Task(WhoId = leadRecord.Id, Subject = 'Confirm submission', Status = 'Not Started'),
-            new Task(WhoId = leadRecord.Id, Subject = 'Contact lead', Status = 'Not Started'),
-            new Task(WhoId = leadRecord.Id, Subject = 'Disqualify / Convert', Status = 'Not Started')
+            new Task(WhoId = leadRecord.Id, Subject = 'Review application', Status = 'Not Started'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Active Contacting', Status = 'Not Started'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Decision - Disqualify / Convert', Status = 'Not Started')
         };
 
         List<LeadIntakeActionPlanController.ActionPlanTask> tasks =
@@ -123,9 +123,9 @@ private class LeadIntakeActionPlanControllerTest {
         clearSeededTasks(leadRecord.Id);
 
         insert new List<Task>{
-            new Task(WhoId = leadRecord.Id, Subject = 'Confirm submission', Status = 'Completed'),
-            new Task(WhoId = leadRecord.Id, Subject = 'Contact lead', Status = 'Completed'),
-            new Task(WhoId = leadRecord.Id, Subject = 'Disqualify / Convert', Status = 'Completed')
+            new Task(WhoId = leadRecord.Id, Subject = 'Review application', Status = 'Completed'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Active Contacting', Status = 'Completed'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Decision - Disqualify / Convert', Status = 'Completed')
         };
 
         List<LeadIntakeActionPlanController.ActionPlanTask> tasks =
@@ -153,12 +153,12 @@ private class LeadIntakeActionPlanControllerTest {
         clearSeededTasks(leadRecord.Id);
 
         insert new List<Task>{
-            new Task(WhoId = leadRecord.Id, Subject = 'Confirm submission', Status = 'Completed'),
-            new Task(WhoId = leadRecord.Id, Subject = 'Contact lead', Status = 'Completed')
+            new Task(WhoId = leadRecord.Id, Subject = 'Review application', Status = 'Completed'),
+            new Task(WhoId = leadRecord.Id, Subject = 'Active Contacting', Status = 'Completed')
         };
         Task outcome = new Task(
             WhoId = leadRecord.Id,
-            Subject = 'Disqualify / Convert',
+            Subject = 'Decision - Disqualify / Convert',
             Status = 'Completed'
         );
         insert outcome;
@@ -168,7 +168,7 @@ private class LeadIntakeActionPlanControllerTest {
         Test.stopTest();
 
         Lead reloaded = [SELECT Status FROM Lead WHERE Id = :leadRecord.Id];
-        System.assertEquals('Contacted', reloaded.Status);
+        System.assertEquals('Decision', reloaded.Status);
 
         Task reloadedTask = [SELECT Status FROM Task WHERE Id = :outcome.Id];
         System.assertEquals('Not Started', reloadedTask.Status);
@@ -176,7 +176,7 @@ private class LeadIntakeActionPlanControllerTest {
         // The reopened outcome step is active again.
         List<LeadIntakeActionPlanController.ActionPlanTask> tasks =
             LeadIntakeActionPlanController.getTasks(leadRecord.Id);
-        System.assertEquals('Disqualify / Convert', tasks[2].subject);
+        System.assertEquals('Decision - Disqualify / Convert', tasks[2].subject);
         System.assertEquals(true, tasks[2].isCurrent);
     }
 

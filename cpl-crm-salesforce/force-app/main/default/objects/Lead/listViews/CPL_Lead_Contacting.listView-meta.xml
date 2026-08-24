@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>CPL_Lead_Contacted</fullName>
+    <fullName>CPL_Lead_Contacting</fullName>
     <columns>FULL_NAME</columns>
     <columns>LEAD.EMAIL</columns>
     <columns>School__c</columns>
-    <columns>Submission_Date__c</columns>
     <columns>College_Year__c</columns>
     <columns>LEAD.CREATED_DATE</columns>
     <columns>CORE.USERS.ALIAS</columns>
@@ -17,7 +16,7 @@
     <filters>
         <field>LEAD.STATUS</field>
         <operation>equals</operation>
-        <value>Contacted</value>
+        <value>Contacting</value>
     </filters>
-    <label>CPL Leads - Contacted</label>
+    <label>CPL Leads - Contacting</label>
 </ListView>

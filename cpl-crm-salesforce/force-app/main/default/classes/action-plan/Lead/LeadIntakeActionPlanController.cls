@@ -1,8 +1,8 @@
 public with sharing class LeadIntakeActionPlanController {
     private static final List<String> SCHOLAR_SUBJECTS = new List<String>{
-        'Confirm submission',
-        'Contact lead',
-        'Disqualify / Convert'
+        'Review application',
+        'Active Contacting',
+        'Decision - Disqualify / Convert'
     };
 
     private static final List<String> PARTNER_SUBJECTS = new List<String>{
@@ -11,12 +11,22 @@ public with sharing class LeadIntakeActionPlanController {
         'Convert or Disqualify'
     };
 
+    private static final Map<String, String> LEGACY_SUBJECT_TO_SUBJECT =
+        new Map<String, String>{
+            'Confirm submission' => 'Review application',
+            'Contact lead' => 'Active Contacting',
+            'Disqualify / Convert' => 'Decision - Disqualify / Convert'
+        };
+
     // Subject -> screen flow launched for that step. Populated incrementally as each
     // step's flow ships; a subject with no entry renders without a Launch button.
     private static final Map<String, String> SUBJECT_TO_FLOW = new Map<String, String>{
-        'Confirm submission' => 'Lead_Guided_Intake_Review',
-        'Contact lead' => 'Lead_Log_Contact',
-        'Disqualify / Convert' => 'Lead_Convert_Or_Disqualify',
+        // Student
+        'Review application' => 'Lead_Guided_Intake_Review',
+        'Active Contacting' => 'Lead_Log_Contact',
+        'Decision - Disqualify / Convert' => 'Lead_Convert_Or_Disqualify',
+
+        // Partner
         'Initial outreach' => 'Partner_Initial_Outreach',
         'Discovery meeting' => 'Partner_Discovery_Meeting',
         'Convert or Disqualify' => 'Partner_Convert_Or_Disqualify'
@@ -31,16 +41,20 @@ public with sharing class LeadIntakeActionPlanController {
         List<String> planSubjects = subjectsForLead(leadId);
         Boolean isTerminal = isTerminalLead(leadId);
 
+        Set<String> querySubjects = new Set<String>(planSubjects);
+        querySubjects.addAll(LEGACY_SUBJECT_TO_SUBJECT.keySet());
+
         Map<String, Task> tasksBySubject = new Map<String, Task>();
         for (Task intakeTask : [
             SELECT Id, Subject, Status, Priority, ActivityDate, Owner.Name
             FROM Task
             WHERE WhoId = :leadId
-            AND Subject IN :planSubjects
+            AND Subject IN :querySubjects
             ORDER BY CreatedDate ASC
         ]) {
-            if (!tasksBySubject.containsKey(intakeTask.Subject)) {
-                tasksBySubject.put(intakeTask.Subject, intakeTask);
+            String subject = canonicalSubject(intakeTask.Subject);
+            if (!tasksBySubject.containsKey(subject)) {
+                tasksBySubject.put(subject, intakeTask);
             }
         }
 
@@ -114,16 +128,18 @@ public with sharing class LeadIntakeActionPlanController {
         }
 
         // Return the lead to the decision point so the intake host can work it again.
-        lead.Status = 'Contacted';
+        lead.Status = 'Decision';
         update lead;
 
         // Re-open the final outcome step so its Launch button reappears.
-        List<String> planSubjects = subjectsForLead(leadId);
-        String outcomeSubject = planSubjects[planSubjects.size() - 1];
+        Set<String> outcomeSubjects = new Set<String>{
+            'Decision - Disqualify / Convert',
+            'Disqualify / Convert'
+        };
         List<Task> outcomeTasks = [
             SELECT Id, Status
             FROM Task
-            WHERE WhoId = :leadId AND Subject = :outcomeSubject
+            WHERE WhoId = :leadId AND Subject IN :outcomeSubjects
         ];
         for (Task outcomeTask : outcomeTasks) {
             outcomeTask.Status = 'Not Started';
@@ -151,6 +167,12 @@ public with sharing class LeadIntakeActionPlanController {
             }
         }
         return SCHOLAR_SUBJECTS;
+    }
+
+    private static String canonicalSubject(String subject) {
+        return LEGACY_SUBJECT_TO_SUBJECT.containsKey(subject)
+            ? LEGACY_SUBJECT_TO_SUBJECT.get(subject)
+            : subject;
     }
 
     public class LeadPlanState {

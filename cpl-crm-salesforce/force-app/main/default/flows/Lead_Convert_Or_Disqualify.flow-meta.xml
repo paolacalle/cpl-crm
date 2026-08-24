@@ -171,12 +171,12 @@
             <label>Disqualify</label>
         </rules>
     </decisions>
-    <description>Completes the Disqualify / Convert intake step. Disqualifying marks the lead Unqualified; converting captures the intended CPL member lifecycle (Athlete or Prospect) and prompts the user to use the standard Convert button. The lead owner stays with the intake queue.</description>
+    <description>Completes the Decision intake step. Disqualifying marks the lead Unqualified; converting captures the intended CPL member lifecycle and converts the lead to a CPL Member. The lead owner stays with the intake queue.</description>
     <environments>Default</environments>
     <formulas>
         <name>Outcome_Message</name>
         <dataType>String</dataType>
-        <expression>IF({!Outcome_Choice} = &quot;Disqualify&quot;, &quot;This lead has been marked Unqualified and the Disqualify / Convert step is complete.&quot;, &quot;This lead has been converted into a CPL member with the selected lifecycle. The Disqualify / Convert step is complete.&quot;)</expression>
+        <expression>IF({!Outcome_Choice} = &quot;Disqualify&quot;, &quot;This lead has been marked Unqualified and the Decision step is complete.&quot;, &quot;This lead has been converted into a CPL member with the selected lifecycle. The Decision step is complete.&quot;)</expression>
     </formulas>
     <interviewLabel>Lead Convert or Disqualify {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Lead Convert or Disqualify</label>
@@ -250,7 +250,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
-        <description>Marks the Disqualify / Convert action-plan task complete so the action plan finishes.</description>
+        <description>Marks the Decision action-plan task complete so the action plan finishes.</description>
         <name>Complete_Outcome_Task</name>
         <label>Complete Outcome Task</label>
         <locationX>0</locationX>
@@ -261,12 +261,19 @@
         <faultConnector>
             <targetReference>Flow_Error</targetReference>
         </faultConnector>
-        <filterLogic>and</filterLogic>
+        <filterLogic>1 AND (2 OR 3) AND 4</filterLogic>
         <filters>
             <field>WhoId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Subject</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Decision - Disqualify / Convert</stringValue>
             </value>
         </filters>
         <filters>
@@ -406,7 +413,7 @@
         </connector>
         <fields>
             <name>Confirm_Convert_Preview</name>
-            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new CPL Member &lt;em&gt;Person Account&lt;/em&gt; with lifecycle &lt;strong&gt;{!Member_Type}&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;Transfers any files attached to this Lead onto the new Person Account.&lt;/li&gt;&lt;li&gt;Marks the &quot;Disqualify / Convert&quot; Task complete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new CPL Member &lt;em&gt;Person Account&lt;/em&gt; with lifecycle &lt;strong&gt;{!Member_Type}&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;Transfers any files attached to this Lead onto the new Person Account.&lt;/li&gt;&lt;li&gt;Marks the &quot;Decision - Disqualify / Convert&quot; Task complete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

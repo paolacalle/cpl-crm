@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>CPL_Lead_In_Intake_Review</fullName>
+    <fullName>CPL_Lead_Decision</fullName>
     <columns>FULL_NAME</columns>
     <columns>LEAD.EMAIL</columns>
     <columns>School__c</columns>
@@ -16,7 +16,7 @@
     <filters>
         <field>LEAD.STATUS</field>
         <operation>equals</operation>
-        <value>In Intake Review</value>
+        <value>Decision</value>
     </filters>
-    <label>CPL Leads - In Intake Review</label>
+    <label>CPL Leads - Decision</label>
 </ListView>

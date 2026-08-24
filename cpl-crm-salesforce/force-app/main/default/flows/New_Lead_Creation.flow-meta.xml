@@ -120,7 +120,7 @@
         <inputAssignments>
             <field>Description</field>
             <value>
-                <stringValue>Confirm the submitted Lead details, including email, school, college year, resume, and scholar statement.</stringValue>
+                <stringValue>Review the submitted Lead details, including email, school, college year, resume, scholar statement, school, and sport.</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -144,7 +144,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Confirm submission</stringValue>
+                <stringValue>Review application</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -156,9 +156,9 @@
         <object>Task</object>
     </recordCreates>
     <recordCreates>
-        <description>Creates the second intake action-plan task for the Lead.</description>
+        <description>Creates the active contacting action-plan task for the Lead.</description>
         <name>Create_Task_Contact_Lead</name>
-        <label>Create Task - Contact Lead</label>
+        <label>Create Task - Active Contacting</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
@@ -167,7 +167,7 @@
         <inputAssignments>
             <field>Description</field>
             <value>
-                <stringValue>Contact the Lead to resolve any intake questions and confirm next steps.</stringValue>
+                <stringValue>Actively contact the Lead, log contact notes, and decide when they are ready for final decision.</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -191,7 +191,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Contact lead</stringValue>
+                <stringValue>Active Contacting</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -214,7 +214,7 @@
         <inputAssignments>
             <field>Description</field>
             <value>
-                <stringValue>Complete the intake outcome by either disqualifying the Lead or converting it when ready.</stringValue>
+                <stringValue>Make the final intake decision by either disqualifying the Lead or converting it to a CPL Member.</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -238,7 +238,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Disqualify / Convert</stringValue>
+                <stringValue>Decision - Disqualify / Convert</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>

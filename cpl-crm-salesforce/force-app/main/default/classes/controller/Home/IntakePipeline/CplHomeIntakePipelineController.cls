@@ -1,10 +1,8 @@
 public with sharing class CplHomeIntakePipelineController {
     private static final List<String> STATUS_ORDER = new List<String>{
         'New',
-        'In Intake Review',
-        'Contacted',
-        'Qualified',
-        'Unqualified'
+        'Contacting',
+        'Decision'
     };
 
     @AuraEnabled(cacheable=true)

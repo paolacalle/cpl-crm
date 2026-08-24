@@ -15,7 +15,7 @@
         <choiceText>Promising - move forward</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>Qualified</stringValue>
+            <stringValue>Decision</stringValue>
         </value>
     </choices>
     <decisions>
@@ -44,7 +44,7 @@
             <label>Yes - Has Task</label>
         </rules>
     </decisions>
-    <description>Guided screen flow for the Partner Lead Discovery meeting step. Captures meeting date / attendees / outcome notes, marks the seeded &quot;Discovery meeting&quot; Task complete, and advances Lead.Status based on the outcome the user selects (Qualified or Unqualified).</description>
+    <description>Guided screen flow for the Partner Lead Discovery meeting step. Captures meeting date / attendees / outcome notes, marks the seeded &quot;Discovery meeting&quot; Task complete, and advances Lead.Status based on the outcome the user selects (Decision or Unqualified).</description>
     <environments>Default</environments>
     <formulas>
         <description>Append the new Discovery Meeting note to any existing Lead.Description content (with a labeled section header) instead of overwriting it.</description>

@@ -10,29 +10,17 @@ const STATUS_META = {
         filterName: 'CPL_Lead_New', 
         toolTip: 'Freshly created leads awaiting initial review.' 
     },
-    'In Intake Review': { 
-        cssClass: 'stat stat-review', 
+    'Contacting': {
+        cssClass: 'stat stat-contacting', 
         objectApiName: 'Lead', 
-        filterName: 'CPL_Lead_In_Intake_Review', 
-        toolTip: 'Leads currently undergoing initial review.' 
+        filterName: 'CPL_Lead_Contacting',
+        toolTip: 'Leads actively being contacted after application review.'
     },
-    'Contacted': { 
-        cssClass: 'stat stat-contacted', 
+    'Decision': {
+        cssClass: 'stat stat-decision', 
         objectApiName: 'Lead', 
-        filterName: 'CPL_Lead_Contacted', 
-        toolTip: 'Outreach has been made to the student.' 
-    },
-    'Qualified': { 
-        cssClass: 'stat stat-qualified', 
-        objectApiName: 'Lead', 
-        filterName: 'CPL_Lead_Qualified', 
-        toolTip: 'Leads we intend to advance into mentorship.' 
-    },
-    'Unqualified': { 
-        cssClass: 'stat stat-unqualified', 
-        objectApiName: 'Lead', 
-        filterName: 'CPL_Lead_Unqualified', 
-        toolTip: 'Leads that do not meet standard criteria.' 
+        filterName: 'CPL_Lead_Decision',
+        toolTip: 'Leads ready for conversion or disqualification.'
     }
 };
 

@@ -5,7 +5,7 @@ private class LeadConvertActionTest {
         Lead leadRecord = new Lead(
             FirstName = 'Convert',
             LastName = 'Me',
-            Status = 'Contacted',
+            Status = 'Decision',
             Email = 'convert.me@example.com'
         );
         insert leadRecord;
