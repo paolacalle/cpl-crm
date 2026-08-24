@@ -141,4 +141,49 @@ private class LeadContactingCheckpointActionTest {
             WHERE Lead__c = :leadRecord.Id
         ]);
     }
+
+    @IsTest
+    static void directSubmitMethodsCreateTaskMarkSentAndSendEmail() {
+        Lead leadRecord = new Lead(
+            FirstName = 'Direct',
+            LastName = 'Submit',
+            Company = 'CPL',
+            Status = 'Contacting',
+            Email = 'direct.submit@example.com',
+            Initial_Contact_Email_Sent__c = false
+        );
+        insert leadRecord;
+
+        Test.startTest();
+        Id taskId = LeadContactingCheckpointAction.createFollowUpTask(
+            leadRecord.Id,
+            'Direct submit task',
+            Date.today().addDays(3),
+            'Created from the Flow task submit button.'
+        );
+        LeadContactingCheckpointAction.markInitialContactEmailSent(leadRecord.Id);
+        LeadContactingCheckpointAction.sendInitialContactEmail(
+            leadRecord.Id,
+            'Initial contact',
+            'Hello from CPL.'
+        );
+        Test.stopTest();
+
+        Task taskRecord = [
+            SELECT WhoId, Subject, ActivityDate, Description
+            FROM Task
+            WHERE Id = :taskId
+        ];
+        System.assertEquals(leadRecord.Id, taskRecord.WhoId);
+        System.assertEquals('Direct submit task', taskRecord.Subject);
+        System.assertEquals(Date.today().addDays(3), taskRecord.ActivityDate);
+        System.assertEquals('Created from the Flow task submit button.', taskRecord.Description);
+
+        Lead updatedLead = [
+            SELECT Initial_Contact_Email_Sent__c
+            FROM Lead
+            WHERE Id = :leadRecord.Id
+        ];
+        System.assertEquals(true, updatedLead.Initial_Contact_Email_Sent__c);
+    }
 }

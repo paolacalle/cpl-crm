@@ -1,0 +1,19 @@
+.action-panel {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.message-input {
+    --slds-c-textarea-sizing-min-height: 150px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.status-text {
+    color: #3e3e3c;
+    margin: 0;
+}

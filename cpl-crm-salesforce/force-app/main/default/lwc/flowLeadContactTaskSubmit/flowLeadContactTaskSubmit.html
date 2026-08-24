@@ -1,0 +1,33 @@
+<template>
+    <div class="action-panel">
+        <lightning-input
+            type="text"
+            label="Task subject"
+            value={subject}
+            required
+            onchange={handleSubjectChange}
+        ></lightning-input>
+
+        <lightning-input
+            type="date"
+            label="Due date"
+            value={dueDate}
+            onchange={handleDueDateChange}
+        ></lightning-input>
+
+        <lightning-textarea
+            label="Task notes"
+            value={notes}
+            onchange={handleNotesChange}
+        ></lightning-textarea>
+
+        <div class="actions">
+            <lightning-button
+                variant="brand"
+                label="Submit Task"
+                onclick={handleSubmitTask}
+                disabled={isSaving}
+            ></lightning-button>
+        </div>
+    </div>
+</template>

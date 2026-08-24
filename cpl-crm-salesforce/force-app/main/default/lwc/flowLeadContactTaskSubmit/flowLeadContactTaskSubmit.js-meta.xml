@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Lead Contact Task Submit</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="Lead Id" role="inputOnly"/>
+            <property name="subject" type="String" label="Task Subject" default="Follow up with lead"/>
+            <property name="dueDate" type="String" label="Due Date"/>
+            <property name="notes" type="String" label="Task Notes"/>
+            <property name="taskId" type="String" label="Created Task Id" role="outputOnly"/>
+            <property name="taskSubmitted" type="Boolean" label="Task Submitted" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

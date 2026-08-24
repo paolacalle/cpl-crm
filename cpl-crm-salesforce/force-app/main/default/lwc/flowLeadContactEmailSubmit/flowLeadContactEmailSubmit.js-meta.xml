@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Flow Lead Contact Email Submit</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="Lead Id" role="inputOnly"/>
+            <property name="initialContactEmailSent" type="Boolean" label="Initial Contact Email Sent"/>
+            <property name="subject" type="String" label="Email Subject" default="Following up on your CPL Scholar Interest Form"/>
+            <property name="body" type="String" label="Email Body"/>
+            <property name="emailSubmitted" type="Boolean" label="Email Submitted" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -227,7 +227,7 @@
             <inputParameters>
                 <name>messageContent</name>
                 <value>
-                    <stringValue>Add note of your initial application reaction. This will be saved as Lead Stage : Review of application with topics: Automated Note, New to Contacting, Review of Initial Application, Lead Stage.</stringValue>
+                    <stringValue>Add a note with your initial reaction to the student’s application. This note will be saved under Lead Stage: Review of Application with the topics Automated Note, New to Contacting, Review of Initial Application, and Lead Stage.</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -244,7 +244,7 @@
         </fields>
         <fields>
             <name>Review_Note</name>
-            <fieldText>What are your initial thoughts of the application? Strengths? Weaknesses? Questions to ask them?</fieldText>
+            <fieldText>Helper Prompt: What are your initial impressions of the application? Consider the student’s strengths, potential areas of concern, and any questions you’d like to explore with them.</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
@@ -279,7 +279,7 @@
         </connector>
         <fields>
             <name>Confirm_Details_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Review the submitted intake details.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Before moving this lead to Contacting, confirm the email, college year, uploaded resume, and scholar statement are present and valid.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;h2&gt;Guide Purpose&lt;/h2&gt;&lt;p&gt;Before moving this lead forward, take a moment to familiarize yourself with the student and write a brief note about your initial impressions. Then, confirm the student’s information to ensure everything is accurate and up to date.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -303,7 +303,7 @@
             <inputParameters>
                 <name>messageContent</name>
                 <value>
-                    <stringValue>Take some time to familiarize yourself with the student applicant application. Afterwards, we you can wrote down notes on your initial impression.</stringValue>
+                    <stringValue>Take some time to familiarize yourself with the student application. Once you’re finished, click Next and write down a few notes about your initial impressions, including anything that stands out to you.</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -407,9 +407,24 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
-            <name>Flow_Error_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;The lead intake review could not finish.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;No changes were saved. Check the required lead fields and try again.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error detail: {!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>err_lead_intake_review</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>error</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>The lead intake review could not be completed.  No changes were saved. Please review the required lead fields and try again. Error details: {!$Flow.FaultMessage}</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -470,7 +485,7 @@
             <inputParameters>
                 <name>messageContent</name>
                 <value>
-                    <stringValue>Match the submitted school and sport to their standardized values. Our system will try to automatically match these whenever possible, but please review them for accuracy. Standardizing these fields is important because it keeps our data consistent and makes future filtering, reporting, and analysis more reliable.</stringValue>
+                    <stringValue>Match the submitted school and sport to their standardized values. Our system will automatically match these fields whenever possible, but please review the selections for accuracy.  Standardizing this information keeps our data consistent and improves future filtering, reporting, and analysis.</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -487,7 +502,7 @@
         </fields>
         <fields>
             <name>Submitted_Context</name>
-            <fieldText>&lt;h2&gt;&lt;strong&gt;Current Raw Variables&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;Submitted school: {!Get_Lead.School_Name_From_Form__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Submitted sport: {!Get_Lead.Sport_From_Form__c}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;h2&gt;Current Submitted Values&lt;/h2&gt;&lt;p&gt;Submitted school: {!Get_Lead.School_Name_From_Form__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Submitted sport: {!Get_Lead.Sport_From_Form__c}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -567,9 +582,24 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
-            <name>Review_Saved_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Application review saved.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;The lead details, matched school, and sport have been updated, and the lead has been moved to Contacting. The lead owner remains the intake queue.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>success_application_lead</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>success</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Application review saved. The lead details, standardized school, and sport have been updated, and the lead has been moved to Contacting. Click Finish to complete and close the task.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>

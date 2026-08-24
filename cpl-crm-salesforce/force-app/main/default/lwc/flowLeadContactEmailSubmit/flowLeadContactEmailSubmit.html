@@ -1,0 +1,39 @@
+<template>
+    <div class="action-panel">
+        <template if:true={emailAlreadySent}>
+            <p class="status-text">Initial contact email has already been sent or marked sent.</p>
+        </template>
+
+        <template if:false={emailAlreadySent}>
+            <lightning-input
+                type="text"
+                label="Email subject"
+                value={subject}
+                required
+                onchange={handleSubjectChange}
+            ></lightning-input>
+
+            <lightning-textarea
+                label="Email message"
+                value={body}
+                required
+                class="message-input"
+                onchange={handleBodyChange}
+            ></lightning-textarea>
+
+            <div class="actions">
+                <lightning-button
+                    variant="brand"
+                    label="Submit Email"
+                    onclick={handleSendEmail}
+                    disabled={isSaving}
+                ></lightning-button>
+                <lightning-button
+                    label="Mark as Sent"
+                    onclick={handleMarkSent}
+                    disabled={isSaving}
+                ></lightning-button>
+            </div>
+        </template>
+    </div>
+</template>
