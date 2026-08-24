@@ -40,10 +40,25 @@
 }
 
 /* Card variants with explicit border adjustments */
-.stat-new { background: #eaf5fe; border-left: 4px solid #0b5cab; }
-.stat-contacting { background: #d7cbb7; border-left: 4px solid #b16100; }
-.stat-decision { background: #aba6bf; border-left: 4px solid #7a4ea6; }
-.stat-unqualified { background: #c26e76; border-left: 4px solid #706e6b; }
+.stat-new {
+    background: #EAF4FB;
+    border-left: 4px solid #5B9CCB;
+}
+
+.stat-contacting {
+    background: #FFF1D9;
+    border-left: 4px solid #D9A35F;
+}
+
+.stat-decision {
+    background: #EEE8F6;
+    border-left: 4px solid #9A7DB8;
+}
+
+.stat-unqualified {
+    background: #FBE8E9;
+    border-left: 4px solid #C9787F;
+}
 
 .footnote {
   color: #706e6b;
