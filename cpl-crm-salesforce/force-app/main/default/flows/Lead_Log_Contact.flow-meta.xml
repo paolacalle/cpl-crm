@@ -410,9 +410,24 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
-            <name>Decision_Ready_Text</name>
-            <fieldText>&lt;p&gt;Lead is now ready to make a decision of if disqualified or converted.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>success_done_contating_lead</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>success</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Yay! The lead is now ready for a decision: Disqualify or Convert.  Click Finish to complete and close the task.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -434,9 +449,24 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
-            <name>Flow_Error_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;The contact could not be logged.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;No changes were saved. Try again.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Error detail: {!$Flow.FaultMessage}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>err_lead_contacting</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>error</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>The contact could not be logged.    No changes were saved. Try again.    Error detail: {!$Flow.FaultMessage}</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -462,8 +492,36 @@
         </connector>
         <fields>
             <name>Log_Contact_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Active Contacting&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;h2&gt;&lt;strong&gt;Active Contacting Guide Purpose &lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;You can use this page to send the initial contact email, create a meeting(s), add notes, and create follow-up tasks. You can create multiple meetings, notes, and tasks as needed throughout the contacting stage.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>inform_when_to_click_ready</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>info</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>When you’re ready to make a final decision, click Ready for Decision.  If you’re not ready yet, simply click the X at the top of the pop-up to close it and return later.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>

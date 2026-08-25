@@ -368,9 +368,24 @@
             <targetReference>Route_Outcome</targetReference>
         </connector>
         <fields>
-            <name>Choose_Outcome_Message</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Complete the intake outcome.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Disqualify the lead, or convert it into a CPL member.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>inform_conversion</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>info</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Time to make a decision. Choose whether to add this student as a CPL member or disqualify the application.  You may use the text box below to explain your decision, but providing an explanation is optional.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -423,7 +438,7 @@
             <inputParameters>
                 <name>noteLabel</name>
                 <value>
-                    <stringValue>Note: Explain your decision here.</stringValue>
+                    <stringValue>Note: Explain the reasoning behind your decision here. Recommended, but optional.</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -442,6 +457,12 @@
                 <name>recordId</name>
                 <value>
                     <elementReference>Get_Lead.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>sectionLabel</name>
+                <value>
+                    <stringValue>Add Decision Explanation Note</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -472,9 +493,24 @@
             <targetReference>Set_Intended_Lifecycle</targetReference>
         </connector>
         <fields>
-            <name>Confirm_Convert_Preview</name>
-            <fieldText>&lt;p&gt;Ready to convert &lt;strong&gt;{!Get_Lead.Name}&lt;/strong&gt;:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Creates a new &lt;strong style=&quot;color: rgb(162, 57, 176);&quot;&gt;CPL Member&lt;/strong&gt;!&lt;/li&gt;&lt;li&gt;Transfers any files, notes, interactions, attached to this Lead onto the new Athlete.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Click Next to confirm, or Previous to revise.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>success_lead_converted</name>
+            <extensionName>flowruntime:message</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>messageType</name>
+                <value>
+                    <stringValue>info</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageContent</name>
+                <value>
+                    <stringValue>Ready to convert {!Get_Lead.Name} into a CPL Member.  This will create a new CPL Member record and transfer all related files, notes, and interactions from the Lead to the new member.  Click Next to confirm the conversion, or Previous to review and make changes.</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>

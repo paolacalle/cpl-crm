@@ -11,8 +11,8 @@ DIRS=(
     # "${BASE}/flexipages"
     # "${BASE}/labels"
     "${BASE}/flows"
-    # "${BASE}/flowDefinitions"
-    # "${BASE}/flowtests"
+    "${BASE}/flowDefinitions"
+    "${BASE}/flowtests"
     # "${BASE}/objects"
     # "${BASE}/layouts"
     "${BASE}/lwc"
@@ -20,6 +20,7 @@ DIRS=(
     # "${BASE}/triggers"
     # "${BASE}/tabs"
     # "${BASE}/quickActions"
+    "${BASE}/objects"
 )
 
 if [[ "$ENV" == "dev" ]]; then
