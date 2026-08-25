@@ -735,8 +735,29 @@
                 <fieldType>Region</fieldType>
                 <fields>
                     <name>Create_Meeting_Section</name>
-                    <fieldText>&lt;p&gt;&lt;strong&gt;Create a Meeting&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;(Coming Soon)&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Google Calendar&lt;/p&gt;&lt;p&gt;Send Zoom Link&lt;/p&gt;</fieldText>
+                    <fieldText>&lt;p&gt;&lt;strong&gt;Create a Meeting&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Send Zoom Link &lt;strong&gt;(Coming Soon)&lt;/strong&gt;&lt;/p&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <fields>
+                    <name>Google_Calendar_Event</name>
+                    <extensionName>c:leadGoogleCalendarEvent</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>recordId</name>
+                        <value>
+                            <elementReference>recordId</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
                             <stringValue>top</stringValue>

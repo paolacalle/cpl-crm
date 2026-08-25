@@ -6,10 +6,11 @@ BASE="force-app/main/default"
 
 DIRS=(
     "${BASE}/classes"
+    "${BASE}/actions"
     # "${BASE}/email"
     # "${BASE}/flexipages"
     # "${BASE}/labels"
-    # "${BASE}/flows"
+    "${BASE}/flows"
     # "${BASE}/flowDefinitions"
     # "${BASE}/flowtests"
     # "${BASE}/objects"

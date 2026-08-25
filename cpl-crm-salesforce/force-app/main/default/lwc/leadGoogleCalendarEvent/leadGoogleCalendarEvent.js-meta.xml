@@ -3,10 +3,16 @@
     <apiVersion>66.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>New Event in Google Calendar</masterLabel>
-    <targets><target>lightning__RecordPage</target></targets>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
             <objects><object>Lead</object></objects>
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="Lead Id"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

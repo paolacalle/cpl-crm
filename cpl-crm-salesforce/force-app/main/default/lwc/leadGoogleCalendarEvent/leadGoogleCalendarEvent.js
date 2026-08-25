@@ -53,12 +53,11 @@ export default class LeadGoogleCalendarEvent extends NavigationMixin(
                 params.set('add', this.leadEmail);
             }
 
-            this[NavigationMixin.Navigate]({
-                type: 'standard__webPage',
-                attributes: {
-                    url: `https://calendar.google.com/calendar/render?${params.toString()}`
-                }
-            });
+            window.open(
+                `https://calendar.google.com/calendar/render?${params.toString()}`,
+                '_blank',
+                'noopener,noreferrer'
+            );
         } catch (error) {
             console.error('Unable to open Google Calendar:', error);
 
