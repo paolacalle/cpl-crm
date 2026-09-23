@@ -1,29 +1,33 @@
 public with sharing class ProspectAppActionPlanController {
+    // controller class manages the action plan tasks
+    // for prospect scholarship applications
+    // it defines the standard tasks, their corresponding screen flows,
+    // and provides a method to retrieve the action plan tasks for a given application.
+
+    // these are the standard tasks for prospect scholarship action plan
     private static final List<String> PLAN_SUBJECTS = new List<String>{
-        'Send scholarship invite',
-        'Confirm invite acceptance',
-        'Send materials for review link',
-        'Confirm materials',
-        'Set-up final interview',
-        'Collect evaluations',
-        'Make decision'
+        'Scholarship Invite + Material Collection',
+        'Interview + Evaluations',
+        'Decision'
     };
 
-    // Subject -> screen flow API name. Populated incrementally as each step flow ships.
-    // A subject with no entry renders without a Launch button.
+    // mapping of subject to the corresponding screen flow API name
     private static final Map<String, String> SUBJECT_TO_FLOW = new Map<String, String>{
-        'Send scholarship invite' => 'App_Send_Invite',
-        'Confirm invite acceptance' => 'App_Confirm_Invite_Acceptance',
-        'Send materials for review link' => 'App_Send_Materials_Link',
-        'Confirm materials' => 'App_Confirm_Materials'
+        'Scholarship Invite + Material Collection' => 'App_Invite_Materials',
+        'Interview + Evaluations' => 'App_Interview_Evaluations',
+        'Decision' => 'App_Decision'
     };
 
     @AuraEnabled(cacheable=true)
     public static List<ActionPlanTask> getTasks(Id applicationId) {
+
+        // return an empty list if no application ID is provided
         if (applicationId == null) {
             return new List<ActionPlanTask>();
         }
 
+        // query all existing tasks for the given application ID
+        // that match the standard subjects
         Map<String, Task> tasksBySubject = new Map<String, Task>();
         for (Task t : [
             SELECT Id, Subject, Status, Priority, ActivityDate, Owner.Name
@@ -37,6 +41,7 @@ public with sharing class ProspectAppActionPlanController {
             }
         }
 
+        // build the list of action plan tasks based on the standard subjects
         List<ActionPlanTask> planTasks = new List<ActionPlanTask>();
         Integer step = 1;
         for (String subject : PLAN_SUBJECTS) {
@@ -44,6 +49,7 @@ public with sharing class ProspectAppActionPlanController {
             step++;
         }
 
+        // mark the first non-completed task as current
         for (ActionPlanTask t : planTasks) {
             if (t.stateClass != 'completed') {
                 t.isCurrent = true;

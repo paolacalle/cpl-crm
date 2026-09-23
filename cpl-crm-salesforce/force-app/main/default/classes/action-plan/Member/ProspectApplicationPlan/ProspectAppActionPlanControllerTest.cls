@@ -6,7 +6,7 @@ private class ProspectAppActionPlanControllerTest {
     }
 
     @IsTest
-    static void returnsAllSevenStepsForAppWithoutTasks() {
+    static void returnsAllThreeStagesForAppWithoutTasks() {
         Prospect_Scholar_Application__c app;
         for (Prospect_Scholar_Application__c existing : [
             SELECT Id FROM Prospect_Scholar_Application__c LIMIT 1
@@ -20,12 +20,12 @@ private class ProspectAppActionPlanControllerTest {
         List<ProspectAppActionPlanController.ActionPlanTask> tasks =
             ProspectAppActionPlanController.getTasks(app.Id);
 
-        System.assertEquals(7, tasks.size(), 'Should always return 7 plan steps');
-        System.assertEquals('Send scholarship invite', tasks[0].subject);
-        System.assertEquals('App_Send_Invite', tasks[0].flowApiName);
-        System.assertEquals('Confirm invite acceptance', tasks[1].subject);
-        System.assertEquals('App_Confirm_Invite_Acceptance', tasks[1].flowApiName);
-        System.assertEquals('Make decision', tasks[6].subject);
-        System.assertEquals(null, tasks[6].flowApiName);
+        System.assertEquals(3, tasks.size(), 'Should always return 3 plan stages');
+        System.assertEquals('Scholarship Invite + Material Collection', tasks[0].subject);
+        System.assertEquals('App_Invite_Materials', tasks[0].flowApiName);
+        System.assertEquals('Interview + Evaluations', tasks[1].subject);
+        System.assertEquals('App_Interview_Evaluations', tasks[1].flowApiName);
+        System.assertEquals('Decision', tasks[2].subject);
+        System.assertEquals('App_Decision', tasks[2].flowApiName);
     }
 }
