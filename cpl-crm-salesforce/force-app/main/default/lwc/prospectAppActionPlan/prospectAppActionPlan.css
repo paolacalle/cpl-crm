@@ -66,6 +66,17 @@
     margin-top: 0.125rem;
 }
 
+.plan-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.disabled-action {
+    opacity: 0.75;
+}
+
 .dot {
     margin: 0 0.375rem;
 }

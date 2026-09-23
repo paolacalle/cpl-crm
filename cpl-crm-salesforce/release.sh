@@ -13,7 +13,6 @@ DIRS=(
     "${BASE}/flows"
     "${BASE}/flowDefinitions"
     "${BASE}/flowtests"
-    # "${BASE}/objects"
     # "${BASE}/layouts"
     "${BASE}/lwc"
     # "${BASE}/pages"

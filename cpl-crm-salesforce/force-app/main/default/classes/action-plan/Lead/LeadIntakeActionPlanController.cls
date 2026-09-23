@@ -1,4 +1,6 @@
 public with sharing class LeadIntakeActionPlanController {
+    private static final String INTAKE_REVIEW_QUEUE_DEVELOPER_NAME = 'Intake_Review_Queue';
+
     private static final List<String> SCHOLAR_SUBJECTS = new List<String>{
         'Review application',
         'Active Contacting',
@@ -79,6 +81,64 @@ public with sharing class LeadIntakeActionPlanController {
         }
 
         return planTasks;
+    }
+
+    @AuraEnabled
+    public static void ensureCurrentStageTasks(Id leadId) {
+        if (leadId == null) {
+            return;
+        }
+
+        List<Lead> leads = [
+            SELECT Id, OwnerId, Status, IsConverted, RecordType.DeveloperName
+            FROM Lead
+            WHERE Id = :leadId
+            LIMIT 1
+        ];
+        if (leads.isEmpty()) {
+            return;
+        }
+
+        Lead lead = leads[0];
+        if (
+            lead.IsConverted ||
+            lead.Status == 'Unqualified' ||
+            (lead.RecordType != null && lead.RecordType.DeveloperName == 'Partner_Lead')
+        ) {
+            return;
+        }
+
+        Set<String> querySubjects = new Set<String>(SCHOLAR_SUBJECTS);
+        querySubjects.addAll(LEGACY_SUBJECT_TO_SUBJECT.keySet());
+
+        Set<String> existingCanonicalSubjects = new Set<String>();
+        for (Task intakeTask : [
+            SELECT Subject
+            FROM Task
+            WHERE WhoId = :lead.Id
+            AND Subject IN :querySubjects
+        ]) {
+            existingCanonicalSubjects.add(canonicalSubject(intakeTask.Subject));
+        }
+
+        List<Task> missingTasks = new List<Task>();
+        Id taskOwnerId = intakeReviewQueueId();
+        for (String subject : SCHOLAR_SUBJECTS) {
+            if (!existingCanonicalSubjects.contains(subject)) {
+                missingTasks.add(new Task(
+                    WhoId = lead.Id,
+                    OwnerId = taskOwnerId,
+                    Subject = subject,
+                    Description = descriptionForScholarSubject(subject),
+                    Status = statusForScholarSubject(lead.Status, subject),
+                    Priority = 'Normal'
+                ));
+            }
+        }
+
+        if (!missingTasks.isEmpty()) {
+            insert missingTasks;
+        }
     }
 
     @AuraEnabled(cacheable=true)
@@ -173,6 +233,47 @@ public with sharing class LeadIntakeActionPlanController {
         return LEGACY_SUBJECT_TO_SUBJECT.containsKey(subject)
             ? LEGACY_SUBJECT_TO_SUBJECT.get(subject)
             : subject;
+    }
+
+    private static Id intakeReviewQueueId() {
+        for (Group intakeQueue : [
+            SELECT Id
+            FROM Group
+            WHERE DeveloperName = :INTAKE_REVIEW_QUEUE_DEVELOPER_NAME
+            AND Type = 'Queue'
+            LIMIT 1
+        ]) {
+            return intakeQueue.Id;
+        }
+        throw new AuraHandledException('The Intake Review Queue could not be found.');
+    }
+
+    private static String descriptionForScholarSubject(String subject) {
+        if (subject == 'Review application') {
+            return 'Review the submitted Lead details, including email, school, college year, resume, scholar statement, school, and sport.';
+        }
+
+        if (subject == 'Active Contacting') {
+            return 'Actively contact the Lead, log contact notes, and decide when they are ready for final decision.';
+        }
+
+        if (subject == 'Decision - Disqualify / Convert') {
+            return 'Make the final intake decision by either disqualifying the Lead or converting it to a CPL Member.';
+        }
+
+        return null;
+    }
+
+    private static String statusForScholarSubject(String leadStatus, String subject) {
+        if (leadStatus == 'Decision') {
+            return subject == 'Decision - Disqualify / Convert' ? 'Not Started' : 'Completed';
+        }
+
+        if (leadStatus == 'Contacting') {
+            return subject == 'Review application' ? 'Completed' : 'Not Started';
+        }
+
+        return 'Not Started';
     }
 
     public class LeadPlanState {

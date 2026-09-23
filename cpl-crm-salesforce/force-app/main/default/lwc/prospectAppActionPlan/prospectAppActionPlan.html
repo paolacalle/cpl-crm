@@ -22,15 +22,23 @@
                                         <span>Due {task.dueDate}</span>
                                     </template>
                                 </div>
-                                <template if:true={task.showLaunch}>
-                                    <lightning-button
-                                        label="Launch"
-                                        variant="brand"
-                                        class="slds-m-top_x-small"
-                                        data-flow={task.flowApiName}
-                                        data-subject={task.subject}
-                                        onclick={handleLaunch}
-                                    ></lightning-button>
+                                <template if:true={task.showActions}>
+                                    <div class="plan-actions">
+                                        <template for:each={task.actions} for:item="action">
+                                            <lightning-button
+                                                key={action.name}
+                                                label={action.label}
+                                                variant={action.buttonVariant}
+                                                class={action.buttonClass}
+                                                disabled={action.disabled}
+                                                data-action-name={action.name}
+                                                data-action-type={action.type}
+                                                data-flow={action.flowApiName}
+                                                data-subject={task.subject}
+                                                onclick={handleAction}
+                                            ></lightning-button>
+                                        </template>
+                                    </div>
                                 </template>
                             </div>
                         </li>
