@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Set_Update_Id</name>
+        <label>Set Update Id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>interactionUpdate.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Interaction.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Has_Title</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Title</name>
+        <label>Set Title</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>interactionUpdate.Title__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>title</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Has_Note</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Note</name>
+        <label>Set Note</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>interactionUpdate.Note__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>note</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Has_Date</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Date</name>
+        <label>Set Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>interactionUpdate.Interaction_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>interactionDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Interaction</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Success</name>
+        <label>Set Success</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>isSuccess</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_Input_Error</name>
+        <label>Set Input Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Interaction not updated. Provide interactionId and at least one nonblank title, note or interactionDate. Title max 255 characters; note max 32768. Clearing fields and changing parent/topics are not supported.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_Not_Found_Error</name>
+        <label>Set Not Found Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Interaction not found or not accessible. Provide the correct Interaction__c ID.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_Query_Error</name>
+        <label>Set Query Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Validate_Inputs</name>
+        <label>Validate Inputs</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Input_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Otherwise</defaultConnectorLabel>
+        <rules>
+            <name>Inputs_Valid</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>validInputs</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Interaction</targetReference>
+            </connector>
+            <label>Inputs Valid</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Interaction_Found</name>
+        <label>Interaction Found</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Not_Found_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Otherwise</defaultConnectorLabel>
+        <rules>
+            <name>Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Interaction.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Update_Id</targetReference>
+            </connector>
+            <label>Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Has_Title</name>
+        <label>Has Title</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Has_Note</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Otherwise</defaultConnectorLabel>
+        <rules>
+            <name>Title_Provided</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>title</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Title</targetReference>
+            </connector>
+            <label>Title Provided</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Has_Note</name>
+        <label>Has Note</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Has_Date</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Otherwise</defaultConnectorLabel>
+        <rules>
+            <name>Note_Provided</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>note</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Note</targetReference>
+            </connector>
+            <label>Note Provided</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Has_Date</name>
+        <label>Has Date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Update_Interaction</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Otherwise</defaultConnectorLabel>
+        <rules>
+            <name>Date_Provided</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>interactionDate</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Date</targetReference>
+            </connector>
+            <label>Date Provided</label>
+        </rules>
+    </decisions>
+    <description>Updates only supplied title, note and interaction date on an existing interaction. Omitted/blank inputs preserve existing fields. Does not change Contact, Lead, owner, topics or links. Returns isSuccess, interactionId and errorMessage. Requires at least one nonblank change.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Internal validation requiring an ID and at least one supplied change within field limits.</description>
+        <name>validInputs</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(NOT(ISBLANK({!interactionId})), OR(NOT(ISBLANK({!title})), NOT(ISBLANK({!note})), NOT(ISBLANK({!interactionDate}))), LEN({!title}) &lt;= 255, LEN({!note}) &lt;= 32768)</expression>
+    </formulas>
+    <interviewLabel>MCP Update Interaction Note {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>MCP Update Interaction Note</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Interaction</name>
+        <label>Get Interaction</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Interaction_Found</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Set_Query_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>interactionId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Interaction__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Only the sparse record is written. No fault connector: write/automation failures abort the transaction.</description>
+        <name>Update_Interaction</name>
+        <label>Update Interaction</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Success</targetReference>
+        </connector>
+        <inputReference>interactionUpdate</inputReference>
+    </recordUpdates>
+    <runInMode>DefaultMode</runInMode>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Validate_Inputs</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <description>Required Salesforce Interaction__c ID. Resolve and read the intended note before updating. Returned unchanged even on failure; check isSuccess.</description>
+        <name>interactionId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Replacement title, at most 255 characters. Blank or omitted preserves existing title.</description>
+        <name>title</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Full replacement content, at most 32768 characters. Blank or omitted preserves existing content. Read the existing note before appending and include all content to retain.</description>
+        <name>note</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>New interaction date in YYYY-MM-DD format. Omit to preserve the existing date.</description>
+        <name>interactionDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>True only after the update succeeds. False for validation or handled query errors. A platform fault is also a failure.</description>
+        <name>isSuccess</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Explains a handled validation or read failure. Write failures return a platform fault to preserve transaction rollback.</description>
+        <name>errorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Internal sparse update record containing only the ID and explicitly supplied fields. No other fields may be added.</description>
+        <name>interactionUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Interaction__c</objectType>
+    </variables>
+</Flow>

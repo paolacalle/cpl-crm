@@ -1,0 +1,39 @@
+<template>
+    <div class="email-composer">
+        <template if:true={emailAlreadySubmitted}>
+            <p class="status-text">{submittedLabel}</p>
+        </template>
+
+        <template if:false={emailAlreadySubmitted}>
+            <lightning-input
+                type="text"
+                label={subjectLabel}
+                value={subject}
+                required
+                onchange={handleSubjectChange}
+            ></lightning-input>
+
+            <lightning-textarea
+                label={bodyLabel}
+                value={body}
+                required
+                class="message-input"
+                onchange={handleBodyChange}
+            ></lightning-textarea>
+
+            <div class="actions">
+                <lightning-button
+                    variant="brand"
+                    label="Send Email"
+                    onclick={handleSendEmail}
+                    disabled={isSaving}
+                ></lightning-button>
+                <lightning-button
+                    label="Mark Sent"
+                    onclick={handleMarkSent}
+                    disabled={isSaving}
+                ></lightning-button>
+            </div>
+        </template>
+    </div>
+</template>

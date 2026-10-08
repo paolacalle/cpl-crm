@@ -4,8 +4,8 @@
         <description>Attaches emails captured before this scholar existed by matching addresses and logging Email Tasks on the timeline. Runs asynchronously so it never blocks the account creation.</description>
         <name>Heal_Scholar_Emails</name>
         <label>Heal Scholar Emails</label>
-        <locationX>176</locationX>
-        <locationY>288</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>EmailActivityHealAction</actionName>
         <actionType>apex</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -43,7 +43,7 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Heal_Scholar_Emails</targetReference>
