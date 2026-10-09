@@ -539,6 +539,44 @@
                 <name>Send_Email_To_Lead_Column1</name>
                 <fieldType>Region</fieldType>
                 <fields>
+                    <name>inform_which_btn_email</name>
+                    <extensionName>flowruntime:message</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>messageType</name>
+                        <value>
+                            <stringValue>info</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>messageContent</name>
+                        <value>
+                            <stringValue>Click Send Email to send the displayed email to the student from your email account.  If you’ve already completed this step, click Mark as Sent to record it as complete.</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                    <visibilityRule>
+                        <conditionLogic>1</conditionLogic>
+                        <conditions>
+                            <leftValueReference>InitialContactEmailControlsVisible</leftValueReference>
+                            <operator>EqualTo</operator>
+                            <rightValue>
+                                <booleanValue>true</booleanValue>
+                            </rightValue>
+                        </conditions>
+                    </visibilityRule>
+                </fields>
+                <fields>
                     <name>Initial_Contact_Email_Already_Sent</name>
                     <fieldText>&lt;p&gt;Initial contact email has already been sent or marked sent.&lt;/p&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>

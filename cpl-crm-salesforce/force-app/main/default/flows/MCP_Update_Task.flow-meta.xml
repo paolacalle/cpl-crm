@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Task not updated. An enabled reminder requires a reminder date/time and a due date. The reminder must be on a date before the due date. Adjust the reminder or due date, or explicitly disable the reminder.</description>
+        <name>Set_Reminder_Error</name>
+        <label>Set Reminder Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Task not updated. An enabled reminder requires a reminder date/time and a due date. The reminder must be on a date before the due date. Adjust the reminder or due date, or explicitly disable the reminder.</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>isSuccess</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Assign errorMessage = &quot;Task not found. Provide a valid Task ID accessible to the current user.&quot;, then end.</description>
+        <name>Set_Task_Not_Found_Error</name>
+        <label>Set Task Not Found Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Task not found. Provide a valid Task ID accessible to the current user.</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>isSuccess</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Task update failed.</description>
+        <name>Set_Task_Update_Error</name>
+        <label>Set Task Update Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>isSuccess</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Marks the task update as successful and clears any error message. taskId retains the ID of the updated Task.</description>
+        <name>Set_Task_Update_Success</name>
+        <label>Set Task Update Success</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>isSuccess</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>errorMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>If the task is found, then continue with task update. Otherwise, go to fault path.</description>
+        <name>Task_Found</name>
+        <label>Task Found</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Task_Not_Found_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Task.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Validate_Reminder</targetReference>
+            </connector>
+            <label>Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Validates if the reminder is expected to set or not.</description>
+        <name>Validate_Reminder</name>
+        <label>Validate Reminder</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Set_Reminder_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Error Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Valid_Reminder</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>finalIsReminderSet</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>finalDueDate</leftValueReference>
+                <operator>HasValue</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>finalReminderDateTime</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>finalDueDate</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>finalReminderDate</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Task</targetReference>
+            </connector>
+            <label>Valid Reminder</label>
+        </rules>
+        <rules>
+            <name>No_Reminder</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>finalIsReminderSet</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Task</targetReference>
+            </connector>
+            <label>No Reminder</label>
+        </rules>
+    </decisions>
+    <description>Updates an existing Salesforce Task identified by taskId. Supports changes to subject, description, due date, status, priority, owner, and reminder settings. Blank basic inputs preserve existing values. Reminder settings change only when updateReminder is true; disabling a reminder clears its date/time. Validates enabled reminders against the resulting due date. Does not modify recurrence settings. Returns isSuccess, taskId, and errorMessage.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Internal formula. Uses the supplied description when nonblank; otherwise preserves the existing Task description. A supplied description replaces the full existing description. Not a caller-provided input.</description>
+        <name>finalDescription</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!description}, {!Get_Task.Description})</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Uses the supplied dueDate when populated; otherwise preserves the existing Task due date. Also used to validate the resulting reminder settings. Not a caller-provided input.</description>
+        <name>finalDueDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(ISBLANK({!dueDate}), {!Get_Task.ActivityDate}, {!dueDate})</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Uses the requested reminder setting when updateReminder is true; otherwise preserves the existing Task reminder setting. Not a caller-provided input.</description>
+        <name>finalIsReminderSet</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(
+    {!updateReminder},
+    {!IsReminderSet},
+    {!Get_Task.IsReminderSet}
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Uses the supplied ownerId when nonblank; otherwise preserves the existing Task owner. Does not default to the Intake Review Queue. Not a caller-provided input.</description>
+        <name>finalOwnerId</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!ownerId}, {!Get_Task.OwnerId})</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Uses the supplied priority when nonblank; otherwise preserves the existing Task priority. Does not apply a creation default. Not a caller-provided input.</description>
+        <name>finalPriority</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!priority}), TEXT({!Get_Task.Priority}), {!priority})</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Extracts the date from the resulting reminder date/time for comparison with finalDueDate. Not a caller-provided input.</description>
+        <name>finalReminderDate</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE({!finalReminderDateTime})</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Preserves the existing reminder when updateReminder is false. When true, uses ReminderDateTime if enabling the reminder or returns null if disabling it. Not a caller-provided input.</description>
+        <name>finalReminderDateTime</name>
+        <dataType>DateTime</dataType>
+        <expression>IF(
+    {!updateReminder},
+    IF(
+        {!IsReminderSet},
+        {!ReminderDateTime},
+        NULL
+    ),
+    {!Get_Task.ReminderDateTime}
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Uses the supplied status when nonblank; otherwise preserves the existing Task status. Not a caller-provided input.</description>
+        <name>finalStatus</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!status}), TEXT({!Get_Task.Status}), {!status})</expression>
+    </formulas>
+    <formulas>
+        <description>Internal formula. Uses the supplied subject when nonblank; otherwise preserves the existing Task subject. Not a caller-provided input.</description>
+        <name>finalSubject</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!subject}, {!Get_Task.Subject})</expression>
+    </formulas>
+    <interviewLabel>MCP Update Task {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>MCP Update Task</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Getter for the task object.</description>
+        <name>Get_Task</name>
+        <label>Get Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Task_Found</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>taskId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Task</object>
+        <sortField>Id</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates the task with. the provided fields.</description>
+        <name>Update_Task</name>
+        <label>Update Task</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Task_Update_Success</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Set_Task_Update_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>taskId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>finalDueDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>finalDescription</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>IsReminderSet</field>
+            <value>
+                <elementReference>finalIsReminderSet</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>finalOwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <elementReference>finalPriority</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ReminderDateTime</field>
+            <value>
+                <elementReference>finalReminderDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <elementReference>finalStatus</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>finalSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Task</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Replacement task description. Provide the complete desired description, including any existing content that should remain. Omit or leave blank to preserve the existing description.</description>
+        <name>description</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>New due date in YYYY-MM-DD format. Omit to preserve the existing due date. If a reminder remains enabled, the resulting due date must be after the reminder’s calendar date.</description>
+        <name>dueDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Explains why the Task could not be updated, including missing records, invalid inputs, or Salesforce errors. Blank on success.</description>
+        <name>errorMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Used only when updateReminder is true. Set true to enable the reminder and provide ReminderDateTime. Set false to disable the reminder and clear its stored date/time.</description>
+        <name>IsReminderSet</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <description>True only after the Task is successfully updated. False when validation or the update fails; read errorMessage for the reason.</description>
+        <name>isSuccess</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Salesforce ID of the new assigned user or Task-enabled queue. Resolve names to IDs before calling. Omit or leave blank to preserve the existing owner; no fallback owner is applied.</description>
+        <name>ownerId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>New priority: High, Normal, or Low. Omit or leave blank to preserve the existing priority.</description>
+        <name>priority</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Required when updateReminder and IsReminderSet are both true. Provide the desired reminder date/time with an explicit timezone offset. It must fall on a calendar date before the resulting task due date. Omit when disabling or preserving the reminder.</description>
+        <name>ReminderDateTime</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>New task status. Use an exact supported Salesforce Task status value. Omit or leave blank to preserve the existing status. Completing one recurring occurrence does not complete the entire series.</description>
+        <name>status</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>New task subject. Omit or leave blank to preserve the existing subject.</description>
+        <name>subject</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Required Salesforce ID of the existing Task to update. Resolve the intended task before calling this tool.</description>
+        <name>taskId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Controls whether reminder settings are changed. Set true when enabling, disabling, or rescheduling a reminder. If false, preserve the existing reminder settings and omit IsReminderSet and ReminderDateTime.</description>
+        <name>updateReminder</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+</Flow>
