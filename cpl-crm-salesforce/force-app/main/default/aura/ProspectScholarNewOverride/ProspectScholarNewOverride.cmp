@@ -1,0 +1,22 @@
+<aura:component implements="lightning:actionOverride,lightning:isUrlAddressable" access="global">
+    <aura:attribute name="accountId" type="String"/>
+    <aura:attribute name="flowStarted" type="Boolean" default="false"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.initialize}"/>
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.initialize}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.handleRender}"/>
+    <lightning:navigation aura:id="navigation"/>
+    <lightning:card title="New Prospect Scholar Application">
+        <div class="slds-p-around_medium">
+            <aura:if isTrue="{!not(empty(v.errorMessage))}">
+                <p role="alert">{!v.errorMessage}</p>
+            </aura:if>
+            <aura:if isTrue="{!not(empty(v.accountId))}">
+                <lightning:flow aura:id="eligibilityFlow" onstatuschange="{!c.handleStatusChange}"/>
+            </aura:if>
+            <div class="slds-m-top_medium">
+                <lightning:button label="Cancel" onclick="{!c.handleCancel}"/>
+            </div>
+        </div>
+    </lightning:card>
+</aura:component>
