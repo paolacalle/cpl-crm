@@ -85,6 +85,26 @@
                 <identifier>RecordInternship_Count_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Current_Full_Time_Employment__c</fieldItem>
+                <identifier>RecordCurrent_Full_Time_Employment_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Has_Full_Time_Employment__c</fieldItem>
+                <identifier>RecordHas_Full_Time_Employment_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-03d84c37-08c1-40a2-9d7b-977ee6b084c8</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -140,20 +160,6 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>showLegacyActivityComposer</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentName>runtime_sales_activities:activityPanel</componentName>
-                <identifier>runtime_sales_activities_activityPanel</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-bad4540a-8355-4f2f-98e9-d163cd3d0eae</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Account.Id</value>
                 </componentInstanceProperties>
@@ -177,7 +183,21 @@
                 <identifier>force_relatedListSingleContainer3</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-bed6dc33-faf1-4c5b-8fcb-09009fc2b50b</name>
+        <name>Facet-2df54d88-40a4-4f1d-bcba-159d46549f9b</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLegacyActivityComposer</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>runtime_sales_activities:activityPanel</componentName>
+                <identifier>runtime_sales_activities_activityPanel</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-bad4540a-8355-4f2f-98e9-d163cd3d0eae</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -220,19 +240,19 @@
                             <value>Job_Title__c</value>
                         </valueListItems>
                         <valueListItems>
+                            <value>RECORDTYPE</value>
+                        </valueListItems>
+                        <valueListItems>
                             <value>Employer__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Employment_Type__c</value>
+                            <value>Status__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Start_Date__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>End_Date__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Is_Current__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Is_qualifying__c</value>
@@ -422,6 +442,20 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
+                    <value>Facet-2df54d88-40a4-4f1d-bcba-159d46549f9b</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.contractDocumentTab</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab7</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
                     <value>Facet-bad4540a-8355-4f2f-98e9-d163cd3d0eae</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -430,20 +464,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-bed6dc33-faf1-4c5b-8fcb-09009fc2b50b</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Standard.Tab.contractDocumentTab</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab7</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Country__c</fullName>
-    <description>Country where the employment role is or was based.</description>
     <defaultValue>&quot;USA&quot;</defaultValue>
+    <description>Country where the employment role is or was based.</description>
     <externalId>false</externalId>
     <inlineHelpText>Optional field to capture the country of employment.</inlineHelpText>
     <label>Country</label>

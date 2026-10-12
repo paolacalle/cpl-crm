@@ -1,0 +1,19 @@
+.intro { background: linear-gradient(120deg, #f7f3fb, #fff); border-bottom: 1px solid #e5dfeb; }
+.eligibility-banner { background: #f4f1f7; border-left: 4px solid #5e4b8b; color: #2f2544; }
+.step-title { display: flex; align-items: flex-start; gap: .75rem; }
+.step-title h2 { font-size: 1rem; font-weight: 700; }
+.step-title p, .requirement-card p { color: #5c5c5c; margin-top: .15rem; }
+.step-number { align-items: center; background: #5e4b8b; border-radius: 50%; color: white; display: inline-flex; font-weight: 700; height: 1.75rem; justify-content: center; width: 1.75rem; }
+.search-results { border: 1px solid #dddbda; border-radius: .25rem; max-width: 42rem; overflow: hidden; }
+.member-result { background: white; border: 0; cursor: pointer; display: flex; flex-direction: column; padding: .6rem .8rem; text-align: left; width: 100%; }
+.member-result:hover { background: #f3f0f7; }
+.member-result small, .member-summary span, .internship-row small { color: #5c5c5c; display: block; }
+.member-summary { align-items: center; background: #f3f7f4; border: 1px solid #c6dfce; border-radius: .25rem; display: flex; max-width: 42rem; padding: .75rem; }
+.member-summary div { flex: 1; }
+.requirement-card { border: 1px solid #dddbda; border-radius: .375rem; height: 100%; padding: 1rem; }
+.requirement-card h3 { color: #31264a; font-size: .95rem; font-weight: 700; }
+.internship-list { margin-top: .75rem; }
+.internship-row { align-items: center; border-top: 1px solid #eee; display: grid; gap: .4rem; grid-template-columns: 1.75rem 1fr auto; padding: .65rem 0; }
+.qualifying-label { color: #4b3b70; font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+.empty-internships { background: #fff6e5; border-radius: .25rem; color: #5c4200; margin-top: .75rem; padding: .75rem; }
+.actions { border-top: 1px solid #dddbda; padding-top: 1rem; text-align: right; }

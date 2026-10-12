@@ -111,6 +111,81 @@ private class LeadIntakeActionPlanControllerTest {
     }
 
     @IsTest
+    static void ensureCurrentStageTasksCreatesMissingContactingScholarTasks() {
+        Group intakeQueue = [
+            SELECT Id
+            FROM Group
+            WHERE DeveloperName = 'Intake_Review_Queue'
+            AND Type = 'Queue'
+            LIMIT 1
+        ];
+        Lead leadRecord = new Lead(
+            FirstName = 'Missing',
+            LastName = 'ContactingTasks',
+            Company = 'CPL',
+            Status = 'Contacting',
+            RecordTypeId = scholarLeadRtId()
+        );
+        insert leadRecord;
+        clearSeededTasks(leadRecord.Id);
+
+        Test.startTest();
+        LeadIntakeActionPlanController.ensureCurrentStageTasks(leadRecord.Id);
+        Test.stopTest();
+
+        Map<String, Task> tasksBySubject = new Map<String, Task>();
+        for (Task intakeTask : [
+            SELECT Subject, Status, OwnerId, Priority, Description
+            FROM Task
+            WHERE WhoId = :leadRecord.Id
+        ]) {
+            tasksBySubject.put(intakeTask.Subject, intakeTask);
+        }
+
+        System.assertEquals(3, tasksBySubject.size());
+        System.assertEquals('Completed', tasksBySubject.get('Review application').Status);
+        System.assertEquals('Not Started', tasksBySubject.get('Active Contacting').Status);
+        System.assertEquals('Not Started', tasksBySubject.get('Decision - Disqualify / Convert').Status);
+        System.assertEquals(intakeQueue.Id, tasksBySubject.get('Active Contacting').OwnerId);
+        System.assertEquals('Normal', tasksBySubject.get('Active Contacting').Priority);
+        System.assertEquals(
+            'Actively contact the Lead, log contact notes, and decide when they are ready for final decision.',
+            tasksBySubject.get('Active Contacting').Description
+        );
+
+        List<LeadIntakeActionPlanController.ActionPlanTask> tasks =
+            LeadIntakeActionPlanController.getTasks(leadRecord.Id);
+        System.assertEquals(true, tasks[0].exists);
+        System.assertEquals(true, tasks[1].exists);
+        System.assertEquals(true, tasks[2].exists);
+        System.assertEquals('Active Contacting', tasks[1].subject);
+        System.assertEquals(true, tasks[1].isCurrent);
+    }
+
+    @IsTest
+    static void ensureCurrentStageTasksDoesNotCreateScholarTasksForPartnerLead() {
+        RecordType partnerRt = [
+            SELECT Id FROM RecordType
+            WHERE SobjectType = 'Lead' AND DeveloperName = 'Partner_Lead' LIMIT 1
+        ];
+        Lead partnerLead = new Lead(
+            FirstName = 'No',
+            LastName = 'ScholarTasks',
+            Company = 'Pending - Partner Outreach',
+            Status = 'Contacting',
+            RecordTypeId = partnerRt.Id
+        );
+        insert partnerLead;
+        clearSeededTasks(partnerLead.Id);
+
+        Test.startTest();
+        LeadIntakeActionPlanController.ensureCurrentStageTasks(partnerLead.Id);
+        Test.stopTest();
+
+        System.assertEquals(0, [SELECT COUNT() FROM Task WHERE WhoId = :partnerLead.Id]);
+    }
+
+    @IsTest
     static void disqualifiedLeadHasNoCurrentStep() {
         Lead leadRecord = new Lead(
             FirstName = 'Dis',

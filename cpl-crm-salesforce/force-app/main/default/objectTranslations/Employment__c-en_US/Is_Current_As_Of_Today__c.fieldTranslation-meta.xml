@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- This field is calculated automatically. An employment is current when it has started and has no end date or an end date of today or later. --></help>
+    <label><!-- Is Current As Of Today --></label>
+    <name>Is_Current_As_Of_Today__c</name>
+</CustomFieldTranslation>

@@ -76,4 +76,9 @@
         <default>false</default>
         <label>Order Summary Orchestration</label>
     </standardValue>
+    <standardValue>
+        <fullName>Cart</fullName>
+        <default>false</default>
+        <label>Cart</label>
+    </standardValue>
 </StandardValueSet>

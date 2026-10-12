@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <excludeButtons>OpenSlackRecordChannel</excludeButtons>
     <excludeButtons>PrintableView</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
@@ -56,6 +57,14 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Scholarship_Eligibility_Computed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Current_Full_Time_Employment__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Has_Full_Time_Employment__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
@@ -176,6 +185,8 @@
         <fields>Status__c</fields>
         <fields>Start_Date__c</fields>
         <fields>End_Date__c</fields>
+        <fields>Department__c</fields>
+        <fields>Notes__c</fields>
         <fields>Is_qualifying__c</fields>
         <relatedList>Employment__c.CPL_Member__c</relatedList>
         <sortField>Start_Date__c</sortField>
@@ -184,9 +195,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Evaluation__c.CPL_Member__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedFileList</relatedList>
     </relatedLists>
     <relatedObjects>ParentId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

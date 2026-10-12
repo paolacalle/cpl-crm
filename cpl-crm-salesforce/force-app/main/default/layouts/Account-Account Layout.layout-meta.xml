@@ -52,6 +52,14 @@
                 <behavior>Readonly</behavior>
                 <field>Scholarship_Eligibility_Computed__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Current_Full_Time_Employment__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Has_Full_Time_Employment__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>

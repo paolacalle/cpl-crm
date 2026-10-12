@@ -73,8 +73,8 @@
         <name>VR_PSA_Invite_Confirmed_Before_Forward</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Only Junior-year students are eligible to submit a CPL Scholar application. --></errorMessage>
-        <name>VR_PSA_Junior_Required_On_Submission</name>
+        <errorMessage><!-- Ensures that only Junior to Rising Senior students can have a Prospect Scholar Application. --></errorMessage>
+        <name>VR_PSA_JuniorSenior_Required</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Only use Rejection fields when the application is Rejected or Withdrawn. --></errorMessage>

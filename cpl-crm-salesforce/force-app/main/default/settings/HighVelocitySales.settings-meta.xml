@@ -7,6 +7,7 @@
     <enableCadenceVariantTestingPref>false</enableCadenceVariantTestingPref>
     <enableChgTgtAssigneeUsrPermPref>false</enableChgTgtAssigneeUsrPermPref>
     <enableEngagementWaveAnalyticsPref>false</enableEngagementWaveAnalyticsPref>
+    <enableHighVelocitySales>false</enableHighVelocitySales>
     <enableHighVelocitySalesSetup>false</enableHighVelocitySalesSetup>
     <enableLogACallForCTIPref>false</enableLogACallForCTIPref>
     <enableLogTasksForLinkedInPref>false</enableLogTasksForLinkedInPref>

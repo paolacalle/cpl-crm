@@ -46,6 +46,11 @@
                 <default>false</default>
                 <label>Wealth Management</label>
             </value>
+            <value>
+                <fullName>Not Primary Wealth Related</fullName>
+                <default>false</default>
+                <label>Not Primary Wealth Related</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

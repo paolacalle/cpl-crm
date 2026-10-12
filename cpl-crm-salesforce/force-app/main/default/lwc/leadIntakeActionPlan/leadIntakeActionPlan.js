@@ -5,6 +5,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import LeadActionPlanFlowModal from 'c/leadActionPlanFlowModal';
 import getTasks from '@salesforce/apex/LeadIntakeActionPlanController.getTasks';
 import getLeadState from '@salesforce/apex/LeadIntakeActionPlanController.getLeadState';
+import ensureCurrentStageTasks from '@salesforce/apex/LeadIntakeActionPlanController.ensureCurrentStageTasks';
 import reopenLead from '@salesforce/apex/LeadIntakeActionPlanController.reopenLead';
 
 export default class LeadIntakeActionPlan extends NavigationMixin(LightningElement) {
@@ -14,6 +15,37 @@ export default class LeadIntakeActionPlan extends NavigationMixin(LightningEleme
     wiredResult;
     wiredStateResult;
     reopening = false;
+    repairedLeadId;
+
+    connectedCallback() {
+        this.ensureTasks();
+    }
+
+    renderedCallback() {
+        this.ensureTasks();
+    }
+
+    async ensureTasks() {
+        if (!this.recordId || this.repairedLeadId === this.recordId) {
+            return;
+        }
+
+        this.repairedLeadId = this.recordId;
+        try {
+            await ensureCurrentStageTasks({ leadId: this.recordId });
+            if (this.wiredResult) {
+                await refreshApex(this.wiredResult);
+            }
+        } catch (error) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Could not prepare action plan',
+                    message: error?.body?.message || 'Unexpected error creating missing action plan tasks.',
+                    variant: 'error'
+                })
+            );
+        }
+    }
 
     @wire(getTasks, { leadId: '$recordId' })
     wiredTasks(result) {

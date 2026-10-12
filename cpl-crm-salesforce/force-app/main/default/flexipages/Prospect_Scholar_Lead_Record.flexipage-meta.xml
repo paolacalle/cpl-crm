@@ -91,6 +91,12 @@
                 <identifier>RecordOwnerIdField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Submission_Date__c</fieldItem>
+                <identifier>RecordSubmission_Date__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-applicant-details-column</name>
         <type>Facet</type>
     </flexiPageRegions>

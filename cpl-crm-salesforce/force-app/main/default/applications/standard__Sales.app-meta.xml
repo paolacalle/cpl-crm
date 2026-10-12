@@ -19,5 +19,6 @@
     <tabs>standard-Forecasting3</tabs>
     <tabs>Prospect_Scholar_Application__c</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>Employment__c</tabs>
     <uiType>Aloha</uiType>
 </CustomApplication>

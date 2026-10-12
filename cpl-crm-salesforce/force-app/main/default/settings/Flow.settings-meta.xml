@@ -23,5 +23,4 @@
     <isEnhancedFlowListViewVisible>true</isEnhancedFlowListViewVisible>
     <isFlowBlockAccessToSessionIDEnabled>true</isFlowBlockAccessToSessionIDEnabled>
     <isManageFlowRequiredForAutomationCharts>false</isManageFlowRequiredForAutomationCharts>
-    <isSupportRollbackOnErrorForApexInvocableActionsEnabled>true</isSupportRollbackOnErrorForApexInvocableActionsEnabled>
 </FlowSettings>

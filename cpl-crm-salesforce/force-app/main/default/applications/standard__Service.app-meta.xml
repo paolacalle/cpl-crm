@@ -17,5 +17,6 @@
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>Employment__c</tabs>
     <uiType>Aloha</uiType>
 </CustomApplication>

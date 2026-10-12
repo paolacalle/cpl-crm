@@ -4,6 +4,7 @@
     <enableOaEventInternalWrites>false</enableOaEventInternalWrites>
     <enableOaEventNotifications>false</enableOaEventNotifications>
     <enableOaForCore>false</enableOaForCore>
+    <enableOmniCleanMetadataPref>false</enableOmniCleanMetadataPref>
     <enableOmniGlobalAutoNumberPref>false</enableOmniGlobalAutoNumberPref>
     <enableOmniStudioContentTest>false</enableOmniStudioContentTest>
     <enableOmniStudioMetadata>false</enableOmniStudioMetadata>

@@ -9,5 +9,6 @@
     <navType>Standard</navType>
     <tabs>standard-LightningBoltHome</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>Employment__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

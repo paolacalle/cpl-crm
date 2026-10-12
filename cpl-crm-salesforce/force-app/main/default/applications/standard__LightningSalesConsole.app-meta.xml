@@ -41,9 +41,13 @@
     <tabs>standard-File</tabs>
     <tabs>standard-EmailTemplate</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>Employment__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>LightningSalesConsole_UtilityBar</utilityBar>
     <workspaceConfig>
+        <mappings>
+            <tab>Employment__c</tab>
+        </mappings>
         <mappings>
             <tab>Form_Submission__c</tab>
         </mappings>

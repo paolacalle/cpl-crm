@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>OpenSlackRecordChannel</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -24,6 +23,14 @@
                 <behavior>Edit</behavior>
                 <field>Scholarship_Eligibility_Status__pc</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Current_Full_Time_Employment__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Has_Full_Time_Employment__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -32,15 +39,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Secondary_Email__pc</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Why_CPL__pc</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Commits_to_CPL_mantra__pc</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>PersonGenderIdentity</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -160,18 +167,6 @@
         <fields>End_Date__c</fields>
         <relatedList>Employment__c.CPL_Member__c</relatedList>
         <sortField>Start_Date__c</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>Related_Contact__c</fields>
-        <fields>Related_Contact_Record_Type__c</fields>
-        <fields>Related_Contact_Organization__c</fields>
-        <fields>Operational_Status__c</fields>
-        <fields>Primary_Contact__c</fields>
-        <fields>Verified_Date__c</fields>
-        <relatedList>CPL_Member_Identity_Link__c.CPL_Member__c</relatedList>
-        <sortField>CREATED_DATE</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>

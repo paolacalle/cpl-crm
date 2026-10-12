@@ -1,0 +1,88 @@
+<template>
+    <lightning-card title="New Prospect Scholar Application" icon-name="custom:custom45">
+        <div class="intro slds-p-horizontal_large slds-p-top_medium slds-p-bottom_small">
+            <p class="slds-text-heading_small">Confirm eligibility in two steps</p>
+            <p class="slds-text-body_regular slds-m-top_x-small">A CPL member is eligible when they are a Junior or Senior and have at least one qualifying internship.</p>
+        </div>
+
+        <div class="eligibility-banner slds-m-horizontal_large slds-m-bottom_medium slds-notify slds-notify_alert" role="status">
+            <lightning-icon icon-name={eligibilityVariant} size="x-small" class="slds-m-right_x-small"></lightning-icon>
+            {eligibilityMessage}
+        </div>
+
+        <div class="slds-p-horizontal_large slds-p-bottom_large">
+            <section class="step-section">
+                <div class="step-title"><span class="step-number">1</span><div><h2>Choose the CPL member</h2><p>Find the applicant whose eligibility you want to confirm.</p></div></div>
+                <template if:false={hasSelectedMember}>
+                    <div class="slds-grid slds-gutters slds-m-top_small">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_8-of-12">
+                            <lightning-input label="Search CPL members" value={searchTerm} onchange={handleSearchInput} onkeydown={handleSearchInput} placeholder="Start typing a member name"></lightning-input>
+                        </div>
+                        <div class="slds-col slds-align-bottom slds-p-bottom_x-small">
+                            <lightning-button label="Search" onclick={handleSearch} disabled={isSearching}></lightning-button>
+                        </div>
+                    </div>
+                    <template if:true={hasSearchResults}>
+                        <ul class="search-results slds-m-top_small" aria-label="Member search results">
+                            <template for:each={searchResults} for:item="member">
+                                <li key={member.id}>
+                                    <button class="member-result" data-id={member.id} onclick={handleSelectMember}>
+                                        <span>{member.name}</span><small>{member.email}</small>
+                                    </button>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                </template>
+                <template if:true={hasSelectedMember}>
+                    <div class="member-summary slds-m-top_small">
+                        <lightning-icon icon-name="standard:person_account" size="small" class="slds-m-right_small"></lightning-icon>
+                        <div><strong>{selectedMember.name}</strong><span>{selectedMember.email}</span></div>
+                        <lightning-button label="Change member" variant="base" onclick={handleClear}></lightning-button>
+                    </div>
+                </template>
+            </section>
+
+            <template if:true={hasSelectedMember}>
+                <section class="step-section slds-m-top_large">
+                    <div class="step-title"><span class="step-number">2</span><div><h2>Confirm the two eligibility requirements</h2><p>Both conditions must be met before an application can be created.</p></div></div>
+                    <div class="requirements slds-grid slds-wrap slds-gutters slds-m-top_small">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                            <div class="requirement-card">
+                                <h3>Academic year</h3>
+                                <p>The member must be a Junior or Senior.</p>
+                                <lightning-radio-group name="collegeYear" label="Current college year" options={classYearOptions} value={collegeYear} type="button" onchange={handleClassYearChange}></lightning-radio-group>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                            <div class="requirement-card">
+                                <h3>Qualifying internship</h3>
+                                <p>Review every recorded internship and mark the roles that qualify.</p>
+                                <template if:true={hasInternships}>
+                                    <div class="internship-list">
+                                        <template for:each={internships} for:item="internship">
+                                            <label key={internship.id} class="internship-row">
+                                                <lightning-input type="checkbox" data-id={internship.id} checked={internship.isQualifying} onchange={handleInternshipChange} variant="label-hidden" aria-label="Mark internship as qualifying"></lightning-input>
+                                                <span><strong>{internship.employerName}</strong><small>{internship.jobTitle} · {internship.season}</small></span>
+                                                <span class="qualifying-label">Qualifying</span>
+                                            </label>
+                                        </template>
+                                    </div>
+                                </template>
+                                <template if:false={hasInternships}>
+                                    <div class="empty-internships">No internships are recorded for this member. Add an internship before creating an application.</div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="actions slds-m-top_large">
+                    <lightning-button label="Cancel" onclick={handleClear} disabled={isSaving}></lightning-button>
+                    <lightning-button class="slds-m-left_small" label="Create eligible application" variant="brand" onclick={handleCreate} disabled={isCreateDisabled} icon-name="utility:success"></lightning-button>
+                </div>
+            </template>
+        </div>
+        <template if:true={isLoadingMember}><lightning-spinner alternative-text="Loading member eligibility"></lightning-spinner></template>
+        <template if:true={isSaving}><lightning-spinner alternative-text="Creating application"></lightning-spinner></template>
+    </lightning-card>
+</template>

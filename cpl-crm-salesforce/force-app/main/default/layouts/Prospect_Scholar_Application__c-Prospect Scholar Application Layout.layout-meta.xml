@@ -144,6 +144,9 @@
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <relatedLists>
+        <relatedList>RelatedFileList</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>NAME</fields>
         <relatedList>Evaluation__c.Prospect_Scholar_Application__c</relatedList>
     </relatedLists>

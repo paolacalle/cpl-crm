@@ -28,15 +28,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Current_Employment__c</field>
+                <field>Submission_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Current_Employer__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Current_Job_Title__c</field>
+                <behavior>Edit</behavior>
+                <field>Secondary_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

@@ -21,6 +21,10 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__LightningInstrumentation</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
         <name>standard__SalesforceCMS</name>
         <type>CustomApplication</type>
     </appMenuItems>
@@ -101,7 +105,19 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__DigitalWallet</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
         <name>jotform__Jotform</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Claude_MCP_Read_Only</name>
+        <type>ExternalClientApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__AlmDevops</name>
         <type>CustomApplication</type>
     </appMenuItems>
 </AppMenu>

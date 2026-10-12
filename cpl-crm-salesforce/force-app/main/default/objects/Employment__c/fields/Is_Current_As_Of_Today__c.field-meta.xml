@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Current_As_Of_Today__c</fullName>
+    <description>Automatically indicates whether this employment is active based on its start date and end date.</description>
+    <formula>AND(
+  Start_Date__c &lt;= TODAY(),
+  OR(
+    ISBLANK(End_Date__c),
+    End_Date__c &gt;= TODAY()
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>This field is calculated automatically. An employment is current when it has started and has no end date or an end date of today or later.</inlineHelpText>
+    <label>Is Current As Of Today</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

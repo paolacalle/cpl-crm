@@ -182,7 +182,11 @@
     <tabs>standard-Opportunity</tabs>
     <tabs>standard-Lead</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>Employment__c</tabs>
     <workspaceConfig>
+        <mappings>
+            <tab>Employment__c</tab>
+        </mappings>
         <mappings>
             <tab>Form_Submission__c</tab>
         </mappings>

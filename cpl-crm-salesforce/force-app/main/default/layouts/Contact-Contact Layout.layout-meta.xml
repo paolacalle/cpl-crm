@@ -14,12 +14,12 @@
                 <field>Lead_Source_Detail__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Current_Employer__c</field>
+                <behavior>Edit</behavior>
+                <field>Submission_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Current_Job_Title__c</field>
+                <behavior>Edit</behavior>
+                <field>Secondary_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
@@ -183,17 +183,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Employment__c.Contact__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>CPL_Member__c</fields>
-        <fields>CPL_Member_Lifecycle__c</fields>
-        <fields>Operational_Status__c</fields>
-        <fields>Primary_Contact__c</fields>
-        <fields>Verified_Date__c</fields>
-        <relatedList>CPL_Member_Identity_Link__c.Related_Contact__c</relatedList>
-        <sortField>CREATED_DATE</sortField>
-        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

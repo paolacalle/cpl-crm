@@ -19,6 +19,13 @@
             <desktopEnabled>true</desktopEnabled>
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
+        <notificationType>activity_team_member</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
         <notificationType>admin_graph_api_migration</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
@@ -27,6 +34,34 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>ads_notification</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>agent_memory_import</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>agentexch_install_req_admin</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>agentexch_install_req_user</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>agentexch_install_succ_user</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -54,7 +89,35 @@
             <desktopEnabled>true</desktopEnabled>
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
+        <notificationType>ase_inbox_conflict_resolution</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>bar_audit_log_export</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>bar_backup_status</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
         <notificationType>bar_recover_activity_status</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>bar_settings_change</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -69,6 +132,13 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>bulk_action_plan_save</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>true</mobileEnabled>
+        </notificationChannels>
+        <notificationType>bulk_create_timesheet_result</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -125,6 +195,13 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>credit_memo_generation</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>csi_score_notification</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -195,6 +272,27 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>event_reminder</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>fh_creation_job_run_completed</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>fh_root_filter_invalidated</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>fh_sync_check_job_run_completed</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -325,6 +423,13 @@
     <notificationTypeSettings>
         <notificationChannels>
             <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>pkg_vrfy_trust_request</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
             <mobileEnabled>true</mobileEnabled>
         </notificationChannels>
         <notificationType>profile_post</notificationType>
@@ -370,6 +475,13 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>rtf_payment_status</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>siq_connect_exchange</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>
@@ -440,6 +552,20 @@
             <mobileEnabled>false</mobileEnabled>
         </notificationChannels>
         <notificationType>user_graph_api_migration</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>view_all_emails</notificationType>
+    </notificationTypeSettings>
+    <notificationTypeSettings>
+        <notificationChannels>
+            <desktopEnabled>true</desktopEnabled>
+            <mobileEnabled>false</mobileEnabled>
+        </notificationChannels>
+        <notificationType>view_siq_object</notificationType>
     </notificationTypeSettings>
     <notificationTypeSettings>
         <notificationChannels>

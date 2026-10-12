@@ -7,4 +7,5 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <tabs>standard-AppLauncher</tabs>
     <tabs>Form_Submission__c</tabs>
+    <tabs>Employment__c</tabs>
 </CustomApplication>

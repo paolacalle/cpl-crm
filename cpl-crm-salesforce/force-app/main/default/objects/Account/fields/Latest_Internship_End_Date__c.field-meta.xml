@@ -6,7 +6,7 @@
     <label>Latest Internship End Date</label>
     <summarizedField>Employment__c.End_Date__c</summarizedField>
     <summaryFilterItems>
-        <field>Employment__c.Employment_Type__c</field>
+        <field>Employment__c.RecordTypeId</field>
         <operation>equals</operation>
         <value>Internship</value>
     </summaryFilterItems>

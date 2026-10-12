@@ -129,5 +129,15 @@
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
     <externalSharingModel>ControlledByParent</externalSharingModel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Location</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Type</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ActiveFrom</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ActiveTo</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>Location</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Type</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ActiveFrom</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ActiveTo</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

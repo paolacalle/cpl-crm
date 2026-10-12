@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the state that this employment took place. --></help>
+    <label><!-- State --></label>
+    <name>State_Picklist__c</name>
+</CustomFieldTranslation>

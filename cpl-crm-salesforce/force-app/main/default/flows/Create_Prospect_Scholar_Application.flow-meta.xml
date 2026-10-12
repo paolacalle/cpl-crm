@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Member_Found</name>
+        <label>Member Found?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Account_Context_Unavailable</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Member Found</defaultConnectorLabel>
+        <rules>
+            <name>Found_Person_Account</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_CPL_Member.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Review_CPL_Member</targetReference>
+            </connector>
+            <label>Found Person Account</label>
+        </rules>
+    </decisions>
+    <description>Read-only first-stage draft for Plan A. Receives an Account recordId and displays the Person Account name and college year. Does not check internship eligibility, create applications, or update records. The New action override is configured separately.</description>
+    <environments>Default</environments>
+    <interviewLabel>Create Prospect Scholar Application {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Prospect Scholar Application</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_CPL_Member</name>
+        <label>Get CPL Member</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Member_Found</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Account_Context_Unavailable</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsPersonAccount</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Account_Context_Unavailable</name>
+        <label>Account Context Unavailable</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Account_Context_Message</name>
+            <fieldText>&lt;p&gt;The CPL member could not be loaded. Supply the ID of an accessible Person Account in the recordId input and try again. If the issue continues, ask your Salesforce administrator to check Account and field permissions.&lt;/p&gt;&lt;p&gt;No records have been created or changed.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Review_CPL_Member</name>
+        <label>Review CPL Member</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Member_Details</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;CPL Member:&lt;/b&gt; {!Get_CPL_Member.Name}&lt;/p&gt;&lt;p&gt;&lt;b&gt;College Year:&lt;/b&gt; {!Get_CPL_Member.College_Year__pc}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Account ID:&lt;/b&gt; {!Get_CPL_Member.Id}&lt;/p&gt;&lt;p&gt;If College Year is blank, no value is recorded on the member Account.&lt;/p&gt;&lt;p&gt;This draft only confirms that the correct member loads. Eligibility review and application creation are not yet included. Clicking Finish will not save or create any records.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_CPL_Member</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

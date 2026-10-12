@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_JuniorSenior_Required</fullName>
+    <active>true</active>
+    <description>Ensures that only Junior or Senior students can have a Prospect Scholar Application.</description>
+    <errorConditionFormula>AND(
+    NOT(ISPICKVAL(College_Year__c, &quot;Junior&quot;)),
+    NOT(ISPICKVAL(College_Year__c, &quot;Senior&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>College_Year__c</errorDisplayField>
+    <errorMessage>Ensures that only Junior to Rising Senior students can have a Prospect Scholar Application.</errorMessage>
+</ValidationRule>

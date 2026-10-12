@@ -128,4 +128,22 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
+    <searchLayouts>
+        <customTabListAdditionalFields>ActivityDate</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ExternalTransactionNumber</customTabListAdditionalFields>
+        <customTabListAdditionalFields>JournalType</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TransactionAmount</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ActivityDate</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ExternalTransactionNumber</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>JournalType</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>TransactionAmount</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ActivityDate</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ExternalTransactionNumber</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>JournalType</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>TransactionAmount</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>ActivityDate</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ExternalTransactionNumber</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>JournalType</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TransactionAmount</searchResultsAdditionalFields>
+    </searchLayouts>
 </CustomObject>

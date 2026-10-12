@@ -4,17 +4,21 @@
     <description>Derived status of the employment based on dates and current flag.</description>
     <externalId>false</externalId>
     <formula>IF(
-  Is_Current__c,
-  &quot;Current&quot;,
+  ISBLANK(Start_Date__c),
+  &quot;Unknown&quot;,
   IF(
-    ISBLANK(End_Date__c),
-    &quot;Unknown&quot;,
-    &quot;Past&quot;
+    Is_Current_As_Of_Today__c,
+    &quot;Current&quot;,
+    IF(
+      Start_Date__c &gt; TODAY(),
+      &quot;Future&quot;,
+      &quot;Past&quot;
+    )
   )
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <inlineHelpText>Automatically displays whether the employment is current or past.</inlineHelpText>
-    <label>Status</label>
+    <inlineHelpText>Automatically displays whether this employment is Future, Current, Past, or Unknown based on the start date, end date, and calculated current-employment status.</inlineHelpText>
+    <label>Employment Status</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

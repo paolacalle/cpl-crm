@@ -5,7 +5,6 @@
     <enableApiUserLtngOutAccessPref>false</enableApiUserLtngOutAccessPref>
     <enableAuraBoxcarReductionPref>false</enableAuraBoxcarReductionPref>
     <enableAuraCDNPref>true</enableAuraCDNPref>
-    <enableAuraSecStaticResCRUCPref>false</enableAuraSecStaticResCRUCPref>
     <enableDeferRenderingWorkspacePage>true</enableDeferRenderingWorkspacePage>
     <enableErrorExperienceEnabled>false</enableErrorExperienceEnabled>
     <enableFeedbackInMobile>true</enableFeedbackInMobile>
