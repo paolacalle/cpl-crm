@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>CPL_Member_Identity_Link__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>CPL_Member_Identity_Link__c.CPL_Member__c</members>
+        <members>CPL_Member_Identity_Link__c.CPL_Member_Lifecycle__c</members>
+        <members>CPL_Member_Identity_Link__c.Notes__c</members>
+        <members>CPL_Member_Identity_Link__c.Operational_Status__c</members>
+        <members>CPL_Member_Identity_Link__c.Primary_Contact__c</members>
+        <members>CPL_Member_Identity_Link__c.Related_Contact__c</members>
+        <members>CPL_Member_Identity_Link__c.Related_Contact_Email__c</members>
+        <members>CPL_Member_Identity_Link__c.Related_Contact_Organization__c</members>
+        <members>CPL_Member_Identity_Link__c.Related_Contact_Record_Type__c</members>
+        <members>CPL_Member_Identity_Link__c.Verified_By__c</members>
+        <members>CPL_Member_Identity_Link__c.Verified_Date__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>CPL_Member_Identity_Link__c-CPL Member Identity Link Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>PersonAccount-CPL Member</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>CPL_Member_Identity_Link_User</members>
+        <members>PS_CRM_Admin</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>CPL_Member_Identity_Link__c.Active_Link_Must_Be_Verified</members>
+        <members>CPL_Member_Identity_Link__c.CPL_Member_Must_Be_Alumni</members>
+        <members>CPL_Member_Identity_Link__c.CPL_Member_Must_Be_Person_Account</members>
+        <members>CPL_Member_Identity_Link__c.Primary_Contact_Must_Be_Active</members>
+        <name>ValidationRule</name>
+    </types>
+    <version>66.0</version>
+</Package>

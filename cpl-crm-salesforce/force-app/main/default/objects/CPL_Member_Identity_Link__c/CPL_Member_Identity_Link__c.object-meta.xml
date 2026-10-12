@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Establishes that a CPL Member Person Account and an operational Contact represent the same person. The link is retained even when the Contact's operational role becomes inactive.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <label>CPL Member Identity Link</label>
+    <nameField>
+        <displayFormat>CMIL-{00000}</displayFormat>
+        <label>Identity Link Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>CPL Member Identity Links</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

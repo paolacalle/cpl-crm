@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Verified_By__c</fullName>
+    <description>CPL staff member who confirmed the identity match.</description>
+    <label>Verified By</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Verified CPL Member Identity Links</relationshipLabel>
+    <relationshipName>Verified_CPL_Member_Identity_Links</relationshipName>
+    <type>Lookup</type>
+</CustomField>

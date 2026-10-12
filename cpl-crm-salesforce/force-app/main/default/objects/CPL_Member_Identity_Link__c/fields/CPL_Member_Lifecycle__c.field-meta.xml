@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Member_Lifecycle__c</fullName>
+    <description>Current lifecycle of the linked CPL Member, exposed for reporting.</description>
+    <formula>TEXT(CPL_Member__r.CPL_Student_Lifecycle__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>CPL Member Lifecycle</label>
+    <type>Text</type>
+</CustomField>

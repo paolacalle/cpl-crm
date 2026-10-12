@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Member_Must_Be_Person_Account</fullName>
+    <active>true</active>
+    <description>Defends the identity model even if a user bypasses the lookup filter.</description>
+    <errorConditionFormula>NOT(CPL_Member__r.IsPersonAccount)</errorConditionFormula>
+    <errorDisplayField>CPL_Member__c</errorDisplayField>
+    <errorMessage>Select a CPL Member Person Account.</errorMessage>
+</ValidationRule>

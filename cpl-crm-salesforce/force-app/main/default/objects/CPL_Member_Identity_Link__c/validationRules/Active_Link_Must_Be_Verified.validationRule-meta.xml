@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Link_Must_Be_Verified</fullName>
+    <active>true</active>
+    <description>An active identity link must identify when and by whom the match was confirmed.</description>
+    <errorConditionFormula>AND(ISPICKVAL(Operational_Status__c, &quot;Active&quot;), OR(ISBLANK(Verified_Date__c), ISBLANK(Verified_By__c)))</errorConditionFormula>
+    <errorDisplayField>Operational_Status__c</errorDisplayField>
+    <errorMessage>Active identity links require both Verified Date and Verified By.</errorMessage>
+</ValidationRule>

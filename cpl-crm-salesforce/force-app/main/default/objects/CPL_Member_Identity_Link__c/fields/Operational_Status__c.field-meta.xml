@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Operational_Status__c</fullName>
+    <description>Whether this operational Contact representation is currently active. The identity link remains part of the member's record even when inactive.</description>
+    <inlineHelpText>Use Inactive when the Contact's operational role is no longer current. Do not delete the identity link.</inlineHelpText>
+    <label>Operational Status</label>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending Verification</fullName>
+                <default>true</default>
+                <label>Pending Verification</label>
+            </value>
+            <value>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <label>Active</label>
+            </value>
+            <value>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+                <label>Inactive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

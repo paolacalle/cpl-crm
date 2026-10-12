@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Related_Contact__c</fullName>
+    <description>The operational Contact that represents the same person as the CPL Member.</description>
+    <inlineHelpText>Select the Partner, Donor, Connector, Insider, or other operational Contact that represents this CPL Member.</inlineHelpText>
+    <label>Related Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>CPL Member Identity Links</relationshipLabel>
+    <relationshipName>CPL_Member_Identity_Links</relationshipName>
+    <required>true</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

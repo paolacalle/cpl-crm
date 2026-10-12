@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPL_Member_Must_Be_Alumni</fullName>
+    <active>true</active>
+    <description>Identity links are reserved for graduated CPL members.</description>
+    <errorConditionFormula>NOT(OR(ISPICKVAL(CPL_Member__r.CPL_Student_Lifecycle__c, &quot;Alumni&quot;), ISPICKVAL(CPL_Member__r.CPL_Student_Lifecycle__c, &quot;Scholar Alumni&quot;)))</errorConditionFormula>
+    <errorDisplayField>CPL_Member__c</errorDisplayField>
+    <errorMessage>Select a CPL Member whose lifecycle is Alumni or Scholar Alumni.</errorMessage>
+</ValidationRule>

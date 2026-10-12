@@ -164,6 +164,18 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Related_Contact__c</fields>
+        <fields>Related_Contact_Record_Type__c</fields>
+        <fields>Related_Contact_Organization__c</fields>
+        <fields>Operational_Status__c</fields>
+        <fields>Primary_Contact__c</fields>
+        <fields>Verified_Date__c</fields>
+        <relatedList>CPL_Member_Identity_Link__c.CPL_Member__c</relatedList>
+        <sortField>CREATED_DATE</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
         <fields>Evaluator_Contact__c</fields>
         <fields>Evaluator_Relationship__c</fields>
         <fields>Evaluation_Type__c</fields>
