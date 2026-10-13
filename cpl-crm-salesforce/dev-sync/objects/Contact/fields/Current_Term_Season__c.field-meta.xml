@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Term_Season__c</fullName>
+    <description>Identifies whether the student is currently enrolled in the Spring or Fall academic term.</description>
+    <inlineHelpText>Select the academic term the student is currently in.</inlineHelpText>
+    <label>Current Term Season</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_Term_Season</valueSetName>
+    </valueSet>
+</CustomField>

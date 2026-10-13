@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resume_Uploaded__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Mark if resume submission includes a resume url.</description>
+    <inlineHelpText>Mark if resume submission includes a resume url.</inlineHelpText>
+    <label>Resume Uploaded</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

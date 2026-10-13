@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Member Journey" icon-name="standard:user">
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template if:true={isInactive}>
+                <div class="inactive">
+                    <lightning-icon icon-name="utility:moderation" size="small" class="inactive-icon"></lightning-icon>
+                    <span>This member is currently <strong>Inactive</strong>.</span>
+                </div>
+            </template>
+            <template if:false={hasLifecycle}>
+                <div class="slds-text-color_weak">Lifecycle not set on this member yet.</div>
+            </template>
+            <template if:true={showJourney}>
+                <ol class="journey">
+                    <template for:each={stages} for:item="stage">
+                        <li key={stage.key} class="journey-stage">
+                            <div class={stage.stateClass}>{stage.number}</div>
+                            <div class="journey-stage-body">
+                                <div class="journey-stage-title">{stage.label}</div>
+                                <template if:true={stage.sublabel}>
+                                    <div class="journey-stage-sublabel">{stage.sublabel}</div>
+                                </template>
+                                <div class="journey-stage-desc">{stage.description}</div>
+                            </div>
+                        </li>
+                    </template>
+                </ol>
+            </template>
+        </div>
+    </lightning-card>
+</template>

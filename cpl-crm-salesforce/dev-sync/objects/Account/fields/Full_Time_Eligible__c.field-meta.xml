@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Full_Time_Eligible__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the organization provides access to full-time wealth management roles for CPL Scholars upon graduation.</description>
+    <inlineHelpText>Check this box if the organization offers or supports full-time employment opportunities for scholars after graduation.</inlineHelpText>
+    <label>Full-Time Eligible</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

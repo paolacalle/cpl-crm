@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cycle__c</fullName>
+    <description>Human-readable cycle label derived from Cycle Year . Used in page layouts and list views.</description>
+    <externalId>false</externalId>
+    <formula>&quot;Cycle &quot; &amp; TEXT(Cycle_Year__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Auto-generated label for quick recognition (e.g., “2026”).</inlineHelpText>
+    <label>Cycle</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

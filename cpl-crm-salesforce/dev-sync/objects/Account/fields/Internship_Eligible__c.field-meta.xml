@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Internship_Eligible__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Identifies whether the organization offers junior-year internship opportunities within the wealth management industry.</description>
+    <inlineHelpText>Check this box if the organization can host CPL Scholars for a junior-year internship.</inlineHelpText>
+    <label>Internship Eligible</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

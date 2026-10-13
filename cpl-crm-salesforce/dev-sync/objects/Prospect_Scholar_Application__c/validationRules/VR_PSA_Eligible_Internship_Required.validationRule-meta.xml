@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Eligible_Internship_Required</fullName>
+    <active>true</active>
+    <description>Prospect Scholar Applications require at least one qualifying internship on the applicant Person Account.</description>
+    <errorConditionFormula>AND(
+  NOT(ISBLANK(Applicant_Account__c)),
+  OR(
+    ISBLANK(Applicant_Account__r.Qualifying_Internship_Count__c),
+    Applicant_Account__r.Qualifying_Internship_Count__c &lt; 1
+  )
+)</errorConditionFormula>
+    <errorDisplayField>Applicant_Account__c</errorDisplayField>
+    <errorMessage>The applicant must have at least one eligible internship before a Prospect Scholar Application can be created.</errorMessage>
+</ValidationRule>

@@ -46,7 +46,7 @@ private class CplHomeMemberPipelineControllerTest {
         // Must match CplHomeMemberPipelineController.STATUS_ORDER (Prospect and
         // Inactive are intentionally excluded there).
         List<String> expectedOrder = new List<String>{
-            'Athlete', 'Applicant', 'Scholar', 'Scholar Alumni', 'MemberAlumni'
+            'Athlete', 'Scholar', 'Scholar Alumni', 'Member Alumni'
         };
         System.assertEquals(expectedOrder.size(), result.size(), 'One entry per lifecycle stage');
 
@@ -57,7 +57,7 @@ private class CplHomeMemberPipelineControllerTest {
         }
 
         System.assertEquals(2, countByStatus.get('Scholar'),   'Two scholars inserted');
-        System.assertEquals(1, countByStatus.get('Applicant'), 'One applicant inserted');
+        System.assertEquals(false, countByStatus.containsKey('Applicant'), 'Applications have their own quick view');
         System.assertEquals(0, countByStatus.get('Athlete'),   'Empty stage reports zero');
     }
 }

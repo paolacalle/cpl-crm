@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Email__c</fullName>
+    <description>A secondary email associated with this accounted.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>A secondary email associated with this accounted.</inlineHelpText>
+    <label>Secondary Email</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Email</type>
+    <unique>false</unique>
+</CustomField>

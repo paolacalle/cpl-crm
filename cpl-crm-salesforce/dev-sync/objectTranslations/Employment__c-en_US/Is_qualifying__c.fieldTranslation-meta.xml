@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Check if the employment is qualifying for the scholarship program upon completion. --></help>
+    <label><!-- Is qualifying --></label>
+    <name>Is_qualifying__c</name>
+</CustomFieldTranslation>

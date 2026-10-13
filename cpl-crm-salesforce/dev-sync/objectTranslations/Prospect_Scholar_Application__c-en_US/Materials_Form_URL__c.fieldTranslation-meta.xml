@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Generated from the Scholar Finalist Materials Form Base URL custom label. --></help>
+    <label><!-- Materials Form URL --></label>
+    <name>Materials_Form_URL__c</name>
+</CustomFieldTranslation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>External_Form_ID__c</fullName>
+    <description>Form ID source from where the submission came from.</description>
+    <inlineHelpText>Enter the form ID related to this submission.</inlineHelpText>
+    <label>External Form ID</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

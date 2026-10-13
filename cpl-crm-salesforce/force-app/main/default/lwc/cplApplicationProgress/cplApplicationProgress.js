@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
-import STATUS_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Application_Status__c';
+import STATUS_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Application_Stage__c';
+import DECISION_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Application_Decision__c';
 import RESUME_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Resume_Received__c';
 import ESSAY_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Essay_Received__c';
 import COACH_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Coach_Professor_Recommendation_Received__c';
@@ -10,11 +11,15 @@ import SENT_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Schol
 import CONFIRMED_FIELD from '@salesforce/schema/Prospect_Scholar_Application__c.Scholarship_Invite_Confrimed_Date__c';
 
 const FIELDS = [
-    STATUS_FIELD, RESUME_FIELD, ESSAY_FIELD, COACH_FIELD, INTERN_FIELD,
+    STATUS_FIELD, DECISION_FIELD, RESUME_FIELD, ESSAY_FIELD, COACH_FIELD, INTERN_FIELD,
     COMPLETE_FIELD, SENT_FIELD, CONFIRMED_FIELD
 ];
 
 const STATUS_CLASS = {
+    'Invite & Materials': 'badge badge-pending',
+    'Interview & Evaluations': 'badge badge-review',
+    'Ready for Decision': 'badge badge-warning',
+    'Closed': 'badge badge-neutral',
     'Invite Sent': 'badge badge-pending',
     'Collecting Documents': 'badge badge-active',
     'In Review': 'badge badge-review',
@@ -46,6 +51,10 @@ export default class CplApplicationProgress extends LightningElement {
 
     get statusBadgeClass() {
         return STATUS_CLASS[this.status] || 'badge';
+    }
+
+    get decision() {
+        return this.record ? getFieldValue(this.record, DECISION_FIELD) : null;
     }
 
     get materialsComplete() {

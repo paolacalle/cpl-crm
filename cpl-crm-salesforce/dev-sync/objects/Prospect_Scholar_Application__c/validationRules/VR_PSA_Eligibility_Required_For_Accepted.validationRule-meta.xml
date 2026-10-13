@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Eligibility_Required_For_Accepted</fullName>
+    <active>true</active>
+    <description>Prevents an application from being marked as Accepted unless eligibility has been confirmed.</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Application_Status__c, &quot;Accepted&quot;),
+  NOT(Eligibility_Confirmed__c)
+)</errorConditionFormula>
+    <errorDisplayField>Eligibility_Confirmed__c</errorDisplayField>
+    <errorMessage>Eligibility must be confirmed before an application can be marked as Accepted.</errorMessage>
+</ValidationRule>

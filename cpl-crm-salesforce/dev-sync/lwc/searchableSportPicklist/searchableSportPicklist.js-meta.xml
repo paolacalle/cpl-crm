@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Searchable Sport Picklist</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="label" type="String" label="Label" default="Primary Sport"/>
+            <property name="placeholder" type="String" label="Placeholder" default="Search sports..."/>
+            <property name="required" type="Boolean" label="Required" default="false"/>
+            <property name="value" type="String" label="Selected Sport"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

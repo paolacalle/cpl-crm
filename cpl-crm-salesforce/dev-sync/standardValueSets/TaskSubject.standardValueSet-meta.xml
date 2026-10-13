@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Call</fullName>
+        <default>false</default>
+        <label>Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Send Letter</fullName>
+        <default>false</default>
+        <label>Send Letter</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Send Quote</fullName>
+        <default>false</default>
+        <label>Send Quote</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Intake Call</fullName>
+        <default>false</default>
+        <label>Intake Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Initial Outreach</fullName>
+        <default>false</default>
+        <label>Initial Outreach</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Follow-up Call</fullName>
+        <default>false</default>
+        <label>Follow-up Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Schedule Interview</fullName>
+        <default>false</default>
+        <label>Schedule Interview</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Scholar Interview</fullName>
+        <default>false</default>
+        <label>Scholar Interview</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Reference / Coach Call</fullName>
+        <default>false</default>
+        <label>Reference / Coach Call</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Log Evaluation Feedback</fullName>
+        <default>false</default>
+        <label>Log Evaluation Feedback</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Interview Debrief</fullName>
+        <default>false</default>
+        <label>Interview Debrief</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Send Application Link</fullName>
+        <default>false</default>
+        <label>Send Application Link</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Collect Application Documents</fullName>
+        <default>false</default>
+        <label>Collect Application Documents</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Recommendation Follow-up</fullName>
+        <default>false</default>
+        <label>Recommendation Follow-up</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Confirm Eligibility</fullName>
+        <default>false</default>
+        <label>Confirm Eligibility</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Review Application</fullName>
+        <default>false</default>
+        <label>Review Application</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Award Notification</fullName>
+        <default>false</default>
+        <label>Award Notification</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Confirm Award Acceptance</fullName>
+        <default>false</default>
+        <label>Confirm Award Acceptance</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Award Disbursement Follow-up</fullName>
+        <default>false</default>
+        <label>Award Disbursement Follow-up</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Mentorship Check-in</fullName>
+        <default>false</default>
+        <label>Mentorship Check-in</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Internship / Employment Check-in</fullName>
+        <default>false</default>
+        <label>Internship / Employment Check-in</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Benefit Recertification</fullName>
+        <default>false</default>
+        <label>Benefit Recertification</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Alumni Check-in</fullName>
+        <default>false</default>
+        <label>Alumni Check-in</label>
+    </standardValue>
+</StandardValueSet>

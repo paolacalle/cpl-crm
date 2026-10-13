@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_RejectionReason_Required_Other</fullName>
+    <active>true</active>
+    <description>Ensures the the rejection reason is required when rejection filter is set to &quot;Other&quot;</description>
+    <errorConditionFormula>AND(
+  OR(
+    ISPICKVAL(Application_Status__c, &quot;Rejected&quot;),
+    ISPICKVAL(Application_Status__c, &quot;Withdrawn&quot;)
+  ),
+  ISPICKVAL(Rejection_Filter__c, &quot;Other (use Rejection Reason)&quot;),
+  LEN(TRIM(Rejection_Reason__c)) &lt; 25
+)</errorConditionFormula>
+    <errorDisplayField>Rejection_Reason__c</errorDisplayField>
+    <errorMessage>Please add more detail in Rejection Reason when Rejection Filter is “Other”.</errorMessage>
+</ValidationRule>

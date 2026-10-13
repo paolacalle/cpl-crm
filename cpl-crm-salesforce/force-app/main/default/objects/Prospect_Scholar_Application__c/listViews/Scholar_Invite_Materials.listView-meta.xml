@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scholar_Invite_Materials</fullName>
+    <columns>NAME</columns><columns>Applicant_Account__c</columns><columns>Application_Stage__c</columns><columns>Application_Decision__c</columns><columns>Case_Owner__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters><field>Application_Stage__c</field><operation>equals</operation><value>Invite &amp; Materials</value></filters>
+
+    <label>Invite &amp; Materials</label>
+</ListView>

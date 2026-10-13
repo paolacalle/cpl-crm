@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Provided by the applicant. Used by Step 4&apos;s optional &quot;email recommender&quot; action. --></help>
+    <label><!-- Internship Supervisor Name --></label>
+    <name>Internship_Supervisor_Name__c</name>
+</CustomFieldTranslation>

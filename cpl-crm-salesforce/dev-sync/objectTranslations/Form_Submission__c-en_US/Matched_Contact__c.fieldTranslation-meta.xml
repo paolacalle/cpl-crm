@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Populated automatically when a form submission matches an existing Contact. A submission should reference either a Lead or a Contact, not both. --></help>
+    <label><!-- Matched Contact --></label>
+    <name>Matched_Contact__c</name>
+    <relationshipLabel><!-- Form Submissions --></relationshipLabel>
+</CustomFieldTranslation>

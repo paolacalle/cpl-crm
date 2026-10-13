@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluator_Contact__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The individual that is providing feedback.</description>
+    <inlineHelpText>Who is giving the feedback?</inlineHelpText>
+    <label>Evaluator Contact</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Evaluations</relationshipLabel>
+    <relationshipName>Evaluations</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

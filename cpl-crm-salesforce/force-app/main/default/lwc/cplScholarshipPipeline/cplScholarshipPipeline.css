@@ -1,0 +1,5 @@
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; }
+button { text-align:left; border:1px solid #ddd; border-left:6px solid #6750a4; border-radius:8px; padding:1rem; background:#f8f6fc; color:#181818; cursor:pointer; font:inherit; }
+button:hover { background:#eee8fa; }
+button:focus-visible { outline:3px solid #0176d3; outline-offset:3px; }
+.count { display:block; font-size:2rem; font-weight:700; }

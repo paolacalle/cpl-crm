@@ -3,7 +3,8 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Applicant_Account__c</columns>
-    <columns>Application_Status__c</columns>
+    <columns>Application_Stage__c</columns>
+    <columns>Application_Decision__c</columns>
     <columns>Eligibility_Confirmed__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>

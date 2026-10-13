@@ -3,6 +3,7 @@
     <fullName>CPL_Applicant</fullName>
     <columns>ACCOUNT.NAME</columns>
     <columns>CPL_Student_Lifecycle__c</columns>
+    <columns>Has_Active_Scholarship_Application__c</columns>
     <columns>Graduation_Date__c</columns>
     <columns>PC_EMAIL</columns>
     <columns>Primary_Sport__pc</columns>
@@ -10,9 +11,14 @@
     <columns>ACCOUNT.LAST_ACTIVITY</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>CPL_Student_Lifecycle__c</field>
+        <field>Has_Active_Scholarship_Application__c</field>
         <operation>equals</operation>
-        <value>Applicant</value>
+        <value>1</value>
     </filters>
-    <label>CPL Applicants</label>
+    <filters>
+        <field>IS_PERSON_ACCOUNT</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Members with Active Applications</label>
 </ListView>

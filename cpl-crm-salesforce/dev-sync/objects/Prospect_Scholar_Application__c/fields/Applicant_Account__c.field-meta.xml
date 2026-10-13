@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Applicant_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The individual Account representing the applicant associated with this Prospect Scholar Application.
+This Account must be a CPL Applicant Account and serves as the primary person record for the application.</description>
+    <inlineHelpText>Select the applicant’s individual Account. Only Accounts with the CPL Applicant Account record type are allowed.</inlineHelpText>
+    <label>Applicant Account</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CPL Applicant Account</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Prospect Scholar Applications (Applicant Account)</relationshipLabel>
+    <relationshipName>Prospect_Scholar_Applications1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

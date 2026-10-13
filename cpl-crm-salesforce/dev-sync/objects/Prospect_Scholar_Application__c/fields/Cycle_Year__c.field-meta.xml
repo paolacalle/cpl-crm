@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cycle_Year__c</fullName>
+    <description>Identifies the scholarship application cycle year this application belongs to. Used for reporting, validation (merges/dup checks), and workload assignment.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the cycle year for this application (e.g., 2026). Cycle Year is the primary field used for filtering lists, dashboards, and preventing cross-year merges/duplicates.</inlineHelpText>
+    <label>Cycle Year</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

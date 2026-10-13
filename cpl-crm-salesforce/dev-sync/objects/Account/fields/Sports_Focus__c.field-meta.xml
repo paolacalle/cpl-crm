@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sports_Focus__c</fullName>
+    <description>Identifies the sports through which CLP recruits student-athletes at this college.</description>
+    <inlineHelpText>Select one or more sports most relevant to CLP recruiting efforts at this college.</inlineHelpText>
+    <label>Sports Focus</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_Sports</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

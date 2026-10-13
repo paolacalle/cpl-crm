@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Fundraising_User</label>
+    <permissionSets>force__ActionPlans</permissionSets>
+    <permissionSets>force__ActionableSegmentation</permissionSets>
+    <permissionSets>force__AnalyticsQueryService</permissionSets>
+    <permissionSets>force__FundraisingAccess</permissionSets>
+    <permissionSets>force__GroupMembershipPsl</permissionSets>
+    <permissionSets>force__IndustriesARCPsl</permissionSets>
+    <permissionSets>force__IndustriesInteractionSummaryPsl</permissionSets>
+    <permissionSets>force__IndustriesServiceExcellence</permissionSets>
+    <permissionSets>force__LifeEventsAccessPSL</permissionSets>
+    <permissionSets>force__OmniStudioUser</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

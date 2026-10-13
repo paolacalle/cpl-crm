@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company_Employers</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ACCOUNT.INDUSTRY</columns>
+    <columns>Full_Time_Eligible__c</columns>
+    <columns>Internship_Eligible__c</columns>
+    <columns>Recruiting_Priority__c</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Account.Company_Employer</value>
+    </filters>
+    <label>Company / Employers</label>
+</ListView>

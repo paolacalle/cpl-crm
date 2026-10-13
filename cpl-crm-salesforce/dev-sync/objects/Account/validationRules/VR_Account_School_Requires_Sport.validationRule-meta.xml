@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Account_School_Requires_Sport</fullName>
+    <active>false</active>
+    <description>Requires at least one sport to be selected for School accounts.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;School&quot;,
+  ISBLANK(Sports_Focus__c)
+)</errorConditionFormula>
+    <errorDisplayField>Sports_Focus__c</errorDisplayField>
+    <errorMessage>Please select at least one sport for School recruiting.</errorMessage>
+</ValidationRule>

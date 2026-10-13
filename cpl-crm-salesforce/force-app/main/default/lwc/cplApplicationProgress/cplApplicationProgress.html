@@ -7,6 +7,7 @@
             <template if:false={errorMessage}>
                 <div class="status-row">
                     <span class={statusBadgeClass}>{status}</span>
+                    <span class="badge">Decision: {decision}</span>
                     <template if:true={materialsComplete}>
                         <span class="materials-complete-badge">All materials in</span>
                     </template>

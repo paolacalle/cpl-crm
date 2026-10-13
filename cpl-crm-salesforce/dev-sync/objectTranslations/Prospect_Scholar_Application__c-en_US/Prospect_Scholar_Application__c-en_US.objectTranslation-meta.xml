@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Prospect Scholar Application</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Prospect Scholar Applications</value>
+    </caseValues>
+    <layouts>
+        <layout>Prospect Scholar Application Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Finalist Materials --></label>
+            <section>Finalist Materials</section>
+        </sections>
+        <sections>
+            <label><!-- Review &amp; Decision --></label>
+            <section>Review &amp; Decision</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Accept Application --></label>
+        <name>Accept_Application</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Assign Intake Owner --></label>
+        <name>Assign_Intake_Owner</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Confirm Eligibility --></label>
+        <name>Confirm_Eligibility</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Reject Application --></label>
+        <name>Reject_Application</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Send Finalist Materials Invite --></label>
+        <name>Send_Finalist_Materials_Invite</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Update Status --></label>
+        <name>Update_Status</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Withdraw Application --></label>
+        <name>Withdraw_Application</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- The applicant must be connected to a Person Account. --></errorMessage>
+        <name>VR_PSA_Applicant_Must_Be_Person_Account</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Eligibility must be confirmed before an application can be marked as Accepted. --></errorMessage>
+        <name>VR_PSA_Eligibility_Required_For_Accepted</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The applicant must have at least one eligible internship before a Prospect Scholar Application can be created. --></errorMessage>
+        <name>VR_PSA_Eligible_Internship_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- An Intake Owner must be assigned when an application is submitted. --></errorMessage>
+        <name>VR_PSA_Intake_Owner_Required_Post_Submit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The scholarship invite must be sent and confirmed before this application can move forward to document collection or review. --></errorMessage>
+        <name>VR_PSA_Invite_Confirmed_Before_Forward</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only Junior-year students are eligible to submit a CPL Scholar application. --></errorMessage>
+        <name>VR_PSA_Junior_Required_On_Submission</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only use Rejection fields when the application is Rejected or Withdrawn. --></errorMessage>
+        <name>VR_PSA_NoRejectionFields_Unless_Terminal</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Rejection Filter and Rejection Reason are required when an application is Rejected or Withdrawn. --></errorMessage>
+        <name>VR_PSA_RejectionDetails_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please add more detail in Rejection Reason when Rejection Filter is “Other”. --></errorMessage>
+        <name>VR_PSA_RejectionReason_Required_Other</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Applicant and Application Status are required. --></errorMessage>
+        <name>VR_PSA_Requires_Core_Fields</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Applications that are Rejected or Withdrawn cannot be changed. --></errorMessage>
+        <name>VR_PSA_Terminal_Status_Locked</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Send_Scholarship_Invite_Confirm_Eligibility --></label>
+        <name>Send_Scholarship_Invite_Confirm_Eligibility</name>
+    </webLinks>
+</CustomObjectTranslation>

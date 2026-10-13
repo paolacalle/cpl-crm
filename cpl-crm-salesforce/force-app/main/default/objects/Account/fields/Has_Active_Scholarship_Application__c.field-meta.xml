@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Has_Active_Scholarship_Application__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>System-maintained: true when at least one linked Prospect Scholar Application is not Accepted, Rejected, or Withdrawn. Independent of CPL Student Lifecycle.</description>
+    <inlineHelpText>Automatically maintained from scholarship applications. Waitlisted is active; Accepted, Rejected and Withdrawn are closed.</inlineHelpText>
+    <label>Has Active Scholarship Application</label>
+    <type>Checkbox</type>
+</CustomField>

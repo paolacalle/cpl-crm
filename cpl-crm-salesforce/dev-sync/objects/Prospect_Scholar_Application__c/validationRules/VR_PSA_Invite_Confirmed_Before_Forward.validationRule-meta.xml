@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PSA_Invite_Confirmed_Before_Forward</fullName>
+    <active>true</active>
+    <description>Blocks users from moving a prospect application forward on the path until the scholarship invite has been sent and confirmed.</description>
+    <errorConditionFormula>AND(
+  ISCHANGED(Application_Status__c),
+  NOT(ISPICKVAL(Application_Status__c, &quot;Invite Sent&quot;)),
+  NOT(ISPICKVAL(Application_Status__c, &quot;Rejected&quot;)),
+  NOT(ISPICKVAL(Application_Status__c, &quot;Withdrawn&quot;)),
+  OR(
+    NOT(Scholarship_Invite_Sent__c),
+    NOT(Scholarship_Invite_Confirmed__c),
+    NOT(ISPICKVAL(Scholarship_Invite_Status__c, &quot;Confirmed&quot;))
+  )
+)</errorConditionFormula>
+    <errorDisplayField>Application_Status__c</errorDisplayField>
+    <errorMessage>The scholarship invite must be sent and confirmed before this application can move forward to document collection or review.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Social_Program_Management_Caseworker</label>
+    <permissionSets>force__ActionPlans</permissionSets>
+    <permissionSets>force__BRERuntime</permissionSets>
+    <permissionSets>force__BenefitManagementPermissionSetLicense</permissionSets>
+    <permissionSets>force__CarePlansPermissionSetLicense</permissionSets>
+    <permissionSets>force__CaseReferralPsl</permissionSets>
+    <permissionSets>force__ComplaintsManagementAccess</permissionSets>
+    <permissionSets>force__CompliantDataSharingUser</permissionSets>
+    <permissionSets>force__CriteriaBasedSearchAndFilterPsl</permissionSets>
+    <permissionSets>force__DynamicAssessmentPsl</permissionSets>
+    <permissionSets>force__ExplainabilityServicePSL</permissionSets>
+    <permissionSets>force__GroupMembershipPsl</permissionSets>
+    <permissionSets>force__IndustriesARCPsl</permissionSets>
+    <permissionSets>force__IndustriesAssessmentPermissionSet</permissionSets>
+    <permissionSets>force__IndustriesInteractionSummaryPsl</permissionSets>
+    <permissionSets>force__IndustriesRecordAggregationAccess</permissionSets>
+    <permissionSets>force__IndustriesVisit</permissionSets>
+    <permissionSets>force__LifeEventsAccessPSL</permissionSets>
+    <permissionSets>force__OmniStudioUser</permissionSets>
+    <permissionSets>force__ProviderManagementPsl</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

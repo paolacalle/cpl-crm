@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Choose the cycle term (Fall/Spring). Use if you run multiple cycles per year. --></help>
+    <label><!-- Cycle Term --></label>
+    <name>Cycle_Term__c</name>
+</CustomFieldTranslation>

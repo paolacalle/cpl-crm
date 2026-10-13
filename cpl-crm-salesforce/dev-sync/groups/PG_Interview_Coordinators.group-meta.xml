@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Public group responsible for coordinating applicant interviews, including interview-stage task management, logistics tracking, and interview outcome updates.</description>
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <name>PG_Interview_Coordinators</name>
+</Group>

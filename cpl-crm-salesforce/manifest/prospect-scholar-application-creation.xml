@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <!-- Read-only draft Screen Flow and wrapper. Does not activate or assign the New override. -->
+    <!-- Draft flow, wrapper, application-membership indicator and home quick views. -->
     <!-- Existing record-triggered flows and unrelated eligibility components are intentionally excluded. -->
     <types>
         <members>ProspectScholarNewOverride</members>
@@ -9,6 +9,63 @@
     <types>
         <members>Create_Prospect_Scholar_Application</members>
         <name>Flow</name>
+    </types>
+    <types>
+        <members>Account.Has_Active_Scholarship_Application__c</members>
+        <members>Prospect_Scholar_Application__c.Application_Stage__c</members>
+        <members>Prospect_Scholar_Application__c.Application_Decision__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>ScholarApplicationMembership</members>
+        <members>ScholarApplicationStageService</members>
+        <members>ScholarApplicationStageServiceTest</members>
+        <members>ScholarApplicationStageBackfill</members>
+        <members>ScholarApplicationPipelineController</members>
+        <members>ScholarApplicationMembershipBackfill</members>
+        <members>ScholarApplicationMembershipTest</members>
+        <members>CplHomeMemberPipelineController</members>
+        <members>CplHomeMemberPipelineControllerTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>ScholarApplicationMembershipTrigger</members>
+        <members>ScholarApplicationStageTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>cplHomeQuickLinks</members>
+        <members>cplScholarshipPipeline</members>
+        <members>cplApplicationProgress</members>
+        <members>cplHomeMemberPipeline</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>Account.CPL_Applicant</members>
+        <members>Prospect_Scholar_Application__c.All</members>
+        <members>Prospect_Scholar_Application__c.Scholar_Invite_Materials</members>
+        <members>Prospect_Scholar_Application__c.Scholar_Interview_Evaluations</members>
+        <members>Prospect_Scholar_Application__c.Scholar_Ready_for_Decision</members>
+        <members>Prospect_Scholar_Application__c.Scholar_All_Decisions</members>
+        <members>Account.CPL_Members_Applicant</members>
+        <name>ListView</name>
+    </types>
+    <types>
+        <members>CPL_Application_Membership_Read</members>
+        <members>CPL_Scholarship_Pipeline</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Home</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Prospect_Scholar_Application__c-Prospect Scholar Application Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Prospect_Scholar_Application__c.Update_Status</members>
+        <name>QuickAction</name>
     </types>
     <version>66.0</version>
 </Package>

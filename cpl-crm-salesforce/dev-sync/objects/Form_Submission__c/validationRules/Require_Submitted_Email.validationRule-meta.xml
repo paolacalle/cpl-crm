@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Submitted_Email</fullName>
+    <active>true</active>
+    <description>Prevents creation of Form Submissions without an email address, which is required for matching to existing Leads or Contacts.</description>
+    <errorConditionFormula>ISBLANK(Submitted_Email__c)</errorConditionFormula>
+    <errorDisplayField>Submitted_Email__c</errorDisplayField>
+    <errorMessage>Submitted Email is required to process this form submission.</errorMessage>
+</ValidationRule>

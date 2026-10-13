@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the CPL host who is responsible for managing this application. --></help>
+    <label><!-- Intake Owner --></label>
+    <name>Intake_Owner__c</name>
+    <relationshipLabel><!-- Prospect Scholar Applications (Intake Owner) --></relationshipLabel>
+</CustomFieldTranslation>

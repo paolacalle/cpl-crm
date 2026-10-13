@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scholarship_Eligibility_Status__c</fullName>
+    <description>The eligibility of this contact for the scholarship application path.</description>
+    <inlineHelpText>Do you believe this student is eligible for the scholarship?</inlineHelpText>
+    <label>Scholarship Eligibility Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not Eligible</fullName>
+                <default>false</default>
+                <label>Not Eligible</label>
+            </value>
+            <value>
+                <fullName>Nearly Eligible</fullName>
+                <default>false</default>
+                <label>Nearly Eligible</label>
+            </value>
+            <value>
+                <fullName>Eligible</fullName>
+                <default>false</default>
+                <label>Eligible</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

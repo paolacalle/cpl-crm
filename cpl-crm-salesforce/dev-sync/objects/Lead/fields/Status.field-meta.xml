@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status</fullName>
+    <businessOwnerGroup>PG_Intake_Owners</businessOwnerGroup>
+    <businessStatus>Active</businessStatus>
+    <description>Indicates the current stage of the lead as it moves through intake review and qualification prior to conversion into a Prospect Applicant.</description>
+    <inlineHelpText>Use this field to track intake progress for the lead. Once approved, the lead should be converted into a Prospect Applicant.</inlineHelpText>
+    <securityClassification>Internal</securityClassification>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Picklist</type>
+</CustomField>

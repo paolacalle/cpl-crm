@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the main reason for rejection or withdrawal. Use Rejection Reason for specific context/details. --></help>
+    <label><!-- Rejection Filter --></label>
+    <name>Rejection_Filter__c</name>
+    <picklistValues>
+        <masterLabel>Citizenship status</masterLabel>
+        <translation><!-- Citizenship status --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Duplicate application</masterLabel>
+        <translation><!-- Duplicate application --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Goals misaligned with wealth management path</masterLabel>
+        <translation><!-- Goals misaligned with wealth management path --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Incomplete application</masterLabel>
+        <translation><!-- Incomplete application --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Inconsistent info / unclear background</masterLabel>
+        <translation><!-- Inconsistent info / unclear background --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Invalid submission / spam</masterLabel>
+        <translation><!-- Invalid submission / spam --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Limited slots / cohort full</masterLabel>
+        <translation><!-- Limited slots / cohort full --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>No response / ghosted</masterLabel>
+        <translation><!-- No response / ghosted --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Not a student-athlete / not eligible</masterLabel>
+        <translation><!-- Not a student-athlete / not eligible --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Not junior year / wrong college year</masterLabel>
+        <translation><!-- Not junior year / wrong college year --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Not ready for internship expectations</masterLabel>
+        <translation><!-- Not ready for internship expectations --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other (use Rejection Reason)</masterLabel>
+        <translation><!-- Other (use Rejection Reason) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Outside program requirements (other)</masterLabel>
+        <translation><!-- Outside program requirements (other) --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Professionalism concerns</masterLabel>
+        <translation><!-- Professionalism concerns --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Scheduling unavailable / repeatedly rescheduled</masterLabel>
+        <translation><!-- Scheduling unavailable / repeatedly rescheduled --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Timing mismatch (cycle closed)</masterLabel>
+        <translation><!-- Timing mismatch (cycle closed) --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

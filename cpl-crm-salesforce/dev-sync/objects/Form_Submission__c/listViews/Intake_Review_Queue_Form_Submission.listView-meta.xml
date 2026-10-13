@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intake_Review_Queue_Form_Submission</fullName>
+    <columns>NAME</columns>
+    <columns>Submitted_First_Name__c</columns>
+    <columns>Submitted_Last_Name__c</columns>
+    <columns>Submitted_Email__c</columns>
+    <columns>Submitted_College_Year__c</columns>
+    <columns>Submitted_School__c</columns>
+    <columns>Submitted_Sport__c</columns>
+    <columns>Commits_to_CPL_Mantra__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Queue</filterScope>
+    <label>Intake Review Queue</label>
+    <queue>Intake_Review_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

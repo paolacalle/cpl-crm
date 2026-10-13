@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sport_From_Form__c</fullName>
+    <description>Raw sport information provided by the applicant via the CPL Interest Form.</description>
+    <inlineHelpText>This value reflects exactly what the applicant entered on the form and may not match standardized sport categories. Use this as a reference when selecting the standardized sport on the application.</inlineHelpText>
+    <label>Sport From Form</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

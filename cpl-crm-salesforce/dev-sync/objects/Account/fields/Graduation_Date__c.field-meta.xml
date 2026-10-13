@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Graduation_Date__c</fullName>
+    <description>Date the member graduated from their school. When populated, indicates they have completed the CPL journey (Alumni if no scholarship was received, Scholar Alumni if one was).</description>
+    <inlineHelpText>Set this when the member graduates. Used by the Member Journey card and future automation to mark Alumni / Scholar Alumni status.</inlineHelpText>
+    <label>Graduation Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ForecastingTypeSource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <forecastingSourceDefinition>OpportunityAmount</forecastingSourceDefinition>
+    <forecastingType>OpportunityAmount</forecastingType>
+    <isProtected>false</isProtected>
+    <masterLabel>Opportunity Amount</masterLabel>
+    <sourceGroup>1</sourceGroup>
+</ForecastingTypeSource>

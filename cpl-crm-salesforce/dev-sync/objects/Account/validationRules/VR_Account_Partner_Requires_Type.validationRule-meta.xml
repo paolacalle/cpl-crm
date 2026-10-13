@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Account_Partner_Requires_Type</fullName>
+    <active>true</active>
+    <description>Defines how the partner supports CPL (e.g., hiring, ambassador, connector), enabling consistent relationship management and reporting.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Partner Organization&quot;,
+  ISPICKVAL(Partner_Type__c, &quot;&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Partner_Type__c</errorDisplayField>
+    <errorMessage>Partner Type is required for Partner Organization accounts.</errorMessage>
+</ValidationRule>

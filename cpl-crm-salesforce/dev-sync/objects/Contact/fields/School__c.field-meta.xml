@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>School__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>What university or college the prospect scholar is enrolled at.</description>
+    <inlineHelpText>University or College You are Enrolled at</inlineHelpText>
+    <label>School</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Contacts</relationshipLabel>
+    <relationshipName>Contacts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>

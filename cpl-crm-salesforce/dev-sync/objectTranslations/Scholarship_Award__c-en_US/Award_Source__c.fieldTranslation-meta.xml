@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Application = created automatically from an accepted application. Manual = entered by hand, typically for historical awards. --></help>
+    <label><!-- Award Source --></label>
+    <name>Award_Source__c</name>
+    <picklistValues>
+        <masterLabel>Application</masterLabel>
+        <translation><!-- Application --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Manual</masterLabel>
+        <translation><!-- Manual --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

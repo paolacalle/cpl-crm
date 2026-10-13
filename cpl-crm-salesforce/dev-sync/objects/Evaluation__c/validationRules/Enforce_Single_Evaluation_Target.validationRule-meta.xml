@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enforce_Single_Evaluation_Target</fullName>
+    <active>true</active>
+    <description>Ensures that a target for the evaluation is determined.</description>
+    <errorConditionFormula>AND(
+  OR(
+    ISPICKVAL(Evaluation_Target_Type__c, &quot;Employment&quot;),
+    ISPICKVAL(Evaluation_Target_Type__c, &quot;Prospect Application&quot;)
+  ),
+  (
+    (Employment__c = NULL &amp;&amp; ISPICKVAL(Evaluation_Target_Type__c, &quot;Employment&quot;)) ||
+    (Prospect_Scholar_Application__c = NULL &amp;&amp; ISPICKVAL(Evaluation_Target_Type__c, &quot;Prospect Application&quot;))
+  )
+)</errorConditionFormula>
+    <errorDisplayField>Evaluation_Target_Type__c</errorDisplayField>
+    <errorMessage>Enforce that special conditions for employment or application evaluations.</errorMessage>
+</ValidationRule>

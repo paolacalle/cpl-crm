@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Sport__c</fullName>
+    <description>The primary sport this individual engages with.</description>
+    <inlineHelpText>Select the primary sport this individual engages with.</inlineHelpText>
+    <label>Primary Sport</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>CPL_Sports</valueSetName>
+    </valueSet>
+</CustomField>

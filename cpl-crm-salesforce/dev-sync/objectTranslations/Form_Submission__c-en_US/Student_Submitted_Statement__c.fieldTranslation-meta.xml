@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Stored as submitted for intake review and context. --></help>
+    <label><!-- Student Submitted Statement --></label>
+    <name>Student_Submitted_Statement__c</name>
+</CustomFieldTranslation>

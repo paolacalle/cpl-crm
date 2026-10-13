@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- What are this CPL member&apos;s strengths? --></help>
+    <label><!-- Strengths --></label>
+    <name>Strengths__c</name>
+</CustomFieldTranslation>

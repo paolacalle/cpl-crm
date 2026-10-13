@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>New_Lead_Created_Email_Alert</fullName>
+        <description>New Lead Created Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>PG_CRM_Admins</recipient>
+            <type>group</type>
+        </recipients>
+        <recipients>
+            <recipient>PG_Intake_Owners</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>crm-intake@climbpauselift.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>CPL_CRM_Email_Notifications/New_Lead_Created_Email</template>
+    </alerts>
+</Workflow>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Source_Detail__c</fullName>
+    <description>Provides additional detail about how the lead was generated, such as the specific website page, form, campaign, or referral context.</description>
+    <inlineHelpText>Use this field to capture more specific source information (e.g., “Partner With Us Form,” “Prospect Scholar Application Page,” or campaign-specific details).</inlineHelpText>
+    <label>Lead Source Detail</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Raw_Payload__c</fullName>
+    <description>Raw submission payload received from the source system (typically JSON).</description>
+    <inlineHelpText>System audit field. Stores full submission details for recovery and troubleshooting.</inlineHelpText>
+    <label>Raw Payload</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

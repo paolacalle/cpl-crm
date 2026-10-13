@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Athletic_Division__c</fullName>
+    <description>Indicates the athletic division or league in which the college competes.</description>
+    <inlineHelpText>Select the athletic division or league associated with this college’s athletic program.</inlineHelpText>
+    <label>Athletic Division / League</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NCAA Division I</fullName>
+                <default>false</default>
+                <label>NCAA Division I</label>
+            </value>
+            <value>
+                <fullName>NCAA Division II</fullName>
+                <default>false</default>
+                <label>NCAA Division II</label>
+            </value>
+            <value>
+                <fullName>NCAA Division III</fullName>
+                <default>false</default>
+                <label>NCAA Division III</label>
+            </value>
+            <value>
+                <fullName>NAIA</fullName>
+                <default>false</default>
+                <label>NAIA</label>
+            </value>
+            <value>
+                <fullName>NJCAA</fullName>
+                <default>false</default>
+                <label>NJCAA</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

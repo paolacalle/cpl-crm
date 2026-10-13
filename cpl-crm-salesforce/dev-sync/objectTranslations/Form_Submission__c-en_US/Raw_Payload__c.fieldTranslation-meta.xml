@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- System audit field. Stores full submission details for recovery and troubleshooting. --></help>
+    <label><!-- Raw Payload --></label>
+    <name>Raw_Payload__c</name>
+</CustomFieldTranslation>

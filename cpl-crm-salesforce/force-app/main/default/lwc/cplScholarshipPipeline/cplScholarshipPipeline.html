@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Scholarship Application Pipeline" icon-name="standard:scholar">
+        <lightning-button-icon slot="actions" icon-name="utility:refresh" alternative-text="Refresh scholarship pipeline" onclick={refresh} disabled={refreshing}></lightning-button-icon>
+        <div class="slds-p-around_medium">
+            <template if:true={error}><p role="alert">{error}</p></template>
+            <div class="tiles">
+                <template for:each={tiles} for:item="tile">
+                    <button key={tile.filterName} data-filter={tile.filterName} onclick={openList} type="button">
+                        <span class="count">{tile.count}</span><span>{tile.label}</span>
+                    </button>
+                </template>
+            </div>
+            <p class="slds-m-top_small slds-text-color_weak">All Decisions includes waitlisted applications, which also remain in Ready for Decision.</p>
+        </div>
+    </lightning-card>
+</template>

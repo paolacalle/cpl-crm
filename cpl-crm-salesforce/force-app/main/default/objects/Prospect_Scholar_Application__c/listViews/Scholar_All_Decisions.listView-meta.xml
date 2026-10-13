@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scholar_All_Decisions</fullName>
+    <columns>NAME</columns><columns>Applicant_Account__c</columns><columns>Application_Stage__c</columns><columns>Application_Decision__c</columns><columns>Case_Owner__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters><field>Application_Decision__c</field><operation>notEqual</operation><value>Pending</value></filters>
+    <filters><field>Application_Decision__c</field><operation>notEqual</operation><value></value></filters>
+
+    <label>All Decisions</label>
+</ListView>

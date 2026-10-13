@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select type of evaluation you are submitting. --></help>
+    <label><!-- Evaluation Type --></label>
+    <name>Evaluation_Type__c</name>
+    <picklistValues>
+        <masterLabel>Call</masterLabel>
+        <translation><!-- Call --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Internship</masterLabel>
+        <translation><!-- Internship --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Interview</masterLabel>
+        <translation><!-- Interview --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Mentorship</masterLabel>
+        <translation><!-- Mentorship --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Resume</masterLabel>
+        <translation><!-- Resume --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

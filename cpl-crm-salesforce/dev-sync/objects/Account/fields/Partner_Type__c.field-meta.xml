@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner_Type__c</fullName>
+    <description>Categorizes the type of organization and the role it plays within the CLP partner ecosystem.</description>
+    <inlineHelpText>Categorizes the type of organization and the role it plays within the CLP partner ecosystem.</inlineHelpText>
+    <label>Partner Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Partner_Type</valueSetName>
+    </valueSet>
+</CustomField>

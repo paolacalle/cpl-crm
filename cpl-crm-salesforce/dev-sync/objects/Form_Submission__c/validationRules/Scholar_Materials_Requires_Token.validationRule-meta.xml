@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scholar_Materials_Requires_Token</fullName>
+    <active>true</active>
+    <description>Requires Scholar Finalist Materials submissions to include the personalized submission token.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Scholar Finalist Materials&quot;,
+  ISBLANK(Submission_Token__c)
+)</errorConditionFormula>
+    <errorDisplayField>Submission_Token__c</errorDisplayField>
+    <errorMessage>Scholar finalist materials submissions must include the personalized submission token.</errorMessage>
+</ValidationRule>

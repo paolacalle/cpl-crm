@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomerPaymentTerms</fullName>
+    <inlineHelpText>Indicates that the customer has 30 days from the invoice date to pay for services.</inlineHelpText>
+    <trackHistory>false</trackHistory>
+</CustomField>

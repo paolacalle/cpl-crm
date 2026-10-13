@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_Submission_Requires_Resume</fullName>
+    <active>true</active>
+    <description>Requires students to upload a resume on Student Interest submissions.</description>
+    <errorConditionFormula>AND(
+  $RecordType.Name = &quot;Student Interest Submission&quot;,
+  NOT(Resume_Uploaded__c)
+)</errorConditionFormula>
+    <errorDisplayField>Resume_Uploaded__c</errorDisplayField>
+    <errorMessage>A resume upload is required for Student Interest submissions.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Enter the Contact’s official job title during this employment. --></help>
+    <label><!-- Job Title --></label>
+    <name>Job_Title__c</name>
+</CustomFieldTranslation>

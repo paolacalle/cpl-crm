@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OrderPrebillDays</fullName>
+    <inlineHelpText>Represents the number of days before the service date that an invoice is sent to the customer.</inlineHelpText>
+    <trackHistory>false</trackHistory>
+</CustomField>

@@ -3,7 +3,6 @@ public with sharing class CplHomeMemberPipelineController {
     private static final List<String> STATUS_ORDER = new List<String>{
         'Athlete',
         // 'Prospect',
-        'Applicant',
         'Scholar', 
         'Scholar Alumni',
         'Member Alumni'

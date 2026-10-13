@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prospect_Scholar_Application__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Prospect Scholar Application associated with this scholar finalist materials submission.</description>
+    <inlineHelpText>Populated from the personalized finalist materials link.</inlineHelpText>
+    <label>Prospect Scholar Application</label>
+    <referenceTo>Prospect_Scholar_Application__c</referenceTo>
+    <relationshipLabel>Form Submissions</relationshipLabel>
+    <relationshipName>Form_Submissions</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -18,7 +18,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Application_Status__c</field>
+                <field>Application_Stage__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Application_Decision__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

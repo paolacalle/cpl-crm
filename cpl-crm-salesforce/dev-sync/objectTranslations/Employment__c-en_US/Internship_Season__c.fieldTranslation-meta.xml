@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <help><!-- Select the season that this internship will take place in. --></help>
+    <label><!-- Internship Season --></label>
+    <name>Internship_Season__c</name>
+    <picklistValues>
+        <masterLabel>Fall</masterLabel>
+        <translation><!-- Fall --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Spring</masterLabel>
+        <translation><!-- Spring --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Summer</masterLabel>
+        <translation><!-- Summer --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Winter</masterLabel>
+        <translation><!-- Winter --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

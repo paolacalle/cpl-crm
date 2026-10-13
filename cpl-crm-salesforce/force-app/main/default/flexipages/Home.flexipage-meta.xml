@@ -22,6 +22,12 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentName>cplScholarshipPipeline</componentName>
+                <identifier>cplScholarshipPipeline</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentName>cplHomeRecentActivity</componentName>
                 <identifier>cplHomeRecentActivity</identifier>
             </componentInstance>

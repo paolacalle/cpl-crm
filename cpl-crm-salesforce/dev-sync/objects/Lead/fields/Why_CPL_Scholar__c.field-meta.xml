@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Why_CPL_Scholar__c</fullName>
+    <description>Applicant’s response explaining their motivation for applying to the CPL Scholar program and how they believe the program aligns with their personal, academic, and professional goals.</description>
+    <inlineHelpText>Applicants are asked to describe why they are interested in the CPL Scholar program and how its values, opportunities, or mission align with their goals. This response is used to understand motivation and program fit during review.</inlineHelpText>
+    <label>Why CPL Scholar</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

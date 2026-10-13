@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commits_to_CPL_mantra__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the applicant affirms alignment with the CPL mantra and core values as part of the CPL Scholar intake process.</description>
+    <inlineHelpText>Check this box to confirm that applicant understands and commits to upholding the CPL mantra and values throughout the program.</inlineHelpText>
+    <label>Commits to CPL mantra</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

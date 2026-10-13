@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Employment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The Contact’s active employment record.</description>
+    <inlineHelpText>Automatically populated with the Contact’s current employment. Used to derive current employer and role information.</inlineHelpText>
+    <label>Current_Employment</label>
+    <referenceTo>Employment__c</referenceTo>
+    <relationshipLabel>Contacts</relationshipLabel>
+    <relationshipName>Contacts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>
