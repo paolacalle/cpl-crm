@@ -1,5 +1,72 @@
-.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; }
-button { text-align:left; border:1px solid #ddd; border-left:6px solid #6750a4; border-radius:8px; padding:1rem; background:#f8f6fc; color:#181818; cursor:pointer; font:inherit; }
-button:hover { background:#eee8fa; }
-button:focus-visible { outline:3px solid #0176d3; outline-offset:3px; }
-.count { display:block; font-size:2rem; font-weight:700; }
+/* Colors sampled from climbpauselift.org; tints adapted for Salesforce. */
+.tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0.75rem; }
+button {
+  text-align:left;
+  border:1px solid #dedce9;
+  border-left:5px solid var(--tile-accent, #433e7b);
+  border-radius:0.5rem;
+  padding:1rem;
+  background:var(--tile-surface, #f0eef8);
+  color:#433e7b;
+  cursor:pointer;
+  font:inherit;
+  font-weight:600;
+  transition:box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+button[data-filter="Scholar_Invite_Materials"] {
+  --tile-accent: #168DAB;
+  --tile-surface: #EAF7FA;
+  --tile-hover: #D6F0F5;
+}
+
+button[data-filter="Scholar_Interview_Evaluations"] {
+  --tile-accent: #7363B5;
+  --tile-surface: #F3F0FB;
+  --tile-hover: #E7E0F7;
+}
+
+button[data-filter="Scholar_Ready_for_Decision"] {
+  --tile-accent: #D91866;
+  --tile-surface: #FFF0F6;
+  --tile-hover: #FADBE9;
+}
+
+button[data-filter="Scholar_All_Decisions"] {
+  --tile-accent: #433E7B;
+  --tile-surface: #F0EEF8;
+  --tile-hover: #E2DEF2;
+}
+
+/* Consistent interactive styling */
+button[data-filter] {
+  background: var(--tile-surface);
+  border-left: 4px solid var(--tile-accent);
+  transition: background 180ms ease,
+              box-shadow 180ms ease,
+              transform 180ms ease;
+}
+
+button[data-filter]:hover {
+  background: var(--tile-hover);
+  box-shadow: 0 4px 12px rgba(67, 62, 123, 0.12);
+  transform: translateY(-2px);
+}
+
+button[data-filter]:focus-visible {
+  outline: 3px solid var(--tile-accent, #433E7B);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button[data-filter] {
+    transition: none;
+  }
+
+  button[data-filter]:hover {
+    transform: none;
+  }
+}
+.count { display:block; font-size:1.75rem; line-height:1.1; margin-bottom:0.25rem; font-weight:700; font-variant-numeric:tabular-nums; }
+p { color:#59566f; }
+@media (prefers-reduced-motion: reduce) { button { transition:none; } }

@@ -35,6 +35,7 @@
     </types>
     <types>
         <members>cplHomeQuickLinks</members>
+        <members>cplHomeIntakePipeline</members>
         <members>cplScholarshipPipeline</members>
         <members>cplApplicationProgress</members>
         <members>cplHomeMemberPipeline</members>

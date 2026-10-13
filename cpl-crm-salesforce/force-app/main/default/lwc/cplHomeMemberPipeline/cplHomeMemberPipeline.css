@@ -1,105 +1,94 @@
+/* CPL website palette: purple #433e7b, pink #ec1164,
+   aqua #61c7d2, lavender #726e9c. Pale surfaces keep text readable. */
+:host {
+  --cpl-ink: #433e7b;
+  --cpl-muted: #59566f;
+}
 .stats {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
 }
-
-/* 1. Combined .stat and tooltip container rules */
 .stat {
-  position: relative; /* Required for the absolute tooltip placement */
-  background: #ffffff;
-  border: 0;
-  border-radius: 0.25rem;
+  position: relative;
+  background: var(--tile-surface, #f2f1f7);
+  border: 1px solid #dedce9;
+  border-left: 5px solid var(--tile-accent, #433e7b);
+  border-radius: 0.5rem;
   cursor: pointer;
   font-family: inherit;
   width: 100%;
   text-align: left;
-  padding: 1rem; /* Added padding so your card text isn't stuck to edges */
-  box-sizing: border-box; /* Ensures padding doesn't break the grid item size */
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
 }
-
 .stat:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  transform: translateY(-1px);
+  background: var(--tile-hover, #e8e6f2);
+  box-shadow: 0 3px 10px rgba(67, 62, 123, 0.14);
 }
-
+.stat:focus-visible {
+  outline: 3px solid #433e7b;
+  outline-offset: 3px;
+}
 .stat-count {
-  color: #181818;
+  color: var(--cpl-ink);
   font-size: 1.75rem;
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   line-height: 1.1;
 }
-
 .stat-label {
-  color: #181818;
+  color: var(--cpl-ink);
   font-size: 0.75rem;
   font-weight: 600;
   margin-top: 0.25rem;
 }
 
-/* Status-specific branding */
-.stat-athlete { 
-    background: #EBF3FF; 
-    border-left: 4px solid #3B82F6; 
-} 
-
-.stat-applicant { 
-    background: #FFF0F6; 
-    border-left: 4px solid #D946EF; 
-} 
-
-.stat-scholar { 
-    background: #F3E8FF; 
-    border-left: 4px solid #A855F7; 
-} 
-
-.stat-scholar-alumni { 
-    background: #DCFCE7; 
-    border-left: 4px solid #22C55E; 
-} 
-
-.stat-alumni { 
-    background: #E0F2FE; 
-    border-left: 4px solid #0EA5E9; 
+.stat-athlete {
+  --tile-accent: #168DAB;
+  --tile-surface: #EAF7FA;
+  --tile-hover: #D6F0F5;
 }
 
-.footnote {
-  color: #706e6b;
-  font-size: 0.75rem;
-  margin-top: 0.75rem;
+.stat-scholar {
+  --tile-accent: #D91866;
+  --tile-surface: #FFF0F6;
+  --tile-hover: #FADBE9;
 }
 
-/* 2. Tooltip styles attached directly to the card */
+.stat-scholar-alumni {
+  --tile-accent: #433E7B;
+  --tile-surface: #F0EEF8;
+  --tile-hover: #E2DEF2;
+}
+
+.stat-alumni {
+  --tile-accent: #8274AD;
+  --tile-surface: #F5F2FA;
+  --tile-hover: #EAE4F4;
+}
+.footnote { color: var(--cpl-muted); font-size: 0.75rem; margin-top: 0.75rem; }
 .stat .tooltip-text {
   visibility: hidden;
   opacity: 0;
   width: max-content;
   max-width: 200px;
-  white-space: normal; /* Allows text wrapping if max-width is hit */
-  background-color: #0b5cab;
-  color: #ffffff;
+  white-space: normal;
+  background: #433e7b;
+  color: #fff;
   text-align: center;
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   padding: 0.5rem;
   font-size: 0.75rem;
-  font-family: inherit;
-  font-weight: normal; /* Resets any inherited card text weight */
-  
+  font-weight: normal;
   position: absolute;
   z-index: 10;
-  bottom: 110%; /* Adjusted height to hover just above the card */
+  bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gives tooltip visual depth */
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(67, 62, 123, 0.18);
 }
-
-/* Hover trigger on the card reveals the internal tooltip */
-.stat:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-  color: #eaf5fe;
-  transform: translateX(-50%) translateY(-4px); /* Minor lift animation */
-}
+.stat:hover .tooltip-text,
+.stat:focus-visible .tooltip-text { visibility: visible; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .stat { transition: none; } }
